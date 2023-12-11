@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id  String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email String @unique
+  userName String?
+  password String
+  pieces Piece[]
+
+}
+
+model Piece{
+  id  String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title String 
+  colors Colors?
+  category Category?
+  userId String
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum Colors {
+  RED
+  BLUE
+  YELLOW
+  GREEN
+  ORANGE
+  PURPLE
+  PINK
+  BLACK
+  WHITE
+  BROWN
+  GREY
+  GOLD
+  SILVER
+  BRONZE
+}
+
+enum Category{
+  DRESSSHIRT
+  CASUALSHIRT
+  SWEATER
+  SWEATSHIRT
+  JACKET
+  COAT
+  DRESSPANTS
+  CASUALPANTS
+  SHORTS
+  SKIRT
+  DRESS
+  SHOES
+  ACCESSORIES
+  }
