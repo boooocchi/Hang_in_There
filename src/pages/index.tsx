@@ -1,9 +1,6 @@
-import React from "react";
+import React from 'react';
+import '@radix-ui/themes/styles.css';
 
 export default function Home() {
-  return (
-    <main>
-      <h1>Home</h1>
-    </main>
-  );
+  return <main></main>;
 }
