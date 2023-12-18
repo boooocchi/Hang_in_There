@@ -18,7 +18,7 @@ model User{
   userName String?
   password String
   pieces Piece[]
-
+  dendoOutfits DendoOutfit[]
 }
 
 model Piece{
@@ -26,9 +26,24 @@ model Piece{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title String 
+  description String?
   colors Colors?
-  category Category?
+  category Categories?
+  location String?
+  price Float?
   userId String
+  user User @relation(fields: [userId], references: [id])
+  outfits DendoOutfit[]
+}
+
+model DendoOutfit{
+  id  String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title String 
+  keywords String[]
+  userId String
+  pieces Piece[]
   user User @relation(fields: [userId], references: [id])
 }
 
@@ -49,7 +64,7 @@ enum Colors {
   BRONZE
 }
 
-enum Category{
+enum Categories {
   DRESSSHIRT
   CASUALSHIRT
   SWEATER

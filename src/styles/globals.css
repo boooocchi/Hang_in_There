@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* dropzone */
+.deleteImageClass {
+  position: absolute;
+  top: -2%;
+  right: 2%;
+  background-color: #11221f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  align-items: center;
+  cursor: pointer;
+  padding: 3px;
+}
+
+.previewImageContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.dropZoneImage {
+  width: 90%;
+  height: auto;
+}
