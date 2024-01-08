@@ -1,13 +1,19 @@
+import { useSession } from 'next-auth/react';
 import React from 'react';
+
+import { subFont } from '@/constants/FontFamily';
 
 import HeaderDropdownMenu from './HeaderDropdownMenu';
 
 const Header = () => {
+  const { data } = useSession();
+  const userName = data?.user?.userName;
+
   return (
     <header>
-      <nav className="w-full h-pc_header bg-transparent pt-lg pb-[26px] px-3xl flex justify-end items-center">
+      <nav className="w-full h-pc_header bg-transparent pt-xl pb-[26px] px-4xl flex justify-between items-center">
         <div className="relative">
-          <input type="text" className=" border border-richGreen w-48 h-7 mr-sm p-xs pr-lg text-xs" />
+          <input type="text" className=" border border-richGreen w-48 h-7 mr-sm p-xs pr-lg text-xs rounded-md" />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -22,7 +28,10 @@ const Header = () => {
             />
           </svg>
         </div>
-        <HeaderDropdownMenu></HeaderDropdownMenu>
+        <div className={`${subFont.className} flex text-lg gap-2`}>
+          <p>Hello, {userName}</p>
+          <HeaderDropdownMenu></HeaderDropdownMenu>
+        </div>
       </nav>
     </header>
   );

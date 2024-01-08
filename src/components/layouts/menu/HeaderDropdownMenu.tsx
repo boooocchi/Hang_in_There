@@ -1,9 +1,13 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { signOut } from 'next-auth/react';
 import React from 'react';
 
 import { subFont } from '@/constants/FontFamily';
 
 const HeaderDropdownMenu = () => {
+  const handleSignout = async () => {
+    await signOut({ callbackUrl: '/auth/signin' });
+  };
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -19,10 +23,17 @@ const HeaderDropdownMenu = () => {
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content sideOffset={10} align="end" className="border-2 border-deepGreen px-md py-sm rounded-sm">
-          <DropdownMenu.Item className={`${subFont.className} text-lg`}>Account</DropdownMenu.Item>
-          <DropdownMenu.Item className={`${subFont.className} text-lg`}>Logout</DropdownMenu.Item>
-          <DropdownMenu.Arrow className="fill-deepGreen" />
+        <DropdownMenu.Content
+          sideOffset={12}
+          align="end"
+          className="border border-deepGreen px-md py-sm rounded-md bg-white"
+        >
+          <DropdownMenu.Item className={`${subFont.className} font-[200] text-lg hover:outline-none `}>
+            Account
+          </DropdownMenu.Item>
+          <DropdownMenu.Item className={`${subFont.className} font-[200] text-lg hover:outline-none`}>
+            <button onClick={handleSignout}> Logout</button>
+          </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import { mainTitle, subFont } from '@/constants/FontFamily';
@@ -30,11 +31,16 @@ const navItems = [
 const SideMenu = () => {
   const { pathname } = useRouter();
   const settingClassName = pathname === '/settings' ? 'text-accentOrangeRed' : 'text-white';
+
+  const { status } = useSession();
+  if (status === 'loading') return <></>;
+  if (status === 'unauthenticated') return <></>;
+
   return (
-    <nav className="flex flex-col flex-shrink-0 bg-richGreen max-h-screen w-pc_sideMenuWidth min-w-pc_sideMenuWidth z-sideMenu relative py-lg px-2xl drop-shadow-md">
-      <h1 className={`text-white font-mainTitle text-[36px] mr-3  ${mainTitle.className}`}>Do I Have It?</h1>
+    <nav className="flex flex-col flex-shrink-0 bg-richGreen h-screen w-pc_sideMenuWidth min-w-pc_sideMenuWidth z-sideMenu relative pt-xl pb-3xl px-2xl drop-shadow-md min-h-[750px]">
+      <h1 className={`text-white font-mainTitle text-[36px]  ${mainTitle.className}`}>Do I Have It?</h1>
       <div className="flex flex-col h-full justify-between">
-        <ul className=" h-full py-lg">
+        <ul className=" h-full py-xl">
           {navItems.map((item, index) => {
             const menuItemClassName =
               pathname === item.path
@@ -42,7 +48,7 @@ const SideMenu = () => {
                 : 'text-white hover:text-accentOrangeRed';
 
             return (
-              <li key={index} className={`text-white text-xl mb-md ${subFont.className} uppercase drop-shadow-md `}>
+              <li key={index} className={`text-white text-xl mb-md ${subFont.className}  uppercase drop-shadow-md `}>
                 <Link href={item.path} className={menuItemClassName}>
                   {item.name}
                 </Link>
@@ -51,7 +57,7 @@ const SideMenu = () => {
           })}
         </ul>
         <div className={`text-white text-lg mt-auto ${subFont.className} uppercase`}>
-          <Link href="/settings" className={`flex items-center group hover:text-accentOrangeRed `}>
+          <Link href="/settings" className={`flex items-center font-extralight group hover:text-accentOrangeRed `}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

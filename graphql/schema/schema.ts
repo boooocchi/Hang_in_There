@@ -9,9 +9,18 @@ export const typeDefs = gql`
     updatedAt: DateTime!
     email: String!
     userName: String
-    password: String!
+    password: String
+    googleSignin: Boolean
+    limitEntries: [LimitEntry]
     pieces: [Piece]
     dendoOutfits: [DendoOutfit]
+  }
+
+  type LimitEntry {
+    id: String!
+    category: Categories!
+    value: Float!
+    userId: String!
   }
 
   type Piece {
@@ -38,18 +47,11 @@ export const typeDefs = gql`
   }
 
   enum Categories {
-    DRESSSHIRT
-    CASUALSHIRT
-    SWEATER
-    SWEATSHIRT
-    JACKET
-    COAT
-    DRESSPANTS
-    CASUALPANTS
-    SHORTS
-    SKIRT
-    DRESS
     SHOES
+    OUTERWEAR
+    LIGHTTOPS
+    HEAVYTOPS
+    BOTTOMS
     ACCESSORIES
   }
   enum Colors {
@@ -70,7 +72,16 @@ export const typeDefs = gql`
   }
 
   type Query {
-    pieces: [Piece]
+    pieces(userId: String!): [Piece]
     dendoOutfits: [DendoOutfit]
+    limitEntries(userId: String!): [LimitEntry]
+  }
+
+  type Mutation {
+    signup(email: String!, password: String!, userName: String!): AuthPayload
+  }
+
+  type AuthPayload {
+    user: User
   }
 `;

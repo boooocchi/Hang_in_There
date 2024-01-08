@@ -31,11 +31,9 @@ const DropZone: React.FC<DropZoneProps> = ({ className }) => {
     };
   }, [file]);
 
-  const dropZoneBgClass = isDragActive ? 'dropZoneActive' : 'dropZoneInactive';
-
   return (
     <div {...getRootProps({ className: className })}>
-      <div className={dropZoneBgClass}>
+      <div>
         <input {...getInputProps()} />
         {file ? (
           <div className="previewImageContainer">

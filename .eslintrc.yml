@@ -13,58 +13,60 @@ extends:
   - plugin:import/warnings
   - prettier
 plugins:
-  - "@typescript-eslint"
+  - '@typescript-eslint'
   - react
   - react-hooks
   - jsx-a11y
   - import
   - unused-imports
 overrides:
-  - files: ["*.ts", "*.tsx"]
-    parser: "@typescript-eslint/parser"
+  - files: ['*.ts', '*.tsx']
+    parser: '@typescript-eslint/parser'
     parserOptions:
       project: tsconfig.json
       ecmaFeatures:
         jsx: true
       ecmaVersion: 2020
       sourceType: module
-    rules:
-      no-unused-vars: off
-      "@typescript-eslint/no-unused-vars":
-        - error
-        - vars: "all"
-          args: "after-used"
-          ignoreRestSiblings: false
-          argsIgnorePattern: "^_"
-      react/prop-types: "off"
-      jsx-a11y/anchor-is-valid: "off"
-      import/default: "off"
-      import/no-named-as-default-member: "off"
-      import/order:
-        - error
-        - groups:
-            [
-              "builtin",
-              "external",
-              "internal",
-              "index",
-              "object",
-              "parent",
-              "sibling"
-            ]
-          newlines-between: always
-          alphabetize:
-            order: asc
-      unused-imports/no-unused-imports: "error"
-      react-hooks/exhaustive-deps: "error"
-      react/jsx-curly-brace-presence:
-        ["error", { "props": "never", "children": "never" }]
-      "@typescript-eslint/ban-ts-comment":
-        - error
-        - "ts-expect-error": true
-          "ts-ignore": true
-          "ts-nocheck": true
-          "ts-check": true
-      no-console:
-        - error
-        - allow: ["warn", "error"]
+rules:
+  no-unused-vars: off
+  '@typescript-eslint/no-unused-vars':
+    - error
+    - vars: 'all'
+      args: 'after-used'
+      ignoreRestSiblings: false
+      argsIgnorePattern: '^_'
+  react/prop-types: 'off'
+  jsx-a11y/anchor-is-valid: 'off'
+  import/default: 'off'
+  import/no-named-as-default-member: 'off'
+  import/order:
+    - error
+    - groups:
+        - 'builtin'
+        - 'external'
+        - 'internal'
+        - 'index'
+        - 'object'
+        - 'parent'
+        - 'sibling'
+      newlines-between: always
+      alphabetize:
+        order: asc
+  unused-imports/no-unused-imports: 'error'
+  react-hooks/exhaustive-deps: 'error'
+  react/jsx-curly-brace-presence:
+    - 'error'
+    - props: 'never'
+      children: 'never'
+  '@typescript-eslint/ban-ts-comment':
+    - error
+    - 'ts-expect-error': true
+      'ts-ignore': true
+      'ts-nocheck': true
+      'ts-check': false # Change 'ts-check': true to 'ts-check': false if you want to allow @ts-check without an error.
+  no-console:
+    - error
+    - allow:
+        - 'warn'
+        - 'error'

@@ -6,9 +6,9 @@ import Header from '../menu/Header';
 
 const MainLayout: React.FC<Children> = ({ children }) => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="min-h-[750px] flex flex-col h-screen">
       <Header />
-      <div className="flex-grow pt-lg pb-3xl px-3xl overflow-auto">{children}</div>
+      <div className="flex-grow pt-xl pb-3xl px-4xl overflow-auto">{children}</div>
     </div>
   );
 };

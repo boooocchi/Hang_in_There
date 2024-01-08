@@ -7,7 +7,7 @@ export const mainTitle = Mr_Dafoe({
 });
 
 export const subFont = Alumni_Sans({
-  weight: ['400'],
+  weight: ['400', '200'],
   subsets: ['latin'],
   display: 'swap',
 });
