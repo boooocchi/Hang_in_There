@@ -15,10 +15,12 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={apolloClient}>
       <SessionProvider session={pageProps.session}>
-        <div className=" flex min-w-[1200px]">
-          {pathname !== '/auth/signup' && pathname !== '/auth/signin' && <SideMenu />}
-          <div className="flex-grow">
-            <Component {...pageProps} />
+        <div className="flex justify-center bg-richGreen">
+          <div className=" flex lg:w-[1470px] overflow-x-scroll">
+            {pathname !== '/auth/signup' && pathname !== '/auth/signin' && <SideMenu />}
+            <div className="flex-grow bg-white min-w-[980px]">
+              <Component {...pageProps} />
+            </div>
           </div>
         </div>
       </SessionProvider>

@@ -18,111 +18,107 @@ export default function Home({ weatherData }: WeatherData) {
   if (status === 'unauthenticated') return <LoadingPage />;
 
   return (
-    <main>
-      <MainLayout>
-        <div className="flex flex-col h-full">
-          <section className="flex flex-col h-full w-full flex-grow  gap-6">
-            <div className="h-[45%] flex gap-6 justify-between">
-              <div className="h-full w-full relative overflow-hidden group rounded-md">
-                <Link href="/wardrobe" className="overflow-hidden">
-                  <Image
-                    src="/image/home/wardrobe.jpg"
-                    alt="Wardrobe"
-                    fill={true}
-                    style={{ objectFit: 'cover' }}
-                    className="group-hover:scale-110  transition-all duration-200 ease-in "
-                  />
-                </Link>
-                <h2
-                  className={`${mainTitle.className} text-2xl text-white drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  transition-all duration-300`}
-                >
-                  Wardrobe
-                </h2>
-              </div>
-              <div className="h-full  w-full   relative overflow-hidden group rounded-md">
-                <Link href="/registerPiece" className="overflow-hidden">
-                  <Image
-                    src="/image/home/register.jpg"
-                    alt="Wardrobe"
-                    fill={true}
-                    style={{ objectFit: 'cover' }}
-                    className="group-hover:scale-110 transition-all duration-300 ease-in "
-                  />
-                </Link>
-                <h2
-                  className={`${mainTitle.className} text-xl text-center text-white drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  transition-all duration-300`}
-                >
-                  Register Your Peace
-                </h2>
-              </div>
-              <div className="h-full  w-full    relative overflow-hidden group rounded-md">
-                <Link href="/dendoOutfit" className="overflow-hidden">
-                  <Image
-                    src="/image/home/dendo_outfit.jpg"
-                    alt="Wardrobe"
-                    fill={true}
-                    style={{ objectFit: 'cover' }}
-                    className="group-hover:scale-110 transition-all duration-300 ease-in "
-                  />
-                </Link>
-                <h2
-                  className={`${mainTitle.className} text-center text-xl text-white drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  transition-all duration-300`}
-                >
-                  Dendo Outfit
-                </h2>
-              </div>
-              <div className="h-full  w-full    relative overflow-hidden group rounded-md">
-                <Link href="/verdict" className="overflow-hidden">
-                  <Image
-                    src="/image/home/do_i_look_okay.jpg"
-                    alt="Wardrobe"
-                    fill={true}
-                    style={{ objectFit: 'cover' }}
-                    className="group-hover:scale-110 transition-all duration-300 ease-in "
-                  />
-                </Link>
-                <h2
-                  className={`${mainTitle.className} text-xl text-center text-white drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  transition-all duration-300`}
-                >
-                  Do I Look Okay?
-                </h2>
-              </div>
+    <MainLayout>
+      <div className="flex flex-col h-full">
+        <section className="flex flex-col h-full w-full   gap-6">
+          <div className="h-[45%] flex gap-6 justify-between">
+            <div className="h-full w-full relative overflow-hidden group rounded-md">
+              <Link href="/wardrobe" className="overflow-hidden">
+                <Image
+                  src="/image/home/wardrobe.jpg"
+                  alt="Wardrobe"
+                  fill={true}
+                  style={{ objectFit: 'cover' }}
+                  className="group-hover:scale-110  transition-all duration-200 ease-in "
+                />
+              </Link>
+              <h2
+                className={`${mainTitle.className} text-2xl text-white drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  transition-all duration-300`}
+              >
+                Wardrobe
+              </h2>
             </div>
-            <div className="h-[55%] w-full flex gap-6">
-              <div className="h-full w-1/2  flex flex-col gap-6">
-                <div className="w-full h-1/2 border border-richGreen rounded-md   flex">
+            <div className="h-full  w-full   relative overflow-hidden group rounded-md">
+              <Link href="/registerPiece" className="overflow-hidden">
+                <Image
+                  src="/image/home/register.jpg"
+                  alt="Wardrobe"
+                  fill={true}
+                  style={{ objectFit: 'cover' }}
+                  className="group-hover:scale-110 transition-all duration-300 ease-in "
+                />
+              </Link>
+              <h2
+                className={`${mainTitle.className} text-xl text-center text-white drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  transition-all duration-300`}
+              >
+                Register Your Peace
+              </h2>
+            </div>
+            <div className="h-full  w-full    relative overflow-hidden group rounded-md">
+              <Link href="/dendoOutfit" className="overflow-hidden">
+                <Image
+                  src="/image/home/dendo_outfit.jpg"
+                  alt="Wardrobe"
+                  fill={true}
+                  style={{ objectFit: 'cover' }}
+                  className="group-hover:scale-110 transition-all duration-300 ease-in "
+                />
+              </Link>
+              <h2
+                className={`${mainTitle.className} text-center text-xl text-white drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  transition-all duration-300`}
+              >
+                Dendo Outfit
+              </h2>
+            </div>
+            <div className="h-full  w-full    relative overflow-hidden group rounded-md">
+              <Link href="/verdict" className="overflow-hidden">
+                <Image
+                  src="/image/home/do_i_look_okay.jpg"
+                  alt="Wardrobe"
+                  fill={true}
+                  style={{ objectFit: 'cover' }}
+                  className="group-hover:scale-110 transition-all duration-300 ease-in "
+                />
+              </Link>
+              <h2
+                className={`${mainTitle.className} text-xl text-center text-white drop-shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  transition-all duration-300`}
+              >
+                Do I Look Okay?
+              </h2>
+            </div>
+          </div>
+          <div className="h-[55%] w-full flex gap-6">
+            <div className="h-full w-1/2  flex flex-col gap-6">
+              <div className="w-full h-1/2 border border-richGreen rounded-md   flex">
+                <h2
+                  className={`${mainTitle.className} text-lg  text-center h-full items-center flex text-white bg-richGreen p-lg w-[150px] min-w-[150px]`}
+                >
+                  <span>Today&apos;s Weather</span>
+                </h2>
+                <WeatherBox weatherData={weatherData} />
+              </div>
+              <div className="w-full h-1/2  flex gap-6 ">
+                <div className="w-full h-full  rounded-md  p-0 border border-lighterGreen flex">
                   <h2
-                    className={`${mainTitle.className} text-lg  text-center h-full items-center flex text-white bg-richGreen p-lg w-[150px] min-w-[150px]`}
+                    className={`${mainTitle.className} text-lg leading-[16px] text-center h-full items-center flex justify-center text-white bg-richGreen p-lg w-[150px]`}
                   >
-                    <span>Today&apos;s Weather</span>
+                    To Buy List
                   </h2>
-                  <WeatherBox weatherData={weatherData} />
-                </div>
-                <div className="w-full h-1/2  flex gap-6 ">
-                  <div className="w-full h-full  rounded-md  p-0 border border-lighterGreen flex">
-                    <h2
-                      className={`${mainTitle.className} text-lg leading-[16px] text-center h-full items-center flex justify-center text-white bg-richGreen p-lg w-[150px]`}
-                    >
-                      To Buy List
-                    </h2>
-                  </div>
-                </div>
-              </div>
-              <div className="h-full w-1/2  border bg-richGreen p-lg rounded-md flex flex-col gap-3">
-                <h2
-                  className={`${mainTitle.className} text-lg flex items-center justify-center pb-sm text-white h-1/5 `}
-                >
-                  Your Wardrobe Capacity
-                </h2>
-                <div className="h-4/5 flex items-center">
-                  <Charts />
                 </div>
               </div>
             </div>
-          </section>
-        </div>
-      </MainLayout>
-    </main>
+            <div className="h-full w-1/2  border bg-richGreen p-lg rounded-md flex flex-col gap-3">
+              <h2 className={`${mainTitle.className} text-lg flex items-center justify-center pb-sm text-white h-1/5 `}>
+                Your Wardrobe Capacity
+              </h2>
+              <div className="h-4/5 flex items-center">
+                <Charts />
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </MainLayout>
   );
 }
 

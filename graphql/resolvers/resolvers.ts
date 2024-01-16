@@ -1,4 +1,4 @@
-import { Categories } from '@prisma/client';
+import { Categories, Colors } from '@prisma/client';
 import { hash } from 'bcrypt';
 
 import { Context } from '../context';
@@ -16,6 +16,16 @@ type signUpMutationArgs = {
   email: string;
   password: string;
   userName: string;
+};
+
+type registerPieceArgs = {
+  title: string;
+  description: string;
+  color: Colors;
+  category: Categories;
+  location?: string;
+  price?: number;
+  userId: string;
 };
 
 export const resolvers = {
@@ -64,8 +74,25 @@ export const resolvers = {
           }
         }
         throw new Error('Something went wrong');
-
-        // const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+      }
+    },
+    register_piece: async (_parent: unknown, args: registerPieceArgs, context: Context) => {
+      try {
+        const piece = await context.prisma.piece.create({
+          data: {
+            title: args.title,
+            description: args.description,
+            color: args.color,
+            category: args.category,
+            location: args.location,
+            price: args.price,
+            userId: args.userId,
+          },
+        });
+        return piece;
+      } catch (error) {
+        console.error(error);
+        throw new Error(`Failed to register piece: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
     },
   },

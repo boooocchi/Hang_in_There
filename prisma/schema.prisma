@@ -39,7 +39,7 @@ model Piece{
   updatedAt DateTime @updatedAt
   title String 
   description String?
-  colors Colors?
+  color Colors
   category Categories
   location String?
   price Float?

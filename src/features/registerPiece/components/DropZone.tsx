@@ -36,25 +36,39 @@ const DropZone: React.FC<DropZoneProps> = ({ className }) => {
       <div>
         <input {...getInputProps()} />
         {file ? (
-          <div className="previewImageContainer">
-            <button
-              className="deleteImageClass"
-              onClick={(e) => {
-                e.stopPropagation();
-                setFile(null);
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                strokeWidth="1"
-                stroke="white"
-                className="w-4 h-4 drop-shadow-lg"
+          <div
+            className="relative flex flex-col justify-center items-center
+          gap-[3px]"
+          >
+            <div className="relative flex justify-center">
+              <button
+                className=" absolute
+              -top-[3%]
+              right-[12%]
+              bg-black
+              text-white
+              justify-center
+             rounded-full
+              items-center
+              cursor-pointer
+              p-[3px]"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFile(null);
+                }}
               >
-                <path strokeLinecap="square" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <img src={file.preview} alt="Preview" className="dropZoneImage" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="white"
+                  className="w-4 h-4 drop-shadow-lg"
+                >
+                  <path strokeLinecap="square" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <img src={file.preview} alt="Preview" className="w-[70%] max-h-[400px]" />
+            </div>
             <p className={`${subFont.className} text-center w-full`}>{file.name}</p>
           </div>
         ) : (

@@ -2,17 +2,14 @@ import React from 'react';
 
 import PageTitle from '@/components/elements/title/PageTitle';
 import MainLayout from '@/components/layouts/layout/MainLayout';
-import DropZone from '@/features/registerPiece/components/DropZone';
+import Form from '@/features/registerPiece/components/Form';
 
 const index = () => {
   return (
     <MainLayout>
-      <section className="h-full flex flex-col">
+      <section className="h-full w-full flex flex-col">
         <PageTitle>Register Piece</PageTitle>
-        <div className="flex h-full">
-          <div className="w-3/5"></div>
-          <DropZone className="w-2/5  outline-dashed outline-richGreen h-full  flex flex-col justify-center overflow-hidden items-center p-xl rounded-md"></DropZone>
-        </div>
+        <Form />
       </section>
     </MainLayout>
   );

@@ -29,7 +29,7 @@ export const typeDefs = gql`
     updatedAt: DateTime!
     title: String!
     description: String
-    colors: Colors
+    color: Colors!
     category: Categories!
     location: String
     price: Float
@@ -79,6 +79,15 @@ export const typeDefs = gql`
 
   type Mutation {
     signup(email: String!, password: String!, userName: String!): AuthPayload
+    register_piece(
+      title: String!
+      description: String
+      color: Colors!
+      category: Categories!
+      location: String
+      price: Float
+      userId: String!
+    ): Piece
   }
 
   type AuthPayload {

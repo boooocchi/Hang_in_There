@@ -2,32 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* dropzone */
-.deleteImageClass {
-  position: absolute;
-  top: -2%;
-  right: 2%;
-  background-color: #11221f;
-  color: white;
-  display: flex;
-  justify-content: center;
-  border-radius: 50%;
-  align-items: center;
-  cursor: pointer;
-  padding: 3px;
+input:focus {
+  outline: none;
 }
-
-.previewImageContainer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 3px;
-  overflow: hidden;
+.select-trigger {
+  border-radius: 8px;
 }
-
-.dropZoneImage {
-  width: 90%;
-  height: auto;
+.select-trigger[data-state='open'] {
+  border-radius: 8px 8px 0 0;
 }

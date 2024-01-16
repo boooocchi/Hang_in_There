@@ -17,7 +17,7 @@ async function main() {
     data: {
       title: `Bomber Suede Jacket`,
       description: `Real suede bomber jacket with high collar. The jacket is in great condition, with no stains or tears. The jacket is a size medium, but fits more like a small in Canada`,
-      colors: Colors.BROWN,
+      color: Colors.BROWN,
       category: Categories.OUTERWEAR,
       price: 500,
       location: `Banana Republic at Robson`,
@@ -29,7 +29,7 @@ async function main() {
     data: {
       title: 'Grey dress wool pants',
       description: 'Grey dress wool pants, size 30 waist, 30 length. In great condition, no stains or tears.',
-      colors: Colors.GREY,
+      color: Colors.GREY,
       category: Categories.BOTTOMS,
       price: 100,
       location: 'Beauty & Youth in Osaka',

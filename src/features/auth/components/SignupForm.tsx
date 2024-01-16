@@ -62,21 +62,6 @@ const SignupForm = () => {
   const { register, handleSubmit, formState } = form;
   const errors: CustomError = formState.errors;
 
-  // const [isFocused, setIsFocused] = React.useState({
-  //   name: false,
-  //   email: false,
-  //   number: false,
-  //   message: false,
-  // });
-
-  // const handleFocus = (inputName: string) => {
-  //   setIsFocused((prev) => ({ ...prev, [inputName]: true }));
-  // };
-
-  // const handleBlur = (inputName: string) => {
-  //   setIsFocused((prev) => ({ ...prev, [inputName]: false }));
-  // };
-
   const onSubmit = async (data: SignupFormValues) => {
     const { name, email, password } = data;
     try {
@@ -113,33 +98,13 @@ const SignupForm = () => {
     <div className="flex flex-col gap-3 h-full">
       <h1 className={`${subFont.className} text-2xl pb-5`}>Sign up</h1>
       <form className="flex flex-col gap-3  justify-center" onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          register={register('name')}
-          name="name"
-          errorMessage={errors.name?.message}
-          // handleFocus={handleFocus}
-          // handleBlur={handleBlur}
-        ></Input>
-        <Input
-          register={register('email')}
-          name="email"
-          errorMessage={errors.email?.message}
-          // handleFocus={handleFocus}
-          // handleBlur={handleBlur}
-        ></Input>
-        <Input
-          register={register('password')}
-          name="password"
-          errorMessage={errors.password?.message}
-          // handleFocus={handleFocus}
-          // handleBlur={handleBlur}
-        ></Input>
+        <Input register={register('name')} name="name" errorMessage={errors.name?.message}></Input>
+        <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
+        <Input register={register('password')} name="password" errorMessage={errors.password?.message}></Input>
         <Input
           register={register('passwordConfirmation')}
           name="passwordConfirmation"
           errorMessage={errors.samePassword?.message}
-          // handleFocus={handleFocus}
-          // handleBlur={handleBlur}
           placeholder="Password Confirmation"
         ></Input>
         <button

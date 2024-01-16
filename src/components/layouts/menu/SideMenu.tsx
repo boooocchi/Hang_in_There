@@ -38,9 +38,9 @@ const SideMenu = () => {
 
   return (
     <nav className="flex flex-col flex-shrink-0 bg-richGreen h-screen w-pc_sideMenuWidth min-w-pc_sideMenuWidth z-sideMenu relative pt-xl pb-3xl px-2xl drop-shadow-md min-h-[750px]">
-      <h1 className={`text-white font-mainTitle text-[36px]  ${mainTitle.className}`}>Do I Have It?</h1>
+      <h1 className={`text-white font-mainTitle text-[36px] leading-[36px]  ${mainTitle.className}`}>Do I Have It?</h1>
       <div className="flex flex-col h-full justify-between">
-        <ul className=" h-full py-xl">
+        <ul className=" h-full pb-xl pt-[66px]">
           {navItems.map((item, index) => {
             const menuItemClassName =
               pathname === item.path

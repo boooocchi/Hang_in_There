@@ -10,7 +10,7 @@ export const getAllPieces = gql`
       price
       category
       location
-      colors
+      color
     }
   }
 `;
