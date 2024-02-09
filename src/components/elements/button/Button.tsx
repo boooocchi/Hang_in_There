@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-import { subFont } from '@/constants/FontFamily';
+type Props = {
+  children: ReactNode;
+  classname?: string;
+  onClick?: () => void;
+};
 
-const Button = ({ children }) => {
+const Button: React.FC<Props> = ({ children, classname, onClick }) => {
   return (
     <button
-      className={`${subFont.className} border border-richGreen bg-richGreen  p-sm px-md hover:bg-white transition duration-200 text-white hover:text-deepGreen rounded-md`}
+      onClick={onClick}
+      className={`border border-richGreen bg-richGreen p-sm px-md   transition duration-300 text-white registerButton rounded-md primaryButton ${
+        classname || ''
+      }`}
     >
       {children}
     </button>

@@ -1,14 +1,17 @@
 import { useMutation, gql } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Colors, Categories } from '@prisma/client';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
-import { subFont } from '@/constants/FontFamily';
+import Loading from '@/components/elements/message/Loading';
+import { GET_WARDROBE_QUERY } from '@/pages/wardrobe/[id]/index';
 
+import { uploadPhoto } from '../utils/uploadImage';
 import { registerPieceValidationSchema } from '../validation/registerPieceValidationSchema';
 
 import DropDownMenu from './DropDownMenu';
@@ -22,6 +25,7 @@ type RegisterPieceValues = {
   price?: number | null;
   color: Colors | null;
   category: Categories | null;
+  imageUrl?: string;
 };
 
 interface GraphQLError {
@@ -41,6 +45,7 @@ const REGISTER_PIECE_MUTATION = gql`
     $description: String
     $location: String
     $price: Float
+    $imageUrl: String!
   ) {
     register_piece(
       title: $title
@@ -50,6 +55,7 @@ const REGISTER_PIECE_MUTATION = gql`
       description: $description
       location: $location
       price: $price
+      imageUrl: $imageUrl
     ) {
       title
     }
@@ -59,6 +65,10 @@ const REGISTER_PIECE_MUTATION = gql`
 const Form = () => {
   const { data: authData } = useSession();
   const userId = authData?.user?.id;
+  const [imageFile, setImageFile] = React.useState<File | null>(null);
+  const [uploadLoading, setUploadLoading] = React.useState(false);
+
+  const router = useRouter();
 
   const [registerPiece] = useMutation(REGISTER_PIECE_MUTATION);
   const form = useForm<RegisterPieceValues>({
@@ -69,18 +79,32 @@ const Form = () => {
       price: null,
       color: null,
       category: null,
+      imageUrl: '',
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     resolver: yupResolver(registerPieceValidationSchema),
   });
 
+  const handleFileSelect = (file: File) => {
+    setImageFile(file);
+    const imageUrl = `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${file.name}`;
+    form.setValue('imageUrl', imageUrl);
+  };
+
   const { register, handleSubmit, formState, control, trigger } = form;
   const errors = formState.errors;
 
   const onSubmit = async (data: RegisterPieceValues) => {
+    setUploadLoading(true);
     const colorValidation = await trigger('color');
     const categoryValidation = await trigger('category');
+    const imageUploadResponse = await uploadPhoto(imageFile);
+
+    if (!imageUploadResponse.success) {
+      console.error('Image upload failed: ', imageUploadResponse.message);
+      return;
+    }
 
     if (colorValidation && categoryValidation) {
       try {
@@ -92,9 +116,18 @@ const Form = () => {
             price: data.price,
             color: data.color,
             category: data.category,
+            imageUrl: data.imageUrl,
             userId: userId,
           },
+          refetchQueries: [
+            {
+              query: GET_WARDROBE_QUERY,
+              variables: { userId: userId, category: data.category },
+            },
+          ],
         });
+        setUploadLoading(false);
+        router.push(`/wardrobe/${userId}`);
       } catch (error: unknown) {
         if (typeof error === 'object' && error !== null && 'graphQLErrors' in error) {
           const graphQLError = error as GraphQLException;
@@ -109,9 +142,9 @@ const Form = () => {
     }
   };
   return (
-    <div className="w-full h-full tracking-wide">
-      <form className="flex gap-2xl w-full h-full" onSubmit={handleSubmit(onSubmit)}>
-        <div className={`flex flex-col   ${subFont.className} w-1/2 h-full`}>
+    <div className="w-full h-full mt-3">
+      <form className="flex gap-3xl w-full h-full" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col    w-[45%] h-full">
           <Input
             register={register('title')}
             name="Title *"
@@ -163,22 +196,32 @@ const Form = () => {
             />
           </div>
           <div className="flex flex-col flex-grow">
-            <label htmlFor="description" className={`${subFont.className} text-base tracking-wide`}>
+            <label htmlFor="description" className={` text-base mb-2`}>
               Description
             </label>
             <textarea
               {...register('description')}
               name="description"
               id="description"
-              className="border-deepGreen border rounded-md h-full flex-grow p-sm"
-              placeholder="Warm winter down jacket"
+              className="bg-lightGreen rounded-md h-full flex-grow p-sm textarea"
+              placeholder="ex. Warm winter down jacket"
             />
             <ErrorMessage>{errors.description?.message}</ErrorMessage>
           </div>
         </div>
-        <div className="flex flex-col w-1/2  h-full ">
-          <DropZone className="w-full outline-[2px]  outline-dashed outline-richGreen h-full  flex flex-col justify-center overflow-hidden items-center p-lg rounded-md mb-xl"></DropZone>
-          <Button>Register</Button>
+        <div className="flex flex-col w-1/2  h-full pr-[1px]">
+          <DropZone
+            className="outline-[2px]  outline-dashed outline-lightGreen h-full  flex flex-col  justify-center overflow-hidden items-center mr-1 p-lg rounded-md mb-xl"
+            handleFileSelect={handleFileSelect}
+            deleteFile={() => {
+              setImageFile(null);
+              form.setValue('imageUrl', '');
+            }}
+          ></DropZone>
+          <div className="relative">
+            <ErrorMessage dropzone>{errors.imageUrl?.message}</ErrorMessage>
+          </div>
+          <Button>{uploadLoading ? <Loading /> : 'Register'}</Button>
         </div>
       </form>
     </div>

@@ -34,6 +34,7 @@ export const typeDefs = gql`
     location: String
     price: Float
     userId: String!
+    imageUrl: String!
   }
 
   type DendoOutfit {
@@ -43,15 +44,26 @@ export const typeDefs = gql`
     title: String!
     keywords: [String]
     userId: String!
-    pieces: [Piece]
+    pieces: [Piece!]
+    imageUrl: String
+  }
+
+  type WishList {
+    id: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    itemName: String!
+    category: Categories!
+    checked: Boolean!
+    userId: String!
   }
 
   enum Categories {
-    SHOES
-    OUTERWEAR
     LIGHTTOPS
     HEAVYTOPS
+    OUTERWEAR
     BOTTOMS
+    SHOES
     ACCESSORIES
   }
   enum Colors {
@@ -59,12 +71,13 @@ export const typeDefs = gql`
     BLUE
     YELLOW
     GREEN
+    BROWN
+    BEIGE
     ORANGE
     PURPLE
     PINK
     BLACK
     WHITE
-    BROWN
     GREY
     GOLD
     SILVER
@@ -72,9 +85,11 @@ export const typeDefs = gql`
   }
 
   type Query {
-    pieces(userId: String!): [Piece]
-    dendoOutfits: [DendoOutfit]
+    pieces(userId: String!, category: Categories): [Piece]
+    piece(id: String!): Piece
+    dendoOutfits(userId: String!): [DendoOutfit]
     limitEntries(userId: String!): [LimitEntry]
+    wishList(userId: String!): [WishList]
   }
 
   type Mutation {
@@ -86,8 +101,18 @@ export const typeDefs = gql`
       category: Categories!
       location: String
       price: Float
+      imageUrl: String!
       userId: String!
     ): Piece
+    delete_piece(id: String!): Piece
+    register_outfit(
+      title: String!
+      keywords: [String]
+      userId: String!
+      imageUrl: String
+      pieces: [String]!
+    ): DendoOutfit
+    add_wish_list(itemName: String!, category: Categories!, userId: String!): WishList
   }
 
   type AuthPayload {

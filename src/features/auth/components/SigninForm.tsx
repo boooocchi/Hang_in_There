@@ -1,9 +1,8 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
 import React from 'react';
 import { useForm, FieldErrors } from 'react-hook-form';
-
-import { subFont } from '@/constants/FontFamily';
 
 import Input from './Input';
 
@@ -65,26 +64,23 @@ const SigninForm = () => {
   return (
     <div className="flex flex-col h-full gap-3">
       <div className="flex gap-3 items-center pb-md">
-        <h1 className={`${subFont.className} text-2xl `}>Sign in</h1>{' '}
-        {errorMessage && <p className={`text-errorRed  ${subFont.className}`}>{errorMessage}</p>}
+        <h1 className={` text-2xl `}>Sign in</h1> {errorMessage && <p className={`text-errorRed  `}>{errorMessage}</p>}
       </div>
       <form className="flex flex-col gap-3  justify-center " onSubmit={handleSubmit(onSubmit)}>
         <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
         <Input register={register('password')} name="password" errorMessage={errors.password?.message}></Input>
         <div>
-          <button
-            className={`${subFont.className} border border-white p-sm px-md w-full hover:bg-white transition duration-200`}
-          >
+          <button className={` border border-white p-sm px-md w-full hover:bg-white transition duration-200`}>
             Sign in
           </button>
         </div>
       </form>
 
-      <p className={`${subFont.className} text-center `}>or</p>
+      <p className={` text-center `}>or</p>
       <button
         type="button"
         onClick={handleGoogleSignin}
-        className={`${subFont.className} border border-white w-full p-sm px-md hover:bg-white transition duration-200 `}
+        className={` border border-white w-full p-sm px-md hover:bg-white transition duration-200 `}
       >
         <p className="flex items-center justify-center gap-3">
           Sign in with Google
@@ -93,6 +89,11 @@ const SigninForm = () => {
           </svg>
         </p>
       </button>
+      <div className="flex justify-end">
+        <Link href="/auth/signup" className="underline  hover:text-accentOrange">
+          Don&apos;t have an account?
+        </Link>
+      </div>
     </div>
   );
 };

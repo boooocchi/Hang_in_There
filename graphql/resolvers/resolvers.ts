@@ -10,6 +10,7 @@ type limitEntriesArgs = {
 };
 type pieceArgs = {
   userId: string;
+  category: Categories;
 };
 
 type signUpMutationArgs = {
@@ -25,18 +26,42 @@ type registerPieceArgs = {
   category: Categories;
   location?: string;
   price?: number;
+  imageUrl: string;
   userId: string;
+};
+
+type registerOutfitArgs = {
+  title: string;
+  keywords?: string[];
+  imageUrl?: string;
+  userId: string;
+  pieces: string[];
 };
 
 export const resolvers = {
   Query: {
     pieces: (_parent: unknown, args: pieceArgs, context: Context) => {
       return context.prisma.piece.findMany({
-        where: { userId: args.userId },
+        where: { userId: args.userId, category: args.category },
+      });
+    },
+    piece: (_parent: unknown, args: { id: string }, context: Context) => {
+      return context.prisma.piece.findUnique({
+        where: { id: args.id },
       });
     },
     limitEntries: (_parent: unknown, args: limitEntriesArgs, context: Context) => {
       return context.prisma.limitEntry.findMany({
+        where: { userId: args.userId },
+      });
+    },
+    dendoOutfits: (_parent: unknown, args: { userId: string }, context: Context) => {
+      return context.prisma.dendoOutfit.findMany({
+        where: { userId: args.userId },
+      });
+    },
+    wishList: (_parent: unknown, args: { userId: string }, context: Context) => {
+      return context.prisma.wishList.findMany({
         where: { userId: args.userId },
       });
     },
@@ -86,6 +111,7 @@ export const resolvers = {
             category: args.category,
             location: args.location,
             price: args.price,
+            imageUrl: args.imageUrl,
             userId: args.userId,
           },
         });
@@ -93,6 +119,55 @@ export const resolvers = {
       } catch (error) {
         console.error(error);
         throw new Error(`Failed to register piece: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+    },
+    delete_piece: async (_parent: unknown, args: { id: string }, context: Context) => {
+      try {
+        const piece = await context.prisma.piece.delete({
+          where: { id: args.id },
+        });
+        return piece;
+      } catch (error) {
+        console.error(error);
+        throw new Error(`Failed to delete piece: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+    },
+    register_outfit: async (_parent: unknown, args: registerOutfitArgs, context: Context) => {
+      try {
+        const dendoOutfit = await context.prisma.dendoOutfit.create({
+          data: {
+            title: args.title,
+            keywords: args.keywords,
+            imageUrl: args.imageUrl,
+            userId: args.userId,
+            pieces: {
+              connect: args.pieces.map((id) => ({ id })),
+            },
+          },
+        });
+        return dendoOutfit;
+      } catch (error) {
+        console.error(error);
+        throw new Error(`Failed to register piece: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+    },
+    add_wish_list: async (
+      _parent: unknown,
+      args: { itemName: string; category: Categories; userId: string },
+      context: Context,
+    ) => {
+      try {
+        const wishList = await context.prisma.wishList.create({
+          data: {
+            itemName: args.itemName,
+            category: args.category,
+            userId: args.userId,
+          },
+        });
+        return wishList;
+      } catch (error) {
+        console.error(error);
+        throw new Error(`Failed to add to wishlist: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
     },
   },

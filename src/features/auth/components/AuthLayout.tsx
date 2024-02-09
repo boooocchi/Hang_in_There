@@ -3,7 +3,6 @@ import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import LoadingPage from '@/components/layouts/layout/LoadingPage';
-import { mainTitle, subFont } from '@/constants/FontFamily';
 import { Children } from '@/types/types';
 
 const AuthLayout: React.FC<Children> = ({ children }) => {
@@ -17,10 +16,8 @@ const AuthLayout: React.FC<Children> = ({ children }) => {
 
   return (
     <div className="bg-signinPage bg-cover h-screen p-3xl flex items-center">
-      <div
-        className={`w-2/3 flex flex-col items-center justify-center  ${subFont.className} text-[rgba(255,255,255,0.8)]`}
-      >
-        <h1 className={` font-mainTitle text-[80px] drop-shadow-2xl  ${mainTitle.className}`}>Do I Have It?</h1>
+      <div className="w-2/3 flex flex-col items-center justify-center   text-[rgba(255,255,255,0.8)]">
+        <h1 className=" text-[80px] drop-shadow-2xl">Do I Have It?</h1>
         <p className="w-96">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor repellendus fugit laboriosam ad fugiat illum
           voluptatum ipsum. Laudantium et, consequuntur eos perspiciatis fugit mollitia tempora! Architecto explicabo

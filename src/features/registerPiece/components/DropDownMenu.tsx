@@ -3,7 +3,6 @@ import * as Select from '@radix-ui/react-select';
 import React from 'react';
 
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
-import { subFont } from '@/constants/FontFamily';
 
 type DropDownMenuProps = {
   name: string;
@@ -18,38 +17,39 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ name, options, onChange, er
   };
 
   return (
-    <div className={`${subFont.className} relative w-[220px]`}>
-      <h2>{name}</h2>
+    <div className="relative w-1/2  text-base unstyled ">
+      <h2 className="mb-2">{name}</h2>
       <Select.Root onValueChange={handleValueChange}>
-        <Select.Trigger className="border border-deepGreen w-full flex py-xs p-sm justify-between relative outline-none items-center select-trigger">
+        <Select.Trigger className="border-1 border-lightGreen w-full flex py-xs p-sm justify-between relative outline-none items-center select-trigger font-normal bg-lightGreen ">
           <Select.Value placeholder="Select..." />
           <Select.Icon>
             <ChevronDownIcon />
           </Select.Icon>
         </Select.Trigger>
-        <Select.Content
-          position="popper"
-          sideOffset={0}
-          className="bg-white  w-[220px] border-deepGreen border border-t-0  rounded-b-md overflow-hidden outline-none focus:outline-none relative overflow-y-auto max-h-[200px] z-10"
-        >
-          {options.map((option, index) => {
-            return (
-              <Select.Item
-                key={index}
-                value={option}
-                className="w-full bg-white p-sm py-xs border-none hover:bg-richGreen flex items-center hover:text-white outline-none justify-between "
-              >
-                <Select.ItemText>{option}</Select.ItemText>
-                <Select.ItemIndicator>
-                  <CheckIcon />
-                </Select.ItemIndicator>
-              </Select.Item>
-            );
-          })}
-        </Select.Content>
+        <Select.Portal>
+          <Select.Content
+            className=" rounded-b-md overflow-hidden border-none  outline-none focus:outline-none relative overflow-y-auto max-h-[200px] z-10 w-[--radix-select-trigger-width] select-content "
+            position="popper"
+          >
+            {options.map((option, index) => {
+              return (
+                <Select.Item
+                  key={index}
+                  value={option}
+                  className="w-full bg-lightGreen p-sm py-xs border-none flex items-center hover:text-richGreen outline-none justify-between text-base cursor-pointer  hover:bg-lightOrange font-normal"
+                >
+                  <Select.ItemText className="border-none">{option}</Select.ItemText>
+                  <Select.ItemIndicator>
+                    <CheckIcon />
+                  </Select.ItemIndicator>
+                </Select.Item>
+              );
+            })}
+          </Select.Content>
+        </Select.Portal>
       </Select.Root>
       <div className="relative">
-        <ErrorMessage top>{error}</ErrorMessage>
+        <ErrorMessage positionFromTop="top-[3px]">{error}</ErrorMessage>
       </div>
     </div>
   );

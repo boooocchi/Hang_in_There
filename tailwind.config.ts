@@ -9,20 +9,23 @@ const config: Config = {
   ],
   theme: {
     fontSize: {
-      '4xl': '48px',
-      '3xl': '40px',
-      '2xl': '32px',
-      xl: '24px',
-      lg: '20px',
-      base: '16px',
-      sm: '14px',
-      xs: '12px',
+      '4xl': '40px',
+      '3xl': '32px',
+      '2xl': '24px',
+      xl: '20px',
+      lg: '16',
+      base: '14px',
+      sm: '12px',
+      xs: '10px',
+    },
+    fontWeight: {
+      normal: '300',
+      bold: '500',
+      extraBold: '600',
+      boldest: '700',
     },
 
     extend: {
-      fontFamily: {
-        pageTitle: ['Alumni Sans', 'sans-serif'],
-      },
       backgroundImage: {
         signinPage: 'url("/image/signinPage.jpg")',
       },
@@ -30,8 +33,11 @@ const config: Config = {
         deepGreen: '#11221F',
         richGreen: '#00483F',
         lighterGreen: '#11655b',
-        accentOrangeRed: '#fF7B3C',
+        lightGreen: '#d6e7cd',
+        accentOrange: '#fF6A2B',
+        lightOrange: '#F78C5F',
         errorRed: '#FF3300',
+        gray: '#F5F5F5',
       },
       width: {
         pc_sideMenuWidth: '300px',
@@ -44,6 +50,7 @@ const config: Config = {
         sideMenu: '100',
       },
       gap: {
+        '3xl': '60px',
         '2xl': '50px',
         xl: '40px',
         lg: '30px',
@@ -73,13 +80,12 @@ const config: Config = {
         sm: '10px',
         xs: '5px',
       },
-      // absolute: {
-      //   md: '20px',
-      //   sm: '10px',
-      //   xs: '5px',
-      // },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')({
+      strategy: 'class',
+    }),
+  ],
 };
 export default config;

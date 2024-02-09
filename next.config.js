@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['openweathermap.org'],
+    domains: ['do-i-have-it-storage.s3.amazonaws.com'],
   },
 };
 

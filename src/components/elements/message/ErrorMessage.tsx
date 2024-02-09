@@ -1,16 +1,15 @@
 import React from 'react';
 
-import { subFont } from '@/constants/FontFamily';
-
 type ErrorMessageProps = {
   children: React.ReactNode;
-  top?: boolean;
+  positionFromTop?: string;
+  dropzone?: boolean;
 };
-const ErrorMessage: React.FC<ErrorMessageProps> = ({ children, top }) => {
+const ErrorMessage: React.FC<ErrorMessageProps> = ({ children, positionFromTop, dropzone }) => {
   return (
     <p
-      className={`text-errorRed ${subFont.className}  font-bold text-[0.9rem] absolute top-9 left-3 ${
-        top ? 'top-[3px]' : 'top-9'
+      className={`text-errorRed  text-[0.9rem] absolute  left-3 top-9 ${positionFromTop && positionFromTop} ${
+        dropzone && 'dropzoneErrorMessaege'
       }`}
     >
       {children}

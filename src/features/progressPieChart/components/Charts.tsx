@@ -4,7 +4,6 @@ import React from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
 import 'react-circular-progressbar/dist/styles.css';
-import { mainTitle, subFont } from '@/constants/FontFamily';
 
 import { limitDataItem } from '../types/pirChartTypes';
 import { percentageCalculator, countByCategory } from '../utils/chartUtils';
@@ -69,31 +68,31 @@ const Charts = () => {
   }, [limitData, piecesData]);
 
   return (
-    <div className="grid grid-cols-3  h-full gap-x-5 content-center overflow-hidden text-white mt-5">
+    <div className="grid grid-cols-3  h-full gap-x-5 content-center overflow-hidden text-white mt-5 p-sm ">
       {Object.keys(percentages).map((key, index) => {
         const categoryKey = key as keyof PercentagesType;
         const percentage = percentages[categoryKey].percentage;
         return (
-          <div key={index} className="h-full flex justify-center  relative overflow-hidden">
+          <div key={index} className="h-full flex justify-center  relative overflow-hidden ">
             <CircularProgressbar
               value={percentage}
-              strokeWidth={10}
-              className={` ${subFont.className} h-full w-full`}
+              strokeWidth={12}
+              className={`  h-full w-full`}
               circleRatio={0.5}
               counterClockwise={true}
               styles={buildStyles({
                 rotation: 0.25,
                 strokeLinecap: 'round',
                 textSize: '16px',
-                pathTransitionDuration: 0.2,
-                pathColor: `#fF7B3C`,
+                pathTransitionDuration: 0.3,
+                pathColor: `#F78C5F`,
                 textColor: '#11221F',
-                trailColor: '#eee',
+                trailColor: '#ddd ',
                 backgroundColor: '#00483F',
               })}
             />
-            <h2 className={`${subFont.className} text-sm absolute bottom-[30%]`}>{key}</h2>
-            <span className={`absolute text-sm bottom-[50%] ${mainTitle.className}`}>{percentage}%</span>
+            <h2 className="text-richGreen text-sm font-bold absolute bottom-[30%]">{key}</h2>
+            <span className="text-richGreen font-bold absolute text-sm bottom-[50%]">{percentage}%</span>
           </div>
         );
       })}

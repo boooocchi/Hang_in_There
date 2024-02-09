@@ -7,7 +7,6 @@ import React from 'react';
 import { useForm, FieldErrors } from 'react-hook-form';
 
 import Loading from '@/components/elements/message/Loading';
-import { subFont } from '@/constants/FontFamily';
 
 import { signinValidationSchema } from '../validation/signinValidationSchema';
 
@@ -96,7 +95,7 @@ const SignupForm = () => {
 
   return (
     <div className="flex flex-col gap-3 h-full">
-      <h1 className={`${subFont.className} text-2xl pb-5`}>Sign up</h1>
+      <h1 className={` text-2xl pb-5`}>Sign up</h1>
       <form className="flex flex-col gap-3  justify-center" onSubmit={handleSubmit(onSubmit)}>
         <Input register={register('name')} name="name" errorMessage={errors.name?.message}></Input>
         <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
@@ -107,17 +106,15 @@ const SignupForm = () => {
           errorMessage={errors.samePassword?.message}
           placeholder="Password Confirmation"
         ></Input>
-        <button
-          className={`${subFont.className} border border-white p-sm px-md hover:bg-white transition duration-200  `}
-        >
+        <button className={` border border-white p-sm px-md hover:bg-white transition duration-200  `}>
           {loading ? <Loading /> : 'Sign up'}
         </button>
         {error && <p className="text-red-500">{error.message}</p>}
-        <p className={`${subFont.className} text-center`}>or</p>
+        <p className={` text-center`}>or</p>
         <button
           type="button"
           onClick={handleGoogleSignup}
-          className={`${subFont.className} border border-white w-full p-sm px-md hover:bg-white transition duration-200 `}
+          className={` border border-white w-full p-sm px-md hover:bg-white transition duration-200 `}
         >
           <p className="flex items-center justify-center gap-3">
             Sign up with Google
@@ -128,7 +125,7 @@ const SignupForm = () => {
         </button>
       </form>
       <div className="flex justify-end">
-        <Link href="/auth/signin" className={`underline ${subFont.className} hover:text-accentOrangeRed`}>
+        <Link href="/auth/signin" className="underline  hover:text-accentOrange">
           already have an account?
         </Link>
       </div>

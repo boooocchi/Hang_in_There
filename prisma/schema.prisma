@@ -21,6 +21,7 @@ model User{
   googleSignin Boolean @default(false)
   limitEntries  LimitEntry[]
   pieces Piece[]
+  wishList WishList[]
   dendoOutfits DendoOutfit[]
   accounts      Account[]
   sessions      Session[]
@@ -43,6 +44,7 @@ model Piece{
   category Categories
   location String?
   price Float?
+  imageUrl String
   userId String
   user User @relation(fields: [userId], references: [id])
   outfits DendoOutfit[]
@@ -57,6 +59,18 @@ model DendoOutfit{
   userId String
   pieces Piece[]
   user User @relation(fields: [userId], references: [id])
+  imageUrl String?
+}
+
+model WishList{
+  id  String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  itemName String
+  category Categories
+  checked Boolean @default(false)
+  userId String
+  user User @relation(fields: [userId], references: [id])
 }
 
 enum Colors {
@@ -64,12 +78,13 @@ enum Colors {
   BLUE
   YELLOW
   GREEN
+  BROWN
+  BEIGE
   ORANGE
   PURPLE
   PINK
   BLACK
   WHITE
-  BROWN
   GREY
   GOLD
   SILVER
@@ -77,12 +92,12 @@ enum Colors {
 }
 
 enum Categories {
-      SHOES
-      OUTERWEAR
-      LIGHTTOPS
-      HEAVYTOPS
-      BOTTOMS
-      ACCESSORIES
+        LIGHTTOPS
+        HEAVYTOPS
+        OUTERWEAR
+        BOTTOMS
+        SHOES
+        ACCESSORIES
   }
 
 

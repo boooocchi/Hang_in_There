@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-input:focus {
+html {
+  box-sizing: border-box;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
   outline: none;
 }
 .select-trigger {
@@ -10,4 +16,26 @@ input:focus {
 }
 .select-trigger[data-state='open'] {
   border-radius: 8px 8px 0 0;
+}
+
+.dropzoneErrorMessaege {
+  top: -35px;
+}
+
+.select-item:hover {
+  background-color: #00483f !important;
+}
+
+.select-content {
+  box-shadow: 1px 6px 5px 1px rgba(0, 0, 0, 0.1);
+}
+
+.primaryButton:hover {
+  border: 1px solid #00483f !important;
+  background-color: white !important;
+  color: #00483f !important;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }

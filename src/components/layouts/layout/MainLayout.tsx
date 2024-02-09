@@ -1,14 +1,19 @@
 import React from 'react';
 
-import { Children } from '@/types/types';
+import PageTitle from '@/components/elements/title/PageTitle';
 
 import Header from '../menu/Header';
 
-const MainLayout: React.FC<Children> = ({ children }) => {
+type Props = {
+  children: React.ReactNode;
+  pageTitle?: string;
+};
+const MainLayout: React.FC<Props> = ({ children, pageTitle }) => {
   return (
-    <div className="min-h-[750px] flex flex-col h-screen w-full">
+    <div className="min-h-[750px] flex flex-col h-screen px-4xl py-2xl pb-2xl w-full">
       <Header />
-      <div className="flex-grow pt-xl pb-3xl px-4xl overflow-auto w-full">{children}</div>
+      {pageTitle && <PageTitle>{pageTitle}</PageTitle>}
+      <div className="flex-grow  overflow-auto w-full">{children}</div>
     </div>
   );
 };

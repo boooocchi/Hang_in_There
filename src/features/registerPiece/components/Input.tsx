@@ -2,7 +2,6 @@ import React from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
-import { subFont } from '@/constants/FontFamily';
 
 type InputProps = {
   register: UseFormRegisterReturn;
@@ -16,25 +15,21 @@ type InputProps = {
 const Input: React.FC<InputProps> = ({ register, errorMessage, name, placeholder, handleFocus, handleBlur }) => {
   return (
     <>
-      <div
-        className={`flex flex-col   group z-0 mb-xl relative ${
-          name === 'Location' || name === 'Price' ? 'w-[220px]' : 'w-full'
-        }`}
-      >
-        <label htmlFor={name} className={`${subFont.className} text-base `}>
+      <div className="flex flex-col  group z-0 mb-xl relative w-full">
+        <label htmlFor={name} className={` text-base mb-1`}>
           {name}
         </label>
         <input
           type="text"
           id={name}
-          className="border-b border-deepGreen rounded-sm px-sm tracking-wide relative"
+          className=" rounded-md border-1 bg-lightGreen border-lightGreen py-xs px-sm relative text-base"
           placeholder={placeholder ?? name}
           {...register}
           onFocus={() => handleFocus && handleFocus(name)}
           onBlur={() => handleBlur && handleBlur(name)}
         />
         <div className="relative">
-          <ErrorMessage top>{errorMessage}</ErrorMessage>
+          <ErrorMessage positionFromTop="top-[3px]">{errorMessage}</ErrorMessage>
         </div>
       </div>
     </>

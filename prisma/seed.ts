@@ -21,6 +21,7 @@ async function main() {
       category: Categories.OUTERWEAR,
       price: 500,
       location: `Banana Republic at Robson`,
+      imageUrl: `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/testJacket.webp`,
       user: { connect: { id: testUser.id } },
     },
   });
@@ -33,6 +34,7 @@ async function main() {
       category: Categories.BOTTOMS,
       price: 100,
       location: 'Beauty & Youth in Osaka',
+      imageUrl: `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/testPants.webp`,
       user: { connect: { id: testUser.id } },
     },
   });

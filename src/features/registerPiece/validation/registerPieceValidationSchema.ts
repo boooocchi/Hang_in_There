@@ -12,4 +12,5 @@ export const registerPieceValidationSchema = yup.object().shape({
     .oneOf(Object.values(Colors), 'Invalid color value')
     .required('Select a color'),
   category: yup.mixed().oneOf(Object.values(Categories), 'Invalid category value').required('Category is required'),
+  imageUrl: yup.string().required('Image is required'),
 });

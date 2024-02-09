@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { subFont } from '../../../constants/FontFamily';
 import { WeatherIcon } from '../icons/Svgs';
 import { WeatherData } from '../types/weatherType';
 
@@ -8,22 +7,22 @@ const WeatherBox = ({ weatherData }: WeatherData) => {
   return (
     <>
       {weatherData ? (
-        <div className={`w-full p-md flex justify-center items-center  ${subFont.className}`}>
-          <div className="flex flex-col items-center justify-center w-1/2 gap-1">
-            <div className="text-3xl font-bold ml-2 leading-[48px] ">
+        <div className="w-full p-md flex justify-center items-center  bg-white">
+          <div className="flex flex-col items-center justify-center w-1/2">
+            <div className="text-2xl font-bold ml-2 -mb-1">
               {weatherData.currentTemp}
-              <sup className="text-lg ">°C</sup>
+              <sup className="text-base ">°C</sup>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-center">Feels: {weatherData.feelsLike}</div>
-              <div className="flex -mt-1 justify-center gap-2">
+              <div className="text-center text-xs mt-1">Feels: {weatherData.feelsLike}</div>
+              <div className="flex  justify-center gap-2 text-xs">
                 <div>H: {weatherData.maxTemp}</div>
                 <div>L: {weatherData.minTemp}</div>
               </div>
             </div>
           </div>
-          <div className="text-4xl font-extralight text-richGreen">|</div>
-          <div className="flex flex-col w-1/2 justify-center items-center text-xl gap-1">
+          <div className="text-2xl text-richGreen">|</div>
+          <div className="flex flex-col w-1/2 justify-center items-center text-xl ">
             <WeatherIcon description={weatherData.weatherDescription} />
             <span className="text-base">{weatherData.weatherDescription}</span>
           </div>

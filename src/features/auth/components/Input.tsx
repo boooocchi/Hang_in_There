@@ -2,7 +2,6 @@ import React from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
-import { subFont } from '@/constants/FontFamily';
 
 type InputProps = {
   register: UseFormRegisterReturn;
@@ -27,13 +26,10 @@ const Input: React.FC<InputProps> = ({ register, errorMessage, name, placeholder
       />
       <label
         htmlFor={name}
-        className={`${subFont.className}  ml-3 test-black origin-[0] -z-10  absolute duration-300 
+        className={`  ml-3 test-black origin-[0] -z-10  absolute duration-300 
         transform -translate-y-4
         peer-focus:-translate-y-4
-        peer
-      
         peer-placeholder-shown:scale-[100%]
-      
         peer-placeholder-shown:translate-y-1  text-mainBlack peer-focus:text-accentOrange`}
       >
         {placeholder ?? name}
