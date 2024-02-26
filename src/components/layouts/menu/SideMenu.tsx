@@ -92,7 +92,7 @@ const SideMenu = () => {
           <path d="M29,41.752V56H24a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1H42a1,1,0,0,0,1-1V59a3,3,0,0,0-3-3H35V41.752C44.61,40.155,52,31.009,52,20V18a1,1,0,0,0-2,0v1H47.955C47.49,9.541,40.522,2,32,2S16.51,9.541,16.045,19H14V18a1,1,0,0,0-2,0v2C12,31.009,19.39,40.155,29,41.752ZM41,59v1H23V59a1,1,0,0,1,1-1H40A1,1,0,0,1,41,59ZM33,42V56H31V42Zm-1-2c-9.621,0-17.481-8.438-17.954-19h2C16.51,30.459,23.478,38,32,38s15.49-7.541,15.955-17h2C49.481,31.562,41.621,40,32,40ZM32,4c7.72,0,14,7.178,14,16S39.72,36,32,36,18,28.822,18,20,24.28,4,32,4Z"></path>
         </svg>
       ),
-      name: 'Do I Look Okay?',
+      name: 'Verdict on Outfit',
       path: '/verdict',
     },
     {
@@ -116,14 +116,14 @@ const SideMenu = () => {
   ];
 
   return (
-    <nav className="flex flex-col flex-shrink-0 bg-richGreen h-screen w-[275px] min-w-[275px] z-sideMenu relative pt-2xl pb-2xl px-2xl drop-shadow-md min-h-[750px] tracking-tight">
+    <nav className="flex flex-col flex-shrink-0 bg-richGreen  w-[280px] min-w-[280px] z-100 relative pt-2xl pb-2xl px-2xl drop-shadow-md min-h-[750px] tracking-tight h-screen overflow-hidden">
       <h1
         className={`text-white font-mainTitle text-[36px] leading-[32px] whitespace-nowrap -ml-1 ${titleFont.className}`}
       >
         Do I Have It?
       </h1>
       <div className="flex flex-col h-full justify-between">
-        <ul className=" h-full pb-xl pt-[45px]">
+        <ul className=" h-full pb-xl pt-[50px]">
           {navItems.map((item, index) => {
             const menuItemClassName =
               pathname === item.path || (pathname.includes('wardrobe') && item.path.includes('wardrobe'))

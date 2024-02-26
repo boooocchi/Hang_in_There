@@ -9,9 +9,11 @@ type DropDownMenuProps = {
   options: string[];
   onChange: (value: string) => void;
   error?: string;
+  defaultValue?: string;
+  disabled?: boolean;
 };
 
-const DropDownMenu: React.FC<DropDownMenuProps> = ({ name, options, onChange, error }) => {
+const DropDownMenu: React.FC<DropDownMenuProps> = ({ name, options, onChange, error, defaultValue, disabled }) => {
   const handleValueChange = (value: string) => {
     onChange(value);
   };
@@ -19,9 +21,12 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ name, options, onChange, er
   return (
     <div className="relative w-1/2  text-base unstyled ">
       <h2 className="mb-2">{name}</h2>
-      <Select.Root onValueChange={handleValueChange}>
+      <Select.Root onValueChange={handleValueChange} disabled={disabled ? disabled : false}>
         <Select.Trigger className="border-1 border-lightGreen w-full flex py-xs p-sm justify-between relative outline-none items-center select-trigger font-normal bg-lightGreen ">
-          <Select.Value placeholder="Select..." />
+          <Select.Value
+            placeholder={defaultValue ? defaultValue : 'Select...'}
+            defaultValue={defaultValue ?? defaultValue}
+          />
           <Select.Icon>
             <ChevronDownIcon />
           </Select.Icon>

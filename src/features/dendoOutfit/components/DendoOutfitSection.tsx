@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+import Loading from '@/components/elements/message/Loading';
 import { useAuth } from '@/hooks/useAuth';
 import { dateFormatter } from '@/utils/formatDate';
 
@@ -16,7 +17,7 @@ type dendoOutfitType = {
   imageUrl: string;
 };
 
-const DENDOOUTFIT_QUERY = gql`
+export const DENDOOUTFIT_QUERY = gql`
   query DendoOutfits($userId: String!) {
     dendoOutfits(userId: $userId) {
       id
@@ -31,11 +32,13 @@ const DENDOOUTFIT_QUERY = gql`
 const DendoOutfitSection = () => {
   const { session } = useAuth();
   const userId = session?.user?.id;
-  const { data } = useQuery(DENDOOUTFIT_QUERY, {
+  const { data, loading } = useQuery(DENDOOUTFIT_QUERY, {
     variables: { userId },
   });
+
+  if (loading) return <Loading size="large"></Loading>;
   return (
-    <div className="grid grid-cols-4 gap-5 rounded-md overflow-hidden">
+    <div className="grid grid-cols-4 gap-5 rounded-md overflow-y-scroll h-full">
       {data?.dendoOutfits.map((dendoOutfit: dendoOutfitType, index: number) => {
         return (
           <div key={index}>

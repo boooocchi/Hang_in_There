@@ -30,12 +30,22 @@ select:focus {
   box-shadow: 1px 6px 5px 1px rgba(0, 0, 0, 0.1);
 }
 
-.primaryButton:hover {
+.primaryGreenButton:hover {
   border: 1px solid #00483f !important;
-  background-color: white !important;
+  background-color: #f5f5f5 !important;
   color: #00483f !important;
+}
+
+.primaryOrangeButton:hover {
+  border: 1px solid #fc7238 !important;
+  background-color: #f5f5f5 !important;
+  color: #fc7238 !important;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.form-checkbox:focus {
+  box-shadow: none !important;
 }

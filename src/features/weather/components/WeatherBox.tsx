@@ -7,7 +7,7 @@ const WeatherBox = ({ weatherData }: WeatherData) => {
   return (
     <>
       {weatherData ? (
-        <div className="w-full p-md flex justify-center items-center  bg-white">
+        <div className="w-full py-md px-xl flex justify-center items-center  bg-white gap-2">
           <div className="flex flex-col items-center justify-center w-1/2">
             <div className="text-2xl font-bold ml-2 -mb-1">
               {weatherData.currentTemp}
@@ -28,7 +28,7 @@ const WeatherBox = ({ weatherData }: WeatherData) => {
           </div>
         </div>
       ) : (
-        <div>No weather data</div>
+        <div className="h-full w-full flex items-center justify-center">No weather data</div>
       )}
     </>
   );

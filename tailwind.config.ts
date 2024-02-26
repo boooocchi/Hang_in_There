@@ -34,20 +34,10 @@ const config: Config = {
         richGreen: '#00483F',
         lighterGreen: '#11655b',
         lightGreen: '#d6e7cd',
-        accentOrange: '#fF6A2B',
+        accentOrange: '#FC7238',
         lightOrange: '#F78C5F',
         errorRed: '#FF3300',
         gray: '#F5F5F5',
-      },
-      width: {
-        pc_sideMenuWidth: '300px',
-      },
-      height: {
-        pc_headerHeight: '100px',
-        pc_mainLayoutHeight: '800px',
-      },
-      zIndex: {
-        sideMenu: '100',
       },
       gap: {
         '3xl': '60px',

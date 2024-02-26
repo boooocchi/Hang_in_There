@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
 
@@ -5,12 +6,19 @@ type DropZoneProps = {
   className?: string;
   handleFileSelect: (fileName: File) => void;
   deleteFile: () => void;
+  pieceImageUrl?: string;
 };
 
 type FileWithPreview = File & { preview: string };
 
-const DropZone: React.FC<DropZoneProps> = ({ className, handleFileSelect, deleteFile }) => {
+const DropZone: React.FC<DropZoneProps> = ({ className, handleFileSelect, deleteFile, pieceImageUrl }) => {
   const [file, setFile] = React.useState<FileWithPreview | null>(null);
+
+  const [pieceImgUrl, setPieceImgUrl] = React.useState<string>('');
+
+  React.useEffect(() => {
+    if (pieceImageUrl) setPieceImgUrl(pieceImageUrl);
+  }, [pieceImageUrl]);
 
   const onDrop = React.useCallback(
     (acceptedFiles: File[]) => {
@@ -37,18 +45,20 @@ const DropZone: React.FC<DropZoneProps> = ({ className, handleFileSelect, delete
 
   return (
     <div {...getRootProps({ className: className })}>
-      <div>
+      <div className="w-full h-full flex items-center justify-center">
         <input {...getInputProps()} />
-        {file ? (
+        {file || pieceImgUrl ? (
           <div
             className="relative flex flex-col justify-center items-center
-          gap-[3px] mt-3"
+          gap-[3px] mt-3 w-full h-full"
           >
-            <div className="relative flex justify-center">
-              <button
-                className=" absolute
-              -top-[3%]
-              right-[12%]
+            <div className="relative flex justify-center w-full items-center">
+              <div className="flex justify-center items-center w-full">
+                <div className="relative">
+                  <button
+                    className=" absolute
+              -top-[1%]
+              -right-[1%]
               bg-black
               text-white
               justify-center
@@ -56,25 +66,41 @@ const DropZone: React.FC<DropZoneProps> = ({ className, handleFileSelect, delete
               items-center
               cursor-pointer
               p-[3px]"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deleteFile();
-                  setFile(null);
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="white"
-                  className="w-4 h-4 drop-shadow-lg"
-                >
-                  <path strokeLinecap="square" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              <img src={file.preview} alt="Preview" className="w-[70%] max-h-[400px]" />
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (file) {
+                        deleteFile();
+                        setFile(null);
+                      } else {
+                        deleteFile();
+                        setPieceImgUrl('');
+                      }
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="white"
+                      className="w-4 h-4 drop-shadow-lg"
+                    >
+                      <path strokeLinecap="square" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                  <div></div>
+                  <Image
+                    src={file?.preview ? file.preview : pieceImgUrl ? pieceImgUrl : ''}
+                    alt="Preview"
+                    width="250"
+                    height="342"
+                    className="max-h-[342px]"
+                  />
+                </div>
+              </div>
             </div>
-            <p className={` text-center w-full`}>{file.name}</p>
+            <p className={` text-center w-full`}>
+              {file?.name ? file?.name : pieceImgUrl.split('/')[pieceImgUrl.split('/').length - 1]}
+            </p>
           </div>
         ) : (
           <div className="flex flex-col justify-center items-center">

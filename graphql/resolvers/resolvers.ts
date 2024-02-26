@@ -35,6 +35,7 @@ type registerOutfitArgs = {
   keywords?: string[];
   imageUrl?: string;
   userId: string;
+  description?: string;
   pieces: string[];
 };
 
@@ -58,6 +59,12 @@ export const resolvers = {
     dendoOutfits: (_parent: unknown, args: { userId: string }, context: Context) => {
       return context.prisma.dendoOutfit.findMany({
         where: { userId: args.userId },
+      });
+    },
+    dendoOutfit: (_parent: unknown, args: { id: string }, context: Context) => {
+      return context.prisma.dendoOutfit.findUnique({
+        where: { id: args.id },
+        include: { pieces: true },
       });
     },
     wishList: (_parent: unknown, args: { userId: string }, context: Context) => {
@@ -121,6 +128,39 @@ export const resolvers = {
         throw new Error(`Failed to register piece: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
     },
+    update_piece: async (
+      _parent: unknown,
+      args: {
+        id: string;
+        title: string;
+        description?: string;
+        color: Colors;
+        category: Categories;
+        location?: string;
+        price?: number;
+        imageUrl: string;
+      },
+      context: Context,
+    ) => {
+      try {
+        const piece = await context.prisma.piece.update({
+          where: { id: args.id },
+          data: {
+            title: args.title,
+            description: args.description,
+            color: args.color,
+            category: args.category,
+            location: args.location,
+            price: args.price,
+            imageUrl: args.imageUrl,
+          },
+        });
+        return piece;
+      } catch (error) {
+        console.error(error);
+        throw new Error(`Failed to update piece: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+    },
     delete_piece: async (_parent: unknown, args: { id: string }, context: Context) => {
       try {
         const piece = await context.prisma.piece.delete({
@@ -140,6 +180,7 @@ export const resolvers = {
             keywords: args.keywords,
             imageUrl: args.imageUrl,
             userId: args.userId,
+            description: args.description,
             pieces: {
               connect: args.pieces.map((id) => ({ id })),
             },
@@ -168,6 +209,45 @@ export const resolvers = {
       } catch (error) {
         console.error(error);
         throw new Error(`Failed to add to wishlist: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+    },
+    delete_wish_list: async (_parent: unknown, args: { id: string }, context: Context) => {
+      try {
+        const wishList = await context.prisma.wishList.delete({
+          where: { id: args.id },
+        });
+        return wishList;
+      } catch (error) {
+        console.error(error);
+        throw new Error(`Failed to delete from wishlist: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+    },
+    update_wish_list_name: async (_parent: unknown, args: { id: string; itemName: string }, context: Context) => {
+      try {
+        const updatedItem = await context.prisma.wishList.update({
+          where: { id: args.id },
+          data: {
+            itemName: args.itemName,
+          },
+        });
+        return updatedItem;
+      } catch (error) {
+        console.error(error);
+        throw new Error(`Failed to update wishlist: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+    },
+    update_wish_list_status: async (_parent: unknown, args: { id: string; checked: boolean }, context: Context) => {
+      try {
+        const updatedItem = await context.prisma.wishList.update({
+          where: { id: args.id },
+          data: {
+            checked: args.checked,
+          },
+        });
+        return updatedItem;
+      } catch (error) {
+        console.error(error);
+        throw new Error(`Failed to update wishlist: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
     },
   },

@@ -10,12 +10,21 @@ type InputProps = {
   placeholder?: string;
   handleFocus?: (inputName: string) => void;
   handleBlur?: (inputName: string) => void;
+  disabled?: boolean;
 };
 
-const Input: React.FC<InputProps> = ({ register, errorMessage, name, placeholder, handleFocus, handleBlur }) => {
+const Input: React.FC<InputProps> = ({
+  register,
+  errorMessage,
+  name,
+  placeholder,
+  handleFocus,
+  handleBlur,
+  disabled,
+}) => {
   return (
     <>
-      <div className="flex flex-col  group z-0 mb-xl relative w-full">
+      <div className="flex flex-col  group z-0 mb-4 relative w-full">
         <label htmlFor={name} className={` text-base mb-1`}>
           {name}
         </label>
@@ -27,6 +36,7 @@ const Input: React.FC<InputProps> = ({ register, errorMessage, name, placeholder
           {...register}
           onFocus={() => handleFocus && handleFocus(name)}
           onBlur={() => handleBlur && handleBlur(name)}
+          disabled={disabled}
         />
         <div className="relative">
           <ErrorMessage positionFromTop="top-[3px]">{errorMessage}</ErrorMessage>

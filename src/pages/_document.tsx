@@ -9,6 +9,7 @@ export default function Document() {
       <body>
         <Theme>
           <Main />
+          <div id="myportal" />
           <NextScript />
         </Theme>
       </body>

@@ -2,19 +2,19 @@ import React from 'react';
 
 import PageTitle from '@/components/elements/title/PageTitle';
 
-import Header from '../menu/Header';
-
 type Props = {
+  title: string;
   children: React.ReactNode;
-  pageTitle?: string;
+  editButtons?: React.ReactNode;
 };
-const MainLayout: React.FC<Props> = ({ children, pageTitle }) => {
+const MainLayout: React.FC<Props> = ({ children, title, editButtons }) => {
   return (
-    <div className="min-h-[750px] flex flex-col h-screen px-4xl py-2xl pb-2xl w-full">
-      <Header />
-      {pageTitle && <PageTitle>{pageTitle}</PageTitle>}
-      <div className="flex-grow  overflow-auto w-full">{children}</div>
-    </div>
+    <main className="h-full flex flex-col gap-[5%]">
+      <div className="flex items-center gap-[30px]">
+        <PageTitle>{title}</PageTitle> {editButtons && editButtons}
+      </div>
+      <div className="flex justify-center flex-col h-[90%]">{children}</div>
+    </main>
   );
 };
 

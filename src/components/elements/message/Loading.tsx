@@ -1,11 +1,13 @@
 import React from 'react';
 
-const Loading = () => {
+const Loading = ({ size }: { size?: string }) => {
   return (
-    <>
+    <div className="w-full flex-grow flex items-center justify-center h-full">
       <svg
         aria-hidden="true"
-        className="inline w-5 h-5 text-white animate-spin dark:text-white-600 fill-accentOrange"
+        className={`inline text-white animate-spin dark:text-white-600 fill-accentOrange ${
+          size === 'large' ? 'h-[40px] w-[40px]' : 'w-[24px] h-[24px]'
+        }`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +22,7 @@ const Loading = () => {
         />
       </svg>
       <span className="sr-only">Loading...</span>
-    </>
+    </div>
   );
 };
 

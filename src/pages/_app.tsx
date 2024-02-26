@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { SessionProvider } from 'next-auth/react';
 import React from 'react';
 
+import Header from '@/components/layouts/menu/Header';
 import SideMenu from '@/components/layouts/menu/SideMenu';
 import apolloClient from '@/lib/apollo';
 
@@ -15,7 +16,6 @@ export const mainFont = Mulish({
   subsets: ['latin'],
   display: 'swap',
 });
-
 import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -24,10 +24,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={apolloClient}>
       <SessionProvider session={pageProps.session}>
-        <div className={`flex justify-center  ${mainFont.className}  font-normal tracking-tight text-richGreen`}>
-          <div className=" flex lg:w-[1470px] overflow-x-scroll">
-            {pathname !== '/auth/signup' && pathname !== '/auth/signin' && <SideMenu />}
-            <div className="flex-grow  bg-gray min-w-[980px]">
+        <div className={`flex lg:w-[1470px] ${mainFont.className}  font-normal tracking-tight text-richGreen `}>
+          {pathname !== '/auth/signup' && pathname !== '/auth/signin' && <SideMenu />}
+          <div className="flex flex-col px-4xl py-2xl w-full  bg-gray h-screen gap-[45px] min-h-[750px]">
+            <Header />
+            <div className="flex-grow overflow-hidden">
               <Component {...pageProps} />
             </div>
           </div>
@@ -35,4 +36,11 @@ export default function App({ Component, pageProps }: AppProps) {
       </SessionProvider>
     </ApolloProvider>
   );
+}
+
+{
+  /* <div className="xl:min-h-[450px] xl:min-w-[1190px] flex flex-col   justify-center  flex-grow w-full">
+{pageTitle && <PageTitle button={button}>{pageTitle}</PageTitle>}
+<div className=" w-full flex flex-col justify-center overflow-y-scroll ">{children}</div>
+</div> */
 }

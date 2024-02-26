@@ -1,6 +1,8 @@
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
+import SearchInput from '@/components/elements/SearchInput';
+
 import HeaderDropdownMenu from './HeaderDropdownMenu';
 
 const Header = () => {
@@ -8,24 +10,9 @@ const Header = () => {
   const userName = data?.user?.userName;
 
   return (
-    <header>
-      <nav className="w-full h-pc_header bg-transparent  flex justify-between items-center mb-[45px]">
-        <div className="relative">
-          <input type="text" className=" border-1 border-richGreen w-48 h-7 mr-sm p-sm pr-lg text-sm rounded-md " />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="#00110F"
-            className="w-4 h-4 absolute right-4 top-[5px]"
-          >
-            <path
-              strokeLinecap="square"
-              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-            />
-          </svg>
-        </div>
+    <header className="w-full bg-gray h-[5%]">
+      <nav className="flex justify-between items-center h-full">
+        <SearchInput />
         <div className={` flex text-lg gap-2`}>
           <p>Hello, {userName}</p>
           <HeaderDropdownMenu></HeaderDropdownMenu>

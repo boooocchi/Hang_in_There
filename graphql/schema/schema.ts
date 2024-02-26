@@ -46,6 +46,7 @@ export const typeDefs = gql`
     userId: String!
     pieces: [Piece!]
     imageUrl: String
+    description: String
   }
 
   type WishList {
@@ -88,6 +89,7 @@ export const typeDefs = gql`
     pieces(userId: String!, category: Categories): [Piece]
     piece(id: String!): Piece
     dendoOutfits(userId: String!): [DendoOutfit]
+    dendoOutfit(id: String!): DendoOutfit
     limitEntries(userId: String!): [LimitEntry]
     wishList(userId: String!): [WishList]
   }
@@ -104,15 +106,29 @@ export const typeDefs = gql`
       imageUrl: String!
       userId: String!
     ): Piece
+    update_piece(
+      id: String!
+      title: String!
+      description: String
+      color: Colors!
+      category: Categories!
+      location: String
+      price: Float
+      imageUrl: String!
+    ): Piece
     delete_piece(id: String!): Piece
     register_outfit(
       title: String!
       keywords: [String]
+      description: String
       userId: String!
       imageUrl: String
       pieces: [String]!
     ): DendoOutfit
     add_wish_list(itemName: String!, category: Categories!, userId: String!): WishList
+    delete_wish_list(id: String!): WishList
+    update_wish_list_name(id: String!, itemName: String!): WishList
+    update_wish_list_status(id: String!, checked: Boolean!): WishList
   }
 
   type AuthPayload {

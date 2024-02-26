@@ -5,6 +5,7 @@ export const registerDendoOutfitValidationSchema = yup
   .object()
   .shape({
     title: yup.string().required('Title is required'),
+    keyword: yup.string(),
     imageUrl: yup.string().nullable(),
     LIGHTTOPS: yup.lazy((value) =>
       Array.isArray(value)

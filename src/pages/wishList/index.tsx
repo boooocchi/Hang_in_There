@@ -5,7 +5,7 @@ import WishListSection from '@/features/wishList/components/WishListSection';
 
 const Index = () => {
   return (
-    <MainLayout pageTitle="Wish List">
+    <MainLayout title="Wish List">
       <WishListSection />
     </MainLayout>
   );

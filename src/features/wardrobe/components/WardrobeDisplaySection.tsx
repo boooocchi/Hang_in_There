@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 
+import Loading from '@/components/elements/message/Loading';
 import { RegisterOutfitValues } from '@/features/registerDendoOutift/components/DendoOutfitForm';
 import { mainFont } from '@/pages/_app';
 
@@ -23,6 +24,10 @@ type WardrobeDisplaySectionProps = {
   };
 };
 
+type ImageLoadedState = {
+  [key: string]: boolean;
+};
+
 const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
   registerPage,
   register,
@@ -35,8 +40,14 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
     currentValue = watch();
   }
 
+  const [imageLoaded, setImageLoaded] = React.useState<ImageLoadedState>({});
+
+  const handleImageLoad = (id: string) => {
+    setImageLoaded({ ...imageLoaded, [id]: true });
+  };
+
   return (
-    <div className="flex flex-col gap-5 mb-10">
+    <div className="flex flex-col gap-5 mb-10 h-full overflow-y-scroll">
       {categoriesArray.map((category) => {
         const categoryData = wardrobeData[category];
         if (categoryData?.length === 0) return null;
@@ -52,12 +63,14 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                     <div className="flex flex-col gap-2 " key={piece.id}>
                       <Link href={`/piece/${piece.id}`} className="group overflow-hidden rounded-md">
                         <div className="flex flex-col gap-1 relative h-[350px] w-[262px] ">
+                          {!imageLoaded[piece.id] && <Loading size="large" />}
                           <Image
                             src={piece.imageUrl}
                             alt={piece.title}
                             fill={true}
                             style={{ objectFit: 'cover' }}
                             className="rounded-md group-hover:scale-110 transition-all duration-300 ease-in"
+                            onLoad={() => handleImageLoad(piece.id)}
                           />
                         </div>
                       </Link>

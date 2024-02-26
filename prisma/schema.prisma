@@ -60,6 +60,7 @@ model DendoOutfit{
   pieces Piece[]
   user User @relation(fields: [userId], references: [id])
   imageUrl String?
+  description String?
 }
 
 model WishList{
