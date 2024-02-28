@@ -46,6 +46,18 @@ export const resolvers = {
         where: { userId: args.userId, category: args.category },
       });
     },
+    pieces_search: (_parent: unknown, args: { userId: string; searchText: string }, context: Context) => {
+      return context.prisma.piece.findMany({
+        where: {
+          userId: args.userId,
+          OR: [
+            { title: { contains: args.searchText } },
+            { description: { contains: args.searchText } },
+            { location: { contains: args.searchText } },
+          ],
+        },
+      });
+    },
     piece: (_parent: unknown, args: { id: string }, context: Context) => {
       return context.prisma.piece.findUnique({
         where: { id: args.id },
@@ -59,6 +71,18 @@ export const resolvers = {
     dendoOutfits: (_parent: unknown, args: { userId: string }, context: Context) => {
       return context.prisma.dendoOutfit.findMany({
         where: { userId: args.userId },
+      });
+    },
+    dendoOutfits_search: (_parent: unknown, args: { userId: string; searchText: string }, context: Context) => {
+      return context.prisma.dendoOutfit.findMany({
+        where: {
+          userId: args.userId,
+          OR: [
+            { title: { contains: args.searchText } },
+            { description: { contains: args.searchText } },
+            { keywords: { hasSome: [args.searchText] } },
+          ],
+        },
       });
     },
     dendoOutfit: (_parent: unknown, args: { id: string }, context: Context) => {

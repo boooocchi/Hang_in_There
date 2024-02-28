@@ -13,7 +13,7 @@ const MainLayout: React.FC<Props> = ({ children, title, editButtons }) => {
       <div className="flex items-center gap-[30px]">
         <PageTitle>{title}</PageTitle> {editButtons && editButtons}
       </div>
-      <div className="flex justify-center flex-col h-[90%]">{children}</div>
+      <div className="flex justify-center flex-col flex-grow overflow-y-scroll">{children}</div>
     </main>
   );
 };

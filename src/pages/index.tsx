@@ -138,7 +138,7 @@ export default function Home({ weatherData }: WeatherData) {
         </div>
         <div className="h-[65%] w-full flex gap-6 ">
           <div className="h-full w-1/2  flex flex-col gap-6">
-            <div className="w-full h-[50%] border-1 border-lightGreen rounded-md overflow-hidden flex py-md  bg-white">
+            <div className="w-full h-1/2 border-1 border-lightGreen rounded-md flex py-md  bg-white">
               <h2
                 className={` text-lg  text-center h-full items-center flex justify-center text-richGreen bg-white border-r border-lightGreen font-extraBold px-lg  w-[150px] min-w-[150px] `}
               >
@@ -148,8 +148,8 @@ export default function Home({ weatherData }: WeatherData) {
               </h2>
               <WeatherBox weatherData={weatherData} />
             </div>
-            <div className="w-full overflow-hidden h-[50%] rounded-md   flex gap-6 border-1 border-lightGreen py-md bg-white">
-              <div className="w-full h-full flex overflow-hidden ">
+            <div className="w-full h-[50%] rounded-md   flex gap-6 border-1 border-lightGreen py-md bg-white">
+              <div className="w-full h-full flex  ">
                 <div className="flex flex-col gap-2 items-center justify-center border-r border-r-lightGreen w-[125px] min-w-[150px]  px-lg">
                   <h2 className=" text-lg leading-[16px] text-center  items-center flex justify-center text-richGreen bg-white  font-extraBold  ">
                     <span className=" whitespace-nowrap">Wish List</span>
@@ -184,7 +184,7 @@ export default function Home({ weatherData }: WeatherData) {
               </div>
             </div>
           </div>
-          <div className="max-h-full w-1/2   bg-white p-xl rounded-md flex flex-col gap-1 justify-center border-1 border-lightGreen">
+          <div className="h-full w-1/2   bg-white p-xl rounded-md flex flex-col gap-1 justify-center border-1 border-lightGreen">
             <h2 className={` text-xl flex items-center justify-center  text-richGreen h-[10%] font-extraBold`}>
               Your Wardrobe Capacity
             </h2>

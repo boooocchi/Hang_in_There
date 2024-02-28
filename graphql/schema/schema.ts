@@ -87,8 +87,10 @@ export const typeDefs = gql`
 
   type Query {
     pieces(userId: String!, category: Categories): [Piece]
+    pieces_search(userId: String!, searchText: String!): [Piece]
     piece(id: String!): Piece
     dendoOutfits(userId: String!): [DendoOutfit]
+    dendoOutfits_search(userId: String!, searchText: String!): [DendoOutfit]
     dendoOutfit(id: String!): DendoOutfit
     limitEntries(userId: String!): [LimitEntry]
     wishList(userId: String!): [WishList]

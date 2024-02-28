@@ -47,7 +47,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-5 mb-10 h-full overflow-y-scroll">
+    <div className="flex flex-col gap-5   overflow-y-scroll ">
       {categoriesArray.map((category) => {
         const categoryData = wardrobeData[category];
         if (categoryData?.length === 0) return null;
