@@ -4,7 +4,7 @@ import React from 'react';
 
 import Loading from '@/components/elements/message/Loading';
 import MainLayout from '@/components/layouts/layout/MainLayout';
-import DendoOutfitDetailSection from '@/features/dendoOutfit/components/DendoOutfitDetailSection';
+import DendoOutfitDetailSection from '@/features/dendoOutfit/DendoOutfitDetailSection';
 
 const GET_OUTFIT_QUERY = gql`
   query DendoOutfit($dendoOutfitId: String!) {

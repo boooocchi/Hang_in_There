@@ -77,7 +77,7 @@ const SideMenu = () => {
         </svg>
       ),
       name: 'Dendo Outfit',
-      path: `/dendoOutfit/${session?.user?.id}`,
+      path: `/dendoOutfitGallery/${session?.user?.id}`,
     },
     {
       icon: (

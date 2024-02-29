@@ -43,13 +43,13 @@ const DendoOutfitSection = () => {
         return (
           <div key={index}>
             <div className="aspect-[3/4] w-full overflow-hidden relative rounded-md group">
-              <Link href={`/dendoOutfit/${userId}/${dendoOutfit.id}`}>
+              <Link href={`/dendoOutfit/${dendoOutfit.id}`}>
                 <Image
                   src={dendoOutfit.imageUrl ? dendoOutfit.imageUrl : '/image/home/dendo_outfit.jpg'}
                   alt="dendo outfit"
                   fill={true}
                   style={{ objectFit: 'cover' }}
-                  className="group-hover:scale-110  transition-all duration-200 ease-in grayscale-[0.2]"
+                  className="group-hover:scale-110  transition-all duration-200 ease-in "
                 />
               </Link>
             </div>

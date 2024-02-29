@@ -192,14 +192,16 @@ export const useSearch: SearchHook = () => {
                 {dendoOutfitsearchResult?.map((outfit) => {
                   return (
                     <div key={outfit.id}>
-                      <div className="relative w-[100%] aspect-[2/3] rounded-md overflow-hidden mb-1">
-                        <Image
-                          alt="outfit image"
-                          src={outfit.imageUrl ? outfit.imageUrl : '/image/home/dendo_outfit.jpg'}
-                          fill
-                          objectFit="cover"
-                        />
-                      </div>
+                      <Link href={`/dendoOutfit/${outfit.id}`} onClick={handleModalClose}>
+                        <div className="relative w-[100%] aspect-[2/3] rounded-md overflow-hidden mb-1">
+                          <Image
+                            alt="outfit image"
+                            src={outfit.imageUrl ? outfit.imageUrl : '/image/home/dendo_outfit.jpg'}
+                            fill
+                            objectFit="cover"
+                          />
+                        </div>
+                      </Link>
                       <div className="text-sm">{outfit.title}</div>
                     </div>
                   );

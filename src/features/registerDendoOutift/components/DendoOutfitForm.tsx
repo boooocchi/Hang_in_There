@@ -7,7 +7,7 @@ import { FieldErrors, useForm } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
 import Loading from '@/components/elements/message/Loading';
-import { DENDOOUTFIT_QUERY } from '@/features/dendoOutfit/components/DendoOutfitSection';
+import { DENDOOUTFIT_QUERY } from '@/features/dendoOutfitGallery/components/DendoOutfitSection';
 import DropZone from '@/features/registerPiece/components/DropZone';
 import { uploadPhoto } from '@/features/registerPiece/utils/uploadImage';
 import WardrobeDisplaySection from '@/features/wardrobe/components/WardrobeDisplaySection';
