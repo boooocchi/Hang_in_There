@@ -126,7 +126,8 @@ const SideMenu = () => {
         <ul className=" h-full pb-xl pt-[50px]">
           {navItems.map((item, index) => {
             const menuItemClassName =
-              pathname === item.path || (pathname.includes('wardrobe') && item.path.includes('wardrobe'))
+              pathname.split('/')[1] === item.path.split('/')[1] ||
+              (pathname.includes('wardrobe') && item.path.includes('wardrobe'))
                 ? 'text-lightOrange '
                 : '';
 
