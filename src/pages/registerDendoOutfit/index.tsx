@@ -5,7 +5,7 @@ import DendoOutfitForm from '@/features/registerDendoOutift/components/DendoOutf
 
 const Index = () => {
   return (
-    <MainLayout pageTitle="Register Dendo Outfit">
+    <MainLayout title="Register Dendo Outfit">
       <DendoOutfitForm />
     </MainLayout>
   );

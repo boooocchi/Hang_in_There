@@ -1,4 +1,4 @@
-import { gql, useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 // import { yupResolver } from '@hookform/resolvers/yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
@@ -7,54 +7,20 @@ import { FieldErrors, useForm } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
 import Loading from '@/components/elements/message/Loading';
-import { DENDOOUTFIT_QUERY } from '@/features/dendoOutfitGallery/components/DendoOutfitSection';
 import DropZone from '@/features/registerPiece/components/DropZone';
 import { uploadPhoto } from '@/features/registerPiece/utils/uploadImage';
 import WardrobeDisplaySection from '@/features/wardrobe/components/WardrobeDisplaySection';
 import { useAuth } from '@/hooks/useAuth';
+import { DENDOOUTFIT_QUERY } from '@/pages/dendoOutfitGallery/[id]/index';
 import { GET_WARDROBE_QUERY } from '@/pages/wardrobe/[id]/index';
 
+import { REGISTER_OUTFIT } from '../graphql/mutation';
+import { RegisterOutfitValues } from '../types/types';
 import { registerDendoOutfitValidationSchema } from '../validation/registerDendoOutfitValidationSchema';
-
-export type RegisterOutfitValues = {
-  title: string;
-  keywords: string;
-  description: string;
-  imageUrl: string | null;
-  LIGHTTOPS: string | string[] | boolean | undefined;
-  HEAVYTOPS: string | string[] | boolean | undefined;
-  OUTERWEAR: string | string[] | boolean | undefined;
-  BOTTOMS: string | string[] | boolean | undefined;
-  SHOES: string | string[] | boolean | undefined;
-  ACCESSORIES: string | string[] | boolean | undefined;
-};
 
 interface CustomError extends FieldErrors<RegisterOutfitValues> {
   ''?: { message: string; type: string; ref?: React.RefObject<HTMLInputElement> };
 }
-
-export const REGISTER_OUTFIT = gql`
-  mutation Mutation(
-    $userId: String!
-    $keywords: [String]
-    $description: String
-    $pieces: [String]!
-    $title: String!
-    $imageUrl: String
-  ) {
-    register_outfit(
-      userId: $userId
-      pieces: $pieces
-      title: $title
-      keywords: $keywords
-      imageUrl: $imageUrl
-      description: $description
-    ) {
-      id
-      title
-    }
-  }
-`;
 
 const DendoOutfitForm = () => {
   const router = useRouter();
@@ -165,29 +131,33 @@ const DendoOutfitForm = () => {
   };
 
   return (
-    <form className="relative" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex gap-5 h-[175px] mb-5 mt-3">
-        <div className="flex flex-col justify-between w-[40%]">
-          <div className="flex items-baseline">
-            <label htmlFor="title">Title</label>
-            {errors.title && <p className="ml-5 text-sm text-errorRed">{errors.title.message}</p>}
+    <form className="relative h-full" onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex gap-10 h-[175px] mb-5 mt-3">
+        <div className="flex flex-col gap-3 w-[40%] justify-content:flex-start;">
+          <div className=" flex-col flex gap-1">
+            <div className="flex items-baseline">
+              <label htmlFor="title">Title</label>
+              {errors.title && <p className="ml-5 text-sm text-errorRed">{errors.title.message}</p>}
+            </div>
+            <input
+              id="title"
+              type="text"
+              className="border-b border-lightGreen bg-lightGreen rounded-md  text-lg w-full min-w-[300px] py-xs px-sm"
+              {...register('title')}
+            />
           </div>
-          <input
-            id="title"
-            type="text"
-            className="border-b border-lightGreen bg-lightGreen rounded-md mt-1 text-lg w-full min-w-[300px] py-sm px-md mb-3"
-            {...register('title')}
-          />
-          <label htmlFor="keyword">Keyword</label>
-          <input
-            id="keyword"
-            type="text"
-            {...register('keywords')}
-            className="border-b border-lightGreen bg-lightGreen rounded-md mt-1 text-lg w-full min-w-[300px] py-sm px-md"
-          />
+          <div className=" flex flex-col gap-1">
+            <label htmlFor="keyword">Keyword</label>
+            <input
+              id="keyword"
+              type="text"
+              {...register('keywords')}
+              className="border-b border-lightGreen bg-lightGreen rounded-md  text-lg w-full min-w-[300px] py-xs px-sm"
+            />
+          </div>
         </div>
         <div className="flex flex-col w-[60%]">
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description mb-1">Description</label>
           <textarea
             id="description"
             className="h-full rounded-md w-full bg-lightGreen py-sm px-md"

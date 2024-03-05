@@ -49,3 +49,28 @@ select:focus {
 .form-checkbox:focus {
   box-shadow: none !important;
 }
+
+.toastMessage-enter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.toastMessage-enter-active {
+  will-change: transform, opacity;
+  transform: translateX(0);
+  opacity: 1;
+  transition:
+    opacity 1000ms,
+    transform 1000ms;
+}
+.toastMessage-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+.toastMessage-exit-active {
+  will-change: transform, opacity;
+  transform: translateX(100%);
+  opacity: 0;
+  transition:
+    opacity 1000ms,
+    transform 1000ms;
+}

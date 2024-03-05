@@ -3,6 +3,7 @@ import { Categories } from '@prisma/client';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { useToast } from '@/hooks/ToastContext';
 import { useModal } from '@/hooks/useModal';
 import { GET_WARDROBE_QUERY } from '@/pages/wardrobe/[id]/index';
 
@@ -25,6 +26,7 @@ type Props = {
 const DeletePieceButton: React.FC<Props> = ({ pieceId, userId, category }) => {
   const [deletePiece, { loading }] = useMutation(DELETE_PIECE_MUTATION);
   const router = useRouter();
+  const { showToastMessage } = useToast();
 
   const { Modal, openModal } = useModal();
 
@@ -42,8 +44,9 @@ const DeletePieceButton: React.FC<Props> = ({ pieceId, userId, category }) => {
         ],
       });
       router.push(`/wardrobe/${userId}`);
+      showToastMessage('Piece deleted successfully');
     } catch (e) {
-      console.error(e);
+      showToastMessage(`Failed to delete the piece`, true);
     }
   };
 

@@ -5,7 +5,7 @@ import React from 'react';
 import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 import Loading from '@/components/elements/message/Loading';
-import { RegisterOutfitValues } from '@/features/registerDendoOutift/components/DendoOutfitForm';
+import { RegisterOutfitValues } from '@/features/registerDendoOutift/types/types';
 import { mainFont } from '@/pages/_app';
 
 import { upperCamelCase } from '../utility/upperCamelCase';
@@ -47,22 +47,22 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-5   overflow-y-scroll ">
+    <div className="flex flex-col gap-5 overflow-y-scroll  overflow-x-hidden">
       {categoriesArray.map((category) => {
         const categoryData = wardrobeData[category];
         if (categoryData?.length === 0) return null;
         return (
-          <div key={category} className="flex flex-col  gap-2">
+          <div key={category} className="flex flex-col  gap-2 ">
             <h2 className={`text-xl tracking-tighter font-extraBold mb-1  ${mainFont.className}`}>
               {upperCamelCase(category)}
             </h2>
-            <div className="flex w-full overflow-x-scroll  hide-scrollbar gap-5">
+            <div className="flex lg:max-w-[1000px] overflow-x-scroll hide-scrollbar gap-5">
               {!registerPage &&
                 categoryData?.map((piece) => {
                   return (
                     <div className="flex flex-col gap-2 " key={piece.id}>
                       <Link href={`/piece/${piece.id}`} className="group overflow-hidden rounded-md">
-                        <div className="flex flex-col gap-1 relative h-[350px] w-[262px] ">
+                        <div className="flex flex-col gap-1 relative h-[300px] w-[225px] ">
                           {!imageLoaded[piece.id] && <Loading size="large" />}
                           <Image
                             src={piece.imageUrl}

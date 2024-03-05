@@ -11,10 +11,12 @@ import Button from '@/components/elements/button/Button';
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
 import Loading from '@/components/elements/message/Loading';
 import { PieceDetailSectionProps } from '@/features/piece/components/PieceDetailSection';
+import { useToast } from '@/hooks/ToastContext';
 import { GET_PIECE_QUERY } from '@/pages/piece/[id]/index';
 import { GET_WARDROBE_QUERY } from '@/pages/wardrobe/[id]/index';
 import { dateFormatter } from '@/utils/formatDate';
 
+import { REGISTER_PIECE_MUTATION } from '../graphql/mutation';
 import { uploadPhoto } from '../utils/uploadImage';
 import { registerPieceValidationSchema } from '../validation/registerPieceValidationSchema';
 
@@ -39,32 +41,6 @@ interface GraphQLException {
   graphQLErrors: GraphQLError[];
   networkError?: Error;
 }
-
-const REGISTER_PIECE_MUTATION = gql`
-  mutation Mutation(
-    $title: String!
-    $color: Colors!
-    $category: Categories!
-    $userId: String!
-    $description: String
-    $location: String
-    $price: Float
-    $imageUrl: String!
-  ) {
-    register_piece(
-      title: $title
-      color: $color
-      category: $category
-      userId: $userId
-      description: $description
-      location: $location
-      price: $price
-      imageUrl: $imageUrl
-    ) {
-      title
-    }
-  }
-`;
 
 const UPDATE_PIECE_MUTATION = gql`
   mutation Update_piece(
@@ -97,6 +73,8 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
   const userId = authData?.user?.id;
   const [imageFile, setImageFile] = React.useState<File | null>(null);
   const [uploadLoading, setUploadLoading] = React.useState(false);
+
+  const { showToastMessage } = useToast();
 
   useEffect(() => {
     if (pieceData && setEditMode) setEditMode(false);
@@ -214,15 +192,16 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
           });
 
           router.push(`/wardrobe/${userId}`);
+          showToastMessage('Your piece has been successfully registered!');
         } catch (error: unknown) {
           if (typeof error === 'object' && error !== null && 'graphQLErrors' in error) {
             const graphQLError = error as GraphQLException;
             if (graphQLError.graphQLErrors.length > 0) {
               const message = graphQLError.graphQLErrors[0].message;
-              console.error(message);
+              showToastMessage(message);
             }
           } else if (error instanceof Error) {
-            console.error('An unexpected error occurred:', error.message);
+            showToastMessage(`An unexpected error occurred: ${error.message})`);
           }
         } finally {
           setUploadLoading(false);

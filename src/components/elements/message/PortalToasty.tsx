@@ -1,35 +1,51 @@
 import React from 'react';
 
+import { useToast } from '@/hooks/ToastContext';
+
 import ClientPortal from '../Portal';
 
-export type PortalToastyProps = {
-  show: boolean;
-  text: string;
-};
+const PortalToasty: React.FC = () => {
+  const { isShow, text, error } = useToast();
 
-const PortalToasty: React.FC<PortalToastyProps> = ({ show, text }) => {
   return (
     <>
       <ClientPortal selector="#myportal">
         <div
-          className={` ${
-            show ? 'translate-x-0' : 'translate-x-[250px]'
-          }  rounded-md fixed  transition-transform duration-[3000] bg-lightGreen flex items-center shadow-md  top-10 right-5 `}
+          className={`rounded-md fixed ease-in transition-all duration-[150] bg-lightGreen flex items-center shadow-md   top-[50px] right-[50px] ${
+            isShow ? 'translate-x-[0] ' : 'translate-x-[25%] opacity-0'
+          }`}
         >
           <div className=" flex items-center px-md justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              className="w-8 h-8 stroke-accentOrange"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
+            {error ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-8 h-8 stroke-accentOrange"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                className="w-8 h-8 stroke-accentOrange"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            )}
           </div>
           <div className="bg-white h-full w-full py-md px-lg  rounded-r-md">{text}</div>
         </div>

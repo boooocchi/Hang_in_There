@@ -5,8 +5,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
+import { useToast } from '@/hooks/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
-import { useMessage } from '@/hooks/useMessage';
 
 import { wishListValidationSchema } from '../validation/wishListValidationSchema';
 
@@ -72,6 +72,8 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
   const { session } = useAuth();
   const userId = session?.user?.id;
 
+  const { showToastMessage } = useToast();
+
   const [isWishListForm, setIsWishListForm] = React.useState(false);
   const [editItemId, setEditItemId] = React.useState('');
 
@@ -111,7 +113,7 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
             },
           ],
         });
-        showMessage('Item name edited!!');
+        showToastMessage('Item name edited!!');
 
         setIsWishListForm(false);
         setEditItemId('');
@@ -119,7 +121,7 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
         setEditItemId('');
         console.error('error');
         setIsWishListForm(false);
-        showMessage('Failed to edit the item name');
+        showToastMessage('Failed to edit the item name');
       }
     } else {
       try {
@@ -137,10 +139,10 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
           ],
         });
         setIsWishListForm(false);
-        showMessage('Item added!!');
+        showToastMessage('Item added!!');
       } catch {
         console.error('error');
-        showMessage('Failed to add an item');
+        showToastMessage('Failed to add an item');
       }
     }
   };
@@ -158,7 +160,7 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
           },
         ],
       });
-      showMessage('Item deleted!!');
+      showToastMessage('Item deleted!!');
     } catch {
       console.error('error');
     }
@@ -191,8 +193,6 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
       }
     }
   };
-
-  const { MessageModal, showMessage } = useMessage();
 
   return (
     <div className=" w-full h-[400px] rounded-md bg-lightGreen pt-lg pb-md px-lg flex flex-col gap-3 relative">
@@ -316,7 +316,6 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
           </button>
         </div>
       )}
-      <MessageModal />
     </div>
   );
 };
