@@ -74,7 +74,7 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
   const [imageFile, setImageFile] = React.useState<File | null>(null);
   const [uploadLoading, setUploadLoading] = React.useState(false);
 
-  const { showToastMessage } = useToast();
+  const { addToastMessage } = useToast();
 
   useEffect(() => {
     if (pieceData && setEditMode) setEditMode(false);
@@ -192,16 +192,16 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
           });
 
           router.push(`/wardrobe/${userId}`);
-          showToastMessage('Your piece has been successfully registered!');
+          addToastMessage('Your piece has been successfully registered!');
         } catch (error: unknown) {
           if (typeof error === 'object' && error !== null && 'graphQLErrors' in error) {
             const graphQLError = error as GraphQLException;
             if (graphQLError.graphQLErrors.length > 0) {
               const message = graphQLError.graphQLErrors[0].message;
-              showToastMessage(message);
+              addToastMessage(message);
             }
           } else if (error instanceof Error) {
-            showToastMessage(`An unexpected error occurred: ${error.message})`);
+            addToastMessage(`An unexpected error occurred: ${error.message})`);
           }
         } finally {
           setUploadLoading(false);

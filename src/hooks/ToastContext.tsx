@@ -3,40 +3,89 @@ import React, { useState, useContext, useCallback } from 'react';
 import { Children } from '@/types/types';
 
 type ToastContextState = {
-  showToastMessage: (text: string, error?: boolean) => void;
-  isShow: boolean;
-  text: string;
-  error: boolean;
+  addToastMessage: (text: string, error?: boolean) => void;
+  textsState: {
+    text: string;
+    show: boolean;
+    type: 'success' | 'error';
+    timeStamp: number;
+  }[];
 };
 const ToastContext = React.createContext<ToastContextState | undefined>(undefined);
 
 export const ToastProvider: React.FC<Children> = ({ children }) => {
-  const [isShow, setIsShow] = useState(false);
-  const [text, setText] = useState('');
-  const [error, setError] = useState(false);
+  const [textsState, setTextsState] = useState<
+    {
+      text: string;
+      show: boolean;
+      type: 'success' | 'error';
+      timeStamp: number;
+    }[]
+  >([
+    {
+      text: '',
+      show: false,
+      type: 'success',
+      timeStamp: 0,
+    },
+    {
+      text: '',
+      show: false,
+      type: 'success',
+      timeStamp: 0,
+    },
+    {
+      text: '',
+      show: false,
+      type: 'success',
+      timeStamp: 0,
+    },
+  ]);
 
-  const showToastMessage = useCallback((text: string, error: boolean | undefined) => {
-    if (error) {
-      setError(true);
-    }
-    setText(text);
+  const addToastMessage = useCallback((text: string, error: boolean | undefined) => {
+    const timeStamp = new Date().getTime();
+    setTextsState((prev) => {
+      const updatedState = prev.slice();
+      const indexToUpdate = updatedState.findIndex((state) => !state.show);
+      if (indexToUpdate !== -1) {
+        updatedState[indexToUpdate] = {
+          text: text,
+          show: true,
+          type: error ? 'error' : 'success',
+          timeStamp: timeStamp,
+        };
+      } else {
+        updatedState.shift();
+        updatedState.push({
+          text: text,
+          show: true,
+          type: error ? 'error' : 'success',
+          timeStamp: timeStamp,
+        });
+      }
 
-    setTimeout(() => {
-      setIsShow(true);
-    }, 200);
+      return updatedState;
+    });
+
+    const timer = setTimeout(() => {
+      setTextsState((prev) => {
+        const updatedState = prev.slice();
+        const indexToUpdate = updatedState.findIndex((state) => state.timeStamp === timeStamp);
+        if (indexToUpdate !== -1) {
+          updatedState[indexToUpdate] = {
+            ...updatedState[indexToUpdate],
+            show: false,
+          };
+        }
+
+        return updatedState;
+      });
+    }, 5000);
+
+    return () => clearTimeout(timer);
   }, []);
 
-  React.useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isShow) {
-      timer = setTimeout(() => {
-        setIsShow(false);
-      }, 5000);
-    }
-    return () => clearTimeout(timer);
-  }, [isShow]);
-
-  return <ToastContext.Provider value={{ showToastMessage, isShow, text, error }}>{children}</ToastContext.Provider>;
+  return <ToastContext.Provider value={{ addToastMessage, textsState }}>{children}</ToastContext.Provider>;
 };
 
 export const useToast = () => {

@@ -72,7 +72,7 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
   const { session } = useAuth();
   const userId = session?.user?.id;
 
-  const { showToastMessage } = useToast();
+  const { addToastMessage } = useToast();
 
   const [isWishListForm, setIsWishListForm] = React.useState(false);
   const [editItemId, setEditItemId] = React.useState('');
@@ -113,7 +113,7 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
             },
           ],
         });
-        showToastMessage('Item name edited!!');
+        addToastMessage('Item name edited!!');
 
         setIsWishListForm(false);
         setEditItemId('');
@@ -121,7 +121,7 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
         setEditItemId('');
         console.error('error');
         setIsWishListForm(false);
-        showToastMessage('Failed to edit the item name');
+        addToastMessage('Failed to edit the item name');
       }
     } else {
       try {
@@ -139,10 +139,10 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
           ],
         });
         setIsWishListForm(false);
-        showToastMessage('Item added!!');
+        addToastMessage('Item added!!');
       } catch {
         console.error('error');
-        showToastMessage('Failed to add an item');
+        addToastMessage('Failed to add an item');
       }
     }
   };
@@ -160,7 +160,7 @@ const WishListForm: React.FC<Props> = ({ categoryName }) => {
           },
         ],
       });
-      showToastMessage('Item deleted!!');
+      addToastMessage('Item deleted!!');
     } catch {
       console.error('error');
     }
