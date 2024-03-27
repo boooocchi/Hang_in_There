@@ -7,7 +7,7 @@ const WeatherBox = ({ weatherData }: WeatherData) => {
   return (
     <>
       {weatherData ? (
-        <div className="w-full py-md px-xl flex justify-center items-center  bg-white gap-2">
+        <div className="w-full  px-md flex justify-center items-center  bg-white gap-2">
           <div className="flex flex-col items-center justify-center w-1/2">
             <div className="text-2xl font-bold ml-2 -mb-1">
               {weatherData.currentTemp}
@@ -21,10 +21,10 @@ const WeatherBox = ({ weatherData }: WeatherData) => {
               </div>
             </div>
           </div>
-          <div className="text-2xl text-richGreen">|</div>
+          <div className="text-2xl text-lightGreen">|</div>
           <div className="flex flex-col w-1/2 justify-center items-center text-xl ">
             <WeatherIcon description={weatherData.weatherDescription} />
-            <span className="text-base">{weatherData.weatherDescription}</span>
+            <span className="text-base text-center">{weatherData.weatherDescription}</span>
           </div>
         </div>
       ) : (

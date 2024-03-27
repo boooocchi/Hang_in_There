@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <ToastProvider>
           <div className={`flex lg:max-w-[1470px] ${mainFont.className}  font-normal tracking-tight text-richGreen `}>
             {pathname !== '/auth/signup' && pathname !== '/auth/signin' && <SideMenu />}
-            <div className="flex flex-col px-4xl py-2xl w-full  bg-gray h-screen gap-[45px] min-h-[750px] ">
+            <div className="flex flex-col px-4xl py-2xl w-full  bg-gray h-screen gap-[45px] min-h-[750px] max-h-[800px]">
               <Header />
               <div className="flex-grow overflow-hidden">
                 <Component {...pageProps} />
@@ -41,11 +41,4 @@ export default function App({ Component, pageProps }: AppProps) {
       </SessionProvider>
     </ApolloProvider>
   );
-}
-
-{
-  /* <div className="xl:min-h-[450px] xl:min-w-[1190px] flex flex-col   justify-center  flex-grow w-full">
-{pageTitle && <PageTitle button={button}>{pageTitle}</PageTitle>}
-<div className=" w-full flex flex-col justify-center overflow-y-scroll ">{children}</div>
-</div> */
 }

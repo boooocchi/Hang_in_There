@@ -24,7 +24,7 @@ type WardrobeDisplaySectionProps = {
   };
 };
 
-type ImageLoadedState = {
+export type ImageLoadedState = {
   [key: string]: boolean;
 };
 

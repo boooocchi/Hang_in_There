@@ -34,6 +34,26 @@ type RegisterPieceValues = {
   imageUrl?: string;
 };
 
+type PieceData = {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  price: number;
+  color: Colors;
+  category: Categories;
+  imageUrl: string;
+  createdAt: string;
+};
+
+type WardrobeQueryData = {
+  piece: PieceData[];
+};
+
+type RegisterPieceMutationData = {
+  piece: PieceData; // Assuming it returns a single wardrobe item
+};
+
 interface GraphQLError {
   message: string;
 }
@@ -82,7 +102,22 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
 
   const router = useRouter();
 
-  const [registerPiece] = useMutation(REGISTER_PIECE_MUTATION);
+  const [registerPiece] = useMutation<RegisterPieceMutationData>(REGISTER_PIECE_MUTATION, {
+    update: (cache, { data }) => {
+      if (data) {
+        const existingData: WardrobeQueryData | null = cache.readQuery({
+          query: GET_WARDROBE_QUERY,
+        });
+
+        if (existingData) {
+          cache.writeQuery({
+            query: GET_WARDROBE_QUERY,
+            data: { piece: [data.piece, ...existingData.piece] },
+          });
+        }
+      }
+    },
+  });
 
   const [updatePiece] = useMutation(UPDATE_PIECE_MUTATION);
   const form = useForm<RegisterPieceValues>({
@@ -183,12 +218,12 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
               imageUrl: data.imageUrl,
               userId: userId,
             },
-            refetchQueries: [
-              {
-                query: GET_WARDROBE_QUERY,
-                variables: { userId: userId, category: data.category },
-              },
-            ],
+            // refetchQueries: [
+            //   {
+            //     query: GET_WARDROBE_QUERY,
+            //     variables: { userId: userId, category: data.category },
+            //   },
+            // ],
           });
 
           router.push(`/wardrobe/${userId}`);

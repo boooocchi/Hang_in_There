@@ -40,6 +40,18 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
       type: 'success',
       timeStamp: 0,
     },
+    {
+      text: '',
+      show: false,
+      type: 'success',
+      timeStamp: 0,
+    },
+    {
+      text: '',
+      show: false,
+      type: 'success',
+      timeStamp: 0,
+    },
   ]);
 
   const addToastMessage = useCallback((text: string, error: boolean | undefined) => {

@@ -26,7 +26,7 @@ type Props = {
 const DeletePieceButton: React.FC<Props> = ({ pieceId, userId, category }) => {
   const [deletePiece, { loading }] = useMutation(DELETE_PIECE_MUTATION);
   const router = useRouter();
-  const { showToastMessage } = useToast();
+  const { addToastMessage } = useToast();
 
   const { Modal, openModal } = useModal();
 
@@ -44,9 +44,9 @@ const DeletePieceButton: React.FC<Props> = ({ pieceId, userId, category }) => {
         ],
       });
       router.push(`/wardrobe/${userId}`);
-      showToastMessage('Piece deleted successfully');
+      addToastMessage('Piece deleted successfully');
     } catch (e) {
-      showToastMessage(`Failed to delete the piece`, true);
+      addToastMessage(`Failed to delete the piece`, true);
     }
   };
 

@@ -14,6 +14,8 @@ export const GET_WARDROBE_QUERY = gql`
       createdAt
       imageUrl
       title
+      color
+      description
     }
   }
 `;

@@ -93,7 +93,7 @@ const SideMenu = () => {
         </svg>
       ),
       name: 'Verdict on Outfit',
-      path: '/verdict',
+      path: '/advise',
     },
     {
       icon: (

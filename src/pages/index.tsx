@@ -137,50 +137,54 @@ export default function Home({ weatherData }: WeatherData) {
           </div>
         </div>
         <div className="h-[65%] w-full flex gap-6 ">
-          <div className="h-full w-1/2  flex flex-col gap-6">
-            <div className="w-full h-1/2 border-1 border-lightGreen rounded-md flex py-md  bg-white">
-              <h2
-                className={` text-lg  text-center h-full items-center flex justify-center text-richGreen bg-white border-r border-lightGreen font-extraBold px-lg  w-[150px] min-w-[150px] `}
-              >
-                <span>
-                  Today&apos;s <br /> Weather
-                </span>
-              </h2>
-              <WeatherBox weatherData={weatherData} />
+          <div className="h-full w-1/2  flex flex-col  gap-6">
+            <div className="h-1/2 w-full">
+              <div className="w-full h-full border-1 border-lightGreen rounded-md flex py-md  bg-white ">
+                <h2
+                  className={` text-lg  text-center h-full items-center flex justify-center text-richGreen bg-white border-r border-lightGreen font-extraBold px-lg  w-[150px] min-w-[150px] `}
+                >
+                  <span>
+                    Today&apos;s <br /> Weather
+                  </span>
+                </h2>
+                <WeatherBox weatherData={weatherData} />
+              </div>
             </div>
-            <div className="w-full h-[50%] rounded-md   flex gap-6 border-1 border-lightGreen py-md bg-white">
-              <div className="w-full h-full flex  ">
-                <div className="flex flex-col gap-2 items-center justify-center border-r border-r-lightGreen w-[125px] min-w-[150px]  px-lg">
-                  <h2 className=" text-lg leading-[16px] text-center  items-center flex justify-center text-richGreen bg-white  font-extraBold  ">
-                    <span className=" whitespace-nowrap">Wish List</span>
-                  </h2>
-                  <Link
-                    href="/wishList"
-                    className={`bg-accentOrange font-boldest rounded-md  text-white w-[70px] text-center text-sm px-sm  py-[3px] inline-block    ${mainFont.className}`}
-                  >
-                    view
-                  </Link>
-                </div>
-                {wishListData?.wishList.length > 0 && (
-                  <div className="h-full  overflow-y-scroll  bg-white w-full px-2xl">
-                    <ul className="h-full w-full  ">
-                      {wishListData?.wishList.map((item: { itemName: string; id: string }) => (
-                        <li
-                          key={item.id}
-                          className="border-b border-lightGreen h-9 w-full flex items-center justify-start gap-3 text-richGreen"
-                        >
-                          <input
-                            type="checkbox"
-                            className="w-4 h-4 text-accentOrange border-lightGreen
-                          focus:ring-0 ring-0 rounded-sm form-checkbox"
-                          />
-
-                          <span className="w-full truncate">{item.itemName}</span>
-                        </li>
-                      ))}
-                    </ul>
+            <div className="h-1/2 w-full">
+              <div className="w-full h-full   rounded-md   flex gap-6 border-1 border-lightGreen py-md bg-white">
+                <div className="w-full h-full flex  ">
+                  <div className="flex flex-col gap-2 items-center justify-center border-r border-r-lightGreen w-[125px] min-w-[150px]  px-lg">
+                    <h2 className=" text-lg leading-[16px] text-center  items-center flex justify-center text-richGreen bg-white  font-extraBold  ">
+                      <span className=" whitespace-nowrap">Wish List</span>
+                    </h2>
+                    <Link
+                      href="/wishList"
+                      className={`bg-accentOrange font-boldest rounded-md  text-white w-[70px] text-center text-sm px-sm  py-[3px] inline-block    ${mainFont.className}`}
+                    >
+                      view
+                    </Link>
                   </div>
-                )}
+                  {wishListData?.wishList.length > 0 && (
+                    <div className="h-full  overflow-y-scroll  bg-white w-full px-2xl">
+                      <ul className="h-full w-full  ">
+                        {wishListData?.wishList.map((item: { itemName: string; id: string }) => (
+                          <li
+                            key={item.id}
+                            className="border-b border-lightGreen h-9 w-full flex items-center justify-start gap-3 text-richGreen"
+                          >
+                            <input
+                              type="checkbox"
+                              className="w-4 h-4 text-accentOrange border-lightGreen
+                          focus:ring-0 ring-0 rounded-sm form-checkbox"
+                            />
+
+                            <span className="w-full truncate">{item.itemName}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
