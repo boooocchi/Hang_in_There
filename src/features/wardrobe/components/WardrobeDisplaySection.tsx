@@ -24,10 +24,6 @@ type WardrobeDisplaySectionProps = {
   };
 };
 
-export type ImageLoadedState = {
-  [key: string]: boolean;
-};
-
 const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
   registerPage,
   register,

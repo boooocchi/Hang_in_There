@@ -1,6 +1,6 @@
 // import { ChatCompletionContentPartImage } from 'openai/resources/index.mjs';
 
-export const generateAIAdviseWithImage = async (message: string) => {
+export const generateAIAdvise = async (message: string) => {
   const response = await fetch('/api/openai', {
     method: 'POST',
     headers: {

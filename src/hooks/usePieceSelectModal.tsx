@@ -1,19 +1,19 @@
 import { useQuery } from '@apollo/client';
 import { Categories, Piece } from '@prisma/client';
-import Image from 'next/image';
 import React, { useCallback } from 'react';
 import { useDebounce } from 'use-debounce';
 
+import ImageWithLoading from '@/components/elements/ImageWithLoading';
+import Button from '@/components/elements/button/Button';
 import Loading from '@/components/elements/message/Loading';
 import SearchResultModal from '@/components/elements/modal/SearchResultModal';
-import { ImageLoadedState } from '@/features/wardrobe/components/WardrobeDisplaySection';
 import { upperCamelCase } from '@/features/wardrobe/utility/upperCamelCase';
 import { GET_WARDROBE_QUERY } from '@/pages/wardrobe/[id]';
 
 import { useAuth } from './useAuth';
 
 type PieceSelectModalProps = {
-  setSelectedPiece: React.Dispatch<React.SetStateAction<Piece | null>>;
+  createMessage: (piece: Piece) => void;
 };
 
 type SearchHook = (props: PieceSelectModalProps) => {
@@ -21,20 +21,13 @@ type SearchHook = (props: PieceSelectModalProps) => {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const usePieceSelectModal: SearchHook = ({ setSelectedPiece }) => {
+export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
   const { session } = useAuth();
   const userId = session?.user.id;
   const [searchText, setSearchText] = React.useState('');
   const [searchTextQuery] = useDebounce(searchText, 700);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-
-  const [imageLoaded, setImageLoaded] = React.useState<ImageLoadedState>({});
-  const handleImageLoad = (id: string) => {
-    setImageLoaded((prev) => ({
-      ...prev,
-      [id]: true,
-    }));
-  };
+  const [selectedPiece, setSelectedPiece] = React.useState<null | Piece>(null);
 
   const [wardrobeData, setWardrobeData] = React.useState<{
     LIGHTTOPS: Piece[];
@@ -214,20 +207,11 @@ export const usePieceSelectModal: SearchHook = ({ setSelectedPiece }) => {
                                    mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-lighterGreen"
                             />
                           </div>
-
                           <label
                             htmlFor={piece.id}
-                            className="flex flex-col gap-1 relative h-[200px] w-[130px]   bg-white  rounded-md cursor-pointer border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange "
+                            className="flex flex-col gap-1 relative h-[200px] w-[130px]   bg-white  rounded-md  border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange "
                           >
-                            {!imageLoaded[piece.id] && <Loading size="large" />}
-                            <Image
-                              src={piece.imageUrl}
-                              alt={piece.title}
-                              fill={true}
-                              style={{ objectFit: 'cover' }}
-                              className={`rounded-md ${!imageLoaded[piece.id] && 'opacity-0'}`}
-                              onLoad={() => handleImageLoad(piece.id)}
-                            />
+                            <ImageWithLoading id={piece.id} url={piece.imageUrl} alt={piece.title} />
                           </label>
                           <p className="text-sm">{piece.title}</p>
                         </div>
@@ -239,6 +223,17 @@ export const usePieceSelectModal: SearchHook = ({ setSelectedPiece }) => {
             })}
           </div>
         )}
+        <Button
+          onClick={() => {
+            if (selectedPiece) {
+              createMessage(selectedPiece);
+              setIsModalOpen(false);
+            }
+          }}
+          classname="w-full"
+        >
+          Ask about selected piece
+        </Button>
       </div>
     </SearchResultModal>
   );
