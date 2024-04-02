@@ -7,7 +7,7 @@ import { useAuth } from '@/hooks/useAuth';
 
 const SideMenu = () => {
   const { pathname } = useRouter();
-  const settingClassName = pathname === '/settings' ? 'text-lightOrange' : '';
+  const settingClassName = pathname === '/settings' ? 'text-lighterOrange' : '';
 
   const { session } = useAuth();
 
@@ -128,7 +128,7 @@ const SideMenu = () => {
             const menuItemClassName =
               pathname.split('/')[1] === item.path.split('/')[1] ||
               (pathname.includes('wardrobe') && item.path.includes('wardrobe'))
-                ? 'text-lightOrange '
+                ? 'text-lighterOrange '
                 : '';
 
             return (
@@ -140,26 +140,28 @@ const SideMenu = () => {
                         className={`h-[23px] w-[23px] flex items-center mr-5 ${
                           pathname !== '/'
                             ? item.path.includes(pathname.split('/')[1])
-                              ? 'fill-lightOrange stroke-lightOrange'
+                              ? 'fill-lighterOrange stroke-lighterOrange'
                               : 'fill-white stroke-white'
                             : item.path === '/'
-                              ? 'fill-lightOrange stroke-lightOrange'
+                              ? 'fill-lighterOrange stroke-lighterOrange'
                               : 'fill-white stroke-white'
-                        } group-hover:fill-lightOrange group-hover:stroke-lightOrange`}
+                        } group-hover:fill-lighterOrange group-hover:stroke-lighterOrange`}
                       >
                         {item.icon ?? item.icon}
                       </div>
-                      <span className={`${menuItemClassName} group-hover:text-lightOrange text-base`}>{item.name}</span>
+                      <span className={`${menuItemClassName} group-hover:text-lighterOrange text-base`}>
+                        {item.name}
+                      </span>
                     </div>
                   </Link>
                   {pathname !== '/' ? (
                     item.path.includes(pathname.split('/')[1]) ? (
-                      <div className="bg-lightOrange rounded-lg absolute -top-3 -left-[5rem] w-10 h-[50px]"></div>
+                      <div className="bg-lighterOrange rounded-lg absolute -top-3 -left-[5rem] w-10 h-[50px]"></div>
                     ) : (
                       <></>
                     )
                   ) : item.path === '/' ? (
-                    <div className="bg-lightOrange rounded-lg absolute -top-3 -left-[5rem] w-10 h-[50px]"></div>
+                    <div className="bg-lighterOrange rounded-lg absolute -top-3 -left-[5rem] w-10 h-[50px]"></div>
                   ) : (
                     <></>
                   )}
@@ -178,7 +180,7 @@ const SideMenu = () => {
               stroke="white"
               width="20"
               height="20"
-              className=" mr-5 group-hover:stroke-lightOrange"
+              className=" mr-5 group-hover:stroke-lighterOrange"
             >
               <path
                 strokeLinecap="square"
@@ -187,7 +189,7 @@ const SideMenu = () => {
               <path strokeLinecap="square" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
             <span
-              className={`font-extraBold tracking-tighter text-base   ${settingClassName} group-hover:text-lightOrange`}
+              className={`font-extraBold tracking-tighter text-base   ${settingClassName} group-hover:text-lighterOrange`}
             >
               Settings
             </span>

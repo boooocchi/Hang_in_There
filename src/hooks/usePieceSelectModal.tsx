@@ -191,7 +191,7 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
               const categoryData = filteredData ? filteredData[category] : wardrobeData[category];
               if (categoryData?.length === 0) return <></>;
               return (
-                <div key={category} className="flex flex-col   mb-3">
+                <div key={category} className="flex flex-col mb-3">
                   <div>{upperCamelCase(category)}</div>
 
                   <div className="flex lg:max-w-[1000px] overflow-x-scroll hide-scrollbar gap-5">
@@ -203,13 +203,12 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
                               type="checkbox"
                               id={piece.id}
                               onClick={() => setSelectedPiece(piece)}
-                              className="peer  w-3 h-3 text-accentOrange
-                                   mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-lighterGreen"
+                              className="peer  w-3 h-3 text-accentOrange mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-lighterGreen"
                             />
                           </div>
                           <label
                             htmlFor={piece.id}
-                            className="flex flex-col gap-1 relative h-[200px] w-[130px]   bg-white  rounded-md  border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange "
+                            className="flex flex-col gap-1 relative h-[200px] w-[130px]   bg-white  rounded-md  border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange"
                           >
                             <ImageWithLoading id={piece.id} url={piece.imageUrl} alt={piece.title} />
                           </label>

@@ -25,10 +25,10 @@ const HeaderDropdownMenu = () => {
           align="end"
           className=" text-richGreen text-base overflow-hidden rounded-md  bg-lightGreen "
         >
-          <DropdownMenu.Item className="hover:outline-none outline-none px-md hover:duration-300 py-sm  hover:bg-lightOrange font-normal text-center">
+          <DropdownMenu.Item className="hover:outline-none outline-none px-md hover:duration-300 py-sm  hover:bg-lighterOrange font-normal text-center">
             Account
           </DropdownMenu.Item>
-          <DropdownMenu.Item className="outline-none px-md hover:duration-300  hover:outline-none  py-sm  hover:bg-lightOrange font-normal text-center">
+          <DropdownMenu.Item className="outline-none px-md hover:duration-300  hover:outline-none  py-sm  hover:bg-lighterOrange font-normal text-center">
             <button onClick={handleSignout}>Logout</button>
           </DropdownMenu.Item>
         </DropdownMenu.Content>
