@@ -7,7 +7,7 @@ export const generateAIAdvise = async (message: string) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      messages: [{ role: 'system', content: message }],
+      message: { role: 'user', content: message },
     }),
   });
 

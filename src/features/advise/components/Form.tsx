@@ -5,9 +5,11 @@ import Button from '@/components/elements/button/Button';
 import { generateAIAdvise } from '@/features/advise/utils/chatGPT';
 import { usePieceSelectModal } from '@/hooks/usePieceSelectModal';
 
+import { convertAiMessage } from '../utils/utils';
+
 const Form = () => {
   const [message, setMessage] = React.useState('');
-  const [aiResponse, setAiResoponse] = React.useState<string>('');
+  const [aiResponse, setAiResponse] = React.useState<React.ReactNode | null>();
   const [sentMessage, setSentMessage] = React.useState<string>('');
 
   const [isResponseLoading, setResponseLoading] = React.useState(false);
@@ -25,13 +27,14 @@ Color: ${piece.color}`,
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!message) return;
-    setAiResoponse('');
+    setAiResponse('');
     setSentMessage(message);
     setMessage('');
 
     setResponseLoading(true);
     const response = await generateAIAdvise(message);
-    setAiResoponse(response.message.content);
+    const { content } = response.message;
+    setAiResponse(convertAiMessage(content));
     setResponseLoading(false);
   };
 
@@ -79,7 +82,7 @@ Color: ${piece.color}`,
               </div>
               <textarea
                 placeholder="Ask for an AI suggestion on your outfit"
-                className="absolute right-0 top-0 bottom-0 left-0 bg-lightGreen rounded-md py-sm px-md whitespace-pre-wrap break-words  resize-none leading-[24px] max-h-[164px] pr-[70px]"
+                className="absolute right-0 top-0 bottom-0 left-0 bg-lightGreen rounded-md py-sm px-md whitespace-pre-wrap break-words resize-none leading-[24px] max-h-[164px] pr-[70px]"
                 value={message}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
               />
