@@ -3,7 +3,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Colors, Categories } from '@prisma/client';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
 import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -12,6 +11,7 @@ import ErrorMessage from '@/components/elements/message/ErrorMessage';
 import Loading from '@/components/elements/message/Loading';
 import { PieceDetailSectionProps } from '@/features/piece/components/PieceDetailSection';
 import { useToast } from '@/hooks/ToastContext';
+import { useAuth } from '@/hooks/useAuth';
 import { GET_PIECE_QUERY } from '@/pages/piece/[id]/index';
 import { GET_WARDROBE_QUERY } from '@/pages/wardrobe/[id]/index';
 import { dateFormatter } from '@/utils/formatDate';
@@ -89,8 +89,7 @@ const UPDATE_PIECE_MUTATION = gql`
 `;
 
 const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, setEditMode }) => {
-  const { data: authData } = useSession();
-  const userId = authData?.user?.id;
+  const { userId } = useAuth();
   const [imageFile, setImageFile] = React.useState<File | null>(null);
   const [uploadLoading, setUploadLoading] = React.useState(false);
 
@@ -218,12 +217,6 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
               imageUrl: data.imageUrl,
               userId: userId,
             },
-            // refetchQueries: [
-            //   {
-            //     query: GET_WARDROBE_QUERY,
-            //     variables: { userId: userId, category: data.category },
-            //   },
-            // ],
           });
 
           router.push(`/wardrobe/${userId}`);

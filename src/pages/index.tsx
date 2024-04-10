@@ -8,7 +8,7 @@ import { titleFont } from '@/constants/FontFamily';
 import Charts from '@/features/progressPieChart/components/Charts';
 import WeatherBox from '@/features/weather/components/WeatherBox';
 import { WeatherData } from '@/features/weather/types/weatherType';
-import { WISH_LIST_QUERY } from '@/features/wishList/components/WishListForm';
+import { WISH_LIST_QUERY } from '@/features/wishList/graphql/query';
 import { useAuth } from '@/hooks/useAuth';
 
 import '@radix-ui/themes/styles.css';

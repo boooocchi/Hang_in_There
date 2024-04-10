@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 export const useAuth = () => {
   const { data: session, status } = useSession();
+  const userId = session?.user?.id;
   const router = useRouter();
 
   useEffect(() => {
@@ -12,5 +13,5 @@ export const useAuth = () => {
     if (status !== 'authenticated') router.push('/auth/signin');
   }, [session, status, router]);
 
-  return { session, status };
+  return { session, status, userId };
 };
