@@ -2,7 +2,7 @@ import { Categories } from '@prisma/client';
 import React from 'react';
 
 import MainLayout from '@/components/layouts/layout/MainLayout';
-import WishListForm from '@/features/wishList/components/WishListForm';
+import WishListForm from '@/features/wishList/components/WishListCard';
 
 const Index = () => {
   const categories = Object.values(Categories);
