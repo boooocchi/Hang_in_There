@@ -12,7 +12,7 @@ import { uploadPhoto } from '@/features/registerPiece/utils/uploadImage';
 import WardrobeDisplaySection from '@/features/wardrobe/components/WardrobeDisplaySection';
 import { useAuth } from '@/hooks/useAuth';
 import { DENDOOUTFIT_QUERY } from '@/pages/dendoOutfitGallery/[id]/index';
-import { GET_WARDROBE_QUERY } from '@/pages/wardrobe/[id]/index';
+import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
 
 import { REGISTER_OUTFIT } from '../graphql/mutation';
 import { RegisterOutfitValues } from '../types/types';
@@ -24,8 +24,8 @@ interface CustomError extends FieldErrors<RegisterOutfitValues> {
 
 const DendoOutfitForm = () => {
   const router = useRouter();
-  const { session } = useAuth();
-  const userId = session?.user?.id;
+  const { userId } = useAuth();
+
   const form = useForm<RegisterOutfitValues>({
     defaultValues: {
       title: '',
@@ -43,6 +43,10 @@ const DendoOutfitForm = () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     resolver: yupResolver(registerDendoOutfitValidationSchema),
+  });
+
+  const { data, loading } = useQuery(GET_All_PIECES_QUERY, {
+    variables: { userId },
   });
 
   const { register, handleSubmit, formState, watch, setValue } = form;
@@ -94,30 +98,6 @@ const DendoOutfitForm = () => {
     }
   };
 
-  const { data: lightTopsData } = useQuery(GET_WARDROBE_QUERY, {
-    variables: { userId, category: 'LIGHTTOPS' },
-  });
-
-  const { data: heavyTopsData } = useQuery(GET_WARDROBE_QUERY, {
-    variables: { userId, category: 'HEAVYTOPS' },
-  });
-
-  const { data: outerwearData } = useQuery(GET_WARDROBE_QUERY, {
-    variables: { userId, category: 'OUTERWEAR' },
-  });
-
-  const { data: bottomsData } = useQuery(GET_WARDROBE_QUERY, {
-    variables: { userId, category: 'BOTTOMS' },
-  });
-
-  const { data: shoesData } = useQuery(GET_WARDROBE_QUERY, {
-    variables: { userId, category: 'SHOES' },
-  });
-
-  const { data: accessoriesData } = useQuery(GET_WARDROBE_QUERY, {
-    variables: { userId, category: 'ACCESSORIES' },
-  });
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [imageFile, setImageFile] = React.useState<File | null>(null);
   const [isDropzone, setIsDropzone] = React.useState(false);
@@ -129,6 +109,10 @@ const DendoOutfitForm = () => {
   const handleDropzone = () => {
     setIsDropzone(true);
   };
+
+  if (loading) {
+    return <Loading size="large"></Loading>;
+  }
 
   return (
     <form className="relative h-full" onSubmit={handleSubmit(onSubmit)}>
@@ -176,14 +160,7 @@ const DendoOutfitForm = () => {
         registerPage
         register={register}
         watch={watch}
-        wardrobeData={{
-          LIGHTTOPS: lightTopsData?.pieces,
-          HEAVYTOPS: heavyTopsData?.pieces,
-          OUTERWEAR: outerwearData?.pieces,
-          BOTTOMS: bottomsData?.pieces,
-          SHOES: shoesData?.pieces,
-          ACCESSORIES: accessoriesData?.pieces,
-        }}
+        allPieces={data?.all_pieces}
       ></WardrobeDisplaySection>
       {!isDropzone && (
         <div className="flex gap-5 items-end">

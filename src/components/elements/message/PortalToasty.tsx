@@ -7,14 +7,15 @@ import ClientPortal from '../Portal';
 const PortalToasty: React.FC = () => {
   const { textsState } = useToast();
 
+  const isMessage = textsState.some((textState) => textState.show);
   return (
     <ClientPortal selector="#myportal">
-      <div className="top-[50px] right-[50px] fixed flex flex-col gap-3">
+      <div className={`top-[50px] right-[50px] fixed flex flex-col gap-3 text z-[100] ${!isMessage && 'z-0'}`}>
         {textsState.map((textState, index) => (
           <div
             key={index}
             className={`rounded-md  ease-in transition-all duration-[50] bg-lightGreen flex items-center shadow-md    ${
-              textState.show ? 'translate-x-[0] ' : 'translate-x-[25%] opacity-0 '
+              textState.show ? 'translate-x-[0] ' : 'translate-x-[100%] opacity-0'
             }`}
           >
             <div className=" flex items-center px-md justify-center">

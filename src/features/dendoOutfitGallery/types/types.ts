@@ -4,4 +4,5 @@ export type dendoOutfitType = {
   keywords: string;
   title: string;
   imageUrl: string;
+  description: string;
 };

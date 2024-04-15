@@ -9,7 +9,7 @@ const HeaderDropdownMenu = () => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className="focus:outline-none">
+        <button className="focus:outline-none relative z-[99]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#00110F" viewBox="0 0 24 24" className="w-6 h-6">
             <path
               strokeLinecap="square"

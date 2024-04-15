@@ -16,6 +16,7 @@ export const DENDOOUTFIT_QUERY = gql`
       keywords
       title
       imageUrl
+      description
     }
   }
 `;

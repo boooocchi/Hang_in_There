@@ -41,6 +41,11 @@ type registerOutfitArgs = {
 
 export const resolvers = {
   Query: {
+    all_pieces: (_parent: unknown, args: pieceArgs, context: Context) => {
+      return context.prisma.piece.findMany({
+        where: { userId: args.userId },
+      });
+    },
     pieces: (_parent: unknown, args: pieceArgs, context: Context) => {
       return context.prisma.piece.findMany({
         where: { userId: args.userId, category: args.category },

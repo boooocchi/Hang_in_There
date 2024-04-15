@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
-import { useSearch } from '@/hooks/useSearch';
+import { useSearch } from '@/hooks/useSearchModal';
 
 import HeaderDropdownMenu from './HeaderDropdownMenu';
 
@@ -33,8 +33,8 @@ const Header = () => {
           </svg>
           search your wardrobe..
         </button>
-        <div className={` flex text-lg gap-2`}>
-          <p>Hello, {userName}</p>
+        <div className={` flex text-lg gap-0 mr-5`}>
+          <p className="mr-3">Hello, {userName}</p>
           <HeaderDropdownMenu></HeaderDropdownMenu>
         </div>
       </nav>
