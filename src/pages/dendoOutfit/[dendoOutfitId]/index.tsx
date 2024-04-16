@@ -36,8 +36,8 @@ const Index = () => {
     return <Loading size="large" />;
   }
   return (
-    <MainLayout title={data.dendoOutfit.title}>
-      <DendoOutfitDetailSection dendoOutfitDetailsData={data.dendoOutfit}></DendoOutfitDetailSection>
+    <MainLayout title={data?.dendoOutfit?.title}>
+      <DendoOutfitDetailSection dendoOutfitDetailsData={data?.dendoOutfit}></DendoOutfitDetailSection>
     </MainLayout>
   );
 };

@@ -7,6 +7,7 @@ export const convertAiMessage = (message: string) => {
   const options = message.trim().split('\n\n');
   const formattedOptions = options.map((option) => {
     const [title, reason] = option.split('\n');
+    if (!title || !reason) return { title: '', reason: '' };
     return {
       title: title.trim().substring(9).trim(),
       reason: reason.trim().substring(8),

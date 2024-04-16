@@ -13,8 +13,8 @@ import { PieceDetailSectionProps } from '@/features/piece/components/PieceDetail
 import { useToast } from '@/hooks/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
 import { GET_PIECE_QUERY } from '@/pages/piece/[id]/index';
-import { GET_WARDROBE_QUERY } from '@/pages/wardrobe/[id]/index';
-import { dateFormatter } from '@/utils/formatDate';
+import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
+import { dateFormatter } from '@/utils/utils';
 
 import { REGISTER_PIECE_MUTATION } from '../graphql/mutation';
 import { uploadPhoto } from '../utils/uploadImage';
@@ -105,12 +105,12 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
     update: (cache, { data }) => {
       if (data) {
         const existingData: WardrobeQueryData | null = cache.readQuery({
-          query: GET_WARDROBE_QUERY,
+          query: GET_All_PIECES_QUERY,
         });
 
         if (existingData) {
           cache.writeQuery({
-            query: GET_WARDROBE_QUERY,
+            query: GET_All_PIECES_QUERY,
             data: { piece: [data.piece, ...existingData.piece] },
           });
         }

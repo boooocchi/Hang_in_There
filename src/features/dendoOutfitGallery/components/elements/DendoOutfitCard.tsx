@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { dendoOutfitType } from '@/features/dendoOutfitGallery/types/types';
-import { dateFormatter } from '@/utils/formatDate';
+import { dateFormatter } from '@/utils/utils';
 
 type DendoOutfitCardProps = {
   dendoOutfit: dendoOutfitType;

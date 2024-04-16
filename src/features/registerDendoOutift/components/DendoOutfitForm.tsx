@@ -66,7 +66,10 @@ const DendoOutfitForm = () => {
     }
 
     if (data.keywords) {
-      keywordsArr = data.keywords.split(' ');
+      keywordsArr = data.keywords
+        .split(',')
+        .map((keyword) => keyword.trim())
+        .filter((keyword) => keyword !== '');
     }
 
     const piecesArr = [];
@@ -92,7 +95,7 @@ const DendoOutfitForm = () => {
         },
         refetchQueries: [{ query: DENDOOUTFIT_QUERY, variables: { userId } }],
       }); //pieces is the array that contains all the pieces id
-      router.push(`/dendoOutfit/${userId}`);
+      router.push(`/dendoOutfitGallery/${userId}`);
     } catch (error) {
       console.error(error);
     }

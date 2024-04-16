@@ -2,7 +2,7 @@
 import React from 'react';
 
 import MainLayout from '@/components/layouts/layout/MainLayout';
-import Form from '@/features/advise/components/Form';
+import Form from '@/features/suggestions/components/Form';
 
 const Index = () => {
   return (

@@ -2,7 +2,7 @@ import { Piece } from '@prisma/client';
 import React from 'react';
 
 import Button from '@/components/elements/button/Button';
-import { generateAIAdvise } from '@/features/advise/utils/chatGPT';
+import { generateAIAdvise } from '@/features/suggestions/utils/chatGPT';
 import { usePieceSelectModal } from '@/hooks/usePieceSelectModal';
 
 import { convertAiMessage } from '../utils/utils';
