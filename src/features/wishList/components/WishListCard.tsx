@@ -4,7 +4,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { EditIcon, PlusIcon, TrashbinIcon } from '@/components/elements/icons/icons';
-import { useToast } from '@/hooks/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
 
 import { WISH_LIST_DELETE_MUTATION, WISH_LIST_STATUS_UPDATE } from '../graphql/mutation';

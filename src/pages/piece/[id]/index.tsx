@@ -57,7 +57,7 @@ const Piece = () => {
       ) : (
         <div className="flex gap-[10px] items-center h-full mt-1">
           <EditPieceButton onClick={handleEdit} />
-          <DeletePieceButton userId={userId} pieceId={data?.piece.id} category={data?.piece.category} />
+          <DeletePieceButton userId={userId} pieceId={data?.piece.id} />
         </div>
       )}
     </>

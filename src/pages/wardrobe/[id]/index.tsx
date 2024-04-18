@@ -2,6 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 
 import Loading from '@/components/elements/message/Loading';
+import SmtWrongMessage from '@/components/elements/message/SmtWrongMessage';
 import MainLayout from '@/components/layouts/layout/MainLayout';
 import WardrobeDisplaySection from '@/features/wardrobe/components/WardrobeDisplaySection';
 import { useAuth } from '@/hooks/useAuth';
@@ -23,9 +24,21 @@ export const GET_All_PIECES_QUERY = gql`
 const Page = () => {
   const { userId } = useAuth();
 
-  const { data: wardrobeData, loading: wardrobeLoading } = useQuery(GET_All_PIECES_QUERY, {
+  const {
+    data: wardrobeData,
+    loading: wardrobeLoading,
+    error,
+  } = useQuery(GET_All_PIECES_QUERY, {
     variables: { userId },
   });
+
+  if (error) {
+    return (
+      <MainLayout title="Wardrobe">
+        <SmtWrongMessage />
+      </MainLayout>
+    );
+  }
 
   return (
     <>

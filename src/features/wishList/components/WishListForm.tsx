@@ -3,7 +3,7 @@ import React from 'react';
 
 import Button from '@/components/elements/button/Button';
 import { CancelIcon } from '@/components/elements/icons/icons';
-import { useToast } from '@/hooks/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
 
 import { WISH_LIST_ADD_MUTATION, WISH_LIST_UPDATE_MUTATION } from '../graphql/mutation';

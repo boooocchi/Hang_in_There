@@ -9,11 +9,12 @@ import { useForm, Controller } from 'react-hook-form';
 import Button from '@/components/elements/button/Button';
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
 import Loading from '@/components/elements/message/Loading';
+import { useToast } from '@/contexts/ToastContext';
 import { PieceDetailSectionProps } from '@/features/piece/components/PieceDetailSection';
-import { useToast } from '@/hooks/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
 import { GET_PIECE_QUERY } from '@/pages/piece/[id]/index';
 import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
+import { getErrorMessage } from '@/utils/errorHandler';
 import { dateFormatter } from '@/utils/utils';
 
 import { REGISTER_PIECE_MUTATION } from '../graphql/mutation';
@@ -53,14 +54,6 @@ type WardrobeQueryData = {
 type RegisterPieceMutationData = {
   piece: PieceData; // Assuming it returns a single wardrobe item
 };
-
-interface GraphQLError {
-  message: string;
-}
-interface GraphQLException {
-  graphQLErrors: GraphQLError[];
-  networkError?: Error;
-}
 
 const UPDATE_PIECE_MUTATION = gql`
   mutation Update_piece(
@@ -221,15 +214,11 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
 
           router.push(`/wardrobe/${userId}`);
           addToastMessage('Your piece has been successfully registered!');
-        } catch (error: unknown) {
-          if (typeof error === 'object' && error !== null && 'graphQLErrors' in error) {
-            const graphQLError = error as GraphQLException;
-            if (graphQLError.graphQLErrors.length > 0) {
-              const message = graphQLError.graphQLErrors[0].message;
-              addToastMessage(message);
-            }
-          } else if (error instanceof Error) {
-            addToastMessage(`An unexpected error occurred: ${error.message})`);
+        } catch (error) {
+          if (error instanceof Error) {
+            addToastMessage(getErrorMessage(error), true);
+          } else {
+            addToastMessage('An unexpected error occurred.', true);
           }
         } finally {
           setUploadLoading(false);

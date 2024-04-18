@@ -22,8 +22,7 @@ export const DENDOOUTFIT_QUERY = gql`
 `;
 
 const Index = () => {
-  const { session } = useAuth();
-  const userId = session?.user?.id;
+  const { userId } = useAuth();
   const { data, loading } = useQuery(DENDOOUTFIT_QUERY, {
     variables: { userId },
   });

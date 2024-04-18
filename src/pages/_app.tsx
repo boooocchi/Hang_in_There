@@ -8,7 +8,7 @@ import React from 'react';
 import PortalToasty from '@/components/elements/message/PortalToasty';
 import Header from '@/components/layouts/menu/Header';
 import SideMenu from '@/components/layouts/menu/SideMenu';
-import { ToastProvider } from '@/hooks/ToastContext';
+import { ToastProvider } from '@/contexts/ToastContext';
 import apolloClient from '@/lib/apollo';
 
 import 'bootstrap/dist/css/bootstrap.min.css';

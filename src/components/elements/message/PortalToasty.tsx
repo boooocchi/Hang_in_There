@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useToast } from '@/hooks/ToastContext';
+import { useToast } from '@/contexts/ToastContext';
 
 import ClientPortal from '../Portal';
 
@@ -14,7 +14,7 @@ const PortalToasty: React.FC = () => {
         {textsState.map((textState, index) => (
           <div
             key={index}
-            className={`rounded-md  ease-in transition-all duration-[50] bg-lightGreen flex items-center shadow-md    ${
+            className={`rounded-md max-w-[300px]  ease-in transition-all duration-[50] bg-lightGreen flex items-center shadow-md    ${
               textState.show ? 'translate-x-[0] ' : 'translate-x-[100%] opacity-0'
             }`}
           >

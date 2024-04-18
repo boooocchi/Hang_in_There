@@ -3,7 +3,7 @@ import React, { useState, useContext, useCallback } from 'react';
 import { Children } from '@/types/types';
 
 type ToastContextState = {
-  addToastMessage: (text: string, error?: boolean) => void;
+  addToastMessage: (text: string | null, error?: boolean) => void;
   textsState: {
     text: string;
     show: boolean;
@@ -54,26 +54,28 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
     },
   ]);
 
-  const addToastMessage = useCallback((text: string, error: boolean | undefined) => {
+  const addToastMessage = useCallback((text: string | null, error: boolean | undefined) => {
     const timeStamp = new Date().getTime();
     setTextsState((prev) => {
       const updatedState = prev.slice();
       const indexToUpdate = updatedState.findIndex((state) => !state.show);
-      if (indexToUpdate !== -1) {
-        updatedState[indexToUpdate] = {
-          text: text,
-          show: true,
-          type: error ? 'error' : 'success',
-          timeStamp: timeStamp,
-        };
-      } else {
-        updatedState.shift();
-        updatedState.push({
-          text: text,
-          show: true,
-          type: error ? 'error' : 'success',
-          timeStamp: timeStamp,
-        });
+      if (text) {
+        if (indexToUpdate !== -1) {
+          updatedState[indexToUpdate] = {
+            text: text,
+            show: true,
+            type: error ? 'error' : 'success',
+            timeStamp: timeStamp,
+          };
+        } else {
+          updatedState.shift();
+          updatedState.push({
+            text: text,
+            show: true,
+            type: error ? 'error' : 'success',
+            timeStamp: timeStamp,
+          });
+        }
       }
 
       return updatedState;
