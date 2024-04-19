@@ -1,5 +1,6 @@
 import React, { useState, useContext, useCallback } from 'react';
 
+import { smtWentWrongMessage } from '@/constants/Message';
 import { Children } from '@/types/types';
 
 type ToastContextState = {
@@ -62,7 +63,7 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
       if (text) {
         if (indexToUpdate !== -1) {
           updatedState[indexToUpdate] = {
-            text: text,
+            text: text ?? smtWentWrongMessage,
             show: true,
             type: error ? 'error' : 'success',
             timeStamp: timeStamp,
@@ -70,7 +71,7 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
         } else {
           updatedState.shift();
           updatedState.push({
-            text: text,
+            text: text ?? smtWentWrongMessage,
             show: true,
             type: error ? 'error' : 'success',
             timeStamp: timeStamp,

@@ -25,6 +25,10 @@ const nonApolloErrorMessage = (error: ApolloError): string | null => {
   return null;
 };
 
-export const getErrorMessage = (error: Error) => {
-  return isApolloError(error) ? nonApolloErrorMessage(error) : error.message;
+export const getErrorMessage = (error: unknown) => {
+  if (error instanceof Error) {
+    return isApolloError(error) ? nonApolloErrorMessage(error) : error.message;
+  } else {
+    return null;
+  }
 };

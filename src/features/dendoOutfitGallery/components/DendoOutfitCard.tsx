@@ -2,9 +2,10 @@ import Link from 'next/link';
 import React from 'react';
 
 import ImageWithLoading from '@/components/elements/ImageWithLoading';
-import { EllipsisIcon } from '@/components/elements/icons/icons';
 import { dendoOutfitType } from '@/features/dendoOutfitGallery/types/types';
 import { dateFormatter } from '@/utils/utils';
+
+import PullDownMenu from './elements/PullDownMenu';
 
 type DendoOutfitCardProps = {
   dendoOutfit: dendoOutfitType;
@@ -15,7 +16,7 @@ const DendoOutfitCard: React.FC<DendoOutfitCardProps> = ({ dendoOutfit }) => {
     <div className="flex flex-col">
       <div className="text-xs ml-auto flex justify-end gap-2">
         {dateFormatter(new Date(dendoOutfit.createdAt))}
-        <EllipsisIcon />
+        <PullDownMenu></PullDownMenu>
       </div>
 
       <div className="aspect-[3/4] w-full overflow-hidden relative rounded-md group">

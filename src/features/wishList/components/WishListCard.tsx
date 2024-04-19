@@ -52,11 +52,7 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
       });
       addToastMessage('Item deleted!!');
     } catch (error) {
-      if (error instanceof Error) {
-        addToastMessage(getErrorMessage(error));
-      } else {
-        addToastMessage('Oops! Something went wrong!!');
-      }
+      addToastMessage(getErrorMessage(error), true);
     }
   };
 
@@ -77,11 +73,7 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
           },
         });
       } catch (error) {
-        if (error instanceof Error) {
-          addToastMessage(getErrorMessage(error));
-        } else {
-          addToastMessage('Oops! Something went wrong!!');
-        }
+        addToastMessage(getErrorMessage(error), true);
       }
     }
   };

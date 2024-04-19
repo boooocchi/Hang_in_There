@@ -2,9 +2,10 @@ import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 
 import Loading from '@/components/elements/message/Loading';
+import SmtWrongMessage from '@/components/elements/message/SmtWrongMessage';
 import MainLayout from '@/components/layouts/layout/MainLayout';
-import DendoOutfitCard from '@/features/dendoOutfitGallery/components/elements/DendoOutfitCard';
-import RegisterOutfitBtn from '@/features/dendoOutfitGallery/components/elements/RegisterOutfitBtn';
+import DendoOutfitCard from '@/features/dendoOutfitGallery/components/DendoOutfitCard';
+import RegisterOutfitBtn from '@/features/dendoOutfitGallery/components/RegisterOutfitBtn';
 import { dendoOutfitType } from '@/features/dendoOutfitGallery/types/types';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -23,10 +24,15 @@ export const DENDOOUTFIT_QUERY = gql`
 
 const Index = () => {
   const { userId } = useAuth();
-  const { data, loading } = useQuery(DENDOOUTFIT_QUERY, {
+  const { data, loading, error } = useQuery(DENDOOUTFIT_QUERY, {
     variables: { userId },
   });
-
+  if (error)
+    return (
+      <MainLayout title="Dendo Outfit">
+        <SmtWrongMessage />
+      </MainLayout>
+    );
   if (loading) return <Loading size="large"></Loading>;
   return (
     <MainLayout title="Dendo Outfit">

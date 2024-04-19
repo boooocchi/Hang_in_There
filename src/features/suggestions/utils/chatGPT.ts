@@ -1,17 +1,23 @@
 // import { ChatCompletionContentPartImage } from 'openai/resources/index.mjs';
 
-export const generateAIAdvise = async (message: string) => {
-  const response = await fetch('/api/openai', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      message: { role: 'user', content: message },
-    }),
-  });
+import { smtWentWrongMessage } from '@/constants/Message';
 
-  return await response.json();
+export const generateAIAdvise = async (message: string) => {
+  try {
+    const response = await fetch('/api/openai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: { role: 'user', content: message },
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    throw new Error(smtWentWrongMessage);
+  }
 };
 
 // export const generateAIAdviseWithImage = async (url: ChatCompletionContentPartImage.ImageURL) => {

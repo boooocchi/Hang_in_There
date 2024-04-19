@@ -3,7 +3,6 @@ import React from 'react';
 
 import Button from '@/components/elements/button/Button';
 import { CancelIcon } from '@/components/elements/icons/icons';
-import { smtWentWrongMessage } from '@/constants/Message';
 import { useToast } from '@/contexts/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
 import { getErrorMessage } from '@/utils/errorHandler';
@@ -46,11 +45,7 @@ const WishListForm: React.FC<FormProps> = ({
         setEditItemId('');
       } catch (error) {
         setEditItemId('');
-        if (error instanceof Error) {
-          addToastMessage(getErrorMessage(error));
-        } else {
-          addToastMessage(smtWentWrongMessage);
-        }
+        addToastMessage(getErrorMessage(error), true);
       } finally {
         setIsWishListForm(false);
       }
@@ -65,11 +60,7 @@ const WishListForm: React.FC<FormProps> = ({
         });
         addToastMessage('Item added!!');
       } catch (error) {
-        if (error instanceof Error) {
-          addToastMessage(getErrorMessage(error));
-        } else {
-          addToastMessage(smtWentWrongMessage);
-        }
+        addToastMessage(getErrorMessage(error), true);
       } finally {
         setIsWishListForm(false);
       }

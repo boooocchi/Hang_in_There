@@ -2,22 +2,25 @@ import { Piece } from '@prisma/client';
 import React from 'react';
 
 import Button from '@/components/elements/button/Button';
+import { SendIcon } from '@/components/elements/icons/icons';
+import { useToast } from '@/contexts/ToastContext';
 import { generateAIAdvise } from '@/features/suggestions/utils/chatGPT';
 import { usePieceSelectModal } from '@/hooks/usePieceSelectModal';
+import { getErrorMessage } from '@/utils/errorHandler';
 
 import { convertAiMessage } from '../utils/utils';
 
-const Form = () => {
+const SuggestionForm = () => {
   const [message, setMessage] = React.useState('');
   const [aiResponse, setAiResponse] = React.useState<React.ReactNode | null>();
   const [sentMessage, setSentMessage] = React.useState<string>('');
+  const { addToastMessage } = useToast();
 
   const [isResponseLoading, setResponseLoading] = React.useState(false);
 
   const createMessage = (piece: Piece) => {
     setMessage(
       `I would like to ask for good matching pieces for this item below
-
 Name: ${piece.title}
 Description: ${piece.description}
 Color: ${piece.color}`,
@@ -26,16 +29,24 @@ Color: ${piece.color}`,
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!message) return;
+    if (!message) {
+      addToastMessage('Please type something in a form!!');
+      return;
+    }
+
     setAiResponse('');
     setSentMessage(message);
     setMessage('');
-
     setResponseLoading(true);
-    const response = await generateAIAdvise(message);
-    const { content } = response.message;
-    setAiResponse(convertAiMessage(content));
-    setResponseLoading(false);
+    try {
+      const response = await generateAIAdvise(message);
+      const { content } = response.message;
+      setAiResponse(convertAiMessage(content));
+    } catch (error) {
+      addToastMessage(getErrorMessage(error));
+    } finally {
+      setResponseLoading(false);
+    }
   };
 
   const { Modal, setIsModalOpen } = usePieceSelectModal({ createMessage });
@@ -87,20 +98,7 @@ Color: ${piece.color}`,
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
               />
               <Button classname="px-sm py-xs  absolute right-3 bottom-[22px] translate-y-1/2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
-                  />
-                </svg>
+                <SendIcon />
               </Button>
             </div>
           </div>
@@ -111,4 +109,4 @@ Color: ${piece.color}`,
   );
 };
 
-export default Form;
+export default SuggestionForm;

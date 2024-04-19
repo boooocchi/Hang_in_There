@@ -215,11 +215,7 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
           router.push(`/wardrobe/${userId}`);
           addToastMessage('Your piece has been successfully registered!');
         } catch (error) {
-          if (error instanceof Error) {
-            addToastMessage(getErrorMessage(error), true);
-          } else {
-            addToastMessage('An unexpected error occurred.', true);
-          }
+          addToastMessage(getErrorMessage(error), true);
         } finally {
           setUploadLoading(false);
         }
