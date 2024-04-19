@@ -236,8 +236,7 @@ export const resolvers = {
         });
         return wishList;
       } catch (error) {
-        console.error(error);
-        throw new Error(`Failed to add to wishlist: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        throw new Error(`Failed to add to wishlist item...`);
       }
     },
     delete_wish_list: async (_parent: unknown, args: { id: string }, context: Context) => {
@@ -247,8 +246,7 @@ export const resolvers = {
         });
         return wishList;
       } catch (error) {
-        console.error(error);
-        throw new Error(`Failed to delete from wishlist: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        throw new Error(`Failed to delete from wishlist...`);
       }
     },
     update_wish_list_name: async (_parent: unknown, args: { id: string; itemName: string }, context: Context) => {
@@ -262,7 +260,7 @@ export const resolvers = {
         return updatedItem;
       } catch (error) {
         console.error(error);
-        throw new Error(`Failed to update wishlist: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        throw new Error(`Failed to update wishlist item...`);
       }
     },
     update_wish_list_status: async (_parent: unknown, args: { id: string; checked: boolean }, context: Context) => {
@@ -275,8 +273,7 @@ export const resolvers = {
         });
         return updatedItem;
       } catch (error) {
-        console.error(error);
-        throw new Error(`Failed to update wishlist: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        throw new Error(`Failed to update wishlist item...`);
       }
     },
   },

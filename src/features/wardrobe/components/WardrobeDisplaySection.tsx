@@ -1,5 +1,4 @@
 import { Categories, Piece } from '@prisma/client';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { UseFormRegister, UseFormWatch } from 'react-hook-form';
@@ -40,7 +39,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
           const categoryData = sortedWardrobeData[category];
           if (categoryData?.length === 0) return null;
           return (
-            <div key={category} className="flex flex-col  gap-2 ">
+            <div key={category} className="flex flex-col gap-2 ">
               <h2 className={`text-xl tracking-tighter font-extraBold mb-1  ${mainFont.className}`}>
                 {upperCamelCase(category)}
               </h2>
@@ -58,7 +57,6 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                             />
                           </div>
                         </Link>
-
                         <p>{piece.title}</p>
                       </div>
                     );
@@ -79,7 +77,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                           id={piece.id}
                           value={piece.id}
                           className="peer  w-4 h-4 text-accentOrange
-                         mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-lighterGreen"
+                        mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-lighterGreen"
                           {...register(piece.category)}
                           disabled={isDisabled}
                         />
@@ -87,13 +85,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                           htmlFor={piece.id}
                           className="flex flex-col gap-1 relative h-[275px] w-[200px]   bg-white  rounded-md cursor-pointer border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange "
                         >
-                          <Image
-                            src={piece.imageUrl}
-                            alt={piece.title}
-                            fill={true}
-                            style={{ objectFit: 'cover' }}
-                            className="rounded-md"
-                          />
+                          <ImageWithLoading url={piece.imageUrl} alt={piece.title} />
                         </label>
                         <p>{piece.title}</p>
                       </div>

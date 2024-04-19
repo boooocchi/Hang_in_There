@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { EditIcon, PlusIcon, TrashbinIcon } from '@/components/elements/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
+import { getErrorMessage } from '@/utils/errorHandler';
 
 import { WISH_LIST_DELETE_MUTATION, WISH_LIST_STATUS_UPDATE } from '../graphql/mutation';
 import { WISH_LIST_QUERY } from '../graphql/query';
@@ -18,7 +19,6 @@ import WishListForm from './WishListForm';
 const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
   const { userId } = useAuth();
   const { addToastMessage } = useToast();
-
   const [isWishListForm, setIsWishListForm] = React.useState(false);
   const [editItemId, setEditItemId] = React.useState('');
 
@@ -27,11 +27,9 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
       userId,
     },
   });
-
   const [updateItemStatus] = useMutation(WISH_LIST_STATUS_UPDATE, {
     update: (cache, data) => cacheUpdateFunction(cache, data, 'STATUS_UPDATE', userId),
   });
-
   const [deleteListItem] = useMutation(WISH_LIST_DELETE_MUTATION, {
     update: (cache, data) => cacheUpdateFunction(cache, data, 'DELETE', userId),
   });
@@ -53,8 +51,12 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
         },
       });
       addToastMessage('Item deleted!!');
-    } catch {
-      console.error('error');
+    } catch (error) {
+      if (error instanceof Error) {
+        addToastMessage(getErrorMessage(error));
+      } else {
+        addToastMessage('Oops! Something went wrong!!');
+      }
     }
   };
 
@@ -74,8 +76,12 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
             checked: true,
           },
         });
-      } catch {
-        console.error('error');
+      } catch (error) {
+        if (error instanceof Error) {
+          addToastMessage(getErrorMessage(error));
+        } else {
+          addToastMessage('Oops! Something went wrong!!');
+        }
       }
     }
   };

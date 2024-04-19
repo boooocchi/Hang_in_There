@@ -3,8 +3,10 @@ import React from 'react';
 
 import Button from '@/components/elements/button/Button';
 import { CancelIcon } from '@/components/elements/icons/icons';
+import { smtWentWrongMessage } from '@/constants/Message';
 import { useToast } from '@/contexts/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
+import { getErrorMessage } from '@/utils/errorHandler';
 
 import { WISH_LIST_ADD_MUTATION, WISH_LIST_UPDATE_MUTATION } from '../graphql/mutation';
 import { cacheUpdateFunction } from '../graphql/utils';
@@ -41,13 +43,16 @@ const WishListForm: React.FC<FormProps> = ({
           },
         });
         addToastMessage('Item name edited!!');
-        setIsWishListForm(false);
         setEditItemId('');
-      } catch {
+      } catch (error) {
         setEditItemId('');
-        console.error('error');
+        if (error instanceof Error) {
+          addToastMessage(getErrorMessage(error));
+        } else {
+          addToastMessage(smtWentWrongMessage);
+        }
+      } finally {
         setIsWishListForm(false);
-        addToastMessage('Failed to edit the item name');
       }
     } else {
       try {
@@ -58,11 +63,15 @@ const WishListForm: React.FC<FormProps> = ({
             userId: userId,
           },
         });
-        setIsWishListForm(false);
         addToastMessage('Item added!!');
-      } catch {
-        console.error('error');
-        addToastMessage('Failed to add an item');
+      } catch (error) {
+        if (error instanceof Error) {
+          addToastMessage(getErrorMessage(error));
+        } else {
+          addToastMessage(smtWentWrongMessage);
+        }
+      } finally {
+        setIsWishListForm(false);
       }
     }
   };

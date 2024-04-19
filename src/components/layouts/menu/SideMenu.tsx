@@ -71,25 +71,23 @@ const SideMenu = () => {
           {navItems.map((item, index) => {
             const menuItemColor = getNavItemColor(item.pathname, pathname);
             return (
-              <>
-                <li key={index} className={`inline-block text-white mb-lg relative ${menuItemColor}`}>
-                  <Link href={item.path} className="group group-hover:cursor-pointer">
-                    <div className="flex items-center font-extraBold tracking-tighter">
-                      <div
-                        className={`h-[23px] w-[23px] flex items-center mr-5 ${
-                          menuItemColor ? 'fill-lighterOrange stroke-lighterOrange' : 'fill-white stroke-white'
-                        } group-hover:fill-lighterOrange group-hover:stroke-lighterOrange`}
-                      >
-                        {item.icon ?? item.icon}
-                      </div>
-                      <span className={`${menuItemColor} group-hover:text-lighterOrange text-base`}>{item.name}</span>
+              <li key={index} className={`inline-block text-white mb-lg relative ${menuItemColor}`}>
+                <Link href={item.path} className="group group-hover:cursor-pointer">
+                  <div className="flex items-center font-extraBold tracking-tighter">
+                    <div
+                      className={`h-[23px] w-[23px] flex items-center mr-5 ${
+                        menuItemColor ? 'fill-lighterOrange stroke-lighterOrange' : 'fill-white stroke-white'
+                      } group-hover:fill-lighterOrange group-hover:stroke-lighterOrange`}
+                    >
+                      {item.icon ?? item.icon}
                     </div>
-                  </Link>
-                  {menuItemColor && (
-                    <div className="bg-lighterOrange rounded-lg absolute -top-3 -left-[5rem] w-10 h-[50px]"></div>
-                  )}
-                </li>
-              </>
+                    <span className={`${menuItemColor} group-hover:text-lighterOrange text-base`}>{item.name}</span>
+                  </div>
+                </Link>
+                {menuItemColor && (
+                  <div className="bg-lighterOrange rounded-lg absolute -top-3 -left-[5rem] w-10 h-[50px]"></div>
+                )}
+              </li>
             );
           })}
         </ul>
