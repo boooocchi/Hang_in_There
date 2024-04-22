@@ -39,11 +39,11 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
           const categoryData = sortedWardrobeData[category];
           if (categoryData?.length === 0) return null;
           return (
-            <div key={category} className="flex flex-col gap-2 ">
-              <h2 className={`text-xl tracking-tighter font-extraBold mb-1  ${mainFont.className}`}>
+            <div key={category} className="flex flex-col gap-1">
+              <h2 className={`text-xl tracking-tighter font-extraBold  ${mainFont.className}`}>
                 {upperCamelCase(category)}
               </h2>
-              <div className="flex lg:max-w-[1000px] overflow-x-scroll hide-scrollbar gap-5">
+              <div className="flex lg:max-w-[1000px] overflow-x-scroll hide-scrollbar gap-5 ">
                 {!registerPage &&
                   categoryData?.map((piece) => {
                     return (
@@ -71,7 +71,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                       : !!(categoryValue && categoryValue !== piece.id);
 
                     return (
-                      <div className="flex flex-col gap-2 mb-3 items-center " key={piece.id}>
+                      <div className="flex flex-col gap-2  items-center " key={piece.id}>
                         <input
                           type="checkbox"
                           id={piece.id}
@@ -83,7 +83,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                         />
                         <label
                           htmlFor={piece.id}
-                          className="flex flex-col gap-1 relative h-[275px] w-[200px]   bg-white  rounded-md cursor-pointer border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange "
+                          className="flex flex-col  relative h-[220px] w-[160px]   bg-white  rounded-md cursor-pointer border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange "
                         >
                           <ImageWithLoading url={piece.imageUrl} alt={piece.title} />
                         </label>

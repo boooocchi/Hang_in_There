@@ -198,7 +198,7 @@ export const resolvers = {
         return piece;
       } catch (error) {
         console.error(error);
-        throw new Error(`Failed to delete piece: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        throw new Error(`Failed to delete piece..`);
       }
     },
     register_outfit: async (_parent: unknown, args: registerOutfitArgs, context: Context) => {
@@ -217,8 +217,17 @@ export const resolvers = {
         });
         return dendoOutfit;
       } catch (error) {
-        console.error(error);
-        throw new Error(`Failed to register piece: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        throw new Error(`Failed to register piece..`);
+      }
+    },
+    delete_outfit: async (_parent: unknown, args: { id: string }, context: Context) => {
+      try {
+        const dendoOutfit = context.prisma.dendoOutfit.delete({
+          where: { id: args.id },
+        });
+        return dendoOutfit;
+      } catch (error) {
+        throw new Error('Failed to delete your outfit');
       }
     },
     add_wish_list: async (

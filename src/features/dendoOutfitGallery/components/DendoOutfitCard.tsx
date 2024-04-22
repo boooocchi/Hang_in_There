@@ -9,14 +9,15 @@ import PullDownMenu from './elements/PullDownMenu';
 
 type DendoOutfitCardProps = {
   dendoOutfit: dendoOutfitType;
+  deleteHandler: (id: string) => void;
 };
 
-const DendoOutfitCard: React.FC<DendoOutfitCardProps> = ({ dendoOutfit }) => {
+const DendoOutfitCard: React.FC<DendoOutfitCardProps> = ({ dendoOutfit, deleteHandler }) => {
   return (
     <div className="flex flex-col">
       <div className="text-xs ml-auto flex justify-end gap-2">
         {dateFormatter(new Date(dendoOutfit.createdAt))}
-        <PullDownMenu></PullDownMenu>
+        <PullDownMenu deleteHandler={() => deleteHandler(dendoOutfit.id)}></PullDownMenu>
       </div>
 
       <div className="aspect-[3/4] w-full overflow-hidden relative rounded-md group">

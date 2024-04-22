@@ -128,6 +128,7 @@ export const typeDefs = gql`
       imageUrl: String
       pieces: [String]!
     ): DendoOutfit
+    delete_outfit(id: String!): Piece
     add_wish_list(itemName: String!, category: Categories!, userId: String!): WishList
     delete_wish_list(id: String!): WishList
     update_wish_list_name(id: String!, itemName: String!): WishList

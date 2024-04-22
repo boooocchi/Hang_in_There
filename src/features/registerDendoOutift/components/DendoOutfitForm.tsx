@@ -6,13 +6,17 @@ import React from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
+import Input from '@/components/elements/form/Input';
 import Loading from '@/components/elements/message/Loading';
+import { useToast } from '@/contexts/ToastContext';
 import DropZone from '@/features/registerPiece/components/DropZone';
 import { uploadPhoto } from '@/features/registerPiece/utils/uploadImage';
 import WardrobeDisplaySection from '@/features/wardrobe/components/WardrobeDisplaySection';
 import { useAuth } from '@/hooks/useAuth';
+import { useUploadImage } from '@/hooks/useUploadImage';
 import { DENDOOUTFIT_QUERY } from '@/pages/dendoOutfitGallery/[id]/index';
 import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
+import { getErrorMessage } from '@/utils/errorHandler';
 
 import { REGISTER_OUTFIT } from '../graphql/mutation';
 import { RegisterOutfitValues } from '../types/types';
@@ -25,6 +29,7 @@ interface CustomError extends FieldErrors<RegisterOutfitValues> {
 const DendoOutfitForm = () => {
   const router = useRouter();
   const { userId } = useAuth();
+  const { addToastMessage } = useToast();
 
   const form = useForm<RegisterOutfitValues>({
     defaultValues: {
@@ -61,7 +66,7 @@ const DendoOutfitForm = () => {
       imageUploadResponse = await uploadPhoto(imageFile);
     }
     if (imageFile && !imageUploadResponse?.success) {
-      console.error('Image upload failed: ', imageUploadResponse?.message);
+      addToastMessage(`Image upload failed: ${imageUploadResponse?.message}`);
       return;
     }
 
@@ -72,17 +77,16 @@ const DendoOutfitForm = () => {
         .filter((keyword) => keyword !== '');
     }
 
+    const excludedKeys = ['title', 'imageUrl', 'keywords', 'description'];
     const piecesArr = [];
     for (const [key, value] of Object.entries(data)) {
-      if (value && key !== 'title' && key !== 'imageUrl' && key !== 'keywords' && key !== 'description') {
-        //data except title
+      if (value && !excludedKeys.includes(key)) {
+        // when data is an array, push each element to piecesArr
         if (Array.isArray(value)) {
-          // when data is an array, push each element to piecesArr
           piecesArr.push(...value);
-        } else piecesArr.push(value); //when data is not an array, push it to piecesArr
+        } else piecesArr.push(value);
       }
     }
-
     try {
       registerOutfit({
         variables: {
@@ -97,21 +101,11 @@ const DendoOutfitForm = () => {
       }); //pieces is the array that contains all the pieces id
       router.push(`/dendoOutfitGallery/${userId}`);
     } catch (error) {
-      console.error(error);
+      addToastMessage(getErrorMessage(error));
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [imageFile, setImageFile] = React.useState<File | null>(null);
-  const [isDropzone, setIsDropzone] = React.useState(false);
-  const handleFileSelect = (file: File) => {
-    setImageFile(file);
-    const imageUrl = `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${file.name}`;
-    form.setValue('imageUrl', imageUrl);
-  };
-  const handleDropzone = () => {
-    setIsDropzone(true);
-  };
+  const { imageFile, setImageFile, isDropzone, setIsDropzone, handleFileSelect } = useUploadImage({ setValue });
 
   if (loading) {
     return <Loading size="large"></Loading>;
@@ -120,30 +114,20 @@ const DendoOutfitForm = () => {
   return (
     <form className="relative h-full" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex gap-10 h-[175px] mb-5 mt-3">
-        <div className="flex flex-col gap-3 w-[40%] justify-content:flex-start;">
+        <div className="flex flex-col justify-between w-[40%] flex-start">
           <div className=" flex-col flex gap-1">
             <div className="flex items-baseline">
               <label htmlFor="title">Title</label>
               {errors.title && <p className="ml-5 text-sm text-errorRed">{errors.title.message}</p>}
             </div>
-            <input
-              id="title"
-              type="text"
-              className="border-b border-lightGreen bg-lightGreen rounded-md  text-lg w-full min-w-[300px] py-xs px-sm"
-              {...register('title')}
-            />
+            <Input name="title" register={register('title')} />
           </div>
           <div className=" flex flex-col gap-1">
             <label htmlFor="keyword">Keyword</label>
-            <input
-              id="keyword"
-              type="text"
-              {...register('keywords')}
-              className="border-b border-lightGreen bg-lightGreen rounded-md  text-lg w-full min-w-[300px] py-xs px-sm"
-            />
+            <Input name="keyword" register={register('keywords')} />
           </div>
         </div>
-        <div className="flex flex-col w-[60%]">
+        <div className="flex flex-col gap-1 w-[60%]">
           <label htmlFor="description mb-1">Description</label>
           <textarea
             id="description"
@@ -166,10 +150,10 @@ const DendoOutfitForm = () => {
         allPieces={data?.all_pieces}
       ></WardrobeDisplaySection>
       {!isDropzone && (
-        <div className="flex gap-5 items-end">
+        <div className="flex gap-5 items-end mt-5">
           <div className="w-full flex-col flex gap-1">
             <p className="text-center text-base">Do you have a picture of the outfit?</p>
-            <Button classname="w-full" onClick={handleDropzone}>
+            <Button classname="w-full" onClick={() => setIsDropzone(true)}>
               Upload picture
             </Button>
           </div>

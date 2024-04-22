@@ -3,11 +3,15 @@ import { signOut } from 'next-auth/react';
 import React from 'react';
 
 import { EllipsisIcon } from '@/components/elements/icons/icons';
+type PullDownProps = {
+  deleteHandler: () => void;
+};
 
-const PullDownMenu = () => {
+const PullDownMenu: React.FC<PullDownProps> = ({ deleteHandler }) => {
   const handleSignout = async () => {
     await signOut({ callbackUrl: '/auth/signin' });
   };
+
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -27,7 +31,7 @@ const PullDownMenu = () => {
             </DropdownMenu.Item>
           </button>
           <DropdownMenu.DropdownMenuSeparator className="h-[1px] bg-lighterGreen w-4/5"></DropdownMenu.DropdownMenuSeparator>
-          <button onClick={handleSignout}>
+          <button onClick={deleteHandler}>
             <DropdownMenu.Item className="outline-none px-md hover:duration-300  hover:outline-none  text-sm  py-sm  hover:bg-lighterOrange font-normal text-center">
               Delete
             </DropdownMenu.Item>
