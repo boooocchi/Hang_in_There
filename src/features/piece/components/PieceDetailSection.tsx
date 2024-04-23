@@ -1,7 +1,7 @@
 import { Categories, Colors } from '@prisma/client';
 import React from 'react';
 
-import Form from '@/features/registerPiece/components/Form';
+import Form from '@/features/registerPiece/components/PieceForm';
 
 export type PieceDetailSectionProps = {
   pieceData?: {

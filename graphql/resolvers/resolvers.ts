@@ -186,8 +186,7 @@ export const resolvers = {
         });
         return piece;
       } catch (error) {
-        console.error(error);
-        throw new Error(`Failed to update piece: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        throw new Error(`Failed to update piece..`);
       }
     },
     delete_piece: async (_parent: unknown, args: { id: string }, context: Context) => {

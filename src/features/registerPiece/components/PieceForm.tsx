@@ -12,48 +12,20 @@ import Loading from '@/components/elements/message/Loading';
 import { useToast } from '@/contexts/ToastContext';
 import { PieceDetailSectionProps } from '@/features/piece/components/PieceDetailSection';
 import { useAuth } from '@/hooks/useAuth';
-import { GET_PIECE_QUERY } from '@/pages/piece/[id]/index';
+import { useUploadImage } from '@/hooks/useUploadImage';
+import { GET_PIECE_QUERY } from '@/pages/wardrobe/[id]/[pieceId]/index';
 import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
 import { getErrorMessage } from '@/utils/errorHandler';
 import { dateFormatter } from '@/utils/utils';
 
 import { REGISTER_PIECE_MUTATION } from '../graphql/mutation';
+import { RegisterPieceValues, WardrobeQueryData, RegisterPieceMutationData } from '../types/types';
 import { uploadPhoto } from '../utils/uploadImage';
 import { registerPieceValidationSchema } from '../validation/registerPieceValidationSchema';
 
 import DropDownMenu from './DropDownMenu';
 import DropZone from './DropZone';
 import Input from './Input';
-
-type RegisterPieceValues = {
-  title: string;
-  description?: string;
-  location?: string;
-  price?: number | null;
-  color: Colors | null;
-  category: Categories | null;
-  imageUrl?: string;
-};
-
-type PieceData = {
-  id: string;
-  title: string;
-  description: string;
-  location: string;
-  price: number;
-  color: Colors;
-  category: Categories;
-  imageUrl: string;
-  createdAt: string;
-};
-
-type WardrobeQueryData = {
-  piece: PieceData[];
-};
-
-type RegisterPieceMutationData = {
-  piece: PieceData; // Assuming it returns a single wardrobe item
-};
 
 const UPDATE_PIECE_MUTATION = gql`
   mutation Update_piece(
@@ -81,37 +53,13 @@ const UPDATE_PIECE_MUTATION = gql`
   }
 `;
 
-const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, setEditMode }) => {
+const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, setEditMode }) => {
   const { userId } = useAuth();
-  const [imageFile, setImageFile] = React.useState<File | null>(null);
-  const [uploadLoading, setUploadLoading] = React.useState(false);
-
-  const { addToastMessage } = useToast();
-
-  useEffect(() => {
-    if (pieceData && setEditMode) setEditMode(false);
-  }, [pieceData, setEditMode]);
-
   const router = useRouter();
-
-  const [registerPiece] = useMutation<RegisterPieceMutationData>(REGISTER_PIECE_MUTATION, {
-    update: (cache, { data }) => {
-      if (data) {
-        const existingData: WardrobeQueryData | null = cache.readQuery({
-          query: GET_All_PIECES_QUERY,
-        });
-
-        if (existingData) {
-          cache.writeQuery({
-            query: GET_All_PIECES_QUERY,
-            data: { piece: [data.piece, ...existingData.piece] },
-          });
-        }
-      }
-    },
-  });
-
+  const [uploadLoading, setUploadLoading] = React.useState(false);
+  const { addToastMessage } = useToast();
   const [updatePiece] = useMutation(UPDATE_PIECE_MUTATION);
+
   const form = useForm<RegisterPieceValues>({
     defaultValues: {
       title: '',
@@ -126,14 +74,27 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
     // @ts-expect-error
     resolver: yupResolver(registerPieceValidationSchema),
   });
-
-  const handleFileSelect = (file: File) => {
-    setImageFile(file);
-    const imageUrl = `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${file.name}`;
-    form.setValue('imageUrl', imageUrl);
-  };
-
   const { register, handleSubmit, formState, control, trigger, setValue } = form;
+  const errors = formState.errors;
+
+  const { handleFileSelect, imageFile, setImageFile } = useUploadImage({ setValue });
+
+  const [registerPiece] = useMutation<RegisterPieceMutationData>(REGISTER_PIECE_MUTATION, {
+    update: (cache, { data }) => {
+      if (data) {
+        const existingData: WardrobeQueryData | null = cache.readQuery({
+          query: GET_All_PIECES_QUERY,
+          variables: { userId },
+        });
+        if (existingData) {
+          cache.writeQuery({
+            query: GET_All_PIECES_QUERY,
+            data: { all_pieces: [data.register_piece, ...existingData.all_pieces] },
+          });
+        }
+      }
+    },
+  });
 
   React.useEffect(() => {
     if (pieceData?.piece === undefined) return;
@@ -146,7 +107,9 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
     setValue('imageUrl', pieceData.piece.imageUrl);
   }, [pieceData, setValue]);
 
-  const errors = formState.errors;
+  useEffect(() => {
+    if (pieceData && setEditMode) setEditMode(false);
+  }, [pieceData, setEditMode]);
 
   const onSubmit = async (data: RegisterPieceValues) => {
     setUploadLoading(true);
@@ -155,50 +118,38 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
 
     if (colorValidation && categoryValidation) {
       if (editMode && pieceData) {
-        let imageUploadResponse = null;
-        if (pieceData.piece.imageUrl !== data.imageUrl) {
-          imageUploadResponse = await uploadPhoto(imageFile);
-        }
-        if (imageUploadResponse?.success || imageUploadResponse === null) {
-          try {
-            await updatePiece({
-              variables: {
-                id: pieceData.piece.id,
-                title: data.title,
-                description: data.description,
-                location: data.location,
-                price: data.price,
-                color: data.color,
-                category: data.category,
-                imageUrl: data.imageUrl,
-              },
-              refetchQueries: [
-                {
-                  query: GET_PIECE_QUERY,
-                  variables: { pieceId: pieceData.piece.id },
-                },
-              ],
-            });
-            router.push(`/piece/${pieceData.piece.id}`);
-          } catch (error) {
-            console.error(error);
-          } finally {
-            setUploadLoading(false);
-          }
-        } else {
-          console.error('Image upload failed: ', imageUploadResponse?.message);
-          setUploadLoading(false);
-          return;
-        }
-      } else {
-        const imageUploadResponse = await uploadPhoto(imageFile);
-
-        if (!imageUploadResponse.success) {
-          console.error('Image upload failed: ', imageUploadResponse.message);
-          setUploadLoading(false);
-          return;
-        }
         try {
+          if (imageFile && pieceData.piece.imageUrl !== data.imageUrl) {
+            await uploadPhoto(imageFile);
+          }
+          await updatePiece({
+            variables: {
+              id: pieceData.piece.id,
+              title: data.title,
+              description: data.description,
+              location: data.location,
+              price: data.price,
+              color: data.color,
+              category: data.category,
+              imageUrl: data.imageUrl,
+            },
+            refetchQueries: [
+              {
+                query: GET_PIECE_QUERY,
+                variables: { pieceId: pieceData.piece.id },
+              },
+            ],
+          });
+          setEditMode ?? false;
+          addToastMessage('Your piece has been successfully updated!');
+        } catch (error) {
+          addToastMessage(getErrorMessage(error), true);
+        } finally {
+          setUploadLoading(false);
+        }
+      } else if (imageFile) {
+        try {
+          await uploadPhoto(imageFile);
           await registerPiece({
             variables: {
               title: data.title,
@@ -211,7 +162,6 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
               userId: userId,
             },
           });
-
           router.push(`/wardrobe/${userId}`);
           addToastMessage('Your piece has been successfully registered!');
         } catch (error) {
@@ -222,34 +172,39 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
       }
     }
   };
+
   return (
     <div className="w-full h-full">
       <form className="flex gap-3xl w-full h-full" onSubmit={handleSubmit(onSubmit)}>
-        <div className={`flex flex-col   ${pieceData ? 'w-[55%]' : 'w-[45%]'}  h-full`}>
+        <div className={`flex flex-col  justify-between  ${pieceData ? 'w-[55%]' : 'w-[45%]'}  h-full`}>
           <Input
             register={register('title')}
             name="Title *"
             errorMessage={errors.title?.message}
             placeholder="ex. Fleece Jacket"
             disabled={!editMode}
-          ></Input>
-          <div className="flex justify-between gap-8">
-            <Input
-              register={register('location')}
-              name="Location"
-              placeholder="ex. downtown MUJI"
-              errorMessage={errors.location?.message}
-              disabled={!editMode}
-            ></Input>
-            <Input
-              register={register('price')}
-              name="Price"
-              errorMessage={errors.price?.message}
-              placeholder="ex. 38.5"
-              disabled={!editMode}
-            ></Input>
+          />
+          <div className="w-full flex justify-between gap-7">
+            <div className="w-1/2">
+              <Input
+                register={register('location')}
+                name="Location"
+                placeholder="ex. downtown MUJI"
+                errorMessage={errors.location?.message}
+                disabled={!editMode}
+              />
+            </div>
+            <div className="w-[50%]">
+              <Input
+                register={register('price')}
+                name="Price"
+                errorMessage={errors.price?.message}
+                placeholder="ex. 38.5"
+                disabled={!editMode}
+              />
+            </div>
           </div>
-          <div className="flex justify-between gap-8 mb-xl">
+          <div className="flex justify-between gap-7">
             <Controller
               name="color"
               control={control}
@@ -283,15 +238,15 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
               )}
             />
           </div>
-          <div className="flex flex-col flex-grow">
-            <label htmlFor="description" className={` text-base mb-2`}>
+          <div className="flex flex-col">
+            <label htmlFor="description" className="text-base mb-2">
               Description
             </label>
             <textarea
               {...register('description')}
               name="description"
               id="description"
-              className="bg-lightGreen rounded-md h-full flex-grow p-sm textarea"
+              className="bg-lightGreen rounded-md h-[220px] py-md px-md textarea resize-none"
               placeholder="ex. Warm winter down jacket"
               disabled={!editMode}
             />
@@ -309,22 +264,24 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
               </div>
             </div>
           ) : (
-            <div className="flex flex-col h-full justify-between">
+            <div className="flex flex-col h-full justify-between relative">
               {!editMode && pieceData && (
                 <div className="h-[4%] mr-1 flex items-end justify-end text-sm">
                   created at: {dateFormatter(new Date(pieceData.piece.createdAt))}
                 </div>
               )}
-
-              <DropZone
-                className="outline-[2px]  outline-dashed outline-lightGreen h-[85%]  flex flex-col  justify-center overflow-hidden items-center mr-1 p-lg rounded-md mt-1"
-                handleFileSelect={handleFileSelect}
-                deleteFile={() => {
-                  setImageFile(null);
-                  form.setValue('imageUrl', '');
-                }}
-                pieceImageUrl={pieceData?.piece.imageUrl}
-              ></DropZone>
+              <div className="relative h-full">
+                <DropZone
+                  className="outline-[2px]  outline-dashed outline-lightGreen h-[90%]  flex flex-col  justify-center overflow-hidden items-center mr-1 p-lg rounded-md mt-1"
+                  handleFileSelect={handleFileSelect}
+                  deleteFile={() => {
+                    setImageFile(null);
+                    setValue('imageUrl', '');
+                  }}
+                  pieceImageUrl={pieceData?.piece.imageUrl}
+                />
+                <ErrorMessage style="bottom-5">{errors.imageUrl?.message}</ErrorMessage>
+              </div>
               <Button>{uploadLoading ? <Loading /> : pieceData && editMode ? 'Complete edit' : 'Register'}</Button>
             </div>
           )}
@@ -334,4 +291,4 @@ const Form: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, s
   );
 };
 
-export default Form;
+export default PieceForm;

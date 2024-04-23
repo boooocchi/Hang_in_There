@@ -3,18 +3,10 @@ import React from 'react';
 type ErrorMessageProps = {
   children: React.ReactNode;
   positionFromTop?: string;
-  dropzone?: boolean;
+  style?: string;
 };
-const ErrorMessage: React.FC<ErrorMessageProps> = ({ children, positionFromTop, dropzone }) => {
-  return (
-    <p
-      className={`text-errorRed  text-[0.9rem] absolute  left-3 top-9 ${positionFromTop && positionFromTop} ${
-        dropzone && 'dropzoneErrorMessaege'
-      }`}
-    >
-      {children}
-    </p>
-  );
+const ErrorMessage: React.FC<ErrorMessageProps> = ({ children, style }) => {
+  return <p className={`text-errorRed  text-sm absolute ${style ?? style}`}>{children}</p>;
 };
 
 export default ErrorMessage;

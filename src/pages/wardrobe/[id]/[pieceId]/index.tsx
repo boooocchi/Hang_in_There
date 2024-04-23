@@ -28,7 +28,7 @@ export const GET_PIECE_QUERY = gql`
 
 const Piece = () => {
   const router = useRouter();
-  const pieceId = router.query.id;
+  const pieceId = router.query.pieceId;
   const { data, loading } = useQuery(GET_PIECE_QUERY, {
     variables: { pieceId },
   });

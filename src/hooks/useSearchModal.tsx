@@ -131,7 +131,7 @@ export const useSearch: SearchHook = () => {
                       <div className="flex gap-3 mb-3 overflow-x-scroll">
                         {dataOfTheCategory?.map((piece) => (
                           <div key={piece.id}>
-                            <Link href={`/piece/${piece.id}`} onClick={handleModalClose}>
+                            <Link href={`/wardrobe/${userId}/${piece.id}`} onClick={handleModalClose}>
                               <div className="relative w-[150px] aspect-[2/3] rounded-md overflow-hidden">
                                 <ImageWithLoading alt="piece image" url={piece.imageUrl} />
                               </div>

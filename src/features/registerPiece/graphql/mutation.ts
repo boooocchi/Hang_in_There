@@ -21,7 +21,17 @@ export const REGISTER_PIECE_MUTATION = gql`
       price: $price
       imageUrl: $imageUrl
     ) {
+      id
+      createdAt
+      updatedAt
       title
+      description
+      color
+      category
+      location
+      price
+      userId
+      imageUrl
     }
   }
 `;

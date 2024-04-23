@@ -12,14 +12,13 @@ import { WISH_LIST_QUERY } from '@/features/wishList/graphql/query';
 import { useAuth } from '@/hooks/useAuth';
 
 import '@radix-ui/themes/styles.css';
-import { mainFont } from './_app';
 
 export default function Home({ weatherData }: WeatherData) {
   const { status, session } = useAuth();
-  const userid = session?.user?.id;
+  const userId = session?.user?.id;
   const { data: wishListData } = useQuery(WISH_LIST_QUERY, {
     variables: {
-      userId: userid,
+      userId,
     },
   });
 
@@ -50,7 +49,7 @@ export default function Home({ weatherData }: WeatherData) {
               <p>Your Wardrobe</p>
               <Link
                 href="/wardrobe"
-                className={`bg-accentOrange text-white rounded-md px-md  text-center text-sm mt-3 py-[7px] inline-block font-boldest ${mainFont.className}`}
+                className="bg-accentOrange text-white rounded-md px-md  text-center text-sm mt-3 py-[7px] inline-block font-boldest"
               >
                 View
               </Link>
@@ -76,7 +75,7 @@ export default function Home({ weatherData }: WeatherData) {
                 <p>Register Peace</p>
                 <Link
                   href="/registerPiece"
-                  className={`bg-accentOrange text-white font-boldest rounded-md px-md  text-center text-sm mt-3 py-[7px] inline-block   ${mainFont.className}`}
+                  className={`bg-accentOrange text-white font-boldest rounded-md px-md  text-center text-sm mt-3 py-[7px] inline-block  `}
                 >
                   Register
                 </Link>
@@ -104,8 +103,8 @@ export default function Home({ weatherData }: WeatherData) {
             >
               <p>Dendo Outfit</p>
               <Link
-                href={`/dendoOutfit/${userid}`}
-                className={`bg-accentOrange font-boldest rounded-md   text-center text-sm mt-3 py-[7px] inline-block text-white px-md ${mainFont.className}`}
+                href={`/dendoOutfit/${userId}`}
+                className="bg-accentOrange font-boldest rounded-md   text-center text-sm mt-3 py-[7px] inline-block text-white px-md"
               >
                 View
               </Link>
@@ -129,7 +128,7 @@ export default function Home({ weatherData }: WeatherData) {
               <p>Verdic on Outfit</p>
               <Link
                 href="/dendoOutfit"
-                className={`bg-accentOrange font-boldest rounded-md  text-white  text-center text-sm mt-3 py-[7px] inline-block  px-md ${mainFont.className}`}
+                className="file:bg-accentOrange font-boldest rounded-md  text-white  text-center text-sm mt-3 py-[7px] inline-block  px-md"
               >
                 Look
               </Link>
@@ -159,7 +158,7 @@ export default function Home({ weatherData }: WeatherData) {
                     </h2>
                     <Link
                       href="/wishList"
-                      className={`bg-accentOrange font-boldest rounded-md  text-white w-[70px] text-center text-sm px-sm  py-[3px] inline-block    ${mainFont.className}`}
+                      className={`bg-accentOrange font-boldest rounded-md  text-white w-[70px] text-center text-sm px-sm  py-[3px] inline-block   `}
                     >
                       view
                     </Link>

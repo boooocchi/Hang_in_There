@@ -22,7 +22,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ name, options, onChange, er
     <div className="relative w-1/2  text-base unstyled ">
       <h2 className="mb-2">{name}</h2>
       <Select.Root onValueChange={handleValueChange} disabled={disabled ? disabled : false}>
-        <Select.Trigger className="border-1 border-lightGreen w-full flex py-xs p-sm justify-between relative outline-none items-center select-trigger font-normal bg-lightGreen ">
+        <Select.Trigger className="border-1 border-lightGreen w-full flex py-sm px-md justify-between relative outline-none items-center select-trigger font-normal bg-lightGreen ">
           <Select.Value
             placeholder={defaultValue ? defaultValue : 'Select...'}
             defaultValue={defaultValue ?? defaultValue}
@@ -41,7 +41,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ name, options, onChange, er
                 <Select.Item
                   key={index}
                   value={option}
-                  className="w-full bg-lightGreen p-sm py-xs border-none flex items-center hover:text-richGreen outline-none justify-between text-base cursor-pointer  hover:bg-lighterOrange font-normal"
+                  className="w-full bg-lightGreen px-md py-sm border-none flex items-center hover:text-richGreen outline-none justify-between text-base cursor-pointer  hover:bg-lighterOrange font-normal"
                 >
                   <Select.ItemText className="border-none">{option}</Select.ItemText>
                   <Select.ItemIndicator>

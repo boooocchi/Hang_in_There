@@ -7,7 +7,7 @@ import { UseImageUploadReturnType } from '@/types/types';
 export const useUploadImage = ({
   setValue,
 }: {
-  setValue: UseFormSetValue<RegisterOutfitValues>;
+  setValue: UseFormSetValue<RegisterOutfitValues | RegisterPieceValues>;
 }): UseImageUploadReturnType => {
   const [imageFile, setImageFile] = React.useState<File | null>(null);
   const [isDropzone, setIsDropzone] = React.useState(false);

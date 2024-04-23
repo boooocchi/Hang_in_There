@@ -11,6 +11,7 @@ type InputProps = {
   handleFocus?: (inputName: string) => void;
   handleBlur?: (inputName: string) => void;
   disabled?: boolean;
+  style?: string;
 };
 
 const Input: React.FC<InputProps> = ({
@@ -21,17 +22,18 @@ const Input: React.FC<InputProps> = ({
   handleFocus,
   handleBlur,
   disabled,
+  style,
 }) => {
   return (
     <>
-      <div className="flex flex-col  group z-0 mb-4 relative w-full">
-        <label htmlFor={name} className={` text-base mb-1`}>
+      <div className={`flex flex-col group relative w-full ${style && style}`}>
+        <label htmlFor={name} className="text-base mb-1">
           {name}
         </label>
         <input
           type="text"
           id={name}
-          className=" rounded-md border-1 bg-lightGreen border-lightGreen py-xs px-sm relative text-base"
+          className="w-full rounded-md border-1 bg-lightGreen border-lightGreen py-sm px-md relative text-base"
           placeholder={placeholder ?? name}
           {...register}
           onFocus={() => handleFocus && handleFocus(name)}

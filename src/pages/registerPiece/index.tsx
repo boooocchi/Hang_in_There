@@ -1,12 +1,12 @@
 import React from 'react';
 
 import MainLayout from '@/components/layouts/layout/MainLayout';
-import Form from '@/features/registerPiece/components/Form';
+import PieceForm from '@/features/registerPiece/components/PieceForm';
 
 const index = () => {
   return (
     <MainLayout title="Register Piece">
-      <Form />
+      <PieceForm />
     </MainLayout>
   );
 };

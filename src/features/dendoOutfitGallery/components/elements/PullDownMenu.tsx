@@ -30,7 +30,6 @@ const PullDownMenu: React.FC<PullDownProps> = ({ deleteHandler }) => {
               Edit
             </DropdownMenu.Item>
           </button>
-          <DropdownMenu.DropdownMenuSeparator className="h-[1px] bg-lighterGreen w-4/5"></DropdownMenu.DropdownMenuSeparator>
           <button onClick={deleteHandler}>
             <DropdownMenu.Item className="outline-none px-md hover:duration-300  hover:outline-none  text-sm  py-sm  hover:bg-lighterOrange font-normal text-center">
               Delete

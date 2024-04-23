@@ -4,8 +4,9 @@ import React from 'react';
 import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 import ImageWithLoading from '@/components/elements/ImageWithLoading';
+import { mainFont } from '@/constants/FontFamily';
 import { RegisterOutfitValues } from '@/features/registerDendoOutift/types/types';
-import { mainFont } from '@/pages/_app';
+import { useAuth } from '@/hooks/useAuth';
 
 import { useWardrobe } from '../hooks/useWardrobe';
 import { upperCamelCase } from '../utility/upperCamelCase';
@@ -23,6 +24,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
   watch,
   allPieces,
 }) => {
+  const { userId } = useAuth();
   const categoriesArray = Object.values(Categories);
   let currentValue: RegisterOutfitValues;
 
@@ -48,7 +50,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                   categoryData?.map((piece) => {
                     return (
                       <div className="flex flex-col gap-2 " key={piece.id}>
-                        <Link href={`/piece/${piece.id}`} className="group overflow-hidden rounded-md">
+                        <Link href={`/wardrobe/${userId}/${piece.id}`} className="group overflow-hidden rounded-md">
                           <div className="flex flex-col gap-1 relative h-[300px] w-[225px] ">
                             <ImageWithLoading
                               url={piece.imageUrl}

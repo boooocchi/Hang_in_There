@@ -62,7 +62,7 @@ const SigninForm = () => {
   };
 
   return (
-    <div className="flex flex-col h-full gap-3">
+    <div className="bg-white w-[350px]  flex flex-col items-center h-full gap-3">
       <div className="flex gap-3 items-center pb-md">
         <h1 className={` text-2xl `}>Sign in</h1> {errorMessage && <p className={`text-errorRed  `}>{errorMessage}</p>}
       </div>

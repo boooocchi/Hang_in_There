@@ -37,7 +37,7 @@ const SideMenu = () => {
       icon: <RegisterIcon />,
       name: 'Register Piece',
       path: '/registerPiece',
-      pathname: 'piece',
+      pathname: 'registerpiece',
     },
     {
       icon: <DendoOutfitIcon />,
