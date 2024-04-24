@@ -18,7 +18,7 @@ const Input: React.FC<InputProps> = ({ register, errorMessage, name, placeholder
       <input
         type="text"
         id={name}
-        className=" w-full rounded-none relative top-1 appearance-none peer  bg-transparent border-b  border-t-0 border-l-0 border-r-0 border-b-mainBlack  text-mainBlack px-1 sm:px-2 py-1 focus:outline-none h-[1.8rem] focus:border-accentOrange"
+        className="rounded-md w-full relative top-1 appearance-none peer border-0 text-deepGreen px-md py-sm focus:outline-none bg-transparent"
         placeholder=" "
         {...register}
         onFocus={() => handleFocus && handleFocus(name)}
@@ -30,7 +30,7 @@ const Input: React.FC<InputProps> = ({ register, errorMessage, name, placeholder
         transform -translate-y-4
         peer-focus:-translate-y-4
         peer-placeholder-shown:scale-[100%]
-        peer-placeholder-shown:translate-y-1  text-mainBlack peer-focus:text-accentOrange`}
+        peer-placeholder-shown:translate-y-1  text-deepGreen peer-focus:text-accentOrange`}
       >
         {placeholder ?? name}
       </label>

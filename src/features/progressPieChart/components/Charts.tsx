@@ -73,26 +73,24 @@ const Charts = () => {
         const categoryKey = key as keyof PercentagesType;
         const percentage = percentages[categoryKey].percentage;
         return (
-          <div key={index} className="h-full flex justify-center  relative overflow-hidden ">
+          <div key={index} className="h-[95%] flex justify-center  relative overflow-hidden text-deepGreen">
             <CircularProgressbar
               value={percentage}
-              strokeWidth={12}
-              className={`  h-full w-full`}
+              strokeWidth={15}
+              className="h-full w-full"
               circleRatio={0.5}
               counterClockwise={true}
               styles={buildStyles({
                 rotation: 0.25,
                 strokeLinecap: 'round',
-                textSize: '16px',
-                pathTransitionDuration: 0.3,
-                pathColor: `#F78C5F`,
-                textColor: '#11221F',
-                trailColor: '#ddd ',
-                backgroundColor: '#00483F',
+                pathTransitionDuration: 0.5,
+                pathColor: `#11655b`,
+                trailColor: '#ddd',
+                backgroundColor: '#11655b',
               })}
             />
-            <h2 className="text-richGreen text-sm font-bold absolute bottom-[25%]">{key}</h2>
-            <span className="text-richGreen font-bold absolute text-sm bottom-[50%]">{percentage}%</span>
+            <h2 className="text-sm font-bold absolute bottom-[25%]">{key}</h2>
+            <span className=" font-bold absolute text-sm bottom-[50%]">{percentage}%</span>
           </div>
         );
       })}

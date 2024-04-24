@@ -79,7 +79,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                           id={piece.id}
                           value={piece.id}
                           className="peer  w-4 h-4 text-accentOrange
-                        mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-lighterGreen"
+                        mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-richGreen"
                           {...register(piece.category)}
                           disabled={isDisabled}
                         />

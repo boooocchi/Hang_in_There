@@ -10,7 +10,7 @@ interface PageTitleProps extends Children {
 const PageTitle: React.FC<PageTitleProps> = ({ children, button }) => {
   return (
     <div className="flex gap-4 items-center">
-      <h1 className={`${titleFont.className} text-3xl font-boldest text-richGreen items-center flex`}>{children}</h1>
+      <h1 className={`${titleFont.className} text-3xl font-boldest items-center flex`}>{children}</h1>
       {button && <div className="flex item-center gap-2">{button}</div>}
     </div>
   );

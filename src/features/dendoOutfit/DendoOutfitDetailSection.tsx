@@ -2,7 +2,7 @@ import { Categories, Colors } from '@prisma/client';
 import Image from 'next/image';
 import React from 'react';
 
-import { mainFont } from '@/pages/_app';
+import { mainFont } from '@/constants/FontFamily';
 
 type DendoOutfitDetailSectionProps = {
   dendoOutfitDetailsData: {

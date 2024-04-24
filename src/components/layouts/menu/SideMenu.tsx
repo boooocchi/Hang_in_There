@@ -60,11 +60,11 @@ const SideMenu = () => {
   ];
 
   return (
-    <nav className="flex flex-col flex-shrink-0 bg-richGreen  w-[280px] min-w-[280px] z-100 relative pt-2xl pb-2xl px-2xl drop-shadow-md min-h-[750px] tracking-tight h-screen overflow-hidden">
+    <nav className="flex flex-col flex-shrink-0 bg-richGreen  w-[280px] min-w-[280px] z-100 relative pt-2xl pb-2xl px-2xl drop-shadow-md min-h-[0px] tracking-tight h-screen overflow-hidden rounded-r-[30px]">
       <h1
-        className={`text-white font-mainTitle text-[36px] leading-[32px] whitespace-nowrap -ml-1 ${titleFont.className}`}
+        className={`flex items-baseline gap-2 text-white font-mainTitle text-[35px] leading-[32px] whitespace-nowrap -ml-1 ${titleFont.className}`}
       >
-        Do I Have It?
+        Hang <span className="text-[20px]">in</span> There
       </h1>
       <div className="flex flex-col h-full justify-between">
         <ul className=" h-full pb-xl pt-[50px]">

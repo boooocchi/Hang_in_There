@@ -118,7 +118,7 @@ const DropZone: React.FC<DropZoneProps> = ({ className, handleFileSelect, delete
               </g>
             </svg>
 
-            <p className="text-richGreen text-base text-center">
+            <p className=" text-base text-center">
               {' '}
               {isDragActive ? (
                 'Drop the image here ...'

@@ -115,7 +115,7 @@ const DendoOutfitIcon: React.FC<Props> = ({ style }) => (
     id="mirror"
     width="21"
     height="21"
-    transform="scale(1.3,1)"
+    transform="scale(1.2,1)"
     className={style}
   >
     <path d="M29,41.752V56H24a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1H42a1,1,0,0,0,1-1V59a3,3,0,0,0-3-3H35V41.752C44.61,40.155,52,31.009,52,20V18a1,1,0,0,0-2,0v1H47.955C47.49,9.541,40.522,2,32,2S16.51,9.541,16.045,19H14V18a1,1,0,0,0-2,0v2C12,31.009,19.39,40.155,29,41.752ZM41,59v1H23V59a1,1,0,0,1,1-1H40A1,1,0,0,1,41,59ZM33,42V56H31V42Zm-1-2c-9.621,0-17.481-8.438-17.954-19h2C16.51,30.459,23.478,38,32,38s15.49-7.541,15.955-17h2C49.481,31.562,41.621,40,32,40ZM32,4c7.72,0,14,7.178,14,16S39.72,36,32,36,18,28.822,18,20,24.28,4,32,4Z"></path>
@@ -208,6 +208,19 @@ const SendIcon: React.FC<Props> = ({ style }) => (
   </svg>
 );
 
+const GoogleIcon: React.FC<Props> = ({ style }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="16"
+    width="15.25"
+    viewBox="0 0 488 512"
+    stroke="white"
+    className={style ?? 'h-5 w-5 color-gray'}
+  >
+    <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
+  </svg>
+);
+
 export {
   CancelIcon,
   EditIcon,
@@ -222,4 +235,5 @@ export {
   ListIcon,
   EllipsisIcon,
   SendIcon,
+  GoogleIcon,
 };

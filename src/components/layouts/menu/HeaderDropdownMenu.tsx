@@ -23,7 +23,7 @@ const HeaderDropdownMenu = () => {
         <DropdownMenu.Content
           sideOffset={12}
           align="end"
-          className=" text-richGreen text-base overflow-hidden rounded-md  bg-lightGreen "
+          className="text-base overflow-hidden rounded-md  bg-lightGreen "
         >
           <DropdownMenu.Item className="hover:outline-none outline-none px-md hover:duration-300 py-sm  hover:bg-lighterOrange font-normal text-center">
             Account

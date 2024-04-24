@@ -36,10 +36,10 @@ export const useModal: ModalHook = () => {
                 <div className=" w-[500px] bg-gray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg flex flex-col gap-3  fixed z-999 ">
                   <div className="flex justify-center mb-3">{children}</div>
                   <div className="flex justify-between gap-3">
-                    <Button classname="w-full" colorSchema="accentOrange" onClick={closeModal}>
+                    <Button style="w-full" colorSchema="accentOrange" onClick={closeModal}>
                       Cancel
                     </Button>
-                    <Button classname="w-full" onClick={onClick}>
+                    <Button style="w-full" onClick={onClick}>
                       {buttonLabel}
                     </Button>
                   </div>

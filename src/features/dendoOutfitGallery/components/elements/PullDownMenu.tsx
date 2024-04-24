@@ -23,7 +23,7 @@ const PullDownMenu: React.FC<PullDownProps> = ({ deleteHandler }) => {
         <DropdownMenu.Content
           sideOffset={3}
           align="end"
-          className=" text-richGreen text-base overflow-hidden rounded-md  bg-lightGreen mr-1 flex flex-col items-center"
+          className="  text-base overflow-hidden rounded-md  bg-gray mr-1 flex flex-col items-center"
         >
           <button onClick={handleSignout} className="w-full">
             <DropdownMenu.Item className="w-full hover:outline-none outline-none px-md hover:duration-300 py-sm text-sm hover:bg-lighterOrange border-r-1 border-richGreen font-normal text-center">

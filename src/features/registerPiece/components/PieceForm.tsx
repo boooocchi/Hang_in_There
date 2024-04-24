@@ -7,6 +7,7 @@ import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
+import Input from '@/components/elements/form/Input';
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
 import Loading from '@/components/elements/message/Loading';
 import { useToast } from '@/contexts/ToastContext';
@@ -25,7 +26,6 @@ import { registerPieceValidationSchema } from '../validation/registerPieceValida
 
 import DropDownMenu from './DropDownMenu';
 import DropZone from './DropZone';
-import Input from './Input';
 
 const UPDATE_PIECE_MUTATION = gql`
   mutation Update_piece(
@@ -179,7 +179,8 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
         <div className={`flex flex-col  justify-between  ${pieceData ? 'w-[55%]' : 'w-[45%]'}  h-full`}>
           <Input
             register={register('title')}
-            name="Title *"
+            label="Title *"
+            name="title"
             errorMessage={errors.title?.message}
             placeholder="ex. Fleece Jacket"
             disabled={!editMode}
@@ -188,7 +189,8 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
             <div className="w-1/2">
               <Input
                 register={register('location')}
-                name="Location"
+                name="location"
+                label="Location"
                 placeholder="ex. downtown MUJI"
                 errorMessage={errors.location?.message}
                 disabled={!editMode}
@@ -197,7 +199,8 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
             <div className="w-[50%]">
               <Input
                 register={register('price')}
-                name="Price"
+                name="price"
+                label="Price"
                 errorMessage={errors.price?.message}
                 placeholder="ex. 38.5"
                 disabled={!editMode}
@@ -246,7 +249,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
               {...register('description')}
               name="description"
               id="description"
-              className="bg-lightGreen rounded-md h-[220px] py-md px-md textarea resize-none"
+              className="bg-gray rounded-md h-[230px] py-md px-md textarea resize-none border-1 border-middleGreen"
               placeholder="ex. Warm winter down jacket"
               disabled={!editMode}
             />
@@ -272,7 +275,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
               )}
               <div className="relative h-full">
                 <DropZone
-                  className="outline-[2px]  outline-dashed outline-lightGreen h-[90%]  flex flex-col  justify-center overflow-hidden items-center mr-1 p-lg rounded-md mt-1"
+                  className="border-1  border-dashed border-middleGreen h-[90%]  flex flex-col  justify-center overflow-hidden items-center mr-1 p-lg rounded-md mt-1"
                   handleFileSelect={handleFileSelect}
                   deleteFile={() => {
                     setImageFile(null);

@@ -93,11 +93,11 @@ Color: ${piece.color}`,
               </div>
               <textarea
                 placeholder="Ask for an AI suggestion on your outfit"
-                className="absolute right-0 top-0 bottom-0 left-0 bg-lightGreen rounded-md py-sm px-md whitespace-pre-wrap break-words resize-none leading-[24px] max-h-[164px] pr-[70px]"
+                className="absolute border-middleGreen border-1 right-0 top-0 bottom-0 left-0 bg-gray rounded-md py-sm px-md whitespace-pre-wrap break-words resize-none leading-[24px] max-h-[164px] pr-[70px]"
                 value={message}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
               />
-              <Button classname="px-sm py-xs  absolute right-3 bottom-[22px] translate-y-1/2">
+              <Button style="px-sm py-xs  absolute right-3 bottom-[22px] translate-y-1/2">
                 <SendIcon />
               </Button>
             </div>

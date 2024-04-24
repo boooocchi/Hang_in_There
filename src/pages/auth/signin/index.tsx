@@ -6,7 +6,7 @@ import SigninForm from '@/features/auth/components/SigninForm';
 const Signin = () => {
   return (
     <AuthLayout>
-      <SigninForm></SigninForm>
+      <SigninForm />
     </AuthLayout>
   );
 };

@@ -15,7 +15,7 @@ const Header = () => {
     <header className="w-full bg-gray h-[5%]">
       <nav className="flex justify-between items-center h-full">
         <button
-          className="flex gap-2 items-center text-sm p-xs px-sm bg-lightGreen rounded-md"
+          className="flex gap-2 items-center text-sm py-xs px-sm bg-gray rounded-md border-1 border-middleGreen"
           onClick={() => setIsModalOpen(true)}
         >
           <svg
@@ -23,7 +23,7 @@ const Header = () => {
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
-            stroke="#00110F"
+            stroke="#003932"
             className="w-4 h-4"
           >
             <path

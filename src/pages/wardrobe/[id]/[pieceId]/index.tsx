@@ -50,7 +50,7 @@ const Piece = () => {
     <>
       {editMode ? (
         <div className="flex  items-center h-full mt-1">
-          <Button colorSchema="accentOrange" onClick={unsetEditMode} classname=" px-sm py-xs   text-sm">
+          <Button colorSchema="accentOrange" onClick={unsetEditMode} style=" px-sm py-xs   text-sm">
             Cancel this edit
           </Button>
         </div>

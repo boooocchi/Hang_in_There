@@ -111,7 +111,7 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
                                 type="checkbox"
                                 id={piece.id}
                                 onClick={() => setSelectedPiece(piece)}
-                                className="peer  w-3 h-3 text-accentOrange mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-lighterGreen"
+                                className="peer  w-3 h-3 text-accentOrange mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-richGreen"
                               />
                             </div>
                             <label

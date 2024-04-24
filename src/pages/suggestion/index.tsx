@@ -2,12 +2,12 @@
 import React from 'react';
 
 import MainLayout from '@/components/layouts/layout/MainLayout';
-import Form from '@/features/suggestions/components/SuggestionForm';
+import SuggestionForm from '@/features/suggestions/components/SuggestionForm';
 
 const Index = () => {
   return (
     <MainLayout title="Matching Suggestions">
-      <Form />
+      <SuggestionForm />
     </MainLayout>
   );
 };

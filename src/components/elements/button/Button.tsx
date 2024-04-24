@@ -1,17 +1,20 @@
 import React, { ReactNode } from 'react';
 
+import Loading from '@/components/elements/message/Loading';
+
 type Props = {
   children: ReactNode;
   colorSchema?: string;
-  classname?: string;
+  style?: string;
   onClick?: () => void;
+  loading?: boolean;
 };
 
 type colorClassesType = {
   [key: string]: string;
 };
 
-const Button: React.FC<Props> = ({ children, colorSchema = 'richGreen', classname, onClick }) => {
+const Button: React.FC<Props> = ({ children, colorSchema = 'richGreen', style, onClick, loading }) => {
   const baseClasses = 'p-sm px-md transition duration-300 text-white rounded-md border-transparent border-1';
 
   const colorClasses: colorClassesType = {
@@ -20,8 +23,8 @@ const Button: React.FC<Props> = ({ children, colorSchema = 'richGreen', classnam
   };
 
   return (
-    <button onClick={onClick} className={`${baseClasses} ${colorClasses[colorSchema]} ${classname || ''}`}>
-      {children}
+    <button onClick={onClick} className={`${baseClasses} ${colorClasses[colorSchema]} ${style || ''}`}>
+      {loading ? <Loading /> : children}
     </button>
   );
 };

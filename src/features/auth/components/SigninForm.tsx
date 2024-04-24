@@ -4,7 +4,11 @@ import { signIn } from 'next-auth/react';
 import React from 'react';
 import { useForm, FieldErrors } from 'react-hook-form';
 
-import Input from './Input';
+import Button from '@/components/elements/button/Button';
+import Input from '@/components/elements/form/Input';
+import { GoogleIcon } from '@/components/elements/icons/icons';
+import { useToast } from '@/contexts/ToastContext';
+import { getErrorMessage } from '@/utils/errorHandler';
 
 type SigninFormValues = {
   email: string;
@@ -18,6 +22,8 @@ interface CustomError extends FieldErrors<SigninFormValues> {
 const SigninForm = () => {
   const router = useRouter();
   const error = router.query.error;
+  const { addToastMessage } = useToast();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   let errorMessage;
   if (error) {
@@ -42,6 +48,7 @@ const SigninForm = () => {
   const errors: CustomError = formState.errors;
 
   const onSubmit = async (data: SigninFormValues) => {
+    setIsLoading(true);
     try {
       await signIn('credentials', {
         email: data.email,
@@ -49,7 +56,9 @@ const SigninForm = () => {
         callbackUrl: '/',
       });
     } catch (err) {
-      console.error(err);
+      addToastMessage(getErrorMessage(err), true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -62,33 +71,28 @@ const SigninForm = () => {
   };
 
   return (
-    <div className="bg-white w-[350px]  flex flex-col items-center h-full gap-3">
+    <div className=" flex flex-col items-center gap-3 w-1/2">
       <div className="flex gap-3 items-center pb-md">
-        <h1 className={` text-2xl `}>Sign in</h1> {errorMessage && <p className={`text-errorRed  `}>{errorMessage}</p>}
+        <h1 className="text-2xl font-bold">Sign in</h1>
+        {errorMessage && <p className={`text-errorRed  `}>{errorMessage}</p>}
       </div>
-      <form className="flex flex-col gap-3  justify-center " onSubmit={handleSubmit(onSubmit)}>
-        <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
-        <Input register={register('password')} name="password" errorMessage={errors.password?.message}></Input>
-        <div>
-          <button className={` border border-white p-sm px-md w-full hover:bg-white transition duration-200`}>
-            Sign in
-          </button>
+      <form className="flex flex-col gap-4 w-full  justify-center" onSubmit={handleSubmit(onSubmit)}>
+        <div className="w-full flex flex-col gap-3">
+          <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
+          <Input register={register('password')} name="password" errorMessage={errors.password?.message}></Input>
         </div>
+        <Button loading={isLoading}>Sign in</Button>
       </form>
 
-      <p className={` text-center `}>or</p>
-      <button
-        type="button"
-        onClick={handleGoogleSignin}
-        className={` border border-white w-full p-sm px-md hover:bg-white transition duration-200 `}
-      >
-        <p className="flex items-center justify-center gap-3">
-          Sign in with Google
-          <svg xmlns="http://www.w3.org/2000/svg" height="16" width="15.25" viewBox="0 0 488 512">
-            <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
-          </svg>
-        </p>
-      </button>
+      <p className="text-center">or</p>
+      <div className="w-full">
+        <button className="w-full" onClick={handleGoogleSignin}>
+          <p className="flex items-center justify-center gap-3 w-full">
+            <GoogleIcon />
+            Sign in with Google
+          </p>
+        </button>
+      </div>
       <div className="flex justify-end">
         <Link href="/auth/signup" className="underline  hover:text-accentOrange">
           Don&apos;t have an account?
