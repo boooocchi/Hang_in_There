@@ -5,8 +5,7 @@ import { SessionProvider } from 'next-auth/react';
 import React from 'react';
 
 import PortalToasty from '@/components/elements/message/PortalToasty';
-import Header from '@/components/layouts/menu/Header';
-import SideMenu from '@/components/layouts/menu/SideMenu';
+import PageLayout from '@/components/layouts/layout/PageLayout';
 import { mainFont } from '@/constants/FontFamily';
 import { ToastProvider } from '@/contexts/ToastContext';
 import apolloClient from '@/lib/apollo';
@@ -27,15 +26,9 @@ export default function App({ Component, pageProps }: AppProps) {
             {pathname === '/auth/signup' || pathname === '/auth/signin' ? (
               <Component {...pageProps} />
             ) : (
-              <>
-                <SideMenu />
-                <div className="flex flex-col px-4xl py-2xl w-full  bg-gray h-screen gap-[45px] min-h-[750px] max-h-[800px]">
-                  <Header />
-                  <div className="flex-grow overflow-hidden">
-                    <Component {...pageProps} />
-                  </div>
-                </div>
-              </>
+              <PageLayout>
+                <Component {...pageProps} />
+              </PageLayout>
             )}
           </div>
           <PortalToasty></PortalToasty>
