@@ -7,7 +7,7 @@ import { useToast } from '@/contexts/ToastContext';
 import { useModal } from '@/hooks/useModal';
 import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
 
-import { TrashbinIcon } from '../icons/icons';
+import { AlertIcon, TrashbinIcon } from '../icons/icons';
 import Loading from '../message/Loading';
 
 const DELETE_PIECE_MUTATION = gql`
@@ -57,7 +57,10 @@ const DeletePieceButton: React.FC<Props> = ({ pieceId, userId }) => {
         <TrashbinIcon style="w-5 h-5" />
       </button>
       <Modal buttonLabel={loading ? <Loading /> : 'Confirm'} onClick={handleDeletePiece}>
-        Are you sure you want to delete this piece??
+        <div className="flex gap-2 items-center font-normal">
+          <AlertIcon />
+          Are you sure you want to delete this piece??
+        </div>
       </Modal>
     </>
   );

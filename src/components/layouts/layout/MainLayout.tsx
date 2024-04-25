@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PageTitle from '@/components/elements/title/PageTitle';
+import { useAuth } from '@/hooks/useAuth';
 
 type Props = {
   title: string;
@@ -8,6 +9,9 @@ type Props = {
   editButtons?: React.ReactNode;
 };
 const MainLayout: React.FC<Props> = ({ children, title, editButtons }) => {
+  const { status } = useAuth();
+  if (status === 'loading' || status === 'authenticated') return <></>;
+
   return (
     <main className="h-full flex flex-col gap-[5%] ">
       <div className="flex items-center gap-[30px]">

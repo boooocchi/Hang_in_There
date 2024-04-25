@@ -11,7 +11,6 @@ type SearchResultModalProps = {
 const SearchResultModal: React.FC<SearchResultModalProps> = ({ isModalOpen, setIsModalOpen, children }) => {
   const handleKeyDown = React.useCallback(
     (event: React.KeyboardEvent) => {
-      // Example: Close modal when 'Escape' key is pressed
       if (event.key === 'Escape') {
         setIsModalOpen(false);
       }

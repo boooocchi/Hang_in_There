@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 
 import Loading from '@/components/elements/message/Loading';
+import { mainFont } from '@/constants/FontFamily';
 
 type Props = {
   children: ReactNode;
@@ -15,7 +16,7 @@ type colorClassesType = {
 };
 
 const Button: React.FC<Props> = ({ children, colorSchema = 'richGreen', style, onClick, loading }) => {
-  const baseClasses = 'p-sm px-md transition duration-300 text-white rounded-md border-transparent border-1';
+  const baseClasses = `p-sm px-md transition duration-300 text-white rounded-md border-transparent border-1 ${mainFont.className} font-normal`;
 
   const colorClasses: colorClassesType = {
     richGreen: 'bg-richGreen primaryGreenButton',

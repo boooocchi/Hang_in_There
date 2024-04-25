@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { useEffect } from 'react';
 
 import ImageWithLoading from '@/components/elements/ImageWithLoading';
+import { CancelIcon } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import SearchResultModal from '@/components/elements/modal/SearchResultModal';
 import { dendoOutfitType } from '@/features/dendoOutfitGallery/types/types';
@@ -13,25 +14,6 @@ import { DENDOOUTFIT_QUERY } from '@/pages/dendoOutfitGallery/[id]';
 import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]';
 
 import { useAuth } from './useAuth';
-
-// type PiecesSearchResult =
-//   | {
-//       title: string;
-//       category: string;
-//       createdAt: string;
-//       imageUrl: string;
-//       id: string;
-//     }[]
-//   | null;
-
-// type DendoOutfitsSearchResult =
-//   | {
-//       title: string;
-//       imageUrl: string;
-//       createdAt: string;
-//       id: string;
-//     }[]
-//   | null;
 
 type SearchHook = () => {
   Modal: React.ReactNode;
@@ -77,13 +59,13 @@ export const useSearch: SearchHook = () => {
     <SearchResultModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
       <div className="h-[600px] w-[850px] bg-gray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-999">
         <div className="relative flex w-full justify-center items-center">
-          <div className={`relative justify-center items-center ${searchText && 'mb-3'}`}>
+          <div className="relative justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              stroke="#00110F"
+              stroke="#11655b"
               className="w-4 h-4 absolute left-2 top-[7px]"
             >
               <path
@@ -97,25 +79,13 @@ export const useSearch: SearchHook = () => {
                 setSearchText(e.target.value);
                 handleSearchTextChange(e.target.value);
               }}
-              placeholder="search your wardrobe"
+              placeholder="search your wardrobe.."
               type="text"
-              className="w-[250px] h-[30px] mr-sm p-sm pl-xl text-sm rounded-md bg-lightGreen"
+              className="w-[250px] h-[30px] border-1 border-middleGreen px-md py-sm  pl-xl text-sm rounded-md bg-gray"
             />
           </div>
-          <button className="absolute right-0 w-10 top-2" onClick={handleModalClose}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-5 h-5"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-          </button>
         </div>
-        <div className="w-full  overflow-y-scroll flex flex-col gap-4">
+        <div className="w-full overflow-y-scroll flex flex-col gap-3">
           <div>
             <h1 className="font-bold mb-2 text-xl">Your Wardrobe</h1>
             <div className="flex flex-col w-full overflow-hidden">
@@ -124,11 +94,11 @@ export const useSearch: SearchHook = () => {
               {sortedWardrobeData &&
                 categoriesArray.map((category) => {
                   const dataOfTheCategory = sortedWardrobeData[category];
-                  if (dataOfTheCategory && dataOfTheCategory.length === 0) return <></>;
+                  if (dataOfTheCategory && dataOfTheCategory.length === 0) return <div key={category}></div>;
                   return (
-                    <div className="flex flex-col w-full " key={category}>
-                      <div>{upperCamelCase(category)}</div>
-                      <div className="flex gap-3 mb-3 overflow-x-scroll">
+                    <div className="flex flex-col w-full" key={category}>
+                      <h2 className="mb-2">{upperCamelCase(category)}</h2>
+                      <div className="flex gap-4 mb-3 overflow-x-scroll">
                         {dataOfTheCategory?.map((piece) => (
                           <div key={piece.id}>
                             <Link href={`/wardrobe/${userId}/${piece.id}`} onClick={handleModalClose}>
@@ -136,8 +106,7 @@ export const useSearch: SearchHook = () => {
                                 <ImageWithLoading alt="piece image" url={piece.imageUrl} />
                               </div>
                             </Link>
-
-                            <div className="text-sm">{piece.title}</div>
+                            <div className="text-sm text-center mt-1 w-full">{piece.title}</div>
                           </div>
                         ))}
                       </div>
@@ -162,13 +131,19 @@ export const useSearch: SearchHook = () => {
                         />
                       </div>
                     </Link>
-                    <div className="text-sm">{outfit.title}</div>
+                    <div className="text-sm text-center mt-1 w-full">{outfit.title}</div>
                   </div>
                 );
               })}
             </div>
           </div>
         </div>
+        <button
+          className="rounded-full h-5 w-5 flex justify-center items-center bg-accentOrange leading-[10px] text-white absolute -top-2 -right-2 text-sm shadow-sm"
+          onClick={() => handleModalClose()}
+        >
+          <CancelIcon style="w-4 h-4" />
+        </button>
       </div>
     </SearchResultModal>
   );

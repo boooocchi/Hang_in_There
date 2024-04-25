@@ -6,7 +6,7 @@ import SuggestionForm from '@/features/suggestions/components/SuggestionForm';
 
 const Index = () => {
   return (
-    <MainLayout title="Matching Suggestions">
+    <MainLayout title="Suggestions by AI">
       <SuggestionForm />
     </MainLayout>
   );

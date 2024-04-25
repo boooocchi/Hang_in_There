@@ -1,7 +1,7 @@
 import { Categories, Colors } from '@prisma/client';
 import React from 'react';
 
-import Form from '@/features/registerPiece/components/PieceForm';
+import PieceForm from '@/features/registerPiece/components/PieceForm';
 
 export type PieceDetailSectionProps = {
   pieceData?: {
@@ -22,7 +22,7 @@ export type PieceDetailSectionProps = {
 };
 
 const PieceDetailSection: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode, setEditMode }) => {
-  return <Form pieceData={pieceData} editMode={editMode} setEditMode={setEditMode}></Form>;
+  return <PieceForm pieceData={pieceData} editMode={editMode} setEditMode={setEditMode}></PieceForm>;
 };
 
 export default PieceDetailSection;

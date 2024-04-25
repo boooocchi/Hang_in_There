@@ -14,7 +14,7 @@ const config: Config = {
       '3xl': '32px',
       '2xl': '24px',
       xl: '20px',
-      lg: '16',
+      lg: '16px',
       base: '14px',
       sm: '12px',
       xs: '10px',

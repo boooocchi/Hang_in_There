@@ -120,18 +120,21 @@ const DendoOutfitForm = () => {
               <label htmlFor="title">Title</label>
               {errors.title && <p className="ml-5 text-sm text-errorRed">{errors.title.message}</p>}
             </div>
-            <Input name="title" register={register('title')} />
+            <Input name="title" placeholder="ex. Winter go-to basic style" register={register('title')} />
           </div>
           <div className=" flex flex-col gap-1">
-            <label htmlFor="keyword">Keyword</label>
-            <Input name="keyword" register={register('keywords')} />
+            <div className="flex gap-2 items-baseline">
+              <label htmlFor="keyword">Keyword</label> <span className="text-sm">*separate by comma</span>
+            </div>
+            <Input name="keyword" placeholder="ex. winter, casual, chic" register={register('keywords')} />
           </div>
         </div>
         <div className="flex flex-col gap-1 w-[60%]">
           <label htmlFor="description mb-1">Description</label>
           <textarea
             id="description"
-            className="h-full rounded-md w-full bg-lightGreen py-sm px-md"
+            className="border-1 border-middleGreen h-full rounded-md w-full bg-gray py-sm px-md"
+            placeholder="ex. Great for a casual day out with friends or a date night."
             {...register('description')}
           ></textarea>
         </div>
@@ -153,12 +156,12 @@ const DendoOutfitForm = () => {
         <div className="flex gap-5 items-end mt-5">
           <div className="w-full flex-col flex gap-1">
             <p className="text-center text-base">Do you have a picture of the outfit?</p>
-            <Button classname="w-full" onClick={() => setIsDropzone(true)}>
+            <Button style="w-full" onClick={() => setIsDropzone(true)}>
               Upload picture
             </Button>
           </div>
           <div className=" w-full">
-            <Button classname="w-full">{registering ? <Loading size="small" /> : 'Register'}</Button>
+            <Button style="w-full">{registering ? <Loading size="small" /> : 'Register'}</Button>
           </div>
         </div>
       )}
@@ -173,7 +176,7 @@ const DendoOutfitForm = () => {
               setValue('imageUrl', '');
             }}
           ></DropZone>
-          <Button classname="w-full">{registering ? <Loading size="small" /> : 'Register'}</Button>
+          <Button style="w-full">{registering ? <Loading size="small" /> : 'Register'}</Button>
         </div>
       )}
     </form>

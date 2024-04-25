@@ -4,6 +4,7 @@ import React from 'react';
 
 import ImageWithLoading from '@/components/elements/ImageWithLoading';
 import Button from '@/components/elements/button/Button';
+import { CancelIcon } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import SearchResultModal from '@/components/elements/modal/SearchResultModal';
 import { useWardrobe } from '@/features/wardrobe/hooks/useWardrobe';
@@ -57,7 +58,7 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              stroke="#00110F"
+              stroke="#11655b"
               className="w-4 h-4 absolute left-2 top-[7px]"
             >
               <path
@@ -73,36 +74,23 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
               }}
               placeholder="search your wardrobe"
               type="text"
-              className="w-[250px] h-[30px] mr-sm p-sm pl-xl text-sm rounded-md bg-lightGreen"
+              className="w-[250px] h-[30px] border-1 border-middleGreen mr-sm p-sm pl-xl text-sm rounded-md bg-gray"
             />
           </div>
-          <button className="absolute right-0 w-10 top-2" onClick={handleModalClose}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-5 h-5"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-          </button>
         </div>
         {wardrobeDataLoading ? (
           <Loading size="large"></Loading>
         ) : (
-          <div className="w-full  overflow-y-scroll flex flex-col gap-4">
+          <div className="w-full  overflow-y-scroll flex flex-col gap-3">
             {!sortedWardrobeData && <div>No item found</div>}
             {sortedWardrobeData &&
               categoriesArray.map((category) => {
                 const dataByCategory = sortedWardrobeData[category];
-                if (dataByCategory?.length === 0) return <></>;
+                if (dataByCategory?.length === 0) return <div key={category}></div>;
                 return (
                   <div key={category} className="flex flex-col mb-3">
-                    <div>{upperCamelCase(category)}</div>
-
-                    <div className="flex lg:max-w-[1000px] overflow-x-scroll hide-scrollbar gap-5">
+                    <h2 className="mb-3">{upperCamelCase(category)}</h2>
+                    <div className="flex overflow-x-scroll hide-scrollbar gap-4">
                       {dataByCategory?.map((piece) => {
                         return (
                           <div className="flex flex-col gap-1 " key={piece.id}>
@@ -111,16 +99,16 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
                                 type="checkbox"
                                 id={piece.id}
                                 onClick={() => setSelectedPiece(piece)}
-                                className="peer  w-3 h-3 text-accentOrange mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-richGreen"
+                                className="peer  w-3 h-3 text-accentOrange focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-richGreen"
                               />
                             </div>
                             <label
                               htmlFor={piece.id}
-                              className="flex flex-col gap-1 relative h-[200px] w-[130px]   bg-white  rounded-md  border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange"
+                              className="flex flex-col gap-1 relative w-[150px] aspect-[2/3]   bg-white  rounded-md  border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange"
                             >
                               <ImageWithLoading id={piece.id} url={piece.imageUrl} alt={piece.title} />
                             </label>
-                            <p className="text-sm">{piece.title}</p>
+                            <p className="text-sm text-center">{piece.title}</p>
                           </div>
                         );
                       })}
@@ -137,10 +125,16 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
               setIsModalOpen(false);
             }
           }}
-          classname="w-full"
+          style="w-full"
         >
-          Ask about selected piece
+          Select
         </Button>
+        <button
+          className="rounded-full h-5 w-5 flex justify-center items-center bg-accentOrange leading-[10px] text-white absolute -top-2 -right-2 text-sm shadow-sm"
+          onClick={() => handleModalClose()}
+        >
+          <CancelIcon style="w-4 h-4" />
+        </button>
       </div>
     </SearchResultModal>
   );

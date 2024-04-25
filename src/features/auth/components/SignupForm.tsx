@@ -6,11 +6,12 @@ import { signIn } from 'next-auth/react';
 import React from 'react';
 import { useForm, FieldErrors } from 'react-hook-form';
 
+import Button from '@/components/elements/button/Button';
+import Input from '@/components/elements/form/Input';
+import { GoogleIcon } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 
 import { signinValidationSchema } from '../validation/signinValidationSchema';
-
-import Input from './Input';
 
 type SignupFormValues = {
   name: string;
@@ -94,36 +95,30 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3 h-full">
-      <h1 className={` text-2xl pb-5`}>Sign up</h1>
-      <form className="flex flex-col gap-3  justify-center" onSubmit={handleSubmit(onSubmit)}>
-        <Input register={register('name')} name="name" errorMessage={errors.name?.message}></Input>
-        <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
-        <Input register={register('password')} name="password" errorMessage={errors.password?.message}></Input>
-        <Input
-          register={register('passwordConfirmation')}
-          name="passwordConfirmation"
-          errorMessage={errors.samePassword?.message}
-          placeholder="Password Confirmation"
-        ></Input>
-        <button className={` border border-white p-sm px-md hover:bg-white transition duration-200  `}>
-          {loading ? <Loading /> : 'Sign up'}
-        </button>
+    <div className=" flex flex-col items-center gap-3 w-1/2">
+      <h1 className={` text-2xl font-bold mb-md`}>Sign up</h1>
+      <form className="flex flex-col gap-4  justify-center w-full" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-3">
+          <Input register={register('name')} name="name" errorMessage={errors.name?.message}></Input>
+          <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
+          <Input register={register('password')} name="password" errorMessage={errors.password?.message}></Input>
+          <Input
+            register={register('passwordConfirmation')}
+            name="passwordConfirmation"
+            errorMessage={errors.samePassword?.message}
+            placeholder="Password Confirmation"
+          />
+        </div>
+        <Button style="w-full mt-1">{loading ? <Loading /> : 'Sign up'}</Button>
         {error && <p className="text-red-500">{error.message}</p>}
-        <p className={` text-center`}>or</p>
-        <button
-          type="button"
-          onClick={handleGoogleSignup}
-          className={` border border-white w-full p-sm px-md hover:bg-white transition duration-200 `}
-        >
-          <p className="flex items-center justify-center gap-3">
-            Sign up with Google
-            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="15.25" viewBox="0 0 488 512">
-              <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
-            </svg>
-          </p>
-        </button>
       </form>
+      <p className={` text-center`}>or</p>
+      <button type="button" onClick={handleGoogleSignup} className="border-white w-full transition duration-300">
+        <p className="flex items-center justify-center gap-2">
+          <GoogleIcon />
+          Sign up with Google
+        </p>
+      </button>
       <div className="flex justify-end">
         <Link href="/auth/signin" className="underline  hover:text-accentOrange">
           already have an account?

@@ -10,8 +10,8 @@ import { getErrorMessage } from '@/utils/errorHandler';
 
 import { WISH_LIST_DELETE_MUTATION, WISH_LIST_STATUS_UPDATE } from '../graphql/mutation';
 import { WISH_LIST_QUERY } from '../graphql/query';
-import { cacheUpdateFunction } from '../graphql/utils';
 import { CardProps, ListItemType, addItemValues } from '../types/types';
+import { cacheUpdateFunction } from '../utils/utils';
 import { wishListValidationSchema } from '../validation/wishListValidationSchema';
 
 import WishListForm from './WishListForm';
@@ -127,13 +127,13 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
       {!isWishListForm && (
         <div className="flex justify-end w-full">
           <button
-            className="w-10 h-10 bg-accentOrange rounded-full flex justify-center items-center  text-white font-bold text-lg hover:bg-gray group hover:border-accentOrange hover:border-2 "
+            className="w-10 h-10 bg-lightGreen rounded-full flex justify-center items-center  text-accentOrange font-bold text-lg hover:bg-accentOrange border-2  border-accentOrange group hover:border-transparent duration-300"
             onClick={() => {
               setIsWishListForm(true);
               reset();
             }}
           >
-            <PlusIcon style="w-5 h-5 stroke-current group-hover:stroke-accentOrange" />
+            <PlusIcon style="w-5 h-5 stroke-accentOrange group-hover:stroke-gray duration-300" />
           </button>
         </div>
       )}

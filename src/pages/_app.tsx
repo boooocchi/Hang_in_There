@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <SessionProvider session={pageProps.session}>
         <ToastProvider>
           <div
-            className={`flex lg:max-w-[1470px] ${mainFont.className} text-base font-normal tracking-tight text-deepGreen `}
+            className={`flex lg:max-w-[1470px] ${mainFont.className} text-base font-normal tracking-tight text-deepGreen bg-gray `}
           >
             {pathname === '/auth/signup' || pathname === '/auth/signin' ? (
               <Component {...pageProps} />

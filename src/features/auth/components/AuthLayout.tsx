@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
-import LoadingPage from '@/components/layouts/layout/LoadingPage';
+import Loading from '@/components/elements/message/Loading';
 import { titleFont } from '@/constants/FontFamily';
 import { Children } from '@/types/types';
 
@@ -12,10 +12,12 @@ import hangInThereLogo from '../../../../public/image/hangInThereLogo.png';
 const AuthLayout: React.FC<Children> = ({ children }) => {
   const router = useRouter();
   const { status } = useSession();
-  if (status === 'loading') return <LoadingPage />;
+  if (status === 'loading') return;
+  <div className="h-screen w-screen">
+    <Loading size="large" />;
+  </div>;
   if (status === 'authenticated') {
     router.push('/');
-    return;
   }
 
   return (
@@ -29,7 +31,7 @@ const AuthLayout: React.FC<Children> = ({ children }) => {
           enim dolor rerum?
         </p>
       </div>
-      <div className="h-full w-1/2 flex justify-center pt-[250px] bg-gray">{children}</div>
+      <div className="h-full w-1/2 flex justify-center items-center bg-gray">{children}</div>
     </div>
   );
 };

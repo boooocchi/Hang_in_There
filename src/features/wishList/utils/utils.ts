@@ -1,8 +1,7 @@
 import { ApolloCache } from '@apollo/client';
 
+import { WISH_LIST_QUERY } from '../graphql/query';
 import { ListItemType } from '../types/types';
-
-import { WISH_LIST_QUERY } from './query';
 
 export const cacheUpdateFunction = (
   cache: ApolloCache<unknown>,

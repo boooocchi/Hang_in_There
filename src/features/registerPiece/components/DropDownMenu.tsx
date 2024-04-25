@@ -33,7 +33,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ name, options, onChange, er
         </Select.Trigger>
         <Select.Portal>
           <Select.Content
-            className=" rounded-b-md overflow-hidden border-none  outline-none focus:outline-none relative overflow-y-auto max-h-[200px] z-10 w-[--radix-select-trigger-width] select-content bg-[#ffc4aa]"
+            className=" rounded-b-md overflow-hidden border-none  outline-none focus:outline-none relative overflow-y-auto max-h-[200px] z-10 w-[--radix-select-trigger-width] select-content"
             position="popper"
           >
             {options.map((option, index) => {
@@ -41,7 +41,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ name, options, onChange, er
                 <Select.Item
                   key={index}
                   value={option}
-                  className="w-full bg-lightGreen px-md py-sm border-none flex items-center hover:text-deepGreen outline-none justify-between cursor-pointer  hover:bg-lighterOrange font-normal"
+                  className="w-full bg-lightGreen px-md py-sm border-none flex items-center hover:text-deepGreen outline-none justify-between cursor-pointer  hover:bg-lighterOrange font-normal text-base"
                 >
                   <Select.ItemText className="border-none">{option}</Select.ItemText>
                   <Select.ItemIndicator>

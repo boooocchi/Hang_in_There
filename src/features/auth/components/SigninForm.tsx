@@ -72,7 +72,7 @@ const SigninForm = () => {
 
   return (
     <div className=" flex flex-col items-center gap-3 w-1/2">
-      <div className="flex gap-3 items-center pb-md">
+      <div className="flex gap-3 items-center mb-md">
         <h1 className="text-2xl font-bold">Sign in</h1>
         {errorMessage && <p className={`text-errorRed  `}>{errorMessage}</p>}
       </div>
@@ -87,7 +87,7 @@ const SigninForm = () => {
       <p className="text-center">or</p>
       <div className="w-full">
         <button className="w-full" onClick={handleGoogleSignin}>
-          <p className="flex items-center justify-center gap-3 w-full">
+          <p className="flex items-center justify-center gap-2">
             <GoogleIcon />
             Sign in with Google
           </p>

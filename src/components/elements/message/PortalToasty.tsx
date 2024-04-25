@@ -10,7 +10,7 @@ const PortalToasty: React.FC = () => {
   const isMessage = textsState.some((textState) => textState.show);
   return (
     <ClientPortal selector="#myportal">
-      <div className={`top-[50px] right-[50px] fixed flex flex-col gap-3 text z-[100] ${!isMessage && 'z-0'}`}>
+      <div className={`top-[50px] right-[50px] fixed flex flex-col gap-3 text z-[999] ${!isMessage && 'z-0'}`}>
         {textsState.map((textState, index) => (
           <div
             key={index}

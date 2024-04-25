@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from '@/components/elements/button/Button';
+import { CancelIcon } from '@/components/elements/icons/icons';
 
 import ClientPortal from '../components/elements/Portal';
 
@@ -33,7 +34,7 @@ export const useModal: ModalHook = () => {
             {isOpen && (
               <ClientPortal selector="#myportal">
                 <div className="bg-black opacity-50 h-screen w-screen  left-0 top-0 fixed "></div>
-                <div className=" w-[500px] bg-gray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg flex flex-col gap-3  fixed z-999 ">
+                <div className=" w-[500px]  bg-gray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg flex flex-col justify-center gap-3  fixed z-999 ">
                   <div className="flex justify-center mb-3">{children}</div>
                   <div className="flex justify-between gap-3">
                     <Button style="w-full" colorSchema="accentOrange" onClick={closeModal}>
@@ -43,6 +44,12 @@ export const useModal: ModalHook = () => {
                       {buttonLabel}
                     </Button>
                   </div>
+                  <button
+                    className="rounded-full h-5 w-5 flex justify-center items-center bg-accentOrange leading-[10px] text-white absolute -top-2 -right-2 text-sm shadow-sm"
+                    onClick={() => toggleModal()}
+                  >
+                    <CancelIcon style="w-4 h-4" />
+                  </button>
                 </div>
               </ClientPortal>
             )}

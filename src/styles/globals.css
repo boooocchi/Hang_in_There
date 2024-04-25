@@ -22,10 +22,6 @@ select:focus {
   background-color: #11655b !important;
 }
 
-.select-content {
-  box-shadow: 1px 6px 5px 1px rgba(0, 0, 0, 0.1);
-}
-
 .primaryGreenButton:hover {
   border: 1px solid #11655b !important;
   background-color: #f5f5f5 !important;

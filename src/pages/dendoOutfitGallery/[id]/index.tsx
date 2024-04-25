@@ -1,6 +1,7 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import React from 'react';
 
+import { AlertIcon } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import SmtWrongMessage from '@/components/elements/message/SmtWrongMessage';
 import MainLayout from '@/components/layouts/layout/MainLayout';
@@ -10,6 +11,7 @@ import RegisterOutfitBtn from '@/features/dendoOutfitGallery/components/Register
 import { DELETE_DENTO_OUTFIT } from '@/features/dendoOutfitGallery/graphql/mutation';
 import { dendoOutfitType } from '@/features/dendoOutfitGallery/types/types';
 import { useAuth } from '@/hooks/useAuth';
+import { useModal } from '@/hooks/useModal';
 import { getErrorMessage } from '@/utils/errorHandler';
 
 export const DENDOOUTFIT_QUERY = gql`
@@ -31,6 +33,7 @@ const Index = () => {
     variables: { userId },
   });
   const { addToastMessage } = useToast();
+  const [id, setId] = React.useState<string>('');
 
   const [delete_outfit] = useMutation(DELETE_DENTO_OUTFIT);
 
@@ -42,10 +45,13 @@ const Index = () => {
         },
       });
       addToastMessage('Successfully Deleted the outfit!');
+      toggleModal();
     } catch (error) {
       addToastMessage(getErrorMessage(error));
     }
   };
+
+  const { Modal, toggleModal } = useModal();
 
   if (error)
     return (
@@ -60,12 +66,18 @@ const Index = () => {
         {data?.dendoOutfits.map((dendoOutfit: dendoOutfitType) => {
           return (
             <div key={dendoOutfit.id}>
-              <DendoOutfitCard dendoOutfit={dendoOutfit} deleteHandler={deleteHandler} />
+              <DendoOutfitCard dendoOutfit={dendoOutfit} setId={setId} toggleModal={toggleModal} />
             </div>
           );
         })}
         <RegisterOutfitBtn />
       </div>
+      <Modal buttonLabel="Confirm" onClick={() => deleteHandler(id)}>
+        <div className="flex items-center gap-2">
+          <AlertIcon />
+          Are you sure you want to delete this outfit?
+        </div>
+      </Modal>
     </MainLayout>
   );
 };
