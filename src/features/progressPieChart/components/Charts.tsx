@@ -68,16 +68,15 @@ const Charts = () => {
   }, [limitData, piecesData]);
 
   return (
-    <div className="grid grid-cols-3 mt-5 h-full gap-x-7 overflow-hidden content-center text-white p-sm ">
+    <div className="grid grid-cols-3  h-full gap-x-xs overflow-hidden content-center text-white p-md px-lg">
       {Object.keys(percentages).map((key, index) => {
         const categoryKey = key as keyof PercentagesType;
         const percentage = percentages[categoryKey].percentage;
         return (
-          <div key={index} className="h-[95%] flex justify-center  relative overflow-hidden text-deepGreen">
+          <div key={index} className="w-full flex justify-center  relative overflow-hidden text-deepGreen">
             <CircularProgressbar
               value={percentage}
               strokeWidth={15}
-              className="h-full w-full"
               circleRatio={0.5}
               counterClockwise={true}
               styles={buildStyles({
@@ -89,8 +88,8 @@ const Charts = () => {
                 backgroundColor: '#11655b',
               })}
             />
-            <h2 className="text-sm font-bold absolute bottom-[20%]">{key}</h2>
-            <span className=" font-bold absolute text-sm bottom-[50%]">{percentage}%</span>
+            <h2 className="text-xs font-bold absolute bottom-[20%]">{key}</h2>
+            <span className=" font-bold absolute text-sm bottom-[40%]">{percentage}%</span>
           </div>
         );
       })}

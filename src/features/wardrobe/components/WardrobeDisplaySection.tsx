@@ -45,7 +45,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
               <h2 className={`text-xl tracking-tighter font-extraBold  ${mainFont.className}`}>
                 {upperCamelCase(category)}
               </h2>
-              <div className="flex lg:max-w-[1000px] overflow-x-scroll hide-scrollbar gap-5 ">
+              <div className="flex overflow-x-scroll hide-scrollbar gap-5 ">
                 {!registerPage &&
                   categoryData?.map((piece) => {
                     return (

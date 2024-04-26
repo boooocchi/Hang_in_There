@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from '@apollo/client';
-import Link from 'next/link';
 import React from 'react';
 
+import { ListIcon } from '@/components/elements/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 import { WISH_LIST_STATUS_UPDATE } from '@/features/wishList/graphql/mutation';
 import { WISH_LIST_QUERY } from '@/features/wishList/graphql/query';
@@ -38,33 +38,29 @@ const DashboardWIshList = () => {
     }
   };
   return (
-    <div className="w-full h-full rounded-md flex gap-6 border-2 border-lightGreen py-md bg-white">
-      <div className="w-full h-full flex  ">
-        <div className="flex flex-col gap-2 items-center justify-center border-r border-r-lightGreen w-[125px] min-w-[150px]  px-lg">
-          <h2 className=" text-lg leading-[16px] text-center  items-center flex justify-center text-richGreen bg-white  font-extraBold  ">
-            <span className=" whitespace-nowrap">Wish List</span>
-          </h2>
-          <Link
-            href="/wishList"
-            className="text-accentOrange font-boldest rounded-md border-1  border-accentOrange w-[70px] text-center text-sm p-xs inline-block hover:bg-accentOrange hover:text-gray duration-300"
-          >
-            view
-          </Link>
-        </div>
+    <div className="w-full h-full rounded-md flex gap-md py-md bg-darkGray shadow-md p-md">
+      <div className="w-full h-full flex  flex-col gap-sm">
+        <h2 className=" text-base text-center  items-center flex justify-cente gap-sm font-extraBold  ">
+          <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
+            <ListIcon style="fill-none stroke-gray" />
+          </span>
+          <span className="whitespace-nowrap">Wish List</span>
+        </h2>
+
         {wishListData?.wishList.length > 0 && (
-          <div className="h-full  overflow-y-scroll  bg-white w-full px-2xl">
+          <div className="h-full  overflow-y-scroll w-full px-2xl">
             <ul className="h-full w-full  ">
               {wishListData?.wishList.map((item: { itemName: string; id: string; checked: boolean }) => {
                 if (item.checked) return null;
                 return (
                   <li
                     key={item.id}
-                    className="border-b border-lightGreen h-9 w-full flex items-center justify-start gap-3 text-richGreen"
+                    className="border-dotted border-b border-middleGreen h-9 w-full flex items-center justify-start gap-3 text-richGreen"
                   >
                     <input
                       type="checkbox"
                       className="w-4 h-4 text-accentOrange border-accentOrange
-            focus:ring-0 ring-0 rounded-sm form-checkbox"
+            focus:ring-0 ring-0 rounded-sm form-checkbox bg-darkGray"
                       onChange={() => handleItemStatus(item.id, item.checked)}
                     />
 
@@ -81,3 +77,12 @@ const DashboardWIshList = () => {
 };
 
 export default DashboardWIshList;
+
+{
+  /* <Link
+href="/wishList"
+className="text-accentOrange font-boldest rounded-md border-1  border-accentOrange w-[70px] text-center text-sm p-xs inline-block hover:bg-accentOrange hover:text-gray duration-300"
+>
+view
+</Link> */
+}
