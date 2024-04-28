@@ -85,7 +85,7 @@ Color: ${piece.color}`,
               Wanna ask about your piece?
             </button>
           </div>
-          <div className="pt-sm bg-gray w-full">
+          <div className="pt-sm  w-full">
             <div className="w-full relative">
               <div className=" py-sm px-md pr-[70px] overflow-y-hidden whitespace-pre-wrap    break-words max-h-[164px] min-h-[44px] invisible leading-[24px] rounded-md">
                 {message}
@@ -93,7 +93,7 @@ Color: ${piece.color}`,
               </div>
               <textarea
                 placeholder="Ask for an AI suggestion on your outfit"
-                className="absolute border-middleGreen border-1 right-0 top-0 bottom-0 left-0 bg-gray rounded-md py-sm px-md whitespace-pre-wrap break-words resize-none leading-[24px] max-h-[164px] pr-[70px]"
+                className="absolute border-middleGreen border-1 right-0 top-0 bottom-0 left-0 rounded-md py-sm px-md whitespace-pre-wrap break-words resize-none leading-[24px] max-h-[164px] pr-[70px] bg-darkGray"
                 value={message}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
               />

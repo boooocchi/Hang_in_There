@@ -9,7 +9,7 @@ export const dateFormatter = (date: Date) => {
   return formattedDate;
 };
 
-export const getNavItemColor = (pathname: string, url: string) => {
-  if (pathname === '/') return url === pathname ? 'text-lighterOrange' : '';
-  return url.toLowerCase().includes(pathname) ? 'text-lighterOrange' : '';
+export const isItemBgColor = (pathname: string, url: string) => {
+  if (pathname === '/') return url === pathname ? true : false;
+  return url.toLowerCase().includes(pathname) ? true : false;
 };

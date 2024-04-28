@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = ({
         <input
           type="text"
           id={name}
-          className="rounded-md border-1 bg-gray border-middleGreen  py-sm px-md relative "
+          className="rounded-md border-1 bg-darkGray border-middleGreen  py-sm px-md relative "
           placeholder={placeholder ?? name}
           {...register}
           onFocus={() => handleFocus && handleFocus(name)}

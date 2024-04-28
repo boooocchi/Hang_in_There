@@ -19,7 +19,7 @@ const Button: React.FC<Props> = ({ children, colorSchema = 'richGreen', style, o
   const baseClasses = `p-sm px-md transition duration-300 text-white rounded-md border-transparent border-1 ${mainFont.className} font-normal`;
 
   const colorClasses: colorClassesType = {
-    richGreen: 'bg-richGreen primaryGreenButton',
+    richGreen: 'bg-middleGreen primaryGreenButton',
     accentOrange: 'bg-accentOrange  primaryOrangeButton',
   };
 

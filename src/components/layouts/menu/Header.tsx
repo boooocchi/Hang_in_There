@@ -12,10 +12,10 @@ const Header = () => {
   const { setIsModalOpen, Modal } = useSearch();
 
   return (
-    <header className="w-full bg-gray h-[5%]">
+    <header className="w-full h-[5%]">
       <nav className="flex justify-between items-center h-full">
         <button
-          className="flex gap-2 items-center text-sm py-xs px-sm bg-gray rounded-md border-1 border-middleGreen w-[200px]"
+          className="flex gap-2 items-center text-sm py-xs px-sm rounded-md border-1 border-middleGreen w-[200px]"
           onClick={() => setIsModalOpen(true)}
         >
           <svg

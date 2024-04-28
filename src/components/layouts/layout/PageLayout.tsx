@@ -30,9 +30,9 @@ const PageLayout: React.FC<Children> = ({ children }) => {
       {status === 'authenticated' && (
         <div className="w-full flex">
           <SideMenu />
-          <div className="flex flex-col px-4xl py-2xl w-full  bg-gray h-screen gap-[40px] min-h-[750px] max-h-[800px]">
+          <div className="flex flex-col px-4xl py-2xl w-full  bg-darkGray h-screen gap-[40px] min-h-[750px] max-h-[800px] overflow-hidden">
             <Header />
-            <div className={`flex-grow overflow-hidden ${overFlow}`}>{children}</div>
+            <div className={`flex-grow ${overFlow}`}>{children}</div>
           </div>
         </div>
       )}

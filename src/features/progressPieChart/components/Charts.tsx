@@ -5,6 +5,8 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
 import 'react-circular-progressbar/dist/styles.css';
 
+import { ChartIcon, ChartIllustration } from '@/components/elements/icons/icons';
+
 import { limitDataItem } from '../types/pirChartTypes';
 import { percentageCalculator, countByCategory } from '../utils/chartUtils';
 
@@ -68,31 +70,42 @@ const Charts = () => {
   }, [limitData, piecesData]);
 
   return (
-    <div className="grid grid-cols-3  h-full gap-x-xs overflow-hidden content-center text-white p-md px-lg">
-      {Object.keys(percentages).map((key, index) => {
-        const categoryKey = key as keyof PercentagesType;
-        const percentage = percentages[categoryKey].percentage;
-        return (
-          <div key={index} className="w-full flex justify-center  relative overflow-hidden text-deepGreen">
-            <CircularProgressbar
-              value={percentage}
-              strokeWidth={15}
-              circleRatio={0.5}
-              counterClockwise={true}
-              styles={buildStyles({
-                rotation: 0.25,
-                strokeLinecap: 'round',
-                pathTransitionDuration: 0.5,
-                pathColor: `#11655b`,
-                trailColor: '#ddd',
-                backgroundColor: '#11655b',
-              })}
-            />
-            <h2 className="text-xs font-bold absolute bottom-[20%]">{key}</h2>
-            <span className=" font-bold absolute text-sm bottom-[40%]">{percentage}%</span>
-          </div>
-        );
-      })}
+    <div className="h-full w-1/2 bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-md rounded-lg flex flex-col gap-sm relative">
+      <h2 className="text-base flex items-center gap-sm font-extraBold">
+        <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
+          <ChartIcon />
+        </span>
+        Your Wardrobe Capacity
+      </h2>
+      <div className="h-[90%] flex items-center justify-center ">
+        <div className="grid grid-cols-3  h-full gap-x-xs overflow-hidden content-center text-white p-md px-lg ml-8">
+          {Object.keys(percentages).map((key, index) => {
+            const categoryKey = key as keyof PercentagesType;
+            const percentage = percentages[categoryKey].percentage;
+            return (
+              <div key={index} className="w-full flex justify-center  relative overflow-hidden text-deepGreen">
+                <CircularProgressbar
+                  value={percentage}
+                  strokeWidth={15}
+                  circleRatio={0.5}
+                  counterClockwise={true}
+                  styles={buildStyles({
+                    rotation: 0.25,
+                    strokeLinecap: 'round',
+                    pathTransitionDuration: 0.5,
+                    pathColor: `#11655b`,
+                    trailColor: '#ddd',
+                    backgroundColor: '#11655b',
+                  })}
+                />
+                <h2 className="text-xs font-bold absolute bottom-[20%]">{key}</h2>
+                <span className=" font-bold absolute text-sm bottom-[40%]">{percentage}%</span>
+              </div>
+            );
+          })}
+        </div>
+        <ChartIllustration style="absolute -bottom-[23px] -left-0 h-[160px] w-[160px]" />
+      </div>
     </div>
   );
 };

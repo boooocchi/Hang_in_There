@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from '@apollo/client';
 import React from 'react';
 
-import { ListIcon } from '@/components/elements/icons/icons';
+import { ListIcon, WishListIllustration } from '@/components/elements/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 import { WISH_LIST_STATUS_UPDATE } from '@/features/wishList/graphql/mutation';
 import { WISH_LIST_QUERY } from '@/features/wishList/graphql/query';
@@ -38,7 +38,7 @@ const DashboardWIshList = () => {
     }
   };
   return (
-    <div className="w-full h-full rounded-md flex gap-md py-md bg-darkGray shadow-md p-md">
+    <div className="w-full h-full rounded-lg flex gap-md py-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-md relative">
       <div className="w-full h-full flex  flex-col gap-sm">
         <h2 className=" text-base text-center  items-center flex justify-cente gap-sm font-extraBold  ">
           <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
@@ -60,7 +60,7 @@ const DashboardWIshList = () => {
                     <input
                       type="checkbox"
                       className="w-4 h-4 text-accentOrange border-accentOrange
-            focus:ring-0 ring-0 rounded-sm form-checkbox bg-darkGray"
+            focus:ring-0 ring-0 rounded-sm form-checkbox bg-gray"
                       onChange={() => handleItemStatus(item.id, item.checked)}
                     />
 
@@ -72,6 +72,7 @@ const DashboardWIshList = () => {
           </div>
         )}
       </div>
+      <WishListIllustration style="absolute -bottom-[25px] -right-5 h-[150px] w-[150px]" />
     </div>
   );
 };

@@ -79,64 +79,66 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
   };
 
   return (
-    <div className=" w-full h-[400px] rounded-md bg-lightGreen pt-lg pb-md px-lg flex flex-col gap-3 relative">
-      {isWishListForm && <div className="absolute bg-black top-0 left-0 rounded-md opacity-30 w-full h-full"></div>}
-      <h2 className="text-lg font-boldest text-center mb-3">{categoryName}</h2>
-      <ul className="flex flex-col gap-2  h-2/3  overflow-y-scroll hide-scrollbar">
-        {listItemsData?.wishList.map((item: ListItemType) => {
-          if (item.category === categoryName && !item.checked) {
-            return (
-              <li key={item.id} className="flex gap-2 justify-between">
-                <div className="flex gap-3 items-center overflow-hidden">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4 text-accentOrange border-none
+    <div className="flex h-[400px] w-full  bg-transparent ">
+      <div className=" w-[98%] h-[98%] rounded-lg bg-gray flex flex-col pt-lg pb-md px-lg gap-3 relative shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
+        {isWishListForm && <div className="absolute bg-black top-0 left-0 rounded-md opacity-30 w-full h-full"></div>}
+        <h2 className="text-lg font-boldest text-center mb-3">{categoryName}</h2>
+        <ul className="flex flex-col gap-2  h-2/3  overflow-y-scroll hide-scrollbar">
+          {listItemsData?.wishList.map((item: ListItemType) => {
+            if (item.category === categoryName && !item.checked) {
+              return (
+                <li key={item.id} className="flex gap-2 justify-between border-dotted border-b border-middleGreen">
+                  <div className="flex gap-3 items-center overflow-hidden h-7">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 text-accentOrange border-accentOrange
                     focus:ring-0 outline-none rounded-sm form-checkbox"
-                    onChange={() => handleItemStatus(item.id, item.checked)}
-                  />
-                  <p className="truncate">{item.itemName}</p>
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => {
-                      handleEdit(item.itemName, item.id);
-                    }}
-                  >
-                    <EditIcon style="w-4 h-4"></EditIcon>
-                  </button>
-                  <button onClick={() => handleDelete(item.id)}>
-                    <TrashbinIcon style="w-4 h-4"></TrashbinIcon>
-                  </button>
-                </div>
-              </li>
-            );
-          }
-        })}
-        {isWishListForm && (
-          <WishListForm
-            categoryName={categoryName}
-            editItemId={editItemId}
-            setEditItemId={setEditItemId}
-            setIsWishListForm={setIsWishListForm}
-            register={register}
-            handleSubmit={handleSubmit}
-            errors={errors}
-          ></WishListForm>
+                      onChange={() => handleItemStatus(item.id, item.checked)}
+                    />
+                    <p className="truncate">{item.itemName}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => {
+                        handleEdit(item.itemName, item.id);
+                      }}
+                    >
+                      <EditIcon style="w-4 h-4"></EditIcon>
+                    </button>
+                    <button onClick={() => handleDelete(item.id)}>
+                      <TrashbinIcon style="w-4 h-4"></TrashbinIcon>
+                    </button>
+                  </div>
+                </li>
+              );
+            }
+          })}
+          {isWishListForm && (
+            <WishListForm
+              categoryName={categoryName}
+              editItemId={editItemId}
+              setEditItemId={setEditItemId}
+              setIsWishListForm={setIsWishListForm}
+              register={register}
+              handleSubmit={handleSubmit}
+              errors={errors}
+            ></WishListForm>
+          )}
+        </ul>
+        {!isWishListForm && (
+          <div className="flex justify-end w-full">
+            <button
+              className="w-10 h-10 rounded-full flex justify-center items-center  text-accentOrange font-bold text-lg hover:bg-accentOrange border-2  border-accentOrange group hover:border-transparent duration-300"
+              onClick={() => {
+                setIsWishListForm(true);
+                reset();
+              }}
+            >
+              <PlusIcon style="w-5 h-5 stroke-accentOrange group-hover:stroke-gray duration-300" />
+            </button>
+          </div>
         )}
-      </ul>
-      {!isWishListForm && (
-        <div className="flex justify-end w-full">
-          <button
-            className="w-10 h-10 bg-lightGreen rounded-full flex justify-center items-center  text-accentOrange font-bold text-lg hover:bg-accentOrange border-2  border-accentOrange group hover:border-transparent duration-300"
-            onClick={() => {
-              setIsWishListForm(true);
-              reset();
-            }}
-          >
-            <PlusIcon style="w-5 h-5 stroke-accentOrange group-hover:stroke-gray duration-300" />
-          </button>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

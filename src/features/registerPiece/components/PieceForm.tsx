@@ -249,7 +249,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
               {...register('description')}
               name="description"
               id="description"
-              className="bg-gray rounded-md h-[230px] py-md px-md textarea resize-none border-1 border-middleGreen"
+              className="bg-darkGray rounded-md h-[230px] py-md px-md textarea resize-none border-1 border-middleGreen"
               placeholder="ex. Warm winter down jacket"
               disabled={!editMode}
             />

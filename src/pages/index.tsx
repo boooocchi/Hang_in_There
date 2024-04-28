@@ -7,7 +7,6 @@ import {
   DendoOutfitIcon,
   SuggestionIcon,
   DashboardHeroIcon,
-  ChartIcon,
 } from '@/components/elements/icons/icons';
 import MainLayout from '@/components/layouts/layout/MainLayout';
 import { titleFont } from '@/constants/FontFamily';
@@ -18,30 +17,34 @@ import DashboardWIshList from '@/features/wishList/components/DashboardWIshList'
 import { useAuth } from '@/hooks/useAuth';
 
 import '@radix-ui/themes/styles.css';
+// eslint-disable-next-line import/order
+import { useSession } from 'next-auth/react';
 
 export default function Home({ weatherData }: WeatherData) {
+  const { data } = useSession();
+  const userName = data?.user?.userName;
   const { userId } = useAuth();
 
   const cards = [
     {
       title: 'Your Wardrobe',
       icon: <WardrobeIcon style=" fill-gray  " />,
-      link: '/wardrobe',
+      link: `/wardrobe/${userId}`,
     },
     {
-      title: 'Register Peace',
+      title: 'Register Piece',
       icon: <RegisterIcon style="fill-gray" />,
       link: '/registerPiece',
     },
     {
       title: 'Dendo Outfit',
       icon: <DendoOutfitIcon style="fill-gray " />,
-      link: `/dendoOutfit/${userId}`,
+      link: `/dendoOutfitGallery/${userId}`,
     },
     {
       title: 'Suggestion',
       icon: <SuggestionIcon style="stroke-gray stroke-[1px]" />,
-      link: '/wishList',
+      link: '/suggestion',
     },
   ];
 
@@ -49,16 +52,14 @@ export default function Home({ weatherData }: WeatherData) {
     <MainLayout title="DashBoard">
       <section className="flex flex-col h-full w-full gap-md">
         <div className="h-[30%] flex gap-md  font-bold">
-          <div className="p-md w-[70%] relative  bg-lightGreen rounded-md shadow-md">
+          <div className="p-md w-[70%] relative  bg-gray rounded-lg shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
             <div className="text-2xl font-extraBold">
-              <span className={`${titleFont.className} tracking-normal`}>Hello,</span> UserName
+              <span className={`${titleFont.className} tracking-normal`}>Hello,</span> {userName}!!
             </div>
-            <DashboardHeroIcon style="z-100 absolute right-5 bottom-0" />
+            <DashboardHeroIcon style="z-10 absolute right-5 bottom-0" />
           </div>
-          <div className="h-full w-[30%] bg-darkGray">
-            <div className="w-full h-full shadow-md rounded-md flex items-center justify-center">
-              <WeatherBox weatherData={weatherData} />
-            </div>
+          <div className="h-full w-[30%]">
+            <WeatherBox weatherData={weatherData} />
           </div>
         </div>
         <div className="h-[15%] flex gap-sm">
@@ -69,17 +70,7 @@ export default function Home({ weatherData }: WeatherData) {
           ))}
         </div>
         <div className="h-[55%] w-full flex gap-md">
-          <div className="h-full w-1/2 bg-darkGray shadow-md p-md rounded-md flex flex-col gap-sm">
-            <h2 className="text-base flex items-center gap-sm font-extraBold">
-              <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
-                <ChartIcon />
-              </span>
-              Your Wardrobe Capacity
-            </h2>
-            <div className="h-[90%] flex items-center justify-center ">
-              <Charts />
-            </div>
-          </div>
+          <Charts />
           <div className="h-full w-1/2">
             <DashboardWIshList />
           </div>
@@ -120,12 +111,3 @@ export async function getServerSideProps() {
 
   return { props: { weatherData: null } };
 }
-
-// ページカード;
-// {
-//   cards.map((card) => (
-//     <DashboardCard key={card.title} title={card.title} link={card.link}>
-//       {card.icon}
-//     </DashboardCard>
-//   ));
-// }

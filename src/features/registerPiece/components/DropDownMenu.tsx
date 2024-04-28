@@ -22,7 +22,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ name, options, onChange, er
     <div className="relative w-1/2  text-base unstyled ">
       <h2 className="mb-2">{name}</h2>
       <Select.Root onValueChange={handleValueChange} disabled={disabled ? disabled : false}>
-        <Select.Trigger className="border-1 border-middleGreen w-full flex py-sm px-md justify-between relative outline-none items-center select-trigger font-normal bg-gray">
+        <Select.Trigger className="border-1 border-middleGreen w-full flex py-sm px-md justify-between relative outline-none items-center select-trigger font-normal ">
           <Select.Value
             placeholder={defaultValue ? defaultValue : 'Select...'}
             defaultValue={defaultValue ?? defaultValue}

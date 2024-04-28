@@ -32,8 +32,8 @@ const config: Config = {
       },
       colors: {
         deepGreen: '#00423A',
-        richGreen: '#11655b',
-        middleGreen: '#178275',
+        middleGreen: '#10645B',
+        lighterGreen: '#13756B',
         lightGreen: '#E7F3F3',
         accentOrange: '#E96C49',
         lighterOrange: '#FC8463',

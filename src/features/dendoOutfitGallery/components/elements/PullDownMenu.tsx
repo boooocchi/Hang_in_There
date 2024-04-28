@@ -26,12 +26,12 @@ const PullDownMenu: React.FC<PullDownProps> = ({ deleteHandler }) => {
           className="text-base overflow-hidden rounded-md  bg-gray mr-1 flex flex-col items-center"
         >
           <button onClick={handleSignout} className="w-full">
-            <DropdownMenu.Item className="bg-lightGreen w-full hover:outline-none outline-none px-md hover:duration-300 py-sm text-sm hover:bg-lighterOrange border-r-1 border-richGreen font-normal text-center">
+            <DropdownMenu.Item className="bg-gray w-full hover:outline-none outline-none px-md hover:duration-300 py-sm text-sm hover:bg-lighterOrange border-r-1 border-richGreen font-normal text-center hover:text-white">
               Edit
             </DropdownMenu.Item>
           </button>
           <button onClick={deleteHandler}>
-            <DropdownMenu.Item className="bg-lightGreen outline-none px-md hover:duration-300  hover:outline-none  text-sm  py-sm  hover:bg-lighterOrange font-normal text-center">
+            <DropdownMenu.Item className="bg-gray outline-none px-md hover:duration-300  hover:outline-none  text-sm  py-sm  hover:bg-lighterOrange font-normal text-center hover:text-white">
               Delete
             </DropdownMenu.Item>
           </button>

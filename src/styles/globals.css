@@ -86,3 +86,16 @@ select:focus {
   border-style: solid;
   border-color: transparent #ffc4aa transparent transparent;
 }
+
+.wishListCard::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0px; /* Adjust values according to your shadow size */
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  box-shadow: 100px 10px 10px -5px rgba(0, 0, 0, 0.3);
+  border-radius: inherit; /* To match the card container's border-radius */
+}

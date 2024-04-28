@@ -133,7 +133,7 @@ const DendoOutfitForm = () => {
           <label htmlFor="description mb-1">Description</label>
           <textarea
             id="description"
-            className="border-1 border-middleGreen h-full rounded-md w-full bg-gray py-sm px-md"
+            className="border-1 border-middleGreen h-full rounded-md w-full bg-darkGray py-sm px-md"
             placeholder="ex. Great for a casual day out with friends or a date night."
             {...register('description')}
           ></textarea>

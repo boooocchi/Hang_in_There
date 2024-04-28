@@ -21,7 +21,7 @@ const AuthLayout: React.FC<Children> = ({ children }) => {
   }
 
   return (
-    <div className="w-full bg-richGreen bg-cover h-screen  flex ">
+    <div className="w-full bg-middleGreen bg-cover h-screen  flex ">
       <div className="w-1/2 flex flex-col items-center text-white pt-[250px]">
         <Image alt="logo" src={hangInThereLogo} width={80} height={80} />
         <h1 className={`text-[60px] drop-shadow-2xl mb-3 mt-3 ${titleFont.className}`}>Hang in There</h1>

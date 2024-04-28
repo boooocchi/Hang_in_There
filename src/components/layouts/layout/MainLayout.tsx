@@ -11,13 +11,13 @@ type Props = {
 const MainLayout: React.FC<Props> = ({ children, title, editButtons }) => {
   const router = useRouter();
   const pathname = router.pathname;
-  const marginBottom = pathname === '/' ? 'mb-3' : 'mb-3';
+  const dashboardStyle = pathname === '/' ? 'overflow-visible' : 'overflow-y-scroll';
   return (
     <div className="h-full flex flex-col">
-      <div className={`flex items-center gap-[30px] ${marginBottom}`}>
+      <div className="flex items-center gap-[30px] mb-3">
         <PageTitle>{title}</PageTitle> {editButtons && editButtons}
       </div>
-      <div className="flex justify-center flex-col flex-1 overflow-visible w-full">{children}</div>
+      <div className={`flex justify-center h-full flex-1 flex-col w-full ${dashboardStyle}`}>{children}</div>
     </div>
   );
 };

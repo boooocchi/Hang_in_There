@@ -23,14 +23,16 @@ const HeaderDropdownMenu = () => {
         <DropdownMenu.Content
           sideOffset={12}
           align="end"
-          className="text-base overflow-hidden rounded-md  bg-lightGreen "
+          className="text-base overflow-hidden rounded-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]"
         >
-          <DropdownMenu.Item className="hover:outline-none outline-none px-md hover:duration-300 py-sm  hover:bg-lighterOrange font-normal text-center">
+          <DropdownMenu.Item className="hover:outline-none outline-none px-md hover:duration-300 py-sm  hover:bg-lighterOrange font-normal text-center hover:text-white ">
             Account
           </DropdownMenu.Item>
-          <DropdownMenu.Item className="outline-none px-md hover:duration-300  hover:outline-none  py-sm  hover:bg-lighterOrange font-normal text-center">
-            <button onClick={handleSignout}>Logout</button>
-          </DropdownMenu.Item>
+          <button onClick={handleSignout} className="w-full h-full">
+            <DropdownMenu.Item className="w-full h-full outline-none px-md hover:duration-300  hover:outline-none  py-sm  hover:bg-lighterOrange font-normal text-center hover:text-white">
+              Logout
+            </DropdownMenu.Item>
+          </button>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
