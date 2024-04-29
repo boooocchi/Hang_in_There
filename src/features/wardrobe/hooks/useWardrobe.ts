@@ -38,7 +38,7 @@ export const useWardrobe = ({
 
   useEffect(() => {
     setData(wardrobeData);
-    setDendoOutfitData(outfitData ?? null);
+    setDendoOutfitData(outfitData && outfitData.length > 0 ? outfitData : null);
   }, [wardrobeData, outfitData]);
 
   React.useEffect(() => {

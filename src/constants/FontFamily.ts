@@ -1,4 +1,4 @@
-import { Mr_Dafoe, Lobster, Mulish } from 'next/font/google';
+import { Mr_Dafoe, Staatliches, Mulish } from 'next/font/google';
 
 export const mainFont = Mulish({
   weight: ['700', '600', '500', '300'],
@@ -12,7 +12,7 @@ export const logoFont = Mr_Dafoe({
   display: 'swap',
 });
 
-export const titleFont = Lobster({
+export const titleFont = Staatliches({
   weight: ['400'],
   subsets: ['latin'],
 });

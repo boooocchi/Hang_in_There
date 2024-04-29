@@ -9,6 +9,8 @@ import { cacheUpdateFunction } from '@/features/wishList/utils/utils';
 import { useAuth } from '@/hooks/useAuth';
 import { getErrorMessage } from '@/utils/errorHandler';
 
+import { ListItemType } from '../types/types';
+
 const DashboardWIshList = () => {
   const { userId } = useAuth();
   const { data: wishListData } = useQuery(WISH_LIST_QUERY, {
@@ -32,11 +34,15 @@ const DashboardWIshList = () => {
             checked: true,
           },
         });
+        addToastMessage('item checked!');
       } catch (error) {
         addToastMessage(getErrorMessage(error), true);
       }
     }
   };
+
+  const isAnyUncheckedItems = wishListData?.wishList.some((item: ListItemType) => !item.checked);
+
   return (
     <div className="w-full h-full rounded-lg flex gap-md py-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-md relative">
       <div className="w-full h-full flex  flex-col gap-sm">
@@ -46,8 +52,12 @@ const DashboardWIshList = () => {
           </span>
           <span className="whitespace-nowrap">Wish List</span>
         </h2>
-
-        {wishListData?.wishList.length > 0 && (
+        {!isAnyUncheckedItems && (
+          <div className="flex w-full h-full justify-center items-center">
+            <span className="mb-5">You have no item on your wish list</span>
+          </div>
+        )}
+        {wishListData?.wishList.length > 0 && isAnyUncheckedItems && (
           <div className="h-full  overflow-y-scroll w-full px-2xl">
             <ul className="h-full w-full  ">
               {wishListData?.wishList.map((item: { itemName: string; id: string; checked: boolean }) => {

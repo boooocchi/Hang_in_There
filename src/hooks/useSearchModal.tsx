@@ -57,7 +57,7 @@ export const useSearch: SearchHook = () => {
 
   const Modal = (
     <SearchResultModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-      <div className="h-[600px] w-[850px] bg-gray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-999">
+      <div className="h-[600px] w-[850px] bg-gray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-[999]">
         <div className="relative flex w-full justify-center items-center">
           <div className="relative justify-center items-center">
             <svg
@@ -85,7 +85,7 @@ export const useSearch: SearchHook = () => {
             />
           </div>
         </div>
-        <div className="w-full overflow-y-scroll flex flex-col gap-3">
+        <div className="w-full overflow-y-scroll hide-scrollbar flex flex-col gap-3">
           <div>
             <h1 className="font-bold mb-2 text-xl">Your Wardrobe</h1>
             <div className="flex flex-col w-full overflow-hidden">
@@ -139,10 +139,10 @@ export const useSearch: SearchHook = () => {
           </div>
         </div>
         <button
-          className="rounded-full h-5 w-5 flex justify-center items-center bg-accentOrange leading-[10px] text-white absolute -top-2 -right-2 text-sm shadow-sm"
+          className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-white absolute -top-5 -right-8 text-sm shadow-sm"
           onClick={() => handleModalClose()}
         >
-          <CancelIcon style="w-4 h-4" />
+          <CancelIcon style="w-5 h-5" />
         </button>
       </div>
     </SearchResultModal>

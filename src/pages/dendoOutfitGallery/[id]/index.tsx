@@ -1,7 +1,7 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import React from 'react';
 
-import { AlertIcon } from '@/components/elements/icons/icons';
+import { AlertIcon, EmptyIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import SmtWrongMessage from '@/components/elements/message/SmtWrongMessage';
 import MainLayout from '@/components/layouts/layout/MainLayout';
@@ -62,22 +62,31 @@ const Index = () => {
   if (loading) return <Loading size="large"></Loading>;
   return (
     <MainLayout title="Dendo Outfit">
-      <div className="grid grid-cols-4 gap-5 rounded-md overflow-y-scroll h-full">
-        {data?.dendoOutfits.map((dendoOutfit: dendoOutfitType) => {
-          return (
-            <div key={dendoOutfit.id}>
-              <DendoOutfitCard dendoOutfit={dendoOutfit} setId={setId} toggleModal={toggleModal} />
-            </div>
-          );
-        })}
-        <RegisterOutfitBtn />
-      </div>
-      <Modal buttonLabel="Confirm" onClick={() => deleteHandler(id)}>
-        <div className="flex items-center gap-2">
-          <AlertIcon />
-          Are you sure you want to delete this outfit?
+      {data.dendoOutfits.length === 0 ? (
+        <div className="w-full h-full flex flex-col justify-center items-center">
+          You have not registered any outfit yet!
+          <EmptyIllustration />
         </div>
-      </Modal>
+      ) : (
+        <>
+          <div className="grid grid-cols-4 gap-5 rounded-md overflow-y-scroll h-full">
+            {data?.dendoOutfits.map((dendoOutfit: dendoOutfitType) => {
+              return (
+                <div key={dendoOutfit.id}>
+                  <DendoOutfitCard dendoOutfit={dendoOutfit} setId={setId} toggleModal={toggleModal} />
+                </div>
+              );
+            })}
+          </div>
+          <Modal buttonLabel="Confirm" onClick={() => deleteHandler(id)}>
+            <div className="flex items-center gap-2">
+              <AlertIcon />
+              Are you sure you want to delete this outfit?
+            </div>
+          </Modal>
+        </>
+      )}
+      <RegisterOutfitBtn />
     </MainLayout>
   );
 };

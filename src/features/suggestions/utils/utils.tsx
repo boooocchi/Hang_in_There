@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { mainFont } from '@/pages/_app';
-
 export const convertAiMessage = (message: string) => {
   const options = message.trim().split('\n\n');
   const formattedOptions = options.map((option) => {
@@ -19,7 +17,7 @@ export const convertAiMessage = (message: string) => {
       <ul className="flex flex-col gap-3">
         {formattedOptions.map((option, index) => (
           <li key={index}>
-            <p className={`font-extraBold ${mainFont.className}`}>
+            <p className="font-extraBold">
               Option{index + 1}: {option.title}
             </p>
             <p className="">Reason: {option.reason}</p>

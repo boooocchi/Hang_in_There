@@ -53,22 +53,22 @@ Color: ${piece.color}`,
 
   return (
     <form onSubmit={(e) => onSubmit(e)} className="h-full max-h-full relative">
-      <div className="flex flex-col h-full w-full overflow-y-scroll">
-        <div className="h-[85%] overflow-y-scroll flex flex-col gap-3">
+      <div className="flex flex-col h-full w-full ">
+        <div className="h-[85%] w-full  flex flex-col gap-3">
           {sentMessage && (
             <div className="w-full flex justify-end">
-              <div className="relative bg-lightGreen w-[70%] whitespace-pre-wrap p-md rounded-md mr-[30px] userSpeechBubble">
+              <div className="mr-[40px]  bg-gray w-[60%] relative userSpeechBubble whitespace-pre-wrap p-md px-lg rounded-md shadow-md">
                 {sentMessage}
               </div>
             </div>
           )}
           {isResponseLoading && (
-            <div className="relative ml-[30px] bg-lightOrange whitespace-pre-wrap p-md rounded-md aiSpeechBubble w-[50%]">
+            <div className="relative bg-gray whitespace-pre-wrap p-md px-lg rounded-md aiSpeechBubble ">
               waiting for AI response...
             </div>
           )}
           {aiResponse && (
-            <div className="relative ml-[30px] bg-lightOrange w-[70%] whitespace-pre-wrap p-md rounded-md aiSpeechBubble">
+            <div className="relative w-[70%] bg-gray shadow-md  whitespace-pre-wrap p-md px-lg rounded-md aiSpeechBubble  ml-[30px]">
               {aiResponse}
             </div>
           )}
@@ -93,7 +93,7 @@ Color: ${piece.color}`,
               </div>
               <textarea
                 placeholder="Ask for an AI suggestion on your outfit"
-                className="absolute border-middleGreen border-1 right-0 top-0 bottom-0 left-0 rounded-md py-sm px-md whitespace-pre-wrap break-words resize-none leading-[24px] max-h-[164px] pr-[70px] bg-darkGray"
+                className="absolute border-middleGreen border-1 right-0 top-0 bottom-0 left-0 rounded-md py-sm px-md whitespace-pre-wrap break-words resize-none leading-[24px] max-h-[164px] min-h-[44px] pr-[70px] bg-darkGray hide-scrollbar"
                 value={message}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
               />

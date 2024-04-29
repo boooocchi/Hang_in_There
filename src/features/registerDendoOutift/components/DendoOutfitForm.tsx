@@ -105,7 +105,11 @@ const DendoOutfitForm = () => {
     }
   };
 
-  const { imageFile, setImageFile, isDropzone, setIsDropzone, handleFileSelect } = useUploadImage({ setValue });
+  const setImageUrl = (imageUrl: string) => {
+    setValue('imageUrl', imageUrl);
+  };
+
+  const { imageFile, setImageFile, isDropzone, setIsDropzone, handleFileSelect } = useUploadImage({ setImageUrl });
 
   if (loading) {
     return <Loading size="large"></Loading>;

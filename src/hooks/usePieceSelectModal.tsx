@@ -81,7 +81,7 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
         {wardrobeDataLoading ? (
           <Loading size="large"></Loading>
         ) : (
-          <div className="w-full  overflow-y-scroll flex flex-col gap-3">
+          <div className="w-full hide-scrollbar  overflow-y-scroll flex flex-col gap-3">
             {!sortedWardrobeData && <div>No item found</div>}
             {sortedWardrobeData &&
               categoriesArray.map((category) => {
@@ -130,10 +130,10 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
           Select
         </Button>
         <button
-          className="rounded-full h-5 w-5 flex justify-center items-center bg-accentOrange leading-[10px] text-white absolute -top-2 -right-2 text-sm shadow-sm"
+          className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-white absolute -top-5 -right-8 text-sm shadow-sm"
           onClick={() => handleModalClose()}
         >
-          <CancelIcon style="w-4 h-4" />
+          <CancelIcon style="w-5 h-5" />
         </button>
       </div>
     </SearchResultModal>

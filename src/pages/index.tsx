@@ -52,9 +52,9 @@ export default function Home({ weatherData }: WeatherData) {
     <MainLayout title="DashBoard">
       <section className="flex flex-col h-full w-full gap-md">
         <div className="h-[30%] flex gap-md  font-bold">
-          <div className="p-md w-[70%] relative  bg-gray rounded-lg shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
+          <div className="p-md px-lg w-[70%] relative  bg-gray rounded-lg shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
             <div className="text-2xl font-extraBold">
-              <span className={`${titleFont.className} tracking-normal`}>Hello,</span> {userName}!!
+              <span className={`${titleFont.className}`}>Hello,</span> {userName}!!
             </div>
             <DashboardHeroIcon style="z-10 absolute right-5 bottom-0" />
           </div>

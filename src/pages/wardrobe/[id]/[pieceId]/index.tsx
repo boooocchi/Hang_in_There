@@ -7,7 +7,7 @@ import DeletePieceButton from '@/components/elements/button/DeletePieceButton';
 import EditPieceButton from '@/components/elements/button/EditPieceButton';
 import Loading from '@/components/elements/message/Loading';
 import MainLayout from '@/components/layouts/layout/MainLayout';
-import PieceDetailSection from '@/features/piece/components/PieceDetailSection';
+import PieceForm from '@/features/registerPiece/components/PieceForm';
 import { useAuth } from '@/hooks/useAuth';
 
 export const GET_PIECE_QUERY = gql`
@@ -57,7 +57,7 @@ const Piece = () => {
       ) : (
         <div className="flex gap-[10px] items-center h-full mt-1">
           <EditPieceButton onClick={handleEdit} />
-          <DeletePieceButton userId={userId} pieceId={data?.piece.id} />
+          <DeletePieceButton userId={userId} pieceId={data?.piece.id} fileKey={data?.piece.imageUrl} />
         </div>
       )}
     </>
@@ -69,7 +69,7 @@ const Piece = () => {
         <Loading size="large" />
       ) : (
         <MainLayout title={data.piece.title} editButtons={editButtons}>
-          <PieceDetailSection pieceData={data} editMode={editMode} setEditMode={setEditMode}></PieceDetailSection>
+          <PieceForm pieceData={data} editMode={editMode} setEditMode={setEditMode}></PieceForm>;
         </MainLayout>
       )}
     </>

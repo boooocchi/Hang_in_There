@@ -97,6 +97,10 @@ export const typeDefs = gql`
     wishList(userId: String!): [WishList]
   }
 
+  type S3Response {
+    success: Boolean!
+  }
+
   type Mutation {
     signup(email: String!, password: String!, userName: String!): AuthPayload
     register_piece(
@@ -133,6 +137,7 @@ export const typeDefs = gql`
     delete_wish_list(id: String!): WishList
     update_wish_list_name(id: String!, itemName: String!): WishList
     update_wish_list_status(id: String!, checked: Boolean!): WishList
+    delete_s3_image(fileKey: String!): S3Response!
   }
 
   type AuthPayload {

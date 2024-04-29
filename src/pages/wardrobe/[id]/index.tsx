@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 
+import { EmptyIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import SmtWrongMessage from '@/components/elements/message/SmtWrongMessage';
 import MainLayout from '@/components/layouts/layout/MainLayout';
@@ -8,15 +9,19 @@ import WardrobeDisplaySection from '@/features/wardrobe/components/WardrobeDispl
 import { useAuth } from '@/hooks/useAuth';
 
 export const GET_All_PIECES_QUERY = gql`
-  query AllPieces($userId: String!) {
+  query ($userId: String!) {
     all_pieces(userId: $userId) {
       id
-      category
       createdAt
-      imageUrl
+      updatedAt
       title
-      color
       description
+      color
+      category
+      location
+      price
+      imageUrl
+      userId
     }
   }
 `;
@@ -46,6 +51,12 @@ const Page = () => {
         <Loading size="large"></Loading>
       ) : (
         <MainLayout title="Wardrobe">
+          {wardrobeData.all_pieces.length === 0 && (
+            <div className="w-full h-full flex flex-col justify-center items-center">
+              You have not registered any clothes yet!
+              <EmptyIllustration />
+            </div>
+          )}
           <WardrobeDisplaySection allPieces={wardrobeData?.all_pieces}></WardrobeDisplaySection>
         </MainLayout>
       )}

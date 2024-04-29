@@ -35,16 +35,14 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
   }
 
   return (
-    <div className="flex flex-col gap-5 overflow-y-scroll  overflow-x-hidden">
+    <div className="flex flex-col gap-5 overflow-x-hidden">
       {sortedWardrobeData &&
         categoriesArray.map((category) => {
           const categoryData = sortedWardrobeData[category];
           if (categoryData?.length === 0) return null;
           return (
             <div key={category} className="flex flex-col gap-1">
-              <h2 className={`text-xl tracking-tighter font-extraBold  ${mainFont.className}`}>
-                {upperCamelCase(category)}
-              </h2>
+              <h2 className={`text-xl font-extraBold  ${mainFont.className}`}>{upperCamelCase(category)}</h2>
               <div className="flex overflow-x-scroll hide-scrollbar gap-5 ">
                 {!registerPage &&
                   categoryData?.map((piece) => {

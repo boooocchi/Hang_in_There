@@ -53,10 +53,10 @@ const DendoOutfitDetailSection: React.FC<DendoOutfitDetailSectionProps> = ({ den
       <div>
         <div className="flex flex-col gap-3">
           <div className="flex flex-col mb-2">
-            <h2 className={`text-lg tracking-tighter font-extraBold mb-1  ${mainFont.className}`}>Description</h2>
+            <h2 className={`text-lg font-extraBold mb-1  ${mainFont.className}`}>Description</h2>
             <p>{dendoOutfitDetailsData?.description}</p>
           </div>
-          <h2 className={`text-lg tracking-tighter font-extraBold mb-1  ${mainFont.className}`}>Keywords</h2>
+          <h2 className={`text-lg font-extraBold mb-1  ${mainFont.className}`}>Keywords</h2>
           <div className="flex gap-2">
             {dendoOutfitDetailsData.keywords.map((keyword) => (
               <span key="keyword" className="bg-lightGreen rounded-md px-sm py-xs">

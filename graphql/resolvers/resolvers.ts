@@ -1,3 +1,4 @@
+import { DeleteObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { Categories, Colors } from '@prisma/client';
 import { hash } from 'bcrypt';
 
@@ -282,6 +283,36 @@ export const resolvers = {
         return updatedItem;
       } catch (error) {
         throw new Error(`Failed to update wishlist item...`);
+      }
+    },
+    delete_s3_image: async (_parent: unknown, args: { fileKey: string }, _context: Context) => {
+      if (!process.env.S3_ACCESS_KEY || !process.env.S3_SECRET_KEY || !process.env.S3_REGION) {
+        throw new Error('S3 credentials or region are not defined');
+      }
+
+      const s3 = new S3Client({
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY,
+          secretAccessKey: process.env.S3_SECRET_KEY,
+        },
+        region: process.env.S3_REGION,
+      });
+
+      if (!process.env.S3_BUCKET_NAME) {
+        throw new Error('S3 bucket name is not defined');
+      }
+
+      const params = new DeleteObjectCommand({
+        Bucket: process.env.S3_BUCKET_NAME,
+        Key: args.fileKey,
+      });
+
+      try {
+        await s3.send(params);
+        return { success: true };
+      } catch (error) {
+        console.error('Error deleting image from S3:', error);
+        throw new Error('Failed to delete the image');
       }
     },
   },

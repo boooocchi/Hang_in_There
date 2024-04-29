@@ -35,7 +35,8 @@ select:focus {
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none;
+  display: none important!;
+  scrollbar-color: red;
 }
 
 .form-checkbox:focus {
@@ -74,7 +75,7 @@ select:focus {
   right: -40px;
   border-width: 10px 20px 10px 20px;
   border-style: solid;
-  border-color: transparent transparent transparent #dff6f3;
+  border-color: transparent transparent transparent #fdfdfd;
 }
 
 .aiSpeechBubble:after {
@@ -84,7 +85,7 @@ select:focus {
   left: -40px;
   border-width: 10px 20px 10px 20px;
   border-style: solid;
-  border-color: transparent #ffc4aa transparent transparent;
+  border-color: transparent #fdfdfd transparent transparent;
 }
 
 .wishListCard::after {

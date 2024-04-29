@@ -61,11 +61,13 @@ const SideMenu = () => {
   ];
 
   return (
-    <nav className="flex flex-col flex-shrink-0 bg-middleGreen w-[280px]  relative py-2xl px-xl shadow-[10px_15px_10px_-5px_rgba(0,0,0,0.3)] min-h-[0px] tracking-tight h-screen overflow-hidden rounded-r-[30px]">
+    <nav className="flex flex-col flex-shrink-0 bg-middleGreen w-[280px]  relative py-2xl px-xl shadow-[10px_15px_10px_-5px_rgba(0,0,0,0.3)] tracking-tight h-screen min-h-[750px] max-h-[800px] overflow-hidden rounded-r-[30px] 2xl:rounded-[30px]">
       <h1
-        className={`flex items-baseline gap-2 text-white font-mainTitle text-[35px] leading-[32px] whitespace-nowrap -ml-1 ${titleFont.className}`}
+        className={`flex items-baseline gap-2 text-white font-mainTitle text-[35px] leading-[32px] whitespace-nowrap w-full justify-center ${titleFont.className}`}
       >
-        Hang <span className="text-xl">in</span> There
+        <span>
+          Hang <span className="text-xl">in</span> There
+        </span>
       </h1>
       <div className="flex flex-col h-full justify-between">
         <ul className="h-full  pt-[40px] flex flex-col gap-md">

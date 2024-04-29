@@ -14,10 +14,10 @@ const MainLayout: React.FC<Props> = ({ children, title, editButtons }) => {
   const dashboardStyle = pathname === '/' ? 'overflow-visible' : 'overflow-y-scroll';
   return (
     <div className="h-full flex flex-col">
-      <div className="flex items-center gap-[30px] mb-3">
+      <div className="flex items-center gap-[30px] mb-3 tracking-wide">
         <PageTitle>{title}</PageTitle> {editButtons && editButtons}
       </div>
-      <div className={`flex justify-center h-full flex-1 flex-col w-full ${dashboardStyle}`}>{children}</div>
+      <div className={`flex h-full flex-1 flex-col w-full ${dashboardStyle}`}>{children}</div>
     </div>
   );
 };

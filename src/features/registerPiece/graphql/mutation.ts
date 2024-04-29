@@ -35,3 +35,29 @@ export const REGISTER_PIECE_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATE_PIECE_MUTATION = gql`
+  mutation Update_piece(
+    $id: String!
+    $title: String!
+    $color: Colors!
+    $category: Categories!
+    $imageUrl: String!
+    $description: String
+    $location: String
+    $price: Float
+  ) {
+    update_piece(
+      id: $id
+      title: $title
+      color: $color
+      category: $category
+      imageUrl: $imageUrl
+      description: $description
+      location: $location
+      price: $price
+    ) {
+      title
+    }
+  }
+`;

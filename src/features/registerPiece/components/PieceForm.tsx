@@ -1,11 +1,11 @@
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Colors, Categories } from '@prisma/client';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
+import ImageWithLoading from '@/components/elements/ImageWithLoading';
 import Button from '@/components/elements/button/Button';
 import Input from '@/components/elements/form/Input';
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
@@ -19,39 +19,13 @@ import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
 import { getErrorMessage } from '@/utils/errorHandler';
 import { dateFormatter } from '@/utils/utils';
 
-import { REGISTER_PIECE_MUTATION } from '../graphql/mutation';
+import { REGISTER_PIECE_MUTATION, UPDATE_PIECE_MUTATION } from '../graphql/mutation';
 import { RegisterPieceValues, WardrobeQueryData, RegisterPieceMutationData } from '../types/types';
 import { uploadPhoto } from '../utils/uploadImage';
 import { registerPieceValidationSchema } from '../validation/registerPieceValidationSchema';
 
 import DropDownMenu from './DropDownMenu';
 import DropZone from './DropZone';
-
-const UPDATE_PIECE_MUTATION = gql`
-  mutation Update_piece(
-    $id: String!
-    $title: String!
-    $color: Colors!
-    $category: Categories!
-    $imageUrl: String!
-    $description: String
-    $location: String
-    $price: Float
-  ) {
-    update_piece(
-      id: $id
-      title: $title
-      color: $color
-      category: $category
-      imageUrl: $imageUrl
-      description: $description
-      location: $location
-      price: $price
-    ) {
-      title
-    }
-  }
-`;
 
 const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = true, setEditMode }) => {
   const { userId } = useAuth();
@@ -77,7 +51,11 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
   const { register, handleSubmit, formState, control, trigger, setValue } = form;
   const errors = formState.errors;
 
-  const { handleFileSelect, imageFile, setImageFile } = useUploadImage({ setValue });
+  const setImageUrl = (imageUrl: string) => {
+    setValue('imageUrl', imageUrl);
+  };
+
+  const { handleFileSelect, imageFile, setImageFile } = useUploadImage({ setImageUrl });
 
   const [registerPiece] = useMutation<RegisterPieceMutationData>(REGISTER_PIECE_MUTATION, {
     update: (cache, { data }) => {
@@ -176,7 +154,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
   return (
     <div className="w-full h-full">
       <form className="flex gap-3xl w-full h-full" onSubmit={handleSubmit(onSubmit)}>
-        <div className={`flex flex-col  justify-between  ${pieceData ? 'w-[55%]' : 'w-[45%]'}  h-full`}>
+        <div className={`flex flex-col  justify-between  ${pieceData ? 'flex-grow' : 'w-[45%]'}  h-full`}>
           <Input
             register={register('title')}
             label="Title *"
@@ -256,14 +234,14 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
             <ErrorMessage>{errors.description?.message}</ErrorMessage>
           </div>
         </div>
-        <div className={`flex flex-col  ${pieceData ? 'w-[45%]' : 'w-1/2'} h-full pr-[1px]`}>
+        <div className={`flex flex-col  ${pieceData ? 'w-[35%]' : 'w-1/2'} h-full pr-[1px]`}>
           {pieceData && !editMode ? (
             <div className="flex flex-col h-full">
               <div className="h-[5%] mr-1 flex items-end justify-end text-sm">
                 created at: {dateFormatter(new Date(pieceData.piece.createdAt))}
               </div>
-              <div className="h-[95%] w-full relative">
-                <Image alt="outfit" src={pieceData.piece.imageUrl} fill objectFit="cover" className="rounded-md" />
+              <div className="h-full aspect-[3/4] relative">
+                <ImageWithLoading alt="outfit" url={pieceData.piece.imageUrl} />
               </div>
             </div>
           ) : (

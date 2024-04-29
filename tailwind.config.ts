@@ -27,6 +27,9 @@ const config: Config = {
     },
 
     extend: {
+      screens: {
+        xs: '431px',
+      },
       backgroundImage: {
         signinPage: 'url("/image/signinPage.jpg")',
       },
@@ -50,10 +53,6 @@ const config: Config = {
         md: '20px',
         sm: '10px',
         xs: '5px',
-      },
-      borderColor: {
-        deepGreen: '#11221F',
-        richGreen: '#00483F',
       },
       padding: {
         '4xl': '80px',

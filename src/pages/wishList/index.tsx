@@ -9,7 +9,7 @@ const Index = () => {
 
   return (
     <MainLayout title="Wish List">
-      <section className="grid grid-cols-3 gap-lg h-full">
+      <section className="grid grid-cols-3 gap-lg h-full w-full">
         {categories.map((category, item) => (
           <WishListCard categoryName={category} key={item} />
         ))}

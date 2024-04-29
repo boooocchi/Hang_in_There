@@ -1,19 +1,27 @@
 import { gql, useMutation } from '@apollo/client';
-import { Categories } from '@prisma/client';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import { useToast } from '@/contexts/ToastContext';
 import { useModal } from '@/hooks/useModal';
 import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
+import { getErrorMessage } from '@/utils/errorHandler';
 
 import { AlertIcon, TrashbinIcon } from '../icons/icons';
 import Loading from '../message/Loading';
 
 const DELETE_PIECE_MUTATION = gql`
-  mutation Delete_piece($deletePieceId: String!) {
+  mutation ($deletePieceId: String!) {
     delete_piece(id: $deletePieceId) {
       id
+    }
+  }
+`;
+
+const DELETE_S3IMAGE_MUTATION = gql`
+  mutation delete_s3_image($fileKey: String!) {
+    delete_s3_image(fileKey: $fileKey) {
+      success
     }
   }
 `;
@@ -21,13 +29,15 @@ const DELETE_PIECE_MUTATION = gql`
 type Props = {
   pieceId?: string;
   userId?: string;
-  category?: Categories;
+  fileKey: string;
 };
 
-const DeletePieceButton: React.FC<Props> = ({ pieceId, userId }) => {
+const DeletePieceButton: React.FC<Props> = ({ pieceId, userId, fileKey }) => {
   const [deletePiece, { loading }] = useMutation(DELETE_PIECE_MUTATION);
+  const [deleteS3Image] = useMutation(DELETE_S3IMAGE_MUTATION);
   const router = useRouter();
   const { addToastMessage } = useToast();
+  const fileName = fileKey.split('https://do-i-have-it-storage.s3.amazonaws.com/')[1];
 
   const { Modal, openModal } = useModal();
 
@@ -35,7 +45,7 @@ const DeletePieceButton: React.FC<Props> = ({ pieceId, userId }) => {
     if (!pieceId) return;
 
     try {
-      await deletePiece({
+      const result = await deletePiece({
         variables: { deletePieceId: pieceId },
         refetchQueries: [
           {
@@ -44,10 +54,15 @@ const DeletePieceButton: React.FC<Props> = ({ pieceId, userId }) => {
           },
         ],
       });
+      if (result)
+        await deleteS3Image({
+          variables: { fileKey: fileName },
+        });
+
       router.push(`/wardrobe/${userId}`);
       addToastMessage('Piece deleted successfully');
     } catch (e) {
-      addToastMessage(`Failed to delete the piece`, true);
+      addToastMessage(getErrorMessage(e), true);
     }
   };
 
