@@ -6,7 +6,7 @@ type ErrorMessageProps = {
   style?: string;
 };
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ children, style }) => {
-  return <p className={`text-errorRed  text-sm absolute ${style ?? style}`}>{children}</p>;
+  return <p className={`text-errorRed  text-sm absolute ml-1 ${style ?? style}`}>{children}</p>;
 };
 
 export default ErrorMessage;

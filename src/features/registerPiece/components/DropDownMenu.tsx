@@ -41,7 +41,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ name, options, onChange, er
                 <Select.Item
                   key={index}
                   value={option}
-                  className="w-ful px-md py-sm border-none flex items-center hover:text-deepGreen outline-none justify-between cursor-pointer  hover:bg-lighterOrange font-normal text-base"
+                  className="w-ful px-md py-sm border-none flex items-center outline-none justify-between cursor-pointer hover:text-gray  hover:bg-lighterOrange font-normal text-base"
                 >
                   <Select.ItemText className="border-none">{option}</Select.ItemText>
                   <Select.ItemIndicator>

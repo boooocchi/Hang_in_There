@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { useEffect } from 'react';
 
 import ImageWithLoading from '@/components/elements/ImageWithLoading';
-import { CancelIcon } from '@/components/elements/icons/icons';
+import { CancelIcon, DendoOutfitIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import SearchResultModal from '@/components/elements/modal/SearchResultModal';
 import { dendoOutfitType } from '@/features/dendoOutfitGallery/types/types';
@@ -57,7 +57,7 @@ export const useSearch: SearchHook = () => {
 
   const Modal = (
     <SearchResultModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-      <div className="h-[600px] w-[850px] bg-gray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-[999]">
+      <div className="h-[600px] w-[850px] bg-darkGray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-[999]">
         <div className="relative flex w-full justify-center items-center">
           <div className="relative justify-center items-center">
             <svg
@@ -81,13 +81,13 @@ export const useSearch: SearchHook = () => {
               }}
               placeholder="search your wardrobe.."
               type="text"
-              className="w-[250px] h-[30px] border-1 border-middleGreen px-md py-sm  pl-xl text-sm rounded-md bg-gray"
+              className="w-[250px] h-[30px] border-1 border-middleGreen px-md py-sm  pl-xl text-sm rounded-md bg-darkGray"
             />
           </div>
         </div>
         <div className="w-full overflow-y-scroll hide-scrollbar flex flex-col gap-3">
           <div>
-            <h1 className="font-bold mb-2 text-xl">Your Wardrobe</h1>
+            <h1 className="font-bold mb-3 text-xl">Your Wardrobe</h1>
             <div className="flex flex-col w-full overflow-hidden">
               {wardrobeDataLoading && <Loading size="small"></Loading>}
               {!wardrobeDataLoading && !sortedWardrobeData && <div className="text-sm h-10">No search result</div>}
@@ -96,17 +96,17 @@ export const useSearch: SearchHook = () => {
                   const dataOfTheCategory = sortedWardrobeData[category];
                   if (dataOfTheCategory && dataOfTheCategory.length === 0) return <div key={category}></div>;
                   return (
-                    <div className="flex flex-col w-full" key={category}>
+                    <div className="flex flex-col" key={category}>
                       <h2 className="mb-2">{upperCamelCase(category)}</h2>
                       <div className="flex gap-4 mb-3 overflow-x-scroll">
                         {dataOfTheCategory?.map((piece) => (
-                          <div key={piece.id}>
+                          <div key={piece.id} className="overflow-hidden w-[150px]">
                             <Link href={`/wardrobe/${userId}/${piece.id}`} onClick={handleModalClose}>
-                              <div className="relative w-[150px] aspect-[2/3] rounded-md overflow-hidden">
+                              <div className="relative w-[150px] aspect-[3/4] rounded-md overflow-hidden">
                                 <ImageWithLoading alt="piece image" url={piece.imageUrl} />
                               </div>
                             </Link>
-                            <div className="text-sm text-center mt-1 w-full">{piece.title}</div>
+                            <div className="text-sm mt-1 w-[150px] truncate">{piece.title}</div>
                           </div>
                         ))}
                       </div>
@@ -122,16 +122,19 @@ export const useSearch: SearchHook = () => {
               {!all_dendoOutfit_loading && !dendoOutfitData && <div className="text-sm h-10">No search result</div>}
               {dendoOutfitData?.map((outfit: dendoOutfitType) => {
                 return (
-                  <div key={outfit.id}>
+                  <div key={outfit.id} className="w-[150px]">
                     <Link href={`/dendoOutfit/${outfit.id}`} onClick={handleModalClose}>
-                      <div className="relative w-[150px] aspect-[2/3] rounded-md overflow-hidden mb-1">
-                        <ImageWithLoading
-                          alt="outfit image"
-                          url={outfit.imageUrl ? outfit.imageUrl : '/image/home/dendo_outfit.jpg'}
-                        />
+                      <div className="relative w-[150px] aspect-[3/4] rounded-md overflow-hidden mb-1">
+                        {outfit.imageUrl ? (
+                          <ImageWithLoading alt="outfit image" url={outfit.imageUrl} />
+                        ) : (
+                          <div className="w-full h-full flex bg-gray justify-center items-center rounded-md">
+                            <DendoOutfitIllustration />
+                          </div>
+                        )}
                       </div>
                     </Link>
-                    <div className="text-sm text-center mt-1 w-full">{outfit.title}</div>
+                    <div className="text-sm truncate w-full">{outfit.title}</div>
                   </div>
                 );
               })}
@@ -139,7 +142,7 @@ export const useSearch: SearchHook = () => {
           </div>
         </div>
         <button
-          className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-white absolute -top-5 -right-8 text-sm shadow-sm"
+          className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-gray absolute -top-5 -right-8 text-sm shadow-sm"
           onClick={() => handleModalClose()}
         >
           <CancelIcon style="w-5 h-5" />

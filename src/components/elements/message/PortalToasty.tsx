@@ -17,7 +17,7 @@ const PortalToasty: React.FC = () => {
         {textsState.map((textState, index) => (
           <div
             key={index}
-            className={`rounded-md max-w-[400px]  ease-in transition-all duration-[300] ${textState.type !== 'error' ? 'bg-lightGreen' : 'bg-lightOrange'} flex items-center shadow-md    ${
+            className={`rounded-md max-w-[400px]  ease-in transition-all duration-[300] ${!textState.show && 'z-[0] pointer-events-none'} ${textState.type !== 'error' ? 'bg-lightGreen' : 'bg-lightOrange'} flex items-center shadow-md    ${
               textState.show ? 'translate-x-[0]' : 'translate-x-[100%] opacity-0'
             }`}
           >

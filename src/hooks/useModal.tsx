@@ -34,13 +34,13 @@ export const useModal: ModalHook = () => {
             {isOpen && (
               <ClientPortal selector="#myportal">
                 <div className="bg-black opacity-50 h-screen w-screen  left-0 top-0 fixed "></div>
-                <div className=" w-[500px]  bg-gray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg flex flex-col justify-center gap-3  fixed z-999 ">
+                <div className=" xs:w-[500px] w-[90%] bg-gray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg flex flex-col justify-center gap-3  fixed z-999 ">
                   <div className="flex justify-center mb-3">{children}</div>
                   <div className="flex justify-center">
-                    <AlertIllusration></AlertIllusration>
+                    <AlertIllusration />
                   </div>
 
-                  <div className="flex justify-between gap-3">
+                  <div className="flex justify-between gap-sm">
                     <Button style="w-full" colorSchema="accentOrange" onClick={closeModal}>
                       Cancel
                     </Button>

@@ -1,4 +1,5 @@
 import { DeleteObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { createPresignedPost } from '@aws-sdk/s3-presigned-post';
 import { Categories, Colors } from '@prisma/client';
 import { hash } from 'bcrypt';
 
@@ -38,6 +39,13 @@ type registerOutfitArgs = {
   userId: string;
   description?: string;
   pieces: string[];
+};
+
+export type UploadS3ImageResult = {
+  url: string;
+  fields: Record<string, string>;
+  key: string;
+  success: boolean;
 };
 
 export const resolvers = {
@@ -313,6 +321,52 @@ export const resolvers = {
       } catch (error) {
         console.error('Error deleting image from S3:', error);
         throw new Error('Failed to delete the image');
+      }
+    },
+    upload_s3_image: async (
+      _parent: unknown,
+      args: { fileName: string },
+      _context: Context,
+    ): Promise<UploadS3ImageResult> => {
+      if (
+        !process.env.S3_ACCESS_KEY ||
+        !process.env.S3_SECRET_KEY ||
+        !process.env.S3_REGION ||
+        !process.env.S3_BUCKET_NAME
+      ) {
+        throw new Error('S3 credentials, region, or bucket name are not defined');
+      }
+
+      const s3 = new S3Client({
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY,
+          secretAccessKey: process.env.S3_SECRET_KEY,
+        },
+        region: process.env.S3_REGION,
+      });
+
+      const bucketName = process.env.S3_BUCKET_NAME;
+      const filename = encodeURIComponent(args.fileName);
+      const key = `${Date.now()}-${filename}`; // Ensure the file key is unique
+
+      try {
+        const { url, fields } = await createPresignedPost(s3, {
+          Bucket: bucketName,
+          Key: key,
+          Fields: { 'Content-Type': 'image/png' },
+          Conditions: [['content-length-range', 0, 10485760]],
+          Expires: 60,
+        });
+
+        return {
+          url,
+          fields,
+          key,
+          success: true,
+        };
+      } catch (error) {
+        console.error('Error creating presigned URL:', error);
+        throw new Error();
       }
     },
   },

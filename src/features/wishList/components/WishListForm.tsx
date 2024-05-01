@@ -73,7 +73,7 @@ const WishListForm: React.FC<FormProps> = ({
       className="bg-gray  flex flex-col items-center justify-center  p-md rounded-lg absolute top-1/2 translate-y-[-50%] gap-4   w-4/5 left-1/2 translate-x-[-50%]"
     >
       <button
-        className="rounded-full h-5 w-5 flex justify-center items-center bg-accentOrange leading-[10px] text-white absolute -top-2 -right-2 text-sm shadow-sm"
+        className="rounded-full h-5 w-5 flex justify-center items-center bg-accentOrange leading-[10px] text-gray absolute -top-2 -right-2 text-sm shadow-sm"
         onClick={() => {
           setIsWishListForm(false);
           setEditItemId('');

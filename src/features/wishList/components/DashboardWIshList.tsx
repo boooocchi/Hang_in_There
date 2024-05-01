@@ -44,7 +44,7 @@ const DashboardWIshList = () => {
   const isAnyUncheckedItems = wishListData?.wishList.some((item: ListItemType) => !item.checked);
 
   return (
-    <div className="w-full h-full rounded-lg flex gap-md py-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-md relative">
+    <div className="xs:w-1/2 w-full xs:h-full max-xs:h-[300px] rounded-lg flex gap-md py-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-md relative">
       <div className="w-full h-full flex  flex-col gap-sm">
         <h2 className=" text-base text-center  items-center flex justify-cente gap-sm font-extraBold  ">
           <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
@@ -58,8 +58,8 @@ const DashboardWIshList = () => {
           </div>
         )}
         {wishListData?.wishList.length > 0 && isAnyUncheckedItems && (
-          <div className="h-full  overflow-y-scroll w-full px-2xl">
-            <ul className="h-full w-full  ">
+          <div className="overflow-y-scroll w-full xs:px-2xl px-sm h-full">
+            <ul className="w-full  h-[90%]">
               {wishListData?.wishList.map((item: { itemName: string; id: string; checked: boolean }) => {
                 if (item.checked) return null;
                 return (
@@ -82,7 +82,7 @@ const DashboardWIshList = () => {
           </div>
         )}
       </div>
-      <WishListIllustration style="absolute -bottom-[25px] -right-5 h-[150px] w-[150px]" />
+      <WishListIllustration style="absolute xs:-bottom-[25px] -bottom-[18px] -right-2 xs:h-[150px] xs:w-[150px] h-[100px] w-[100px]" />
     </div>
   );
 };

@@ -35,21 +35,21 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
   }
 
   return (
-    <div className="flex flex-col gap-5 overflow-x-hidden">
+    <div className="flex flex-col xs:gap-5 gap-4 overflow-x-scroll">
       {sortedWardrobeData &&
         categoriesArray.map((category) => {
           const categoryData = sortedWardrobeData[category];
           if (categoryData?.length === 0) return null;
           return (
-            <div key={category} className="flex flex-col gap-1">
-              <h2 className={`text-xl font-extraBold  ${mainFont.className}`}>{upperCamelCase(category)}</h2>
-              <div className="flex overflow-x-scroll hide-scrollbar gap-5 ">
+            <div key={category} className="flex flex-col gap-2">
+              <h2 className={`text-xl font-extraBold ${mainFont.className}`}>{upperCamelCase(category)}</h2>
+              <div className="flex overflow-x-scroll hide-scrollbar xs:gap-5 gap-3">
                 {!registerPage &&
                   categoryData?.map((piece) => {
                     return (
-                      <div className="flex flex-col gap-2 " key={piece.id}>
+                      <div className="flex flex-col gap-1 overflow-hidden min-w-[200px]" key={piece.id}>
                         <Link href={`/wardrobe/${userId}/${piece.id}`} className="group overflow-hidden rounded-md">
-                          <div className="flex flex-col gap-1 relative h-[300px] w-[225px] ">
+                          <div className="flex flex-col gap-1 relative w-[200px] aspect-[3/4] ">
                             <ImageWithLoading
                               url={piece.imageUrl}
                               alt={piece.title}
@@ -57,7 +57,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                             />
                           </div>
                         </Link>
-                        <p>{piece.title}</p>
+                        <p className="truncate">{piece.title}</p>
                       </div>
                     );
                   })}
@@ -71,23 +71,23 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                       : !!(categoryValue && categoryValue !== piece.id);
 
                     return (
-                      <div className="flex flex-col gap-2  items-center " key={piece.id}>
+                      <div className="flex flex-col w-[150px] items-center shrink-0" key={piece.id}>
                         <input
                           type="checkbox"
                           id={piece.id}
                           value={piece.id}
-                          className="peer  w-4 h-4 text-accentOrange
-                        mt-3 focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-richGreen"
+                          className="peer w-4 h-4 text-accentOrange bg-darkGray
+                       focus:ring-0 ring-0 outline-none rounded-sm form-checkbox border-richGreen my-2"
                           {...register(piece.category)}
                           disabled={isDisabled}
                         />
                         <label
                           htmlFor={piece.id}
-                          className="flex flex-col  relative h-[220px] w-[160px]   bg-white  rounded-md cursor-pointer border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange "
+                          className="flex flex-col  relative  w-full aspect-[3/4] bg-darkGray  rounded-md cursor-pointer border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange mb-1"
                         >
                           <ImageWithLoading url={piece.imageUrl} alt={piece.title} />
                         </label>
-                        <p>{piece.title}</p>
+                        <p className="w-full truncate text-sm">{piece.title}</p>
                       </div>
                     );
                   })}

@@ -61,3 +61,14 @@ export const UPDATE_PIECE_MUTATION = gql`
     }
   }
 `;
+
+export const UPLOAD_S3_IMAGE = gql`
+  mutation ($fileName: String!) {
+    upload_s3_image(fileName: $fileName) {
+      url
+      fields
+      key
+      success
+    }
+  }
+`;

@@ -8,8 +8,6 @@ import Loading from '@/components/elements/message/Loading';
 import { titleFont } from '@/constants/FontFamily';
 import { Children } from '@/types/types';
 
-import logo from '../../../../public/image/logo.png';
-
 const AuthLayout: React.FC<Children> = ({ children }) => {
   const router = useRouter();
   const { status } = useSession();
@@ -24,8 +22,8 @@ const AuthLayout: React.FC<Children> = ({ children }) => {
   return (
     <div className="w-full bg-middleGreen bg-cover h-screen flex items-center justify-center">
       <div className="w-1/2 flex justify-center">
-        <div className="w-2/3 flex flex-col items-center text-white">
-          <Image alt="logo" src={logo} width={80} height={80} />
+        <div className="w-2/3 flex flex-col items-center text-gray">
+          <Image alt="logo" src="/image/logo.png" width={80} height={80} />
           <h1
             className={`text-[60px] drop-shadow-2xl mb-3 mt-3 flex justify-center items-baseline ${titleFont.className}`}
           >

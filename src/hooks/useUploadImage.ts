@@ -11,7 +11,7 @@ export const useUploadImage = ({
   const [isDropzone, setIsDropzone] = React.useState(false);
   const handleFileSelect = (file: File) => {
     setImageFile(file);
-    const imageUrl = `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${file.name}`;
+    const imageUrl = `set`;
     setImageUrl(imageUrl);
   };
 

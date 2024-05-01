@@ -19,7 +19,7 @@ import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
 import { getErrorMessage } from '@/utils/errorHandler';
 import { dateFormatter } from '@/utils/utils';
 
-import { REGISTER_PIECE_MUTATION, UPDATE_PIECE_MUTATION } from '../graphql/mutation';
+import { REGISTER_PIECE_MUTATION, UPDATE_PIECE_MUTATION, UPLOAD_S3_IMAGE } from '../graphql/mutation';
 import { RegisterPieceValues, WardrobeQueryData, RegisterPieceMutationData } from '../types/types';
 import { uploadPhoto } from '../utils/uploadImage';
 import { registerPieceValidationSchema } from '../validation/registerPieceValidationSchema';
@@ -33,6 +33,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
   const [uploadLoading, setUploadLoading] = React.useState(false);
   const { addToastMessage } = useToast();
   const [updatePiece] = useMutation(UPDATE_PIECE_MUTATION);
+  const [uploadS3Image] = useMutation(UPLOAD_S3_IMAGE);
 
   const form = useForm<RegisterPieceValues>({
     defaultValues: {
@@ -48,7 +49,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
     // @ts-expect-error
     resolver: yupResolver(registerPieceValidationSchema),
   });
-  const { register, handleSubmit, formState, control, trigger, setValue } = form;
+  const { register, handleSubmit, formState, control, trigger, setValue, getValues, reset } = form;
   const errors = formState.errors;
 
   const setImageUrl = (imageUrl: string) => {
@@ -75,6 +76,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
   });
 
   React.useEffect(() => {
+    reset();
     if (pieceData?.piece === undefined) return;
     setValue('title', pieceData.piece.title);
     setValue('description', pieceData.piece.description);
@@ -83,7 +85,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
     setValue('color', pieceData.piece.color);
     setValue('category', pieceData.piece.category);
     setValue('imageUrl', pieceData.piece.imageUrl);
-  }, [pieceData, setValue]);
+  }, [pieceData, setValue, editMode, reset]);
 
   useEffect(() => {
     if (pieceData && setEditMode) setEditMode(false);
@@ -98,7 +100,20 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
       if (editMode && pieceData) {
         try {
           if (imageFile && pieceData.piece.imageUrl !== data.imageUrl) {
-            await uploadPhoto(imageFile);
+            const response = await uploadS3Image({
+              variables: {
+                fileName: imageFile.name,
+              },
+            });
+            await uploadPhoto({
+              file: imageFile,
+              url: response.data.upload_s3_image.url,
+              fields: response.data.upload_s3_image.fields,
+            });
+            setValue(
+              'imageUrl',
+              `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${response.data.upload_s3_image.fields.key}`,
+            );
           }
           await updatePiece({
             variables: {
@@ -109,7 +124,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
               price: data.price,
               color: data.color,
               category: data.category,
-              imageUrl: data.imageUrl,
+              imageUrl: getValues('imageUrl'),
             },
             refetchQueries: [
               {
@@ -127,7 +142,17 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
         }
       } else if (imageFile) {
         try {
-          await uploadPhoto(imageFile);
+          const response = await uploadS3Image({
+            variables: {
+              fileName: imageFile.name,
+            },
+          });
+          await uploadPhoto({
+            file: imageFile,
+            url: response.data.upload_s3_image.url,
+            fields: response.data.upload_s3_image.fields,
+          });
+
           await registerPiece({
             variables: {
               title: data.title,
@@ -136,7 +161,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
               price: data.price,
               color: data.color,
               category: data.category,
-              imageUrl: data.imageUrl,
+              imageUrl: `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${response.data.upload_s3_image.fields.key}`,
               userId: userId,
             },
           });
@@ -153,8 +178,11 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
 
   return (
     <div className="w-full h-full">
-      <form className="flex gap-3xl w-full h-full" onSubmit={handleSubmit(onSubmit)}>
-        <div className={`flex flex-col  justify-between  ${pieceData ? 'flex-grow' : 'w-[45%]'}  h-full`}>
+      <form
+        className="flex xs:flex-row flex-col-reverse xs:gap-3xl gap-md w-full xs:h-full"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="flex flex-col xs:justify-between xs:h-full max-xs:w-full gap-md xs:flex-grow">
           <Input
             register={register('title')}
             label="Title *"
@@ -163,8 +191,8 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
             placeholder="ex. Fleece Jacket"
             disabled={!editMode}
           />
-          <div className="w-full flex justify-between gap-7">
-            <div className="w-1/2">
+          <div className="flex justify-between gap-md">
+            <div className="w-1/2 overflow-hidden">
               <Input
                 register={register('location')}
                 name="location"
@@ -174,7 +202,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
                 disabled={!editMode}
               />
             </div>
-            <div className="w-[50%]">
+            <div className="w-1/2 overflow-hidden">
               <Input
                 register={register('price')}
                 name="price"
@@ -185,7 +213,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
               />
             </div>
           </div>
-          <div className="flex justify-between gap-7">
+          <div className="flex justify-between gap-md">
             <Controller
               name="color"
               control={control}
@@ -227,33 +255,36 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
               {...register('description')}
               name="description"
               id="description"
-              className="bg-darkGray rounded-md h-[230px] py-md px-md textarea resize-none border-1 border-middleGreen"
+              className="bg-darkGray rounded-md h-[250px] py-md px-md textarea resize-none border-1 border-middleGreen"
               placeholder="ex. Warm winter down jacket"
               disabled={!editMode}
             />
             <ErrorMessage>{errors.description?.message}</ErrorMessage>
           </div>
+          <div className={`w-full hidden ${pieceData && !editMode ? 'hidden' : 'max-xs:block'}`}>
+            <Button>{uploadLoading ? <Loading /> : pieceData && editMode ? 'Complete edit' : 'Register'}</Button>
+          </div>
         </div>
-        <div className={`flex flex-col  ${pieceData ? 'w-[35%]' : 'w-1/2'} h-full pr-[1px]`}>
+        <div className={`flex flex-col xs:h-full ${editMode && 'xs:w-[40%]'}`}>
           {pieceData && !editMode ? (
-            <div className="flex flex-col h-full">
-              <div className="h-[5%] mr-1 flex items-end justify-end text-sm">
+            <div className="flex flex-col h-full justify-between">
+              <div className=" mr-1 flex items-end justify-end text-sm">
                 created at: {dateFormatter(new Date(pieceData.piece.createdAt))}
               </div>
-              <div className="h-full aspect-[3/4] relative">
-                <ImageWithLoading alt="outfit" url={pieceData.piece.imageUrl} />
+              <div className="xs:h-[95%] aspect-[3/4] relative">
+                <ImageWithLoading alt="piece image" url={pieceData.piece.imageUrl} />
               </div>
             </div>
           ) : (
-            <div className="flex flex-col h-full justify-between relative">
+            <div className="flex flex-col xs:h-full xs:justify-between relative max-xs:w-full gap-lg">
               {!editMode && pieceData && (
-                <div className="h-[4%] mr-1 flex items-end justify-end text-sm">
+                <div className="xs:h-[4%] mr-1 flex items-end justify-end text-sm">
                   created at: {dateFormatter(new Date(pieceData.piece.createdAt))}
                 </div>
               )}
-              <div className="relative h-full">
+              <div className="relative xs:h-full max-xs:w-full">
                 <DropZone
-                  className="border-1  border-dashed border-middleGreen h-[90%]  flex flex-col  justify-center overflow-hidden items-center mr-1 p-lg rounded-md mt-1"
+                  className="border-1  border-dashed border-middleGreen xs:h-[95%] h-[250px]  flex flex-col  justify-center overflow-hidden items-center mr-1 p-lg rounded-md mt-1 max-xs:w-full"
                   handleFileSelect={handleFileSelect}
                   deleteFile={() => {
                     setImageFile(null);
@@ -261,9 +292,11 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
                   }}
                   pieceImageUrl={pieceData?.piece.imageUrl}
                 />
-                <ErrorMessage style="bottom-5">{errors.imageUrl?.message}</ErrorMessage>
+                <ErrorMessage style="xs:bottom-0">{errors.imageUrl?.message}</ErrorMessage>
               </div>
-              <Button>{uploadLoading ? <Loading /> : pieceData && editMode ? 'Complete edit' : 'Register'}</Button>
+              <div className="max-xs:hidden w-full">
+                <Button>{uploadLoading ? <Loading /> : pieceData && editMode ? 'Complete edit' : 'Register'}</Button>
+              </div>
             </div>
           )}
         </div>

@@ -51,29 +51,27 @@ export default function Home({ weatherData }: WeatherData) {
   return (
     <MainLayout title="DashBoard">
       <section className="flex flex-col h-full w-full gap-md">
-        <div className="h-[30%] flex gap-md  font-bold">
-          <div className="p-md px-lg w-[70%] relative  bg-gray rounded-lg shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
-            <div className="text-2xl font-extraBold">
+        <div className="h-[30%] max-xs:h-[150px] flex xs:gap-md gap-sm font-bold">
+          <div className="h-full py-md px-md xs:w-[70%] w-1/2 relative  bg-gray rounded-lg shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
+            <div className="xs:text-2xl text-xl font-boldest leading-[1]">
               <span className={`${titleFont.className}`}>Hello,</span> {userName}!!
             </div>
-            <DashboardHeroIcon style="z-10 absolute right-5 bottom-0" />
+            <DashboardHeroIcon style="absolute xs:right-5 right-1 bottom-0 xs:h-[200px] xs:w-[200px] h-[100px] w-[100px]" />
           </div>
-          <div className="h-full w-[30%]">
+          <div className="xs:h-full xs:w-[30%] w-1/2">
             <WeatherBox weatherData={weatherData} />
           </div>
         </div>
-        <div className="h-[15%] flex gap-sm">
+        <div className="h-[10%] xs:flex xs:gap-md gap-sm grid grid-cols-2">
           {cards.map((card) => (
             <DashboardCard key={card.title} title={card.title} link={card.link}>
               {card.icon}
             </DashboardCard>
           ))}
         </div>
-        <div className="h-[55%] w-full flex gap-md">
+        <div className="h-[60%] shrink-1 w-full flex flex-col xs:flex-row gap-md">
           <Charts />
-          <div className="h-full w-1/2">
-            <DashboardWIshList />
-          </div>
+          <DashboardWIshList />
         </div>
       </section>
     </MainLayout>

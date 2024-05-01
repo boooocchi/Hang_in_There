@@ -18,6 +18,7 @@ import { DENDOOUTFIT_QUERY } from '@/pages/dendoOutfitGallery/[id]/index';
 import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
 import { getErrorMessage } from '@/utils/errorHandler';
 
+import { UPLOAD_S3_IMAGE } from '../../registerPiece/graphql/mutation';
 import { REGISTER_OUTFIT } from '../graphql/mutation';
 import { RegisterOutfitValues } from '../types/types';
 import { registerDendoOutfitValidationSchema } from '../validation/registerDendoOutfitValidationSchema';
@@ -30,6 +31,8 @@ const DendoOutfitForm = () => {
   const router = useRouter();
   const { userId } = useAuth();
   const { addToastMessage } = useToast();
+
+  const [uploadS3Image] = useMutation(UPLOAD_S3_IMAGE);
 
   const form = useForm<RegisterOutfitValues>({
     defaultValues: {
@@ -60,34 +63,39 @@ const DendoOutfitForm = () => {
   const [registerOutfit, { loading: registering }] = useMutation(REGISTER_OUTFIT);
 
   const onSubmit = async (data: RegisterOutfitValues) => {
-    let imageUploadResponse;
     let keywordsArr;
-    if (imageFile) {
-      imageUploadResponse = await uploadPhoto(imageFile);
-    }
-    if (imageFile && !imageUploadResponse?.success) {
-      addToastMessage(`Image upload failed: ${imageUploadResponse?.message}`);
-      return;
-    }
-
-    if (data.keywords) {
-      keywordsArr = data.keywords
-        .split(',')
-        .map((keyword) => keyword.trim())
-        .filter((keyword) => keyword !== '');
-    }
-
-    const excludedKeys = ['title', 'imageUrl', 'keywords', 'description'];
-    const piecesArr = [];
-    for (const [key, value] of Object.entries(data)) {
-      if (value && !excludedKeys.includes(key)) {
-        // when data is an array, push each element to piecesArr
-        if (Array.isArray(value)) {
-          piecesArr.push(...value);
-        } else piecesArr.push(value);
-      }
-    }
+    let response;
     try {
+      if (imageFile) {
+        response = await uploadS3Image({
+          variables: {
+            fileName: imageFile.name,
+          },
+        });
+        await uploadPhoto({
+          file: imageFile,
+          url: response.data.upload_s3_image.url,
+          fields: response.data.upload_s3_image.fields,
+        });
+      }
+
+      if (data.keywords) {
+        keywordsArr = data.keywords
+          .split(',')
+          .map((keyword) => keyword.trim())
+          .filter((keyword) => keyword !== '');
+      }
+
+      const excludedKeys = ['title', 'imageUrl', 'keywords', 'description'];
+      const piecesArr = [];
+      for (const [key, value] of Object.entries(data)) {
+        if (value && !excludedKeys.includes(key)) {
+          // when data is an array, push each element to piecesArr
+          if (Array.isArray(value)) {
+            piecesArr.push(...value);
+          } else piecesArr.push(value);
+        }
+      }
       registerOutfit({
         variables: {
           userId: userId,
@@ -95,13 +103,16 @@ const DendoOutfitForm = () => {
           pieces: piecesArr,
           keywords: keywordsArr ? keywordsArr : [''],
           description: data.description,
-          imageUrl: data.imageUrl ? data.imageUrl : '',
+          imageUrl: response
+            ? `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${response.data.upload_s3_image.fields.key}`
+            : '',
         },
         refetchQueries: [{ query: DENDOOUTFIT_QUERY, variables: { userId } }],
       }); //pieces is the array that contains all the pieces id
       router.push(`/dendoOutfitGallery/${userId}`);
+      addToastMessage('Outfit registered successfully!', false);
     } catch (error) {
-      addToastMessage(getErrorMessage(error));
+      addToastMessage(getErrorMessage(error), true);
     }
   };
 
@@ -117,8 +128,8 @@ const DendoOutfitForm = () => {
 
   return (
     <form className="relative h-full" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex gap-10 h-[175px] mb-5 mt-3">
-        <div className="flex flex-col justify-between w-[40%] flex-start">
+      <div className="flex xs:flex-row flex-col xs:gap-lg gap-md  xs:h-[175px] mb-5 mt-3">
+        <div className="flex flex-col justify-between xs:w-[40%] w-full flex-start max-xs:gap-md">
           <div className=" flex-col flex gap-1">
             <div className="flex items-baseline">
               <label htmlFor="title">Title</label>
@@ -133,11 +144,11 @@ const DendoOutfitForm = () => {
             <Input name="keyword" placeholder="ex. winter, casual, chic" register={register('keywords')} />
           </div>
         </div>
-        <div className="flex flex-col gap-1 w-[60%]">
+        <div className="flex flex-col gap-1 xs:w-[60%] w-full">
           <label htmlFor="description mb-1">Description</label>
           <textarea
             id="description"
-            className="border-1 border-middleGreen h-full rounded-md w-full bg-darkGray py-sm px-md"
+            className="border-1 border-middleGreen xs:h-full h-[200px] rounded-md w-full bg-darkGray py-sm px-md resize-none"
             placeholder="ex. Great for a casual day out with friends or a date night."
             {...register('description')}
           ></textarea>
@@ -157,9 +168,9 @@ const DendoOutfitForm = () => {
         allPieces={data?.all_pieces}
       ></WardrobeDisplaySection>
       {!isDropzone && (
-        <div className="flex gap-5 items-end mt-5">
+        <div className="flex xs:gap-md gap-xs items-end mt-5">
           <div className="w-full flex-col flex gap-1">
-            <p className="text-center text-base">Do you have a picture of the outfit?</p>
+            <p className="text-center text-base">Have a picture of the outfit?</p>
             <Button style="w-full" onClick={() => setIsDropzone(true)}>
               Upload picture
             </Button>

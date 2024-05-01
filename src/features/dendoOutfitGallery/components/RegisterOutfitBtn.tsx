@@ -4,7 +4,7 @@ import React from 'react';
 const RegisterOutfitBtn = () => {
   return (
     <Link href="/registerDendoOutfit">
-      <button className="w-10 h-10 stroke-white bg-middleGreen rounded-full flex justify-center items-center fixed bottom-[50px] right-[80px]   hover:bg-darkGray group border-2 border-transparent hover:border-middleGreen hover:border-2 transition-all duration-300 ">
+      <button className="w-10 h-10 stroke-gray bg-middleGreen rounded-full flex justify-center items-center fixed xs:bottom-[50px] xs:right-[80px]  right-[30px] bottom-[30px] hover:bg-darkGray group border-2 border-transparent hover:border-middleGreen hover:border-2 transition-all duration-300 ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

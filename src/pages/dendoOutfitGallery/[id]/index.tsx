@@ -1,6 +1,7 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
 import React from 'react';
 
+import { DELETE_S3IMAGE_MUTATION } from '@/components/elements/button/DeletePieceButton';
 import { AlertIcon, EmptyIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import SmtWrongMessage from '@/components/elements/message/SmtWrongMessage';
@@ -33,21 +34,31 @@ const Index = () => {
     variables: { userId },
   });
   const { addToastMessage } = useToast();
-  const [id, setId] = React.useState<string>('');
+  const [args, setArgs] = React.useState<{ id: string; imageUrl: string }>({
+    id: '',
+    imageUrl: '',
+  });
 
-  const [delete_outfit] = useMutation(DELETE_DENTO_OUTFIT);
+  const [deleteOutfit] = useMutation(DELETE_DENTO_OUTFIT);
+  const [deleteS3Image] = useMutation(DELETE_S3IMAGE_MUTATION);
 
-  const deleteHandler = async (id: string) => {
+  const deleteHandler = async (id: string, imageUrl: string) => {
+    const fileName = imageUrl.split('https://do-i-have-it-storage.s3.amazonaws.com/')[1];
     try {
-      await delete_outfit({
+      const response = await deleteOutfit({
         variables: {
           id,
         },
       });
-      addToastMessage('Successfully Deleted the outfit!');
+      if (response) {
+        await deleteS3Image({
+          variables: { fileKey: fileName },
+        });
+      }
+      addToastMessage('Successfully deleted the outfit!');
       toggleModal();
     } catch (error) {
-      addToastMessage(getErrorMessage(error));
+      addToastMessage(getErrorMessage(error), true);
     }
   };
 
@@ -69,16 +80,16 @@ const Index = () => {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-4 gap-5 rounded-md overflow-y-scroll h-full">
+          <div className="grid xs:grid-cols-4 xs:gap-5 grid-cols-2 gap-3 rounded-md overflow-y-scroll h-full">
             {data?.dendoOutfits.map((dendoOutfit: dendoOutfitType) => {
               return (
                 <div key={dendoOutfit.id}>
-                  <DendoOutfitCard dendoOutfit={dendoOutfit} setId={setId} toggleModal={toggleModal} />
+                  <DendoOutfitCard dendoOutfit={dendoOutfit} setArgs={setArgs} toggleModal={toggleModal} />
                 </div>
               );
             })}
           </div>
-          <Modal buttonLabel="Confirm" onClick={() => deleteHandler(id)}>
+          <Modal buttonLabel="Confirm" onClick={() => deleteHandler(args.id, args.imageUrl)}>
             <div className="flex items-center gap-2">
               <AlertIcon />
               Are you sure you want to delete this outfit?

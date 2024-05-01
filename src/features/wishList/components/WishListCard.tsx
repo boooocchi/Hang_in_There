@@ -79,10 +79,10 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
   };
 
   return (
-    <div className="flex h-[400px] w-full  bg-transparent">
-      <div className=" w-[98%] h-[98%] rounded-lg bg-gray flex flex-col pt-lg pb-md px-lg gap-3 relative shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
+    <div className="flex xs:h-[400px] h-[300px] w-full bg-transparent">
+      <div className=" w-[98%] h-[98%] rounded-lg bg-gray flex flex-col pt-lg pb-md px-lg gap-2 relative shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
         {isWishListForm && <div className="absolute bg-black top-0 left-0 rounded-md opacity-30 w-full h-full"></div>}
-        <h2 className="text-lg font-boldest text-center mb-3">{categoryName}</h2>
+        <h2 className="text-lg font-boldest text-center mb-1">{categoryName}</h2>
         <ul className="flex flex-col gap-2  h-2/3  overflow-y-scroll hide-scrollbar">
           {listItemsData?.wishList.map((item: ListItemType) => {
             if (item.category === categoryName && !item.checked) {
@@ -126,7 +126,7 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
           )}
         </ul>
         {!isWishListForm && (
-          <div className="flex justify-end w-full">
+          <div className="flex justify-end w-full mt-auto">
             <button
               className="w-10 h-10 rounded-full flex justify-center items-center  text-accentOrange font-bold text-lg hover:bg-accentOrange border-2  border-accentOrange group hover:border-transparent duration-300"
               onClick={() => {

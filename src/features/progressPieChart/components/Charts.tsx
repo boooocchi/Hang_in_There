@@ -70,7 +70,7 @@ const Charts = () => {
   }, [limitData, piecesData]);
 
   return (
-    <div className="h-full w-1/2 bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-md rounded-lg flex flex-col gap-sm relative">
+    <div className="xs:h-full xs:w-1/2 w-full bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-md rounded-lg flex flex-col gap-sm relative max-xs:h-[250px]">
       <h2 className="text-base flex items-center gap-sm font-extraBold">
         <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
           <ChartIcon />
@@ -78,7 +78,7 @@ const Charts = () => {
         Your Wardrobe Capacity
       </h2>
       <div className="h-[90%] flex items-center justify-center ">
-        <div className="grid grid-cols-3  h-full gap-x-xs overflow-hidden content-center text-white p-md px-lg ml-8">
+        <div className="grid grid-cols-3  h-full xs:gap-x-xs gap-x-md overflow-hidden content-center text-gray xs:py-md xs:px-xl px-md xs:ml-8 ml-5">
           {Object.keys(percentages).map((key, index) => {
             const categoryKey = key as keyof PercentagesType;
             const percentage = percentages[categoryKey].percentage;
@@ -104,7 +104,7 @@ const Charts = () => {
             );
           })}
         </div>
-        <ChartIllustration style="absolute -bottom-[23px] -left-0 h-[160px] w-[160px]" />
+        <ChartIllustration style="absolute xs:-bottom-[23px] -bottom-[18px] xs:-left-0 -left-1 h-[130px] w-[130px] xs:h-[160px] xs:w-[160px] " />
       </div>
     </div>
   );

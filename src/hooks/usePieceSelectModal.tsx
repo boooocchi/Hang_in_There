@@ -49,7 +49,7 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
       <div
         className="
          h-[600px]
-         w-[850px] bg-gray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-999 "
+         w-[850px] bg-darkGray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-999 "
       >
         <div className="relative flex w-full justify-center items-center">
           <div className={`relative justify-center items-center ${searchText && 'mb-3'}`}>
@@ -74,7 +74,7 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
               }}
               placeholder="search your wardrobe"
               type="text"
-              className="w-[250px] h-[30px] border-1 border-middleGreen mr-sm p-sm pl-xl text-sm rounded-md bg-gray"
+              className="w-[250px] h-[30px] border-1 border-middleGreen mr-sm p-sm pl-xl text-sm rounded-md bg-darkGray"
             />
           </div>
         </div>
@@ -86,14 +86,14 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
             {sortedWardrobeData &&
               categoriesArray.map((category) => {
                 const dataByCategory = sortedWardrobeData[category];
-                if (dataByCategory?.length === 0) return <div key={category}></div>;
+                if (dataByCategory?.length === 0) return null;
                 return (
                   <div key={category} className="flex flex-col mb-3">
                     <h2 className="mb-3">{upperCamelCase(category)}</h2>
                     <div className="flex overflow-x-scroll hide-scrollbar gap-4">
                       {dataByCategory?.map((piece) => {
                         return (
-                          <div className="flex flex-col gap-1 " key={piece.id}>
+                          <div className="flex flex-col gap-1 w-[150px]" key={piece.id}>
                             <div className="w-full flex justify-center">
                               <input
                                 type="checkbox"
@@ -104,11 +104,11 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
                             </div>
                             <label
                               htmlFor={piece.id}
-                              className="flex flex-col gap-1 relative w-[150px] aspect-[2/3]   bg-white  rounded-md  border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange"
+                              className="flex flex-col gap-1 relative w-[150px] aspect-[3/4]   bg-gray  rounded-md  border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange"
                             >
                               <ImageWithLoading id={piece.id} url={piece.imageUrl} alt={piece.title} />
                             </label>
-                            <p className="text-sm text-center">{piece.title}</p>
+                            <p className="text-sm truncate">{piece.title}</p>
                           </div>
                         );
                       })}
@@ -130,7 +130,7 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
           Select
         </Button>
         <button
-          className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-white absolute -top-5 -right-8 text-sm shadow-sm"
+          className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-gray absolute -top-5 -right-8 text-sm shadow-sm"
           onClick={() => handleModalClose()}
         >
           <CancelIcon style="w-5 h-5" />

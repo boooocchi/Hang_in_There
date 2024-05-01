@@ -25,11 +25,11 @@ const HeaderDropdownMenu = () => {
           align="end"
           className="text-base overflow-hidden rounded-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]"
         >
-          <DropdownMenu.Item className="hover:outline-none outline-none px-md hover:duration-300 py-sm  hover:bg-lighterOrange font-normal text-center hover:text-white ">
+          <DropdownMenu.Item className="hover:outline-none outline-none px-md hover:duration-300 py-sm  hover:bg-lighterOrange font-normal text-center hover:text-gray ">
             Account
           </DropdownMenu.Item>
           <button onClick={handleSignout} className="w-full h-full">
-            <DropdownMenu.Item className="w-full h-full outline-none px-md hover:duration-300  hover:outline-none  py-sm  hover:bg-lighterOrange font-normal text-center hover:text-white">
+            <DropdownMenu.Item className="w-full h-full outline-none px-md hover:duration-300  hover:outline-none  py-sm  hover:bg-lighterOrange font-normal text-center hover:text-gray">
               Logout
             </DropdownMenu.Item>
           </button>

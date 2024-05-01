@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-micro';
 
 export const typeDefs = gql`
   scalar DateTime
+  scalar JSONObject
 
   type User {
     id: String!
@@ -97,6 +98,13 @@ export const typeDefs = gql`
     wishList(userId: String!): [WishList]
   }
 
+  type UploadS3Response {
+    url: String!
+    fields: JSONObject!
+    key: String!
+    success: Boolean!
+  }
+
   type S3Response {
     success: Boolean!
   }
@@ -138,6 +146,7 @@ export const typeDefs = gql`
     update_wish_list_name(id: String!, itemName: String!): WishList
     update_wish_list_status(id: String!, checked: Boolean!): WishList
     delete_s3_image(fileKey: String!): S3Response!
+    upload_s3_image(fileName: String!): UploadS3Response!
   }
 
   type AuthPayload {

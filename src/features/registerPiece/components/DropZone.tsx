@@ -55,50 +55,42 @@ const DropZone: React.FC<DropZoneProps> = ({ className, handleFileSelect, delete
             <div className="relative flex justify-center w-full items-center">
               <div className="flex justify-center items-center w-full">
                 <div className="relative">
-                  <button
-                    className=" absolute
-              -top-[1%]
-              -right-[1%]
-              bg-black
-              text-white
-              justify-center
-              rounded-full
-              items-center
-              cursor-pointer
-              p-[3px]"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (file) {
-                        deleteFile();
-                        setFile(null);
-                      } else {
-                        deleteFile();
-                        setPieceImgUrl('');
-                      }
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="white"
-                      className="w-4 h-4 drop-shadow-lg"
+                  <div className="xs:h-[250px] h-[180px] aspect-[3/4]">
+                    <Image
+                      src={file?.preview ? file.preview : pieceImgUrl ? pieceImgUrl : ''}
+                      alt="Preview"
+                      objectFit="cover"
+                      fill
+                      className="xs:max-h-[342px] max-h-[200px]"
+                    />
+                    <button
+                      className=" absolute -top-2 -right-2 bg-black text-gray justify-center rounded-full items-center cursor-pointer p-[3px]"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (file) {
+                          deleteFile();
+                          setFile(null);
+                        } else {
+                          deleteFile();
+                          setPieceImgUrl('');
+                        }
+                      }}
                     >
-                      <path strokeLinecap="square" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                  <div></div>
-                  <Image
-                    src={file?.preview ? file.preview : pieceImgUrl ? pieceImgUrl : ''}
-                    alt="Preview"
-                    width="250"
-                    height="342"
-                    className="max-h-[342px]"
-                  />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="#FDFDFD"
+                        className="w-4 h-4 drop-shadow-lg"
+                      >
+                        <path strokeLinecap="square" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <p className={` text-center w-full`}>
+            <p className="text-center w-full">
               {file?.name ? file?.name : pieceImgUrl.split('/')[pieceImgUrl.split('/').length - 1]}
             </p>
           </div>
@@ -109,7 +101,7 @@ const DropZone: React.FC<DropZoneProps> = ({ className, handleFileSelect, delete
               viewBox="0 0 64 64"
               width="40px"
               height="40px"
-              className="fill-richGreen"
+              className="fill-deepGreen"
             >
               <g fill="#11221G">
                 <path d="M51.8 50.4H12.3c-2.3 0-4.2-1.9-4.2-4.2V18c0-2.3 1.9-4.2 4.2-4.2h39.5c2.3 0 4.2 1.9 4.2 4.2v28.2c0 2.3-1.9 4.2-4.2 4.2zM12.2 16.5c-.8 0-1.4.6-1.4 1.4v28.2c0 .8.6 1.4 1.4 1.4h39.5c.8 0 1.4-.6 1.4-1.4V17.9c0-.8-.6-1.4-1.4-1.4H12.2z"></path>

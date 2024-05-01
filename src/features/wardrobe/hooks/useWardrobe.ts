@@ -72,12 +72,14 @@ export const useWardrobe = ({
     );
     setData(filteredData);
 
-    const filteredOutfitData = outfitData?.filter(
-      (item) =>
+    const filteredOutfitData = outfitData?.filter((item) => {
+      return (
         item.title.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) ||
-        item?.description?.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
-    );
-    setDendoOutfitData(filteredOutfitData && filteredData.length > 0 ? filteredOutfitData : null);
+        item?.description?.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) ||
+        item?.keywords?.some((keyword) => keyword.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()))
+      );
+    });
+    setDendoOutfitData(filteredOutfitData && filteredOutfitData.length > 0 ? filteredOutfitData : null);
   };
 
   return { sortedWardrobeData, dendoOutfitData, handleSearchTextChange };

@@ -113,7 +113,7 @@ const SignupForm = () => {
         {error && <p className="text-red-500">{error.message}</p>}
       </form>
       <p className={` text-center`}>or</p>
-      <button type="button" onClick={handleGoogleSignup} className="border-white w-full transition duration-300">
+      <button type="button" onClick={handleGoogleSignup} className="border-gray w-full transition duration-300">
         <p className="flex items-center justify-center gap-2">
           <GoogleIcon />
           Sign up with Google

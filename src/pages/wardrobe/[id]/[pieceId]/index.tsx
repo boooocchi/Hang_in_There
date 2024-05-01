@@ -69,7 +69,7 @@ const Piece = () => {
         <Loading size="large" />
       ) : (
         <MainLayout title={data.piece.title} editButtons={editButtons}>
-          <PieceForm pieceData={data} editMode={editMode} setEditMode={setEditMode}></PieceForm>;
+          <PieceForm pieceData={data} editMode={editMode} setEditMode={setEditMode}></PieceForm>
         </MainLayout>
       )}
     </>

@@ -18,7 +18,7 @@ const DELETE_PIECE_MUTATION = gql`
   }
 `;
 
-const DELETE_S3IMAGE_MUTATION = gql`
+export const DELETE_S3IMAGE_MUTATION = gql`
   mutation delete_s3_image($fileKey: String!) {
     delete_s3_image(fileKey: $fileKey) {
       success
@@ -72,8 +72,10 @@ const DeletePieceButton: React.FC<Props> = ({ pieceId, userId, fileKey }) => {
         <TrashbinIcon style="w-5 h-5" />
       </button>
       <Modal buttonLabel={loading ? <Loading /> : 'Confirm'} onClick={handleDeletePiece}>
-        <div className="flex gap-2 items-center font-normal">
-          <AlertIcon />
+        <div className="flex gap-2 items-center font-normal text-center">
+          <div className="max-xs:hidden">
+            <AlertIcon />
+          </div>
           Are you sure you want to delete this piece??
         </div>
       </Modal>
