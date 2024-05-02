@@ -58,7 +58,7 @@ const DashboardWIshList = () => {
           </div>
         )}
         {wishListData?.wishList.length > 0 && isAnyUncheckedItems && (
-          <div className="overflow-y-scroll w-full xs:px-2xl px-sm h-full">
+          <div className="overflow-y-scroll w-full xs:px-2xl px-sm h-[220px]">
             <ul className="w-full  h-[90%]">
               {wishListData?.wishList.map((item: { itemName: string; id: string; checked: boolean }) => {
                 if (item.checked) return null;

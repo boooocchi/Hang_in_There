@@ -4,7 +4,7 @@ import React from 'react';
 import PageTitle from '@/components/elements/title/PageTitle';
 
 type Props = {
-  title: string;
+  title?: string;
   children: React.ReactNode;
   editButtons?: React.ReactNode;
 };
@@ -15,11 +15,11 @@ const MainLayout: React.FC<Props> = ({ children, title, editButtons }) => {
   return (
     <div className="h-full flex flex-col">
       <div
-        className={`flex items-center gap-[30px] mb-3 tracking-wide max-h-[5%] ${pathname === '/' && 'ml-xs'} xs:ml-0`}
+        className={`flex items-center gap-[30px] mb-sm tracking-wide xs:mb-md ${pathname === '/' && 'ml-xs max-xs:'} xs:ml-0`}
       >
         <PageTitle>{title}</PageTitle> {editButtons && editButtons}
       </div>
-      <div className={`flex flex-grow  flex-col w-full ${dashboardStyle}`}>{children}</div>
+      <div className={`flex h-full flex-grow flex-col w-full ${dashboardStyle}`}>{children}</div>
     </div>
   );
 };

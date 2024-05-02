@@ -77,17 +77,18 @@ const Charts = () => {
         </span>
         Your Wardrobe Capacity
       </h2>
-      <div className="h-[90%] flex items-center justify-center ">
-        <div className="grid grid-cols-3  h-full xs:gap-x-xs gap-x-md overflow-hidden content-center text-gray xs:py-md xs:px-xl px-md xs:ml-8 ml-5">
+      <div className="flex-grow flex items-center justify-center ">
+        <div className="grid grid-cols-3 xs:gap-x-xs gap-x-md overflow-hidden content-center text-gray  xs:px-xl px-md xs:ml-8 ml-5 h-full">
           {Object.keys(percentages).map((key, index) => {
             const categoryKey = key as keyof PercentagesType;
             const percentage = percentages[categoryKey].percentage;
             return (
-              <div key={index} className="w-full flex justify-center  relative overflow-hidden text-deepGreen">
+              <div key={index} className="w-full flex justify-center px-xs relative overflow-hidden text-deepGreen">
                 <CircularProgressbar
                   value={percentage}
                   strokeWidth={15}
                   circleRatio={0.5}
+                  className="h-full w-full"
                   counterClockwise={true}
                   styles={buildStyles({
                     rotation: 0.25,

@@ -255,14 +255,16 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
               {...register('description')}
               name="description"
               id="description"
-              className="bg-darkGray rounded-md h-[250px] py-md px-md textarea resize-none border-1 border-middleGreen"
+              className="bg-darkGray rounded-md xs:flex-grow h-[250px] py-md px-md textarea resize-none border-1 border-middleGreen"
               placeholder="ex. Warm winter down jacket"
               disabled={!editMode}
             />
             <ErrorMessage>{errors.description?.message}</ErrorMessage>
           </div>
           <div className={`w-full hidden ${pieceData && !editMode ? 'hidden' : 'max-xs:block'}`}>
-            <Button>{uploadLoading ? <Loading /> : pieceData && editMode ? 'Complete edit' : 'Register'}</Button>
+            <Button style="w-full">
+              {uploadLoading ? <Loading /> : pieceData && editMode ? 'Complete edit' : 'Register'}
+            </Button>
           </div>
         </div>
         <div className={`flex flex-col xs:h-full ${editMode && 'xs:w-[40%]'}`}>
@@ -295,7 +297,9 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
                 <ErrorMessage style="xs:bottom-0">{errors.imageUrl?.message}</ErrorMessage>
               </div>
               <div className="max-xs:hidden w-full">
-                <Button>{uploadLoading ? <Loading /> : pieceData && editMode ? 'Complete edit' : 'Register'}</Button>
+                <Button style="w-full">
+                  {uploadLoading ? <Loading /> : pieceData && editMode ? 'Complete edit' : 'Register'}
+                </Button>
               </div>
             </div>
           )}

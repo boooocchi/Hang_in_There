@@ -52,8 +52,8 @@ Color: ${piece.color}`,
   const { Modal, setIsModalOpen } = usePieceSelectModal({ createMessage });
 
   return (
-    <form onSubmit={(e) => onSubmit(e)} className="h-full max-h-full relative">
-      <div className="flex flex-col h-full w-full ">
+    <form onSubmit={(e) => onSubmit(e)} className="h-full relative">
+      <div className="flex flex-col h-full w-full">
         <div className="h-[85%] w-full  flex flex-col gap-3">
           {sentMessage && (
             <div className="w-full flex justify-end">

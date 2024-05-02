@@ -50,6 +50,12 @@ export type UploadS3ImageResult = {
 
 export const resolvers = {
   Query: {
+    get_user: (_parent: unknown, args: { userId: string }, context: Context) => {
+      return context.prisma.user.findUnique({
+        where: { id: args.userId },
+        include: { limitEntries: true },
+      });
+    },
     all_pieces: (_parent: unknown, args: pieceArgs, context: Context) => {
       return context.prisma.piece.findMany({
         where: { userId: args.userId },

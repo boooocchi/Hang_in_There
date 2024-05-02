@@ -5,8 +5,8 @@ import Loading from '@/components/elements/message/Loading';
 import { useAuth } from '@/hooks/useAuth';
 import { Children } from '@/types/types';
 
-import Header from '../menu/Header';
-import SideMenu from '../menu/SideMenu';
+import Header from '../../elements/menu/Header';
+import SideMenu from '../../elements/menu/SideMenu';
 
 const PageLayout: React.FC<Children> = ({ children }) => {
   const { status } = useAuth();
@@ -29,10 +29,12 @@ const PageLayout: React.FC<Children> = ({ children }) => {
     <>
       {status === 'authenticated' && (
         <div className="w-full h-full flex">
-          <SideMenu />
-          <div className="flex flex-col h-full  px-sm py-md xs:px-4xl xs:py-2xl w-full bg-darkGray xs:gap-[40px] gap-[20px] xs:min-h-[750px] xs:max-h-[800px] xs:overflow-hidden">
+          <div className="max-xs:hidden">
+            <SideMenu />
+          </div>
+          <div className="flex flex-col h-full  px-sm py-md xs:px-4xl xs:py-2xl w-full bg-darkGray xs:gap-[40px] gap-[20px] xs:min-h-[750px] xs:max-h-[800px] xs:overflow-hidden max-xs:min-h-screen">
             <Header />
-            <div className={`xs:flex-grow h-[95%] ${overFlow}`}>{children}</div>
+            <div className={`flex-grow ${overFlow}`}>{children}</div>
           </div>
         </div>
       )}

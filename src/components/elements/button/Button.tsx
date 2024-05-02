@@ -16,7 +16,7 @@ type colorClassesType = {
 };
 
 const Button: React.FC<Props> = ({ children, colorSchema = 'richGreen', style, onClick, loading }) => {
-  const baseClasses = `p-sm px-md transition duration-300 text-gray rounded-md border-transparent border-1 ${mainFont.className} font-normal w-full`;
+  const baseClasses = `p-sm px-md transition duration-300 text-gray rounded-md border-transparent border-1 ${mainFont.className} font-normal`;
 
   const colorClasses: colorClassesType = {
     richGreen: 'bg-middleGreen primaryGreenButton',

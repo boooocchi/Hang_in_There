@@ -5,21 +5,25 @@ import { WeatherData } from '../types/weatherType';
 
 const WeatherBox = ({ weatherData }: WeatherData) => {
   return (
-    <div className="w-full h-full shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] rounded-lg flex items-center justify-center bg-gray py-md px-sm xs:py-md">
+    <div className="w-full h-full shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] rounded-lg flex items-center justify-center bg-gray py-md max-xs:pl-md max-xs:pr-sm">
       {weatherData ? (
-        <div className="w-full flex flex-col xs:flex-row xs:justify-center items-center xs:items-start xs:px-xl xs:gap-lg gap-sm">
-          <div className="flex xs:flex-col gap-md xs:gap-xs justify-center items-center text-xl">
-            <WeatherIcon description={weatherData.weatherDescription} />
-            <span className="max-w-[80px] text-sm text-center mb-1">{weatherData.weatherDescription}</span>
-          </div>
-          <div className="flex xs:flex-col gap-md xs:gap-sm items-center justify-center">
-            <div className="xs:text-2xl text-xl font-boldest xs:ml-1 -mb-1 leading-[28px]">
-              {weatherData.currentTemp}
-              <sup className="text-base">°C</sup>
+        <div className="flex flex-col gap-sm xs:flex-row  items-center justify-center xs:items-start w-full">
+          <div className="xs:w-1/3 w-full flex xs:flex-col gap-xs xs:gap-xs justify-center items-center text-xl ">
+            <div className="xs:h-[50px] flex items-center justify-center  max-xs:w-1/2">
+              <WeatherIcon description={weatherData.weatherDescription} />
             </div>
-            <div className="flex xs:flex-col items-center">
-              <div className="text-center text-sm xs:mt-1 xs:flex hidden">Feels: {weatherData.feelsLike}</div>
-              <div className="flex flex-col xs:flex-row justify-center gap-1 xs:gap-2 text-sm">
+            <span className="text-sm mb-1 whitespace-normal max-xs:w-1/2 max-w-[80px] xs:text-center">
+              {weatherData.weatherDescription}
+            </span>
+          </div>
+          <div className="xs:w-1/3 w-full flex xs:flex-col h-full gap-xs items-center justify-center">
+            <div className="xs:text-2xl text-xl font-boldest ml-2 xs:h-[50px] max-xs:w-1/2 flex items-center justify-center leading-[1.3]">
+              {weatherData.currentTemp}
+              <span className="xs:text-base text-sm">°C</span>
+            </div>
+            <div className="flex xs:flex-col items-center max-xs:w-1/2">
+              <div className="text-center text-sm  xs:flex hidden max-xs:w-full">Feels: {weatherData.feelsLike}</div>
+              <div className="flex flex-col xs:flex-row justify-center gap-1 xs:gap-2 text-sm max-xs:w-full">
                 <div>H: {weatherData.maxTemp}</div>
                 <div>L: {weatherData.minTemp}</div>
               </div>

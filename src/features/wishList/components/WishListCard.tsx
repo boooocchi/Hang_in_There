@@ -80,10 +80,10 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
 
   return (
     <div className="flex xs:h-[400px] h-[300px] w-full bg-transparent">
-      <div className=" w-[98%] h-[98%] rounded-lg bg-gray flex flex-col pt-lg pb-md px-lg gap-2 relative shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
+      <div className=" w-[98%] h-[98%] rounded-lg bg-gray flex flex-col p-lg px-lg gap-2 relative shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
         {isWishListForm && <div className="absolute bg-black top-0 left-0 rounded-md opacity-30 w-full h-full"></div>}
-        <h2 className="text-lg font-boldest text-center mb-1">{categoryName}</h2>
-        <ul className="flex flex-col gap-2  h-2/3  overflow-y-scroll hide-scrollbar">
+        <h2 className="text-lg font-boldest text-center mb-2">{categoryName}</h2>
+        <ul className="flex flex-col gap-2  h-4/5  overflow-y-scroll hide-scrollbar">
           {listItemsData?.wishList.map((item: ListItemType) => {
             if (item.category === categoryName && !item.checked) {
               return (

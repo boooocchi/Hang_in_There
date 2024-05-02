@@ -51,7 +51,7 @@ export default function Home({ weatherData }: WeatherData) {
   return (
     <MainLayout title="DashBoard">
       <section className="flex flex-col h-full w-full gap-md">
-        <div className="h-[30%] max-xs:h-[150px] flex xs:gap-md gap-sm font-bold">
+        <div className="h-[25%] max-xs:h-[150px] flex xs:gap-md gap-sm font-bold">
           <div className="h-full py-md px-md xs:w-[70%] w-1/2 relative  bg-gray rounded-lg shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
             <div className="xs:text-2xl text-xl font-boldest leading-[1]">
               <span className={`${titleFont.className}`}>Hello,</span> {userName}!!
@@ -62,14 +62,14 @@ export default function Home({ weatherData }: WeatherData) {
             <WeatherBox weatherData={weatherData} />
           </div>
         </div>
-        <div className="h-[10%] xs:flex xs:gap-md gap-sm grid grid-cols-2">
+        <div className="xs:h-[10%] xs:flex xs:gap-md gap-sm grid grid-cols-2">
           {cards.map((card) => (
             <DashboardCard key={card.title} title={card.title} link={card.link}>
               {card.icon}
             </DashboardCard>
           ))}
         </div>
-        <div className="h-[60%] shrink-1 w-full flex flex-col xs:flex-row gap-md">
+        <div className="xs:flex-grow w-full flex flex-col xs:flex-row gap-md">
           <Charts />
           <DashboardWIshList />
         </div>

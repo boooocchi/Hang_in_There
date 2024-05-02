@@ -87,6 +87,7 @@ export const typeDefs = gql`
   }
 
   type Query {
+    get_user(userId: String!): User
     all_pieces(userId: String!): [Piece]
     pieces(userId: String!, category: Categories): [Piece]
     pieces_search(userId: String!, searchText: String!): [Piece]

@@ -100,7 +100,7 @@ export const useSearch: SearchHook = () => {
                       <h2 className="mb-2">{upperCamelCase(category)}</h2>
                       <div className="flex gap-4 mb-3 overflow-x-scroll">
                         {dataOfTheCategory?.map((piece) => (
-                          <div key={piece.id} className="overflow-hidden w-[150px]">
+                          <div key={piece.id} className="overflow-hidden w-[150px] shrink-0">
                             <Link href={`/wardrobe/${userId}/${piece.id}`} onClick={handleModalClose}>
                               <div className="relative w-[150px] aspect-[3/4] rounded-md overflow-hidden">
                                 <ImageWithLoading alt="piece image" url={piece.imageUrl} />
@@ -122,7 +122,7 @@ export const useSearch: SearchHook = () => {
               {!all_dendoOutfit_loading && !dendoOutfitData && <div className="text-sm h-10">No search result</div>}
               {dendoOutfitData?.map((outfit: dendoOutfitType) => {
                 return (
-                  <div key={outfit.id} className="w-[150px]">
+                  <div key={outfit.id} className="w-[150px] shrink-0">
                     <Link href={`/dendoOutfit/${outfit.id}`} onClick={handleModalClose}>
                       <div className="relative w-[150px] aspect-[3/4] rounded-md overflow-hidden mb-1">
                         {outfit.imageUrl ? (

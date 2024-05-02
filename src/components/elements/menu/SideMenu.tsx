@@ -78,7 +78,7 @@ const SideMenu = ({ isSideMenuOpen }: { isSideMenuOpen?: boolean }) => {
             return (
               <li
                 key={index}
-                className={cn('rounded-md py-sm px-md text-gray relative w-full', {
+                className={cn('rounded-md py-sm px-md text-gray relative w-full xs:w-full', {
                   'bg-lighterGreen': menuItemColor,
                 })}
               >
@@ -97,14 +97,14 @@ const SideMenu = ({ isSideMenuOpen }: { isSideMenuOpen?: boolean }) => {
                   </div>
                 </Link>
                 {menuItemColor && (
-                  <div className=" bg-lighterOrange rounded-xl absolute -top-1 -left-[65px] w-10 h-[50px]"></div>
+                  <div className=" xs:block bg-lighterOrange rounded-xl absolute -top-1 -left-[65px] w-10 h-[50px]"></div>
                 )}
               </li>
             );
           })}
         </ul>
-        <div className="mt-auto  text-gray">
-          <Link href="/settings" className="flex items-center  group py-sm px-md">
+        <div className="mt-auto  text-gray w-full py-sm px-md">
+          <Link href="/settings" className="flex items-center  group ">
             <SettingIcon />
             <span
               className={`font-extraBold tracking-tighter text-base ${settingClassName} group-hover:text-lighterOrange`}
