@@ -24,6 +24,11 @@ export const typeDefs = gql`
     userId: String!
   }
 
+  input LimitEntryInput {
+    category: Categories!
+    value: Float!
+  }
+
   type Piece {
     id: String!
     createdAt: DateTime!
@@ -110,6 +115,10 @@ export const typeDefs = gql`
     success: Boolean!
   }
 
+  type UserSettingsUpdateResponse {
+    success: Boolean!
+  }
+
   type Mutation {
     signup(email: String!, password: String!, userName: String!): AuthPayload
     register_piece(
@@ -148,6 +157,13 @@ export const typeDefs = gql`
     update_wish_list_status(id: String!, checked: Boolean!): WishList
     delete_s3_image(fileKey: String!): S3Response!
     upload_s3_image(fileName: String!): UploadS3Response!
+    update_user_info(
+      userId: String!
+      userName: String!
+      email: String!
+      password: String
+      limitEntries: [LimitEntryInput]!
+    ): UserSettingsUpdateResponse
   }
 
   type AuthPayload {

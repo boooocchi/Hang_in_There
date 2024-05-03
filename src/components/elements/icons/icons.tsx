@@ -158,8 +158,8 @@ const SettingIcon: React.FC<Props> = ({ style }) => (
     viewBox="0 0 24 24"
     strokeWidth="1.5"
     stroke="white"
-    width="20"
-    height="20"
+    width="21"
+    height="21"
     className={style ?? 'mr-5 group-hover:stroke-lighterOrange'}
   >
     <path

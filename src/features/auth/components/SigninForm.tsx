@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
@@ -9,6 +10,8 @@ import Input from '@/components/elements/form/Input';
 import { GoogleIcon } from '@/components/elements/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 import { getErrorMessage } from '@/utils/errorHandler';
+
+import { signinValidationSchema } from '../validation/signinValidationSchema';
 
 type SigninFormValues = {
   email: string;
@@ -38,10 +41,7 @@ const SigninForm = () => {
   }
 
   const form = useForm<SigninFormValues>({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    resolver: yupResolver(signinValidationSchema),
   });
 
   const { register, handleSubmit, formState } = form;
@@ -49,6 +49,7 @@ const SigninForm = () => {
 
   const onSubmit = async (data: SigninFormValues) => {
     setIsLoading(true);
+
     try {
       await signIn('credentials', {
         email: data.email,
@@ -77,7 +78,7 @@ const SigninForm = () => {
         {errorMessage && <p className={`text-errorRed  `}>{errorMessage}</p>}
       </div>
       <form className="flex flex-col gap-4 w-full  justify-center" onSubmit={handleSubmit(onSubmit)}>
-        <div className="w-full flex flex-col gap-3">
+        <div className="w-full flex flex-col gap-md">
           <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
           <Input register={register('password')} name="password" errorMessage={errors.password?.message}></Input>
         </div>

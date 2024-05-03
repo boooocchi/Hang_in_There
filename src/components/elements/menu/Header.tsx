@@ -36,11 +36,20 @@ const Header = () => {
           </svg>
           search your wardrobe..
         </button>
-        <div className="xs:flex text-lg gap-0 mr-5 hidden">
+        <div className="xs:flex text-lg gap-0 mr-1 hidden items-center">
           <p className="mr-3">Hello, {userName}</p>
           <HeaderDropdownMenu></HeaderDropdownMenu>
         </div>
-        <button className="xs:hidden mr-xs relative z-[15]" onClick={() => setIsSideMenuOpen((prev) => !prev)}>
+        <button
+          className="xs:hidden mr-xs relative z-[15]"
+          onClick={() => {
+            setIsSideMenuOpen((prev) => !prev);
+            if (typeof window != 'undefined' && window.document) {
+              if (!isSideMenuOpen) document.body.style.overflow = 'hidden';
+              else document.body.style.overflow = 'auto';
+            }
+          }}
+        >
           <MenuIcon style={`${isSideMenuOpen ? 'stroke-gray' : 'stroke-middleGreen'} h-6 w-6`} />
         </button>
       </nav>
@@ -48,7 +57,7 @@ const Header = () => {
       <div
         className={`w-full fixed z-10 xs:hidden max-xs:duration-300  max-xs:right-0  ${isSideMenuOpen ? 'max-xs:top-0 max-xs:opacity-100' : 'max-xs:top-10 pointer-events-none max-xs:opacity-0'}`}
       >
-        <SideMenu isSideMenuOpen={isSideMenuOpen} />
+        <SideMenu isSideMenuOpen={isSideMenuOpen} setIsSideMenuOpen={setIsSideMenuOpen} />
       </div>
     </header>
   );

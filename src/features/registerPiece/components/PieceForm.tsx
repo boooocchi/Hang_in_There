@@ -36,17 +36,6 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
   const [uploadS3Image] = useMutation(UPLOAD_S3_IMAGE);
 
   const form = useForm<RegisterPieceValues>({
-    defaultValues: {
-      title: '',
-      description: '',
-      location: '',
-      price: null,
-      color: null,
-      category: null,
-      imageUrl: '',
-    },
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     resolver: yupResolver(registerPieceValidationSchema),
   });
   const { register, handleSubmit, formState, control, trigger, setValue, getValues, reset } = form;

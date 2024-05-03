@@ -49,9 +49,9 @@ const Piece = () => {
   const editButtons = (
     <>
       {editMode ? (
-        <div className="flex  items-center h-full mt-1">
-          <Button colorSchema="accentOrange" onClick={unsetEditMode} style=" px-sm py-xs   text-sm">
-            Cancel this edit
+        <div className="flex  items-center h-full">
+          <Button colorSchema="accentOrange" onClick={unsetEditMode} style="px-sm py-xs text-sm">
+            Cancel
           </Button>
         </div>
       ) : (

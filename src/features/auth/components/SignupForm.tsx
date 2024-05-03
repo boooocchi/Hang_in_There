@@ -11,7 +11,7 @@ import Input from '@/components/elements/form/Input';
 import { GoogleIcon } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 
-import { signinValidationSchema } from '../validation/signinValidationSchema';
+import { signupValidationSchema } from '../validation/signupValidationSchema';
 
 type SignupFormValues = {
   name: string;
@@ -56,7 +56,7 @@ const SignupForm = () => {
       password: '',
       passwordConfirmation: '',
     },
-    resolver: yupResolver(signinValidationSchema),
+    resolver: yupResolver(signupValidationSchema),
   });
 
   const { register, handleSubmit, formState } = form;
@@ -98,7 +98,7 @@ const SignupForm = () => {
     <div className=" flex flex-col items-center gap-3 w-1/2">
       <h1 className={` text-2xl font-bold mb-md`}>Sign up</h1>
       <form className="flex flex-col gap-4  justify-center w-full" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-md">
           <Input register={register('name')} name="name" errorMessage={errors.name?.message}></Input>
           <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
           <Input register={register('password')} name="password" errorMessage={errors.password?.message}></Input>
@@ -121,7 +121,7 @@ const SignupForm = () => {
       </button>
       <div className="flex justify-end">
         <Link href="/auth/signin" className="underline  hover:text-accentOrange">
-          already have an account?
+          Already have an account?
         </Link>
       </div>
     </div>

@@ -375,5 +375,48 @@ export const resolvers = {
         throw new Error();
       }
     },
+    update_user_info: async (
+      _parent: unknown,
+      args: {
+        userId: string;
+        userName: string;
+        email: string;
+        password: string | undefined;
+        limitEntries: { category: Categories; value: number }[];
+      },
+      context: Context,
+    ) => {
+      const { userId, userName, email, password, limitEntries } = args;
+
+      try {
+        await context.prisma.user.update({
+          where: { id: userId },
+          data: {
+            userName: userName,
+            email: email,
+            limitEntries: {
+              updateMany: limitEntries.map((entry) => ({
+                where: { userId: userId, category: entry.category },
+                data: { value: entry.value },
+              })),
+            },
+          },
+        });
+
+        if (password) {
+          const hashedPassword = await hash(password, 10);
+          await context.prisma.user.update({
+            where: { id: userId },
+            data: {
+              password: hashedPassword,
+            },
+          });
+        }
+        return { success: true };
+      } catch (e) {
+        console.error(e);
+        throw new Error('Failed to update user info..');
+      }
+    },
   },
 };

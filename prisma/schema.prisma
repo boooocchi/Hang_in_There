@@ -27,11 +27,11 @@ model User{
   sessions      Session[]
 }
 model LimitEntry {
-  id       String @id @default(uuid())
   category   Categories
   value    Int
   userId   String
   user     User   @relation(fields: [userId], references: [id])
+  @@unique([userId, category], name: "userId_category")
 }
 
 model Piece{
