@@ -8,10 +8,8 @@ const nextConfig = {
       },
     ],
   },
-  // Add other configurations here as needed
 };
 
-// Set environment variable for NEXTAUTH_URL
 const isProd = process.env.NODE_ENV === 'production';
 process.env.NEXTAUTH_URL = isProd ? process.env.NEXTAUTH_URL : 'http://localhost:3000';
 

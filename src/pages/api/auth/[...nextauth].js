@@ -10,7 +10,7 @@ import { LimitCategories } from '../../../../graphql/resolvers/resolvers';
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: 'jwt',
   },
