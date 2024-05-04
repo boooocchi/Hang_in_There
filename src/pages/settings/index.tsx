@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import Loading from '@/components/elements/message/Loading';
+import SmtWrongMessage from '@/components/elements/message/SmtWrongMessage';
 import MainLayout from '@/components/layouts/layout/MainLayout';
 import SettingsForm from '@/features/settings/components/SettingsForm';
 import { useAuth } from '@/hooks/useAuth';
@@ -14,7 +14,6 @@ export const GET_USER_QUERY = gql`
       email
       googleSignin
       limitEntries {
-        id
         category
         value
         userId
@@ -28,10 +27,11 @@ const Index = () => {
   const { data, loading, error } = useQuery(GET_USER_QUERY, {
     variables: { userId },
   });
-  const router = useRouter();
 
   if (error) {
-    router.push('/auth/signin');
+    <MainLayout title="Settings">
+      <SmtWrongMessage />
+    </MainLayout>;
   }
   if (loading) {
     return (
