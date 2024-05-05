@@ -10,7 +10,7 @@ const HeaderDropdownMenu = () => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className="focus:outline-none relative z-[99] rounded-full h-[30px] w-[30px] bg-darkGray border-deepGreen border-1 overflow-hidden">
+        <button className="focus:outline-none relative z-[5] rounded-full h-[30px] w-[30px] bg-darkGray border-deepGreen border-1 overflow-hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="30"
@@ -48,8 +48,8 @@ const HeaderDropdownMenu = () => {
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           sideOffset={12}
-          align="end"
-          className="max-xs:hidden text-base overflow-hidden rounded-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]"
+          align="start"
+          className="text-base overflow-hidden rounded-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]"
         >
           <Link href="/settings">
             <DropdownMenu.Item className="hover:outline-none outline-none px-md hover:duration-300 py-sm  hover:bg-lighterOrange font-normal text-center hover:text-gray ">

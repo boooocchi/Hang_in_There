@@ -26,7 +26,7 @@ const SearchResultModal: React.FC<SearchResultModalProps> = ({ isModalOpen, setI
             tabIndex={0}
             role="button"
             onClick={() => setIsModalOpen(false)}
-            className="bg-black opacity-50 h-screen w-screen  left-0 top-0 fixed "
+            className="bg-black opacity-50 h-screen w-screen  left-0 top-0 fixed z-[998]"
           ></div>
           {children}
         </ClientPortal>

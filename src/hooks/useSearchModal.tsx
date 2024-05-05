@@ -57,7 +57,7 @@ export const useSearch: SearchHook = () => {
 
   const Modal = (
     <SearchResultModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-      <div className="h-[600px] w-[850px] bg-darkGray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-[999]">
+      <div className="xs:h-[600px] xs:w-[850px] w-[350px] h-[500px] bg-darkGray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] xs:p-lg xs:px-2xl p-md flex flex-col gap-3 items-center  fixed z-[999]">
         <div className="relative flex w-full justify-center items-center">
           <div className="relative justify-center items-center">
             <svg
@@ -87,7 +87,7 @@ export const useSearch: SearchHook = () => {
         </div>
         <div className="w-full overflow-y-scroll hide-scrollbar flex flex-col gap-3">
           <div>
-            <h1 className="font-bold mb-3 text-xl">Your Wardrobe</h1>
+            <h1 className="font-bold xs:mb-3 text-xl mb-2">Your Wardrobe</h1>
             <div className="flex flex-col w-full overflow-hidden">
               {wardrobeDataLoading && <Loading size="small"></Loading>}
               {!wardrobeDataLoading && !sortedWardrobeData && <div className="text-sm h-10">No search result</div>}
@@ -116,7 +116,7 @@ export const useSearch: SearchHook = () => {
             </div>
           </div>
           <div>
-            <h2 className="font-bold mb-2 text-xl">Your Outfit</h2>
+            <h2 className="font-bold xs:mb-3 mb-2 text-xl">Your Outfit</h2>
             <div className="flex w-full gap-3 overflow-x-scroll">
               {all_dendoOutfit_loading && <Loading size="small"></Loading>}
               {!all_dendoOutfit_loading && !dendoOutfitData && <div className="text-sm h-10">No search result</div>}
@@ -142,7 +142,7 @@ export const useSearch: SearchHook = () => {
           </div>
         </div>
         <button
-          className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-gray absolute -top-5 -right-8 text-sm shadow-sm"
+          className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-gray absolute xs:-top-5 xs:-right-8 -right-3 -top-3 text-sm shadow-sm"
           onClick={() => handleModalClose()}
         >
           <CancelIcon style="w-5 h-5" />

@@ -4,6 +4,8 @@
 
 html {
   box-sizing: border-box;
+  height: 100vh; /* Fallback for browsers that do not support env() */
+  height: env(safe-area-inset-bottom) + 100vh;
 }
 
 textarea:focus,
