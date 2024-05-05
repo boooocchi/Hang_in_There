@@ -33,7 +33,7 @@ const Input: React.FC<InputProps> = ({
           </label>
         )}
         <input
-          type={name === 'password' ? 'password' : 'text'}
+          type={name.includes('password') ? 'password' : 'text'}
           id={name}
           className="rounded-md border-1 bg-darkGray border-middleGreen  py-sm px-md relative "
           placeholder={placeholder ?? name}

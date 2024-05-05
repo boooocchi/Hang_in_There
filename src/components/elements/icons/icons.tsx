@@ -1574,7 +1574,7 @@ const EmptyIllustration: React.FC<Props> = ({ style }) => (
   </svg>
 );
 
-const SigninIllustration: React.FC = () => (
+const SigninIllustration: React.FC<Props> = ({style}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     data-name="Layer 1"
@@ -1582,6 +1582,7 @@ const SigninIllustration: React.FC = () => (
     height="140"
     viewBox="300 300 650 450"
     xmlnsXlink="http://www.w3.org/1999/xlink"
+    className={style}
   >
     <path
       id="abb48a01-b3b6-4bc9-9e6f-5cc93133d8eb-1062"

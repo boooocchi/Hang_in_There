@@ -20,7 +20,7 @@ const AuthLayout: React.FC<Children> = ({ children }) => {
   }
 
   return (
-    <div className="w-full bg-middleGreen bg-cover h-screen flex items-center justify-center">
+    <div className="w-full bg-middleGreen bg-cover h-screen xs:flex items-center justify-center hidden">
       <div className="w-1/2 flex justify-center">
         <div className="w-2/3 flex flex-col items-center text-gray">
           <Image alt="logo" src="/image/logo.png" width={80} height={80} />
@@ -39,7 +39,7 @@ const AuthLayout: React.FC<Children> = ({ children }) => {
           </div>
         </div>
       </div>
-      <div className="h-full w-1/2 flex justify-center items-center bg-darkGray">{children}</div>
+      {children}
     </div>
   );
 };

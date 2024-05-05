@@ -72,32 +72,34 @@ const SigninForm = () => {
   };
 
   return (
-    <div className=" flex flex-col items-center gap-3 w-1/2">
-      <div className="flex gap-3 items-center mb-md">
-        <h1 className="text-2xl font-bold">Sign in</h1>
-        {errorMessage && <p className={`text-errorRed  `}>{errorMessage}</p>}
-      </div>
-      <form className="flex flex-col gap-4 w-full  justify-center" onSubmit={handleSubmit(onSubmit)}>
-        <div className="w-full flex flex-col gap-md">
-          <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
-          <Input register={register('password')} name="password" errorMessage={errors.password?.message}></Input>
+    <div className="xs:h-full h-[500px] flex justify-center items-center xs:w-1/2 w-4/5 rounded-lg bg-darkGray p-md">
+      <div className="xs:w-1/2 w-full flex flex-col justify-center items-center  gap-3">
+        <div className="flex gap-3 items-center xs:mb-md mb-xs">
+          <h1 className="text-2xl font-bold">Sign in</h1>
+          {errorMessage && <p className={`text-errorRed  `}>{errorMessage}</p>}
         </div>
-        <Button loading={isLoading}>Sign in</Button>
-      </form>
+        <form className="flex flex-col gap-4 w-full  justify-center" onSubmit={handleSubmit(onSubmit)}>
+          <div className="w-full flex flex-col gap-md">
+            <Input register={register('email')} name="email" errorMessage={errors.email?.message}></Input>
+            <Input register={register('password')} name="password" errorMessage={errors.password?.message}></Input>
+          </div>
+          <Button loading={isLoading}>Sign in</Button>
+        </form>
 
-      <p className="text-center">or</p>
-      <div className="w-full">
-        <button className="w-full" onClick={handleGoogleSignin}>
-          <p className="flex items-center justify-center gap-2">
-            <GoogleIcon />
-            Sign in with Google
-          </p>
-        </button>
-      </div>
-      <div className="flex justify-end">
-        <Link href="/auth/signup" className="underline  hover:text-accentOrange">
-          Don&apos;t have an account?
-        </Link>
+        <p className="text-center">or</p>
+        <div className="w-full">
+          <button className="w-full" onClick={handleGoogleSignin}>
+            <p className="flex items-center justify-center gap-2">
+              <GoogleIcon />
+              Sign in with Google
+            </p>
+          </button>
+        </div>
+        <div className="flex justify-end">
+          <Link href="/auth/signup" className="underline  hover:text-accentOrange">
+            Don&apos;t have an account?
+          </Link>
+        </div>
       </div>
     </div>
   );
