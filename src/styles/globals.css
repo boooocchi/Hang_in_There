@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+html body {
   box-sizing: border-box;
-  height: 100vh; /* Fallback for browsers that do not support env() */
-  height: env(safe-area-inset-bottom) + 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 textarea:focus,

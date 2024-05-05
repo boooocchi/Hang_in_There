@@ -16,6 +16,18 @@ import '@/styles/globals.css';
 export default function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
 
+  React.useEffect(() => {
+    const adjustHeight = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    adjustHeight();
+    window.addEventListener('resize', adjustHeight);
+
+    return () => window.removeEventListener('resize', adjustHeight);
+  }, []);
+
   return (
     <ApolloProvider client={apolloClient}>
       <SessionProvider session={pageProps.session}>
