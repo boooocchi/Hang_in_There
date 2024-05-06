@@ -34,11 +34,6 @@ select:focus {
   color: #e96440 !important;
 }
 
-.hide-scrollbar::-webkit-scrollbar {
-  display: none important!;
-  scrollbar-color: red;
-}
-
 .form-checkbox:focus {
   box-shadow: none !important;
 }
@@ -54,38 +49,6 @@ select:focus {
   transition:
     opacity 1000ms,
     transform 1000ms;
-}
-.toastMessage-exit {
-  transform: translateX(0);
-  opacity: 1;
-}
-.toastMessage-exit-active {
-  will-change: transform, opacity;
-  transform: translateX(100%);
-  opacity: 0;
-  transition:
-    opacity 1000ms,
-    transform 1000ms;
-}
-
-.userSpeechBubble:after {
-  content: '';
-  position: absolute;
-  top: 20px;
-  right: -40px;
-  border-width: 10px 20px 10px 20px;
-  border-style: solid;
-  border-color: transparent transparent transparent #fdfdfd;
-}
-
-.aiSpeechBubble:after {
-  content: '';
-  position: absolute;
-  top: 20px;
-  left: -40px;
-  border-width: 10px 20px 10px 20px;
-  border-style: solid;
-  border-color: transparent #fdfdfd transparent transparent;
 }
 
 .wishListCard::after {
@@ -103,4 +66,8 @@ select:focus {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+input:disabled {
+  opacity: 1;
 }

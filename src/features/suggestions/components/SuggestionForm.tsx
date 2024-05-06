@@ -52,28 +52,28 @@ Color: ${piece.color}`,
   const { Modal, setIsModalOpen } = usePieceSelectModal({ createMessage });
 
   return (
-    <form onSubmit={(e) => onSubmit(e)} className="h-full relative">
+    <form onSubmit={(e) => onSubmit(e)} className="max-xs:max-h-[74svh] h-full relative">
       <div className="flex flex-col h-full w-full">
-        <div className="h-[85%] w-full  flex flex-col gap-3">
+        <div className="h-[85%] w-full  flex flex-col gap-3 overflow-y-scroll">
           {sentMessage && (
             <div className="w-full flex justify-end">
-              <div className="mr-[40px]  bg-gray w-[60%] relative userSpeechBubble whitespace-pre-wrap p-md px-lg rounded-md shadow-md">
+              <div className="bg-gray xs:w-[60%] w-4/5 relative whitespace-pre-wrap p-md px-lg rounded-md shadow-md">
                 {sentMessage}
               </div>
             </div>
           )}
           {isResponseLoading && (
-            <div className="relative bg-gray whitespace-pre-wrap p-md px-lg rounded-md aiSpeechBubble ">
+            <div className="relative xs:w-[60%] w-4/5 bg-gray whitespace-pre-wrap p-md px-lg rounded-md shadow-md">
               waiting for AI response...
             </div>
           )}
           {aiResponse && (
-            <div className="relative w-[70%] bg-gray shadow-md  whitespace-pre-wrap p-md px-lg rounded-md aiSpeechBubble  ml-[30px]">
+            <div className="relativexs:w-[60%] w-4/5 bg-gray shadow-md  whitespace-pre-wrap p-md px-lg rounded-md mb-md">
               {aiResponse}
             </div>
           )}
         </div>
-        <div className="bottom-0 absolute flex items-end w-full flex-col">
+        <div className="xs:bottom-0 -bottom-1 absolute flex items-end w-full flex-col pt-sm bg-darkGray">
           <div className="w-full flex justify-end">
             <button
               onClick={() => {
@@ -87,7 +87,7 @@ Color: ${piece.color}`,
           </div>
           <div className="pt-sm  w-full">
             <div className="w-full relative">
-              <div className=" py-sm px-md pr-[70px] overflow-y-hidden whitespace-pre-wrap    break-words max-h-[164px] min-h-[44px] invisible leading-[24px] rounded-md">
+              <div className=" py-sm px-md pr-[70px] overflow-y-hidden whitespace-pre-wrap break-words max-h-[164px] min-h-[44px] invisible leading-[24px] rounded-md">
                 {message}
                 {/* ダミーのテキストを入れてline-heightの高さが確保されるようにする */}|
               </div>
@@ -97,7 +97,7 @@ Color: ${piece.color}`,
                 value={message}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setMessage(e.target.value)}
               />
-              <Button style="px-sm py-xs  absolute right-3 bottom-[22px] translate-y-1/2">
+              <Button style="px-sm py-xs absolute right-3 bottom-[22px] translate-y-1/2">
                 <SendIcon />
               </Button>
             </div>

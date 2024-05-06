@@ -53,8 +53,8 @@ export default function Home({ weatherData }: WeatherData) {
       <section className="flex flex-col h-full w-full gap-md">
         <div className="h-[25%] max-xs:h-[150px] flex xs:gap-md gap-sm font-bold">
           <div className="h-full py-md px-md xs:w-[70%] w-1/2 relative  bg-gray rounded-lg shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
-            <div className="xs:text-2xl text-xl font-boldest leading-[1.2] tracking-tight">
-              <span className={`${titleFont.className} max-xs:text-base`}>Hello,</span> <br className="xs:hidden" />{' '}
+            <div className="xs:text-2xl text-xl font-boldest leading-[1.1] tracking-tight">
+              <span className={`${titleFont.className} max-xs:text-lg`}>Hello,</span> <br className="xs:hidden" />{' '}
               {userName}.
             </div>
             <DashboardHeroIcon style="absolute xs:right-5 right-1 bottom-0 xs:h-[200px] xs:w-[200px] h-[80px] w-[80px]" />
