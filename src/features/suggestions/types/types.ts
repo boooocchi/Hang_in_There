@@ -6,7 +6,7 @@ export type OpenAiValues = {
 };
 
 export interface Piece {
-  title: string;
+  itemName: string;
   description: string | null;
   color: Colors | null;
   category: Categories | null;

@@ -12,9 +12,9 @@ export type PieceDetailSectionProps = {
       description: string;
       id: string;
       imageUrl: string;
-      location: string;
+      brand: string;
       price: number;
-      title: string;
+      itemName: string;
     };
   };
   editMode?: boolean;

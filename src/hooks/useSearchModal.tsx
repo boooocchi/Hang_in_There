@@ -106,7 +106,7 @@ export const useSearch: SearchHook = () => {
                                 <ImageWithLoading alt="piece image" url={piece.imageUrl} />
                               </div>
                             </Link>
-                            <div className="text-sm mt-1 w-[150px] truncate">{piece.title}</div>
+                            <div className="text-sm mt-1 w-[150px] truncate">{piece.itemName}</div>
                           </div>
                         ))}
                       </div>

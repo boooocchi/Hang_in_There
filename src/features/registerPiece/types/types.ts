@@ -1,9 +1,9 @@
 import { Categories, Colors } from '@prisma/client';
 
 export type RegisterPieceValues = {
-  title: string;
+  itemName: string;
   description?: string | null;
-  location?: string | null;
+  brand?: string | null;
   price?: number | null;
   color: Colors;
   category: Categories;
@@ -12,9 +12,9 @@ export type RegisterPieceValues = {
 
 export type PieceData = {
   id: string;
-  title: string;
+  itemName: string;
   description: string;
-  location: string;
+  brand: string;
   price: number;
   color: Colors;
   category: Categories;

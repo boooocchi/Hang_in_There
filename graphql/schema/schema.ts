@@ -33,11 +33,11 @@ export const typeDefs = gql`
     id: String!
     createdAt: DateTime!
     updatedAt: DateTime!
-    title: String!
+    itemName: String!
     description: String
     color: Colors!
     category: Categories!
-    location: String
+    brand: String
     price: Float
     userId: String!
     imageUrl: String!
@@ -74,18 +74,18 @@ export const typeDefs = gql`
     ACCESSORIES
   }
   enum Colors {
+    BLACK
+    WHITE
+    GRAY
+    BROWN
+    BEIGE
     RED
     BLUE
     YELLOW
     GREEN
-    BROWN
-    BEIGE
     ORANGE
     PURPLE
     PINK
-    BLACK
-    WHITE
-    GREY
     GOLD
     SILVER
     BRONZE
@@ -122,22 +122,22 @@ export const typeDefs = gql`
   type Mutation {
     signup(email: String!, password: String!, userName: String!): AuthPayload
     register_piece(
-      title: String!
+      itemName: String!
       description: String
       color: Colors!
       category: Categories!
-      location: String
+      brand: String
       price: Float
       imageUrl: String!
       userId: String!
     ): Piece
     update_piece(
       id: String!
-      title: String!
+      itemName: String!
       description: String
       color: Colors!
       category: Categories!
-      location: String
+      brand: String
       price: Float
       imageUrl: String!
     ): Piece

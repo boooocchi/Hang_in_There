@@ -2,9 +2,9 @@ import { Categories, Colors } from '@prisma/client';
 import * as yup from 'yup';
 
 export const registerPieceValidationSchema = yup.object({
-  title: yup.string().required('Title is required'),
+  itemName: yup.string().required('Item name is required'),
   description: yup.string().nullable(),
-  location: yup.string().nullable(),
+  brand: yup.string().nullable(),
   price: yup.number().nullable().typeError('Price should be a number'),
   color: yup
     .string()

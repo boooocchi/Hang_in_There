@@ -38,11 +38,11 @@ model Piece{
   id  String @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  title String 
+  itemName String 
   description String?
   color Colors
   category Categories
-  location String?
+  brand String?
   price Float?
   imageUrl String
   userId String
@@ -75,21 +75,21 @@ model WishList{
 }
 
 enum Colors {
-  RED
-  BLUE
-  YELLOW
-  GREEN
-  BROWN
-  BEIGE
-  ORANGE
-  PURPLE
-  PINK
-  BLACK
-  WHITE
-  GREY
-  GOLD
-  SILVER
-  BRONZE
+    BLACK
+    WHITE
+    GRAY
+    BROWN
+    BEIGE
+    RED
+    BLUE
+    YELLOW
+    GREEN
+    ORANGE
+    PURPLE
+    PINK
+    GOLD
+    SILVER
+    BRONZE
 }
 
 enum Categories {

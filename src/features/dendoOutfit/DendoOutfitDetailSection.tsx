@@ -19,7 +19,7 @@ type DendoOutfitDetailSectionProps = {
 
 type piece = {
   imageUrl: string;
-  title: string;
+  itemName: string;
   color: Colors;
   category: Categories;
 };
@@ -30,7 +30,7 @@ const DendoOutfitDetailSection: React.FC<DendoOutfitDetailSectionProps> = ({ den
   );
 
   return (
-    <div className="flex xs:gap-5 gap-lg flex-grow xs:flex-row flex-col w-full">
+    <div className="flex xs:gap-xl gap-lg flex-grow xs:flex-row flex-col w-full">
       <div className="flex max-xs:flex-row-reverse justify-start items-start max-xs:gap-sm h-full max-xs:max-h-[366px] max-xs:overflow-hidden">
         <div className="grid grid-cols-1 gap-2 content-start h-full max-xs:overflow-y-scroll no-scrollover min-w-[70px]">
           {dendoOutfitDetailsData.imageUrl && (
@@ -53,7 +53,7 @@ const DendoOutfitDetailSection: React.FC<DendoOutfitDetailSectionProps> = ({ den
           {dendoOutfitDetailsData?.pieces?.map((piece) => {
             return (
               <button
-                key={piece.title}
+                key={piece.itemName}
                 className={`h-[80px] aspect-[3/4] overflow-hidden relative rounded-md ${
                   featuredPic === piece.imageUrl && 'border-accentOrange border-2'
                 }`}
@@ -75,13 +75,15 @@ const DendoOutfitDetailSection: React.FC<DendoOutfitDetailSectionProps> = ({ den
             {dendoOutfitDetailsData?.description}
           </p>
         </div>
-        <h2 className={`text-lg font-extraBold mb-2${mainFont.className}`}>Keywords</h2>
-        <div className="flex gap-2 max-xs:overflow-x-scroll">
-          {dendoOutfitDetailsData.keywords.map((keyword) => (
-            <span key="keyword" className="bg-gray shadow-md rounded-md px-sm py-xs">
-              {keyword}
-            </span>
-          ))}
+        <div>
+          <h2 className={`text-lg font-extraBold mb-2 ${mainFont.className}`}>Keywords</h2>
+          <div className="flex gap-2 max-xs:overflow-x-scroll max-xs:overflow-y-visible h-10">
+            {dendoOutfitDetailsData.keywords.map((keyword) => (
+              <p key="keyword" className="bg-gray shadow-md rounded-md px-sm py-xs h-8">
+                {keyword}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -22,11 +22,11 @@ type signUpMutationArgs = {
 };
 
 type registerPieceArgs = {
-  title: string;
+  itemName: string;
   description: string;
   color: Colors;
   category: Categories;
-  location?: string;
+  brand?: string;
   price?: number;
   imageUrl: string;
   userId: string;
@@ -71,9 +71,9 @@ export const resolvers = {
         where: {
           userId: args.userId,
           OR: [
-            { title: { contains: args.searchText } },
+            { itemName: { contains: args.searchText } },
             { description: { contains: args.searchText } },
-            { location: { contains: args.searchText } },
+            { brand: { contains: args.searchText } },
           ],
         },
       });
@@ -156,11 +156,11 @@ export const resolvers = {
       try {
         const piece = await context.prisma.piece.create({
           data: {
-            title: args.title,
+            itemName: args.itemName,
             description: args.description,
             color: args.color,
             category: args.category,
-            location: args.location,
+            brand: args.brand,
             price: args.price,
             imageUrl: args.imageUrl,
             userId: args.userId,
@@ -176,11 +176,11 @@ export const resolvers = {
       _parent: unknown,
       args: {
         id: string;
-        title: string;
+        itemName: string;
         description?: string;
         color: Colors;
         category: Categories;
-        location?: string;
+        brand?: string;
         price?: number;
         imageUrl: string;
       },
@@ -190,11 +190,11 @@ export const resolvers = {
         const piece = await context.prisma.piece.update({
           where: { id: args.id },
           data: {
-            title: args.title,
+            itemName: args.itemName,
             description: args.description,
             color: args.color,
             category: args.category,
-            location: args.location,
+            brand: args.brand,
             price: args.price,
             imageUrl: args.imageUrl,
           },

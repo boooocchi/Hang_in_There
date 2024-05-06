@@ -21,7 +21,7 @@ const SuggestionForm = () => {
   const createMessage = (piece: Piece) => {
     setMessage(
       `I would like to ask for good matching pieces for this item below
-Name: ${piece.title}
+Name: ${piece.itemName}
 Description: ${piece.description}
 Color: ${piece.color}`,
     );

@@ -102,9 +102,9 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
                               htmlFor={piece.id}
                               className="flex flex-col gap-1 relative w-[150px] aspect-[3/4]   bg-gray  rounded-md  border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange"
                             >
-                              <ImageWithLoading id={piece.id} url={piece.imageUrl} alt={piece.title} />
+                              <ImageWithLoading id={piece.id} url={piece.imageUrl} alt={piece.itemName} />
                             </label>
-                            <p className="text-sm truncate">{piece.title}</p>
+                            <p className="text-sm truncate">{piece.itemName}</p>
                           </div>
                         );
                       })}

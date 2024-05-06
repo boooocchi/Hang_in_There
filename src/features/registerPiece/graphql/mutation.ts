@@ -2,33 +2,33 @@ import { gql } from '@apollo/client';
 
 export const REGISTER_PIECE_MUTATION = gql`
   mutation Mutation(
-    $title: String!
+    $itemName: String!
     $color: Colors!
     $category: Categories!
     $userId: String!
     $description: String
-    $location: String
+    $brand: String
     $price: Float
     $imageUrl: String!
   ) {
     register_piece(
-      title: $title
+      itemName: $itemName
       color: $color
       category: $category
       userId: $userId
       description: $description
-      location: $location
+      brand: $brand
       price: $price
       imageUrl: $imageUrl
     ) {
       id
       createdAt
       updatedAt
-      title
+      itemName
       description
       color
       category
-      location
+      brand
       price
       userId
       imageUrl
@@ -39,25 +39,25 @@ export const REGISTER_PIECE_MUTATION = gql`
 export const UPDATE_PIECE_MUTATION = gql`
   mutation Update_piece(
     $id: String!
-    $title: String!
+    $itemName: String!
     $color: Colors!
     $category: Categories!
     $imageUrl: String!
     $description: String
-    $location: String
+    $brand: String
     $price: Float
   ) {
     update_piece(
       id: $id
-      title: $title
+      itemName: $itemName
       color: $color
       category: $category
       imageUrl: $imageUrl
       description: $description
-      location: $location
+      brand: $brand
       price: $price
     ) {
-      title
+      itemName
     }
   }
 `;

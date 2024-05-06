@@ -14,11 +14,11 @@ export const GET_All_PIECES_QUERY = gql`
       id
       createdAt
       updatedAt
-      title
+      itemName
       description
       color
       category
-      location
+      brand
       price
       imageUrl
       userId

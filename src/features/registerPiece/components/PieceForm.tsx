@@ -20,7 +20,7 @@ import { getErrorMessage } from '@/utils/errorHandler';
 import { dateFormatter } from '@/utils/utils';
 
 import { REGISTER_PIECE_MUTATION, UPDATE_PIECE_MUTATION, UPLOAD_S3_IMAGE } from '../graphql/mutation';
-import { RegisterPieceValues, WardrobeQueryData, RegisterPieceMutationData } from '../types/types';
+import { RegisterPieceValues, RegisterPieceMutationData } from '../types/types';
 import { uploadPhoto } from '../utils/uploadImage';
 import { registerPieceValidationSchema } from '../validation/registerPieceValidationSchema';
 
@@ -48,28 +48,20 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
   const { handleFileSelect, imageFile, setImageFile } = useUploadImage({ setImageUrl });
 
   const [registerPiece] = useMutation<RegisterPieceMutationData>(REGISTER_PIECE_MUTATION, {
-    update: (cache, { data }) => {
-      if (data) {
-        const existingData: WardrobeQueryData | null = cache.readQuery({
-          query: GET_All_PIECES_QUERY,
-          variables: { userId },
-        });
-        if (existingData) {
-          cache.writeQuery({
-            query: GET_All_PIECES_QUERY,
-            data: { all_pieces: [data.register_piece, ...existingData.all_pieces] },
-          });
-        }
-      }
-    },
+    refetchQueries: [
+      {
+        query: GET_All_PIECES_QUERY,
+        variables: { userId },
+      },
+    ],
   });
 
   React.useEffect(() => {
     reset();
     if (pieceData?.piece === undefined) return;
-    setValue('title', pieceData.piece.title);
+    setValue('itemName', pieceData.piece.itemName);
     setValue('description', pieceData.piece.description);
-    setValue('location', pieceData.piece.location);
+    setValue('brand', pieceData.piece.brand);
     setValue('price', pieceData.piece.price);
     setValue('color', pieceData.piece.color);
     setValue('category', pieceData.piece.category);
@@ -107,9 +99,9 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
           await updatePiece({
             variables: {
               id: pieceData.piece.id,
-              title: data.title,
+              itemName: data.itemName,
               description: data.description,
-              location: data.location,
+              brand: data.brand,
               price: data.price,
               color: data.color,
               category: data.category,
@@ -144,9 +136,9 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
 
           await registerPiece({
             variables: {
-              title: data.title,
+              itemName: data.itemName,
               description: data.description,
-              location: data.location,
+              brand: data.brand,
               price: data.price,
               color: data.color,
               category: data.category,
@@ -173,21 +165,21 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
       >
         <div className="flex flex-col xs:justify-between xs:h-full max-xs:w-full gap-md xs:flex-grow">
           <Input
-            register={register('title')}
-            label="Title *"
-            name="title"
-            errorMessage={errors.title?.message}
+            register={register('itemName')}
+            label="Item Name *"
+            name="itemName"
+            errorMessage={errors.itemName?.message}
             placeholder="ex. Fleece Jacket"
             disabled={!editMode}
           />
           <div className="flex justify-between gap-md">
             <div className="w-1/2 overflow-hidden">
               <Input
-                register={register('location')}
-                name="location"
-                label="Location"
+                register={register('brand')}
+                name="brand"
+                label="Brand"
                 placeholder="ex. downtown MUJI"
-                errorMessage={errors.location?.message}
+                errorMessage={errors.brand?.message}
                 disabled={!editMode}
               />
             </div>

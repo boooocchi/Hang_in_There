@@ -16,7 +16,7 @@ const GET_OUTFIT_QUERY = gql`
       description
       pieces {
         imageUrl
-        title
+        itemName
         color
         category
         id

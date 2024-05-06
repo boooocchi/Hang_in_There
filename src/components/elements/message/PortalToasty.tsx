@@ -8,24 +8,23 @@ import ClientPortal from '../Portal';
 const PortalToasty: React.FC = () => {
   const { textsState } = useToast();
 
-  const isMessage = textsState.some((textState) => textState.show);
   return (
     <ClientPortal selector="#myportal">
-      <div
-        className={`w-[400px] fixed gap-sm -right-[400px] top-[50px] flex flex-col text z-[999] ${!isMessage && 'z-[0] pointer-events-none'}`}
-      >
+      <div className={` fixed -right-[400px] h-[500px] top-[50px] text z-[999]`}>
         {textsState.map((textState, index) => {
           return (
             <div
               key={index}
-              className={`relative  rounded-md max-w-[300px]  ease-in transition-all duration-[300]  ${textState.type !== 'error' ? 'bg-lightGreen' : 'bg-lightOrange'} flex items-center shadow-md  z-[999]  ${
-                textState.show ? 'xs:-translate-x-[350px] -translate-x-[320px]' : 'translate-x-[0] opacity-0'
+              className={`relative mb-sm rounded-md min-w-[300px] max-w-[500px] ease-in transition-all duration-[300]  ${textState.type !== 'error' ? 'bg-lightGreen' : 'bg-lightOrange'} flex items-center shadow-md  z-[999]  ${
+                textState.show ? 'xs:-translate-x-[450px] -translate-x-[420px]' : 'translate-x-[0] opacity-0'
               }`}
             >
-              <div className=" flex items-center px-md justify-center">
+              <div className="flex items-center px-md justify-center">
                 {textState.type === 'error' ? <ErrorIllustration /> : <SuccessIllustration />}
               </div>
-              <div className="bg-gray h-full w-full py-lg px-lg  rounded-r-md">{textState.text}</div>
+              <div className="bg-gray h-full w-full py-lg px-lg  rounded-r-md text-md">
+                {textState.text !== '' ? textState.text : `dummy`}
+              </div>
             </div>
           );
         })}

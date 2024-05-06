@@ -15,12 +15,12 @@ async function main() {
 
   const testJacket = await prisma.piece.create({
     data: {
-      title: `Bomber Suede Jacket`,
+      itemName: `Bomber Suede Jacket`,
       description: `Real suede bomber jacket with high collar. The jacket is in great condition, with no stains or tears. The jacket is a size medium, but fits more like a small in Canada`,
       color: Colors.BROWN,
       category: Categories.OUTERWEAR,
       price: 500,
-      location: `Banana Republic at Robson`,
+      brand: `Banana Republic at Robson`,
       imageUrl: `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/testJacket.webp`,
       user: { connect: { id: testUser.id } },
     },
@@ -28,12 +28,12 @@ async function main() {
 
   const testPants = await prisma.piece.create({
     data: {
-      title: 'Grey dress wool pants',
+      itemName: 'Grey dress wool pants',
       description: 'Grey dress wool pants, size 30 waist, 30 length. In great condition, no stains or tears.',
-      color: Colors.GREY,
+      color: Colors.GRAY,
       category: Categories.BOTTOMS,
       price: 100,
-      location: 'Beauty & Youth in Osaka',
+      brand: 'Beauty & Youth in Osaka',
       imageUrl: `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/testPants.webp`,
       user: { connect: { id: testUser.id } },
     },

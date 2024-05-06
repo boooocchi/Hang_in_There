@@ -67,7 +67,7 @@ export const useWardrobe = ({
   const handleSearchTextChange = (searchText: string) => {
     const filteredData = wardrobeData?.filter(
       (item) =>
-        item.title.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) ||
+        item.itemName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) ||
         item?.description?.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
     );
     setData(filteredData);

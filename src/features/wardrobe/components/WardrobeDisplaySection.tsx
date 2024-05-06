@@ -47,17 +47,17 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                 {!registerPage &&
                   categoryData?.map((piece) => {
                     return (
-                      <div className="flex flex-col gap-1 overflow-hidden min-w-[200px]" key={piece.id}>
+                      <div className="flex flex-col gap-1 overflow-hidden w-[200px]" key={piece.id}>
                         <Link href={`/wardrobe/${userId}/${piece.id}`} className="group overflow-hidden rounded-md">
                           <div className="flex flex-col gap-1 relative w-[200px] aspect-[3/4] ">
                             <ImageWithLoading
                               url={piece.imageUrl}
-                              alt={piece.title}
+                              alt={piece.itemName}
                               style="group-hover:scale-110 transition-all duration-300 ease-in"
                             />
                           </div>
                         </Link>
-                        <p className="truncate">{piece.title}</p>
+                        <p className="truncate">{piece.itemName}</p>
                       </div>
                     );
                   })}
@@ -85,9 +85,9 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                           htmlFor={piece.id}
                           className="flex flex-col  relative  w-full aspect-[3/4] bg-darkGray  rounded-md cursor-pointer border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange mb-1"
                         >
-                          <ImageWithLoading url={piece.imageUrl} alt={piece.title} />
+                          <ImageWithLoading url={piece.imageUrl} alt={piece.itemName} />
                         </label>
-                        <p className="w-full truncate text-sm">{piece.title}</p>
+                        <p className="w-full truncate text-sm">{piece.itemName}</p>
                       </div>
                     );
                   })}

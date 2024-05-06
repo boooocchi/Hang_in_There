@@ -1,41 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center" id="title">Hang in There</h1>
 
-## Getting Started
+<p align="center"><img src="https://drive.google.com/file/d/17vDjpUDVcq-2ytStaPfgbHeddNMBT4P5/view?usp=drive_link" alt="project-image"></p>
 
-First, run the development server:
+<p id="description"></p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<h2>🚀 Demo</h2>
+
+[https://hang-in-there.vercel.app/](https://hang-in-there.vercel.app/)
+
+<h2>Project Screenshots:</h2>
+
+<img src="https://drive.google.com/file/d/1r_DaJIWuCeQEhoQwcBmwIh5tgUj0CGb1/view?usp=drive_link" alt="project-screenshot" width="750" height="100%">
+
+<h2>🧐 Features</h2>
+
+Here're some of the project's best features:
+
+- Responsive and Aesthetic Design: Developed a visually appealing user interface with a responsive design ensuring a seamless shopping experience across all devices.
+- User Authentication and Profile Management: Integrated secure login/register functionality enabling users to create and manage their profiles view order history.
+- Stripe Payment Integration: Integrated Stripe as a payment gateway to facilitate secure and hassle-free transactions providing users with a variety of payment options.
+- Personalized Recommendations: Implemented a recommendation algorithm on product pages to suggest related items based on the currently viewed product encouraging product exploration and potential upselling.
+- Favorites List: Added functionality for users to save products to a favorites list facilitating quick access to preferred items and improving the overall shopping experience.
+- Performance and SEO Optimization: Utilized Google Lighthouse to audit the site’s performance and SEO making necessary optimizations to improve load times accessibility and search engine rankings ultimately enhancing the user experience and site visibility.
+
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. cd eCommerce/client</p>
+
+```
+npm i & npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<h2>💻 Built with</h2>
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Technologies used in the project:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- React.js
+- SASS
+- Strapi
+- Stripe
+- zod
+- Redux
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<h2>🛡️ License:</h2>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# do_i_have_it
+This project is licensed under the This project is licensed under the @Gyunay

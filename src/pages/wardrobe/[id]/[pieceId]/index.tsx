@@ -16,9 +16,9 @@ export const GET_PIECE_QUERY = gql`
       category
       color
       price
-      location
+      brand
       description
-      title
+      itemName
       createdAt
       imageUrl
       id
@@ -68,7 +68,7 @@ const Piece = () => {
       {loading ? (
         <Loading size="large" />
       ) : (
-        <MainLayout title={data.piece.title} editButtons={editButtons}>
+        <MainLayout title={data.piece.itemName} editButtons={editButtons}>
           <PieceForm pieceData={data} editMode={editMode} setEditMode={setEditMode}></PieceForm>
         </MainLayout>
       )}

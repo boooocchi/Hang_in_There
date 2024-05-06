@@ -4,10 +4,10 @@ import React from 'react';
 export const convertAiMessage = (message: string) => {
   const options = message.trim().split('\n\n');
   const formattedOptions = options.map((option) => {
-    const [title, reason] = option.split('\n');
-    if (!title || !reason) return { title: '', reason: '' };
+    const [itemName, reason] = option.split('\n');
+    if (!itemName || !reason) return { itemName: '', reason: '' };
     return {
-      title: title.trim().substring(9).trim(),
+      itemName: itemName.trim().substring(9).trim(),
       reason: reason.trim().substring(8),
     };
   });
@@ -18,10 +18,10 @@ export const convertAiMessage = (message: string) => {
         {formattedOptions.map((option, index) => (
           <li key={index}>
             <p className="font-extraBold">
-              Option{index + 1}: {option.title}
+              Option{index + 1}: {option.itemName}
             </p>
             <p className="">Reason: {option.reason}</p>
-            <SearchLink link={option.title} />
+            <SearchLink link={option.itemName} />
           </li>
         ))}
       </ul>
