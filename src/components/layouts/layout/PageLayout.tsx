@@ -16,7 +16,7 @@ const PageLayout: React.FC<Children> = ({ children }) => {
 
   if (status === 'loading') {
     return (
-      <div className="h-screen w-full">
+      <div className="xs:h-screen h-svh w-full">
         <Loading size="large" />
       </div>
     );
@@ -32,7 +32,7 @@ const PageLayout: React.FC<Children> = ({ children }) => {
           <div className="max-xs:hidden">
             <SideMenu />
           </div>
-          <div className="flex flex-col h-full  px-sm py-md xs:px-4xl xs:py-2xl w-full bg-darkGray xs:gap-[40px] gap-[20px] xs:min-h-[750px] xs:max-h-[800px] xs:overflow-hidden max-xs:min-h-screen">
+          <div className="flex flex-col h-full  px-sm py-md xs:px-4xl xs:py-2xl w-full bg-darkGray xs:gap-[40px] gap-[20px] xs:min-h-[750px] xs:max-h-[800px] xs:overflow-hidden max-xs:min-h-svh">
             <Header />
             <div className={`flex-grow ${overFlow}`}>{children}</div>
           </div>

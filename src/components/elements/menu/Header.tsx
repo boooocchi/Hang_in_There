@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <header className="w-full">
       <nav className="flex justify-between h-full items-center">
-        <div className="flex items-center">
+        <div className="flex items-center gap-sm">
           <div className="xs:hidden flex items-center">
             <HeaderDropdownMenu />
           </div>
@@ -42,7 +42,7 @@ const Header = () => {
             <span className="xs:flex hidden">search your wardrobe..</span>
           </button>
         </div>
-        <h1 className={`xs:hidden flex ${titleFont.className} text-2xl items-baseline max-xs:mr-md`}>
+        <h1 className={`xs:hidden flex ${titleFont.className} text-2xl items-baseline max-xs:mr-lg`}>
           Hang<span className="text-lg">&nbsp; in &nbsp;</span>There
         </h1>
         <div className="xs:flex text-lg gap-0 mr-1 hidden items-center">

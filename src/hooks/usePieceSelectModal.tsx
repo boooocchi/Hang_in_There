@@ -46,11 +46,7 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
 
   const Modal = (
     <SearchResultModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-      <div
-        className="
-         h-[600px]
-         w-[850px] bg-darkGray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-999 "
-      >
+      <div className="xs:h-[600px] xs:w-[850px] w-[350px] h-[500px] max:h-[600px] max:w-[850px] bg-darkGray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-[999] ">
         <div className="relative flex w-full justify-center items-center">
           <div className={`relative justify-center items-center ${searchText && 'mb-3'}`}>
             <svg
@@ -118,19 +114,21 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
               })}
           </div>
         )}
-        <Button
-          onClick={() => {
-            if (selectedPiece) {
-              createMessage(selectedPiece);
-              setIsModalOpen(false);
-            }
-          }}
-          style="w-full"
-        >
-          Select
-        </Button>
+        {sortedWardrobeData && (
+          <Button
+            onClick={() => {
+              if (selectedPiece) {
+                createMessage(selectedPiece);
+                setIsModalOpen(false);
+              }
+            }}
+            style="w-full"
+          >
+            Select
+          </Button>
+        )}
         <button
-          className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-gray absolute -top-5 -right-8 text-sm shadow-sm"
+          className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-gray absolute xs:-top-5 xs:-right-8 -right-2 -top-3 text-sm shadow-sm"
           onClick={() => handleModalClose()}
         >
           <CancelIcon style="w-5 h-5" />

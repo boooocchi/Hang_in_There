@@ -7,7 +7,7 @@ import SignupForm from '@/features/auth/components/SignupForm';
 
 const Index = () => {
   return (
-    <div className="h-screen w-full min-h-[600px]">
+    <div className="xs:h-screen h-svh w-full min-h-[600px]">
       <div className="flex flex-col xs:hidden w-full h-full items-center justify-center bg-middleGreen">
         <h1
           className={`text-[45px] drop-shadow-2xl mb-3 mt-3 flex justify-center items-baseline ${titleFont.className} text-gray relative`}

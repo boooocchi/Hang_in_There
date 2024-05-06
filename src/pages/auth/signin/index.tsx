@@ -7,7 +7,7 @@ import SigninForm from '@/features/auth/components/SigninForm';
 
 const Signin = () => {
   return (
-    <div className="h-screen w-full min-h-[600px]">
+    <div className="xs:h-screen h-svh w-full min-h-[600px]">
       <div className="flex flex-col xs:hidden w-full h-full items-center justify-center  bg-middleGreen relative">
         <h1
           className={`text-[45px] drop-shadow-2xl mb-3 mt-3 flex justify-center items-baseline ${titleFont.className} text-gray relative`}

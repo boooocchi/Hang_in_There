@@ -12,7 +12,7 @@ const AuthLayout: React.FC<Children> = ({ children }) => {
   const router = useRouter();
   const { status } = useSession();
   if (status === 'loading') return;
-  <div className="h-screen w-screen">
+  <div className="xs:h-screen h-svh w-screen">
     <Loading size="large" />;
   </div>;
   if (status === 'authenticated') {

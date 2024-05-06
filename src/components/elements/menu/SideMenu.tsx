@@ -120,7 +120,7 @@ const SideMenu = ({
         </div>
       </nav>
       <button
-        className="xs:hidden fixed h-screen w-screen bg-[rgba(1,1,1,0.3)] z-10"
+        className="xs:hidden fixed h-svh w-screen bg-[rgba(1,1,1,0.3)] z-10"
         onClick={() => {
           setIsSideMenuOpen && setIsSideMenuOpen(false);
           document.body.style.overflow = 'auto';

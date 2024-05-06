@@ -15,7 +15,7 @@ const MainLayout: React.FC<Props> = ({ children, title, editButtons }) => {
   return (
     <div className="h-full flex flex-col">
       <div
-        className={`flex items-center gap-[30px] mb-sm tracking-wide xs:mb-md ${pathname === '/' && 'ml-xs max-xs:'} xs:ml-0 w-full`}
+        className={`flex items-center xs:gap-[30px] max-xs:justify-between mb-sm tracking-wide xs:mb-md ${pathname === '/' && 'ml-xs max-xs:'} xs:ml-0 w-full`}
       >
         <PageTitle>{title}</PageTitle>
         {editButtons && editButtons}
