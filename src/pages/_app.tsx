@@ -16,29 +16,17 @@ import '@/styles/globals.css';
 export default function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
 
-  React.useEffect(() => {
-    const adjustHeight = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-
-    adjustHeight();
-    window.addEventListener('resize', adjustHeight);
-
-    return () => window.removeEventListener('resize', adjustHeight);
-  }, []);
-
   return (
     <ApolloProvider client={apolloClient}>
       <SessionProvider session={pageProps.session}>
         <ToastProvider>
           <PortalToasty></PortalToasty>
           <div
-            className="flex w-full bg-darkGray 2xl:justify-center max-xs:h-svh;
+            className=" bg-darkGray w-screen 2xl:justify-center xs:h-screen max-xs:h-svh;
           "
           >
             <div
-              className={`flex xs:max-w-[1536px] xs:min-w-[1280px] xs:max-h-[800px] ${mainFont.className} text-base font-normal tracking-tight text-deepGreen bg-darkGray w-full xs:h-screen`}
+              className={`flex xs:max-w-[1536px] xs:min-w-[1280px] ${mainFont.className} text-base font-normal items-center tracking-tight text-deepGreen bg-darkGray w-full xs:h-screen`}
             >
               {pathname === '/auth/signup' || pathname === '/auth/signin' ? (
                 <Component {...pageProps} />

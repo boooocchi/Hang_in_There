@@ -28,8 +28,8 @@ const PageLayout: React.FC<Children> = ({ children }) => {
   return (
     <>
       {status === 'authenticated' && (
-        <div className="w-full h-full flex">
-          <div className="max-xs:hidden">
+        <div className="w-full h-full flex items-center">
+          <div className="max-xs:hidden max-h-[800px]">
             <SideMenu />
           </div>
           <div className="flex flex-col h-full  px-[15px] pt-md pb-xl xs:px-4xl xs:py-2xl w-full bg-darkGray xs:gap-[40px] gap-[20px] xs:min-h-[750px] xs:max-h-[800px] xs:overflow-hidden max-xs:min-h-svh">
