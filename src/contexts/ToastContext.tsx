@@ -60,6 +60,7 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
     setTextsState((prev) => {
       const updatedState = prev.slice();
       const indexToUpdate = updatedState.findIndex((state) => !state.show);
+
       if (text) {
         if (indexToUpdate !== -1) {
           updatedState[indexToUpdate] = {
@@ -78,7 +79,6 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
           });
         }
       }
-
       return updatedState;
     });
 
@@ -88,14 +88,16 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
         const indexToUpdate = updatedState.findIndex((state) => state.timeStamp === timeStamp);
         if (indexToUpdate !== -1) {
           updatedState[indexToUpdate] = {
-            ...updatedState[indexToUpdate],
+            text: '',
             show: false,
+            type: 'success',
+            timeStamp: 0,
           };
         }
 
         return updatedState;
       });
-    }, 5000);
+    }, 30000);
 
     return () => clearTimeout(timer);
   }, []);

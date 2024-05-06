@@ -32,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ApolloProvider client={apolloClient}>
       <SessionProvider session={pageProps.session}>
         <ToastProvider>
+          <PortalToasty></PortalToasty>
           <div
             className="flex w-full bg-darkGray 2xl:justify-center max-xs:h-svh;
           "
@@ -48,7 +49,6 @@ export default function App({ Component, pageProps }: AppProps) {
               )}
             </div>
           </div>
-          <PortalToasty></PortalToasty>
         </ToastProvider>
       </SessionProvider>
     </ApolloProvider>
