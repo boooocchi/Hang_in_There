@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <header className="w-full">
       <nav className="flex justify-between h-full items-center">
-        <div className="flex items-center gap-sm">
+        <div className="flex items-center gap-xs">
           <div className="xs:hidden flex items-center">
             <HeaderDropdownMenu />
           </div>

@@ -4,7 +4,6 @@
 
 html body {
   box-sizing: border-box;
-  height: 100svh;
 }
 
 textarea:focus,
@@ -100,4 +99,8 @@ select:focus {
   bottom: 0px;
   box-shadow: 100px 10px 10px -5px rgba(0, 0, 0, 0.3);
   border-radius: inherit; /* To match the card container's border-radius */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

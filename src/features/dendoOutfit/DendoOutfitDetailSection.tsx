@@ -30,9 +30,9 @@ const DendoOutfitDetailSection: React.FC<DendoOutfitDetailSectionProps> = ({ den
   );
 
   return (
-    <div className="flex gap-5 flex-grow ">
-      <div className=" flex justify-start items-start  gap-3 h-full">
-        <div className="grid grid-cols-1 gap-2 content-start h-full">
+    <div className="flex xs:gap-5 gap-lg flex-grow xs:flex-row flex-col w-full">
+      <div className="flex max-xs:flex-row-reverse justify-start items-start max-xs:gap-sm h-full max-xs:max-h-[366px] max-xs:overflow-hidden">
+        <div className="grid grid-cols-1 gap-2 content-start h-full max-xs:overflow-y-scroll no-scrollover min-w-[70px]">
           {dendoOutfitDetailsData.imageUrl && (
             <button
               key={dendoOutfitDetailsData.imageUrl}
@@ -64,11 +64,11 @@ const DendoOutfitDetailSection: React.FC<DendoOutfitDetailSectionProps> = ({ den
             );
           })}
         </div>
-        <div className="h-full  aspect-[3/4] relative">
+        <div className="xs:h-full max-xs:w-4/5 aspect-[3/4] relative">
           <ImageWithLoading url={featuredPic} alt="featuredPhoto" />
         </div>
       </div>
-      <div className="flex flex-grow flex-col gap-3">
+      <div className="flex flex-grow flex-col gap-md">
         <div className="flex flex-col mb-2">
           <h2 className={`text-lg font-extraBold mb-2  ${mainFont.className}`}>Description</h2>
           <p className="min-h-[250px] bg-gray shadow-md px-lg py-md rounded-lg">
@@ -76,7 +76,7 @@ const DendoOutfitDetailSection: React.FC<DendoOutfitDetailSectionProps> = ({ den
           </p>
         </div>
         <h2 className={`text-lg font-extraBold mb-2${mainFont.className}`}>Keywords</h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 max-xs:overflow-x-scroll">
           {dendoOutfitDetailsData.keywords.map((keyword) => (
             <span key="keyword" className="bg-gray shadow-md rounded-md px-sm py-xs">
               {keyword}

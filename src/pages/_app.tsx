@@ -34,7 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <ToastProvider>
           <div className="flex w-full bg-darkGray 2xl:justify-center">
             <div
-              className={`flex xs:max-w-[1536px] xs:min-w-[1280px] xs:max-h-[800px] ${mainFont.className} text-base font-normal tracking-tight text-deepGreen bg-darkGray w-full`}
+              className={`flex xs:max-w-[1536px] xs:min-w-[1280px] xs:max-h-[800px] ${mainFont.className} text-base font-normal tracking-tight text-deepGreen bg-darkGray w-full xs:h-screen`}
             >
               {pathname === '/auth/signup' || pathname === '/auth/signin' ? (
                 <Component {...pageProps} />

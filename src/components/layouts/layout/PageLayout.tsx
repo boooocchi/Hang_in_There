@@ -32,7 +32,7 @@ const PageLayout: React.FC<Children> = ({ children }) => {
           <div className="max-xs:hidden">
             <SideMenu />
           </div>
-          <div className="flex flex-col h-full  px-[15px] pt-md pb-lg xs:px-4xl xs:py-2xl w-full bg-darkGray xs:gap-[40px] gap-[20px] xs:min-h-[750px] xs:max-h-[800px] xs:overflow-hidden max-xs:min-h-svh">
+          <div className="flex flex-col h-full  px-[15px] pt-md pb-lg xs:px-4xl xs:py-2xl w-full bg-darkGray xs:gap-[40px] gap-[20px] xs:min-h-[750px] xs:max-h-[800px] xs:overflow-hidden max-xs:min-h-svh xs:h-scroll">
             <Header />
             <div className={`flex-grow ${overFlow}`}>{children}</div>
           </div>

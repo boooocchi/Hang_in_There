@@ -56,7 +56,7 @@ export default function Home({ weatherData }: WeatherData) {
             <div className="xs:text-2xl text-xl font-boldest leading-[1]">
               <span className={`${titleFont.className}`}>Hello,</span> {userName}!!
             </div>
-            <DashboardHeroIcon style="absolute xs:right-5 right-1 bottom-0 xs:h-[200px] xs:w-[200px] h-[100px] w-[100px]" />
+            <DashboardHeroIcon style="absolute xs:right-5 right-1 bottom-0 xs:h-[200px] xs:w-[200px] h-[80px] w-[80px]" />
           </div>
           <div className="xs:h-full xs:w-[30%] w-1/2">
             <WeatherBox weatherData={weatherData} />
