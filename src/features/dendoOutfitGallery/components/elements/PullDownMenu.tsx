@@ -1,5 +1,4 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { signOut } from 'next-auth/react';
 import React from 'react';
 
 import { EllipsisIcon } from '@/components/elements/icons/icons';
@@ -8,10 +7,6 @@ type PullDownProps = {
 };
 
 const PullDownMenu: React.FC<PullDownProps> = ({ deleteHandler }) => {
-  const handleSignout = async () => {
-    await signOut({ callbackUrl: '/auth/signin' });
-  };
-
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -25,11 +20,6 @@ const PullDownMenu: React.FC<PullDownProps> = ({ deleteHandler }) => {
           align="end"
           className="text-base overflow-hidden rounded-md shadow-md  bg-gray mr-1 flex flex-col items-center"
         >
-          <button onClick={handleSignout} className="w-full">
-            <DropdownMenu.Item className="bg-gray w-full hover:outline-none outline-none px-md hover:duration-300 py-sm text-sm hover:bg-lighterOrange border-r-1 border-richGreen font-normal text-center hover:text-gray">
-              Edit
-            </DropdownMenu.Item>
-          </button>
           <button onClick={deleteHandler}>
             <DropdownMenu.Item className="bg-gray outline-none px-md hover:duration-300  hover:outline-none  text-sm  py-sm  hover:bg-lighterOrange font-normal text-center hover:text-gray">
               Delete

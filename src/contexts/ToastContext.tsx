@@ -97,7 +97,7 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
 
         return updatedState;
       });
-    }, 30000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);

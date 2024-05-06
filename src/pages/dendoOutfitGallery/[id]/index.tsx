@@ -50,7 +50,7 @@ const Index = () => {
           id,
         },
       });
-      if (response) {
+      if (response && fileName) {
         await deleteS3Image({
           variables: { fileKey: fileName },
         });
