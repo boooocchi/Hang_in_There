@@ -1,6 +1,6 @@
 <h1 align="center" id="title">Hang in There</h1>
 
-<p align="center"><img src="https://github.com/boooocchi/Hang_in_There/assets/111376639/68e72c36-0861-4a88-a370-ae76f40f76eb" alt="project-image"></p>
+<p align="center"><img src="https://github.com/boooocchi/Hang_in_There/assets/111376639/95f32a36-fbe4-4b76-81a7-945bfba891d1" alt="project-image"></p>
 
 <p id="description"></p>
 
@@ -13,8 +13,6 @@
 <h2>🧐 Features</h2>
 
 <h2>🛠️ Installation Steps:</h2>
-
-<p>1. cd eCommerce/client</p>
 
 ```
 npm i & npm run dev

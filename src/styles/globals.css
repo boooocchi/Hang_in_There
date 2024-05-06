@@ -68,6 +68,7 @@ select:focus {
   display: none;
 }
 
-input:disabled {
+input:disabled,
+textarea:disabled {
   opacity: 1;
 }
