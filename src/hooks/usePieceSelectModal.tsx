@@ -46,7 +46,7 @@ export const usePieceSelectModal: SearchHook = ({ createMessage }) => {
 
   const Modal = (
     <SearchResultModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-      <div className="xs:h-[600px] xs:w-[850px] w-[350px] h-[500px] max:h-[600px] max:w-[850px] bg-darkGray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] p-lg px-2xl flex flex-col gap-3 items-center  fixed z-[999] ">
+      <div className="xs:h-[600px] xs:w-[850px] w-[350px] h-[500px] max:h-[600px] max:w-[850px] bg-darkGray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] xs:p-lg xs:px-2xl p-md flex flex-col gap-3 items-center  fixed z-[999] ">
         <div className="relative flex w-full justify-center items-center">
           <div className={`relative justify-center items-center ${searchText && 'mb-3'}`}>
             <svg
