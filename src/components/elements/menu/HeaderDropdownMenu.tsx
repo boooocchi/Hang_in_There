@@ -47,9 +47,9 @@ const HeaderDropdownMenu = () => {
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          sideOffset={12}
+          sideOffset={10}
           align="end"
-          className="text-base overflow-hidden rounded-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]"
+          className="relative text-base overflow-hidden rounded-md bg-gray max-xs:ml-sm shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]"
         >
           <Link href="/settings">
             <DropdownMenu.Item className="hover:outline-none outline-none hover:duration-300 xs:py-sm xs:px-md py-md px-lg hover:bg-lighterOrange font-normal text-center hover:text-gray ">
