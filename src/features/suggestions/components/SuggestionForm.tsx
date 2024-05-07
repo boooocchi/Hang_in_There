@@ -3,18 +3,22 @@ import React from 'react';
 
 import Button from '@/components/elements/button/Button';
 import { SendIcon } from '@/components/elements/icons/icons';
+import ErrorMessage from '@/components/elements/message/ErrorMessage';
 import { useToast } from '@/contexts/ToastContext';
 import { generateAIAdvise } from '@/features/suggestions/utils/chatGPT';
+import { useAuth } from '@/hooks/useAuth';
 import { usePieceSelectModal } from '@/hooks/usePieceSelectModal';
 import { getErrorMessage } from '@/utils/errorHandler';
 
 import { convertAiMessage } from '../utils/utils';
 
 const SuggestionForm = () => {
+  const { userId } = useAuth();
   const [message, setMessage] = React.useState('');
   const [aiResponse, setAiResponse] = React.useState<React.ReactNode | null>();
   const [sentMessage, setSentMessage] = React.useState<string>('');
   const { addToastMessage } = useToast();
+  const [aiMessageLimitError, setAiMessageLimitError] = React.useState('');
 
   const [isResponseLoading, setResponseLoading] = React.useState(false);
 
@@ -29,8 +33,12 @@ Color: ${piece.color}`,
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!message) {
-      addToastMessage('Please type something in a form!!');
+    if (message.length > 300) {
+      setAiMessageLimitError('Message should be less than 300 characters');
+      return;
+    }
+    if (!message || !userId) {
+      addToastMessage('Please type something in a form.');
       return;
     }
 
@@ -39,9 +47,17 @@ Color: ${piece.color}`,
     setMessage('');
     setResponseLoading(true);
     try {
-      const response = await generateAIAdvise(message);
+      const response = await generateAIAdvise(message, userId);
+      if (response.status === 429) {
+        addToastMessage('You have exceeded the limit of use of AI suggestion');
+        return;
+      }
       const { content } = response.message;
-      setAiResponse(convertAiMessage(content));
+      if (message.includes('I would like to ask for good matching pieces for this item below')) {
+        setAiResponse(convertAiMessage(content));
+      } else {
+        setAiResponse(content);
+      }
     } catch (error) {
       addToastMessage(getErrorMessage(error));
     } finally {
@@ -91,6 +107,7 @@ Color: ${piece.color}`,
                 {message}
                 {/* ダミーのテキストを入れてline-heightの高さが確保されるようにする */}|
               </div>
+              <ErrorMessage style={`${!aiMessageLimitError && 'hidden'} -top-5`}>{aiMessageLimitError}</ErrorMessage>
               <textarea
                 placeholder="Ask for an AI suggestion on your outfit"
                 className="absolute border-middleGreen border-1 right-0 top-0 bottom-0 left-0 rounded-md py-sm px-md whitespace-pre-wrap break-words resize-none leading-[24px] max-h-[164px] min-h-[44px] pr-[70px] bg-darkGray hide-scrollbar"

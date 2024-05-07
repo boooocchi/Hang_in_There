@@ -228,19 +228,18 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
               )}
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="description" className="text-base mb-2">
-              Description
+          <div className="flex flex-col relative">
+            <label htmlFor="description" className="mb-2 flex items-center gap-sm">
+              <span>Description</span> <ErrorMessage style="relative">{errors.description?.message}</ErrorMessage>
             </label>
             <textarea
               {...register('description')}
               name="description"
               id="description"
-              className="bg-darkGray rounded-md xs:flex-grow h-[220px] py-md px-md textarea resize-none border-1 border-middleGreen"
+              className="bg-darkGray relative rounded-md xs:h-[250px] h-[220px] py-md px-md textarea resize-none border-1 border-middleGreen"
               placeholder="ex. Warm winter down jacket"
               disabled={!editMode}
             />
-            <ErrorMessage>{errors.description?.message}</ErrorMessage>
           </div>
           <div className={`w-full hidden ${pieceData && !editMode ? 'hidden' : 'max-xs:block'}`}>
             <Button style="w-full">

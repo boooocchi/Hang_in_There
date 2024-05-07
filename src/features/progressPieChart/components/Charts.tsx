@@ -37,11 +37,7 @@ const Charts = () => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 
-  const {
-    data: limitData,
-    // loading,
-    // error,
-  } = useQuery(LIMITENTRIES_QUERY, {
+  const { data: limitData } = useQuery(LIMITENTRIES_QUERY, {
     variables: { userId },
   });
 

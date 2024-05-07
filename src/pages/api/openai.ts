@@ -2,27 +2,63 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI from 'openai';
 
+type RequestLimits = Record<string, number>;
+
+const requestLimits: RequestLimits = {};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const { message } = req.body;
+    const userId = req.body.userId;
+    const limit = 5;
+    const today = new Date().toISOString().slice(0, 10);
+    const key = `${userId}:${today}`;
+
+    if (!requestLimits[key]) {
+      requestLimits[key] = 0;
+    }
+
+    requestLimits[key]++;
+
+    if (requestLimits[key] > limit) {
+      res.status(429).json({ status: 429 });
+    }
+    const message = req.body.message;
 
     try {
       const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-      const response = await openai.chat.completions.create({
-        messages: [
-          {
-            role: 'system',
-            content:
-              'Please provide three clothing options along with a one short sentence explanation for each choice as follows: Option 1: [clothing option 1] Reason: [one sentence reason]  Option 2: [clothing option 2] Reason: [one sentence reason]  Option 3: [clothing option 3] Reason: [one sentence reason]. Each option should be separated by a new empty line.',
-          },
-          message,
-        ],
-        model: 'gpt-3.5-turbo',
-        temperature: 1,
-      });
+      if (message.content.includes('I would like to ask for good matching pieces for this item below')) {
+        const response = await openai.chat.completions.create({
+          messages: [
+            {
+              role: 'system',
+              content:
+                'Please provide three clothing options along with a one short sentence explanation for each choice as follows: Option 1: [clothing option 1] Reason: [one sentence reason]  Option 2: [clothing option 2] Reason: [one sentence reason]  Option 3: [clothing option 3] Reason: [one sentence reason]. Each option should be separated by a new empty line.',
+            },
+            message,
+          ],
+          model: 'gpt-3.5-turbo',
+          temperature: 1,
+        });
 
-      res.status(200).json(response.choices[0]);
+        res.status(200).json(response.choices[0]);
+      } else {
+        const response = await openai.chat.completions.create({
+          messages: [
+            {
+              role: 'system',
+              content:
+                'you are helpful assistance. you can answer questions about fashion and clothing. when User ask something not related to fashion, you can say "I am a fashion assistant and I can only answer questions related to fashion and clothing. Please ask me a question about fashion or clothing."',
+            },
+            message,
+          ],
+          model: 'gpt-3.5-turbo',
+          temperature: 1,
+          max_tokens: 500,
+        });
+
+        res.status(200).json(response.choices[0]);
+      }
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error communicating with OpenAI API' });

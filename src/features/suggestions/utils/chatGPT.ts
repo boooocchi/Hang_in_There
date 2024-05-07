@@ -1,6 +1,7 @@
 import { smtWentWrongMessage } from '@/constants/Message';
+import { getErrorMessage } from '@/utils/errorHandler';
 
-export const generateAIAdvise = async (message: string) => {
+export const generateAIAdvise = async (message: string, userId: string) => {
   try {
     const response = await fetch('/api/openai', {
       method: 'POST',
@@ -9,11 +10,12 @@ export const generateAIAdvise = async (message: string) => {
       },
       body: JSON.stringify({
         message: { role: 'user', content: message },
+        userId,
       }),
     });
 
     return await response.json();
   } catch (error) {
-    throw new Error(smtWentWrongMessage);
+    throw new Error(getErrorMessage(error) || smtWentWrongMessage);
   }
 };
