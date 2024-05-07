@@ -78,7 +78,7 @@ const Charts = () => {
         Your Wardrobe Capacity
       </h2>
       <div className="flex-grow flex items-center justify-center ">
-        <div className="grid grid-cols-3 xs:gap-x-xs gap-x-md overflow-hidden content-center text-gray  xs:px-xl px-md xs:ml-8 ml-5 h-full">
+        <div className="grid grid-cols-3 xs:gap-x-xs gap-x-xs overflow-hidden content-center text-gray  xs:px-lg px-sm xs:ml-8 ml-md h-full">
           {Object.keys(percentages).map((key, index) => {
             const categoryKey = key as keyof PercentagesType;
             const percentage = percentages[categoryKey].percentage;
@@ -88,7 +88,7 @@ const Charts = () => {
                   value={percentage}
                   strokeWidth={15}
                   circleRatio={0.5}
-                  className="h-full w-full"
+                  className="xs:h-[100px] xs:w-[180px] h-[70px] w-[100px]"
                   counterClockwise={true}
                   styles={buildStyles({
                     rotation: 0.25,
