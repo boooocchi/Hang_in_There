@@ -15,14 +15,14 @@ const PortalToasty: React.FC = () => {
           return (
             <div
               key={index}
-              className={`relative mb-sm rounded-md min-w-[300px] max-w-[500px] ease-in transition-all duration-[300]  ${textState.type !== 'error' ? 'bg-lightGreen' : 'bg-lightOrange'} flex items-center shadow-md  z-[999]  ${
-                textState.show ? 'xs:-translate-x-[450px] -translate-x-[420px]' : 'translate-x-[0] opacity-0'
+              className={`relative mb-sm rounded-md min-w-[300px] xs:max-w-[500px] max-w-[300px] ease-in transition-all duration-[300]  ${textState.type !== 'error' ? 'bg-lightGreen' : 'bg-lightOrange'} flex items-center shadow-md  z-[999]  ${
+                textState.show ? 'xs:-translate-x-[450px] -translate-x-[415px]' : 'translate-x-[0] opacity-0'
               }`}
             >
               <div className="flex items-center px-md justify-center">
                 {textState.type === 'error' ? <ErrorIllustration /> : <SuccessIllustration />}
               </div>
-              <div className="bg-gray h-full w-full py-lg px-lg  rounded-r-md text-md">
+              <div className="bg-gray h-full w-full xs:p-lg p-md  rounded-r-md text-md">
                 {textState.text !== '' ? textState.text : `dummy`}
               </div>
             </div>

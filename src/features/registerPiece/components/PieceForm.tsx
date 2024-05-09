@@ -163,7 +163,7 @@ const PieceForm: React.FC<PieceDetailSectionProps> = ({ pieceData, editMode = tr
         className="flex xs:flex-row flex-col-reverse xs:gap-3xl gap-md w-full xs:h-full"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex flex-col xs:justify-between xs:h-full max-xs:w-full gap-md xs:flex-grow">
+        <div className="flex flex-col xs:justify-between xs:h-full max-xs:w-full max-xs:gap-md xs:flex-grow">
           <Input
             register={register('itemName')}
             label="Item Name *"

@@ -78,6 +78,13 @@ export const authOptions = {
                 userId: user.id,
               },
             });
+            await prisma.chatRestriction.create({
+              data: {
+                userId: user.id,
+                count: 5,
+                lastUpdated: new Date(),
+              },
+            });
           });
         }
       }

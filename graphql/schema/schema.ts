@@ -13,6 +13,7 @@ export const typeDefs = gql`
     password: String
     googleSignin: Boolean
     limitEntries: [LimitEntry]
+    chatRestriction: ChatRestriction
     pieces: [Piece]
     dendoOutfits: [DendoOutfit]
   }
@@ -22,6 +23,13 @@ export const typeDefs = gql`
     category: Categories!
     value: Float!
     userId: String!
+  }
+
+  type ChatRestriction {
+    id: String!
+    userId: String!
+    lastUpdated: DateTime!
+    count: Float!
   }
 
   input LimitEntryInput {

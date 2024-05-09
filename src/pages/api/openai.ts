@@ -2,29 +2,50 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI from 'openai';
 
-type RequestLimits = Record<string, number>;
-
-const requestLimits: RequestLimits = {};
+import prisma from '../../lib/prisma';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const userId = req.body.userId;
-    const limit = 5;
-    const today = new Date().toISOString().slice(0, 10);
-    const key = `${userId}:${today}`;
-
-    if (!requestLimits[key]) {
-      requestLimits[key] = 0;
-    }
-
-    requestLimits[key]++;
-
-    if (requestLimits[key] > limit) {
-      res.status(429).json({ status: 429 });
-    }
     const message = req.body.message;
-
     try {
+      const user = await prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+        include: {
+          chatRestriction: true,
+        },
+      });
+      if (
+        user?.chatRestriction &&
+        user?.chatRestriction.lastUpdated.toISOString().slice(0, 10) !== new Date().toISOString().slice(0, 10)
+      ) {
+        await prisma.chatRestriction.update({
+          where: {
+            userId: userId,
+          },
+          data: {
+            lastUpdated: new Date(),
+            count: 1,
+          },
+        });
+      } else {
+        await prisma.chatRestriction.update({
+          where: {
+            userId: userId,
+          },
+          data: {
+            count: {
+              increment: 1,
+            },
+          },
+        });
+      }
+      if (user?.chatRestriction?.count && user.chatRestriction.count > 5) {
+        res.status(429).json({ status: 429, message: 'You have exceeded the number of requests limit' });
+        return;
+      }
       const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
       if (message.content.includes('I would like to ask for good matching pieces for this item below')) {
