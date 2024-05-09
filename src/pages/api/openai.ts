@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         where: {
           id: userId,
         },
-        include: {
+        select: {
           chatRestriction: true,
         },
       });

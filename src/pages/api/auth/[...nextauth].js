@@ -70,19 +70,19 @@ export const authOptions = {
         token.email = user.email;
         token.userName = user.userName;
         if (isNewUser) {
+          await prisma.chatRestriction.create({
+            data: {
+              userId: user.id,
+              count: 0,
+              lastUpdated: new Date(),
+            },
+          });
           LimitCategories.forEach(async (category) => {
             await prisma.limitEntry.create({
               data: {
-                category,
+                category: category,
                 value: 20,
                 userId: user.id,
-              },
-            });
-            await prisma.chatRestriction.create({
-              data: {
-                userId: user.id,
-                count: 5,
-                lastUpdated: new Date(),
               },
             });
           });

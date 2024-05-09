@@ -5,7 +5,7 @@ import { hash } from 'bcrypt';
 
 import { Context } from '../context';
 
-export const LimitCategories = ['SHOES', 'OUTERWEAR', 'LIGHTTOPS', 'HEAVYTOPS', 'BOTTOMS', 'ACCESSORIES'];
+export const LimitCategories = ['OUTERWEAR', 'LIGHTTOPS', 'HEAVYTOPS', 'BOTTOMS', 'SHOES', 'ACCESSORIES'];
 
 type limitEntriesArgs = {
   userId: string;
@@ -139,6 +139,13 @@ export const resolvers = {
                 userId: user.id,
               },
             });
+          });
+          await prisma.chatRestriction.create({
+            data: {
+              userId: user.id,
+              count: 0,
+              lastUpdated: new Date(),
+            },
           });
         }
         return { user };
