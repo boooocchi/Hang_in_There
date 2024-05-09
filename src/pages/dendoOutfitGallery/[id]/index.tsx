@@ -70,32 +70,34 @@ const Index = () => {
         <SmtWrongMessage />
       </MainLayout>
     );
-  if (loading) return <Loading size="large"></Loading>;
   return (
     <MainLayout title="Dendo Outfit">
-      {data.dendoOutfits.length === 0 ? (
+      {loading && <Loading size="large" />}
+      {data?.dendoOutfits.length === 0 ? (
         <div className="w-full h-full flex flex-col justify-center items-center">
           You have not registered any outfit yet!
           <EmptyIllustration />
         </div>
       ) : (
-        <>
-          <div className="grid xs:grid-cols-4 xs:gap-5 grid-cols-2 gap-3 rounded-md overflow-y-scroll h-full">
-            {data?.dendoOutfits.map((dendoOutfit: dendoOutfitType) => {
-              return (
-                <div key={dendoOutfit.id}>
-                  <DendoOutfitCard dendoOutfit={dendoOutfit} setArgs={setArgs} toggleModal={toggleModal} />
-                </div>
-              );
-            })}
-          </div>
-          <Modal buttonLabel="Confirm" onClick={() => deleteHandler(args.id, args.imageUrl)}>
-            <div className="flex items-center gap-2">
-              <AlertIcon />
-              Are you sure you want to delete this outfit?
+        !loading && (
+          <>
+            <div className="grid xs:grid-cols-4 xs:gap-5 grid-cols-2 gap-3 rounded-md overflow-y-scroll h-full">
+              {data?.dendoOutfits.map((dendoOutfit: dendoOutfitType) => {
+                return (
+                  <div key={dendoOutfit.id}>
+                    <DendoOutfitCard dendoOutfit={dendoOutfit} setArgs={setArgs} toggleModal={toggleModal} />
+                  </div>
+                );
+              })}
             </div>
-          </Modal>
-        </>
+            <Modal buttonLabel="Confirm" onClick={() => deleteHandler(args.id, args.imageUrl)}>
+              <div className="flex items-center gap-2">
+                <AlertIcon />
+                Are you sure you want to delete this outfit?
+              </div>
+            </Modal>
+          </>
+        )
       )}
       <RegisterOutfitBtn />
     </MainLayout>

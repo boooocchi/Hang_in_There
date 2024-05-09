@@ -63,7 +63,7 @@ export default function Home({ weatherData }: WeatherData) {
             <WeatherBox weatherData={weatherData} />
           </div>
         </div>
-        <div className="xs:h-[15%] xs:flex xs:gap-md gap-sm grid grid-cols-2">
+        <div className="xs:h-[13%] xs:flex xs:gap-md gap-sm grid grid-cols-2">
           {cards.map((card) => (
             <DashboardCard key={card.title} title={card.title} link={card.link}>
               {card.icon}

@@ -6,6 +6,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 import { ChartIcon, ChartIllustration } from '@/components/elements/icons/icons';
+import Loading from '@/components/elements/message/Loading';
 
 import { limitDataItem } from '../types/pirChartTypes';
 import { percentageCalculator, countByCategory } from '../utils/chartUtils';
@@ -36,6 +37,7 @@ type PercentagesType = {
 const Charts = () => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const { data: limitData } = useQuery(LIMITENTRIES_QUERY, {
     variables: { userId },
@@ -55,6 +57,7 @@ const Charts = () => {
   });
 
   React.useEffect(() => {
+    setIsLoading(true);
     if (limitData && limitData.limitEntries && piecesData && piecesData.pieces) {
       limitData.limitEntries.forEach((item: limitDataItem) => {
         const numOfPieces = countByCategory(piecesData.pieces, item.category);
@@ -63,6 +66,7 @@ const Charts = () => {
         setPercentage((prev) => ({ ...prev, [item.category]: { percentage } }));
       });
     }
+    setIsLoading(false);
   }, [limitData, piecesData]);
 
   return (
@@ -74,33 +78,38 @@ const Charts = () => {
         Your Wardrobe Capacity
       </h2>
       <div className="flex-grow flex items-center justify-center ">
-        <div className="grid grid-cols-3 xs:gap-x-xs gap-x-xs overflow-hidden content-center text-gray  xs:px-lg px-sm xs:ml-8 ml-md h-full">
-          {Object.keys(percentages).map((key, index) => {
-            const categoryKey = key as keyof PercentagesType;
-            const percentage = percentages[categoryKey].percentage;
-            return (
-              <div key={index} className="w-full flex justify-center px-xs relative overflow-hidden text-deepGreen">
-                <CircularProgressbar
-                  value={percentage}
-                  strokeWidth={15}
-                  circleRatio={0.5}
-                  className="xs:h-[100px] xs:w-[180px] h-[70px] w-[100px]"
-                  counterClockwise={true}
-                  styles={buildStyles({
-                    rotation: 0.25,
-                    strokeLinecap: 'round',
-                    pathTransitionDuration: 0.5,
-                    pathColor: `#11655b`,
-                    trailColor: '#ddd',
-                    backgroundColor: '#11655b',
-                  })}
-                />
-                <h2 className="text-xs font-bold absolute bottom-[20%]">{key}</h2>
-                <span className=" font-bold absolute text-sm bottom-[40%]">{percentage}%</span>
-              </div>
-            );
-          })}
-        </div>
+        {isLoading ? (
+          <Loading size="large"></Loading>
+        ) : (
+          <div className="grid grid-cols-3 xs:gap-x-xs gap-x-xs overflow-hidden content-center text-gray  xs:px-lg px-sm xs:ml-8 ml-md h-full">
+            {Object.keys(percentages).map((key, index) => {
+              const categoryKey = key as keyof PercentagesType;
+              const percentage = percentages[categoryKey].percentage;
+              return (
+                <div key={index} className="w-full flex justify-center px-xs relative overflow-hidden text-deepGreen">
+                  <CircularProgressbar
+                    value={percentage}
+                    strokeWidth={15}
+                    circleRatio={0.5}
+                    className="xs:h-[100px] xs:w-[180px] h-[70px] w-[100px]"
+                    counterClockwise={true}
+                    styles={buildStyles({
+                      rotation: 0.25,
+                      strokeLinecap: 'round',
+                      pathTransitionDuration: 0.5,
+                      pathColor: `#11655b`,
+                      trailColor: '#ddd',
+                      backgroundColor: '#11655b',
+                    })}
+                  />
+                  <h2 className="text-xs font-bold absolute bottom-[20%]">{key}</h2>
+                  <span className=" font-bold absolute text-sm bottom-[40%]">{percentage}%</span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
         <ChartIllustration style="absolute xs:-bottom-[23px] -bottom-[18px] xs:-left-0 -left-1 h-[130px] w-[130px] xs:h-[160px] xs:w-[160px] " />
       </div>
     </div>

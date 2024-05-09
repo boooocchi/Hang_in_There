@@ -2,6 +2,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import React from 'react';
 
 import { ListIcon, WishListIllustration } from '@/components/elements/icons/icons';
+import Loading from '@/components/elements/message/Loading';
 import { useToast } from '@/contexts/ToastContext';
 import { WISH_LIST_STATUS_UPDATE } from '@/features/wishList/graphql/mutation';
 import { WISH_LIST_QUERY } from '@/features/wishList/graphql/query';
@@ -13,7 +14,7 @@ import { ListItemType } from '../types/types';
 
 const DashboardWIshList = () => {
   const { userId } = useAuth();
-  const { data: wishListData } = useQuery(WISH_LIST_QUERY, {
+  const { data: wishListData, loading } = useQuery(WISH_LIST_QUERY, {
     variables: {
       userId,
     },
@@ -52,7 +53,8 @@ const DashboardWIshList = () => {
           </span>
           <span className="whitespace-nowrap">Wish List</span>
         </h2>
-        {!isAnyUncheckedItems && (
+        {loading && <Loading size="large"></Loading>}
+        {!isAnyUncheckedItems && !loading && (
           <div className="flex w-full h-full justify-center items-center">
             <span className="mb-5">You have no item on your wish list</span>
           </div>
