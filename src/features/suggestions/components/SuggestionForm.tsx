@@ -2,7 +2,7 @@ import { Piece } from '@prisma/client';
 import React from 'react';
 
 import Button from '@/components/elements/button/Button';
-import { SendIcon } from '@/components/elements/icons/icons';
+import { AiChatIcon, SendIcon } from '@/components/elements/icons/icons';
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
 import { useToast } from '@/contexts/ToastContext';
 import { generateAIAdvise } from '@/features/suggestions/utils/chatGPT';
@@ -71,20 +71,50 @@ Color: ${piece.color}`,
     <form onSubmit={(e) => onSubmit(e)} className="max-xs:max-h-[74svh] h-full relative">
       <div className="flex flex-col h-full w-full">
         <div className="h-[85%] w-full  flex flex-col gap-3 overflow-y-scroll">
+          {!sentMessage && (
+            <div className="h-full w-full flex flex-col xs:-mt-md">
+              <div className="w-full flex justify-center">
+                <AiChatIcon style="xs:h-[250px] xs:w-[250px] h-[150px] w-[150px] xs:mr-md" />
+              </div>
+              <div className="w-full text-center">
+                <h2 className="xs:text-xl text-lg font-extraBold tracking-tighter xs:mb-md mb-sm">HOW TO USE</h2>
+                <h3 className="xs:text-lg font-extraBold tracking-tight mb-xs">Ask for Matching pieces</h3>
+                <p className="mb-sm leading-[1.3] max-xs:text-sm">
+                  You can ask for good matching pieces for an item in your wardrome <br /> by clicking the button below
+                  <span className="font-bold"> &quot;wanna ask about your piece? &quot;</span>. <br /> AI will give you
+                  3 suggestions for the item you have selected.
+                </p>
+                <h3 className="xs:text-lg font-extraBold tracking-tight mb-xs">
+                  Ask general question about your outfit or question
+                </h3>
+                <p className="mb-sm leading-[1.3]  max-xs:text-sm">
+                  You can ask general fashion question <br className="xs:hidden" /> by typing in the text area below.{' '}
+                  <br />
+                  *If you ask a non fashion related question, <br className="xs:hidden" />
+                  AI will not andwer properly.
+                </p>
+                <h3 className="xs:text-base tracking-tight mb-xs text-accentOrange text-sm">
+                  *Note: This AI chat feature can be used up to 5 times per day.
+                </h3>
+              </div>
+            </div>
+          )}
           {sentMessage && (
             <div className="w-full flex justify-end">
-              <div className="bg-gray xs:w-[60%] w-4/5 relative whitespace-pre-wrap p-md px-lg rounded-md shadow-md">
+              <div className="bg-middleGreen text-gray xs:w-[60%] w-4/5 relative whitespace-pre-wrap p-lg rounded-md shadow-md">
                 {sentMessage}
               </div>
             </div>
           )}
           {isResponseLoading && (
-            <div className="relative xs:w-[60%] w-4/5 bg-gray whitespace-pre-wrap p-md px-lg rounded-md shadow-md">
-              waiting for AI response...
+            <div className="relative xs:w-[60%] w-4/5 whitespace-pre-wrap p-lg rounded-md shadow-md bg-middleGreen text-gray flex gap-xs">
+              <div className="h-2 w-2 bg-gray rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+              <div className="h-2 w-2 bg-gray rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+              <div className="h-2 w-2 bg-gray rounded-full animate-bounce"></div>
             </div>
           )}
           {aiResponse && (
-            <div className="relativexs:w-[60%] w-4/5 bg-gray shadow-md  whitespace-pre-wrap p-md px-lg rounded-md mb-md">
+            <div className="relativexs:w-[60%] w-4/5 shadow-md  whitespace-pre-wrap p-lg rounded-md mb-md bg-middleGreen text-gray">
               {aiResponse}
             </div>
           )}
