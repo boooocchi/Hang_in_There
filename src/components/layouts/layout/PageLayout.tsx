@@ -12,7 +12,8 @@ const PageLayout: React.FC<Children> = ({ children }) => {
   const { status } = useAuth();
   const router = useRouter();
   const pathname = router.pathname;
-  const overFlow = pathname === '/' ? 'overflow-visible' : 'overflow-hidden';
+  const overFlow =
+    pathname === '/' ? 'xs:overflow-visible max-xs:overflow-y-scroll max-xs:overflow-x-visible' : 'overflow-hidden';
 
   if (status === 'loading') {
     return (

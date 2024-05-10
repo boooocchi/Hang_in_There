@@ -84,18 +84,9 @@ const DashboardWIshList = () => {
           </div>
         )}
       </div>
-      <WishListIllustration style="absolute xs:-bottom-[25px] -bottom-[18px] -right-2 xs:h-[150px] xs:w-[150px] h-[100px] w-[100px]" />
+      <WishListIllustration style="absolute xs:-bottom-[25px] -bottom-[18px] -right-2 max-xs:right-0 xs:h-[150px] xs:w-[150px] h-[100px] w-[100px]" />
     </div>
   );
 };
 
 export default DashboardWIshList;
-
-{
-  /* <Link
-href="/wishList"
-className="text-accentOrange font-boldest rounded-md border-1  border-accentOrange w-[70px] text-center text-sm p-xs inline-block hover:bg-accentOrange hover:text-gray duration-300"
->
-view
-</Link> */
-}
