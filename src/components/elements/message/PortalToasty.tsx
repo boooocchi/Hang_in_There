@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ErrorIllustration, SuccessIllustration } from '@/components/elements/icons/icons';
+import { mainFont } from '@/constants/FontFamily';
 import { useToast } from '@/contexts/ToastContext';
 
 import ClientPortal from '../Portal';
@@ -15,14 +16,14 @@ const PortalToasty: React.FC = () => {
           return (
             <div
               key={index}
-              className={`relative mb-sm rounded-md min-w-[300px] xs:max-w-[500px] max-w-[300px] ease-in transition-all duration-[300]  ${textState.type !== 'error' ? 'bg-lightGreen' : 'bg-lightOrange'} flex items-center shadow-md  z-[999]  ${
+              className={`relative mb-sm rounded-md min-w-[300px] xs:max-w-[500px] max-w-[300px] ease-in transition-all duration-[300]  ${textState.type !== 'error' ? 'bg-middleGreen' : 'bg-accentOrange'} flex items-center shadow-md  z-[999]  ${
                 textState.show ? 'xs:-translate-x-[450px] -translate-x-[415px]' : 'translate-x-[0] opacity-0'
               }`}
             >
               <div className="flex items-center px-md justify-center">
                 {textState.type === 'error' ? <ErrorIllustration /> : <SuccessIllustration />}
               </div>
-              <div className="bg-gray h-full w-full xs:p-lg p-md  rounded-r-md text-md">
+              <div className={`bg-gray h-full w-full xs:p-lg p-lg  rounded-r-md text-md text-sm ${mainFont.className}`}>
                 {textState.text !== '' ? textState.text : `dummy`}
               </div>
             </div>

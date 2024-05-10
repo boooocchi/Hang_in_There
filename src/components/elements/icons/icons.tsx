@@ -899,8 +899,8 @@ const AlertIllusration: React.FC<Props> = ({ style }) => (
 const SuccessIllustration: React.FC<Props> = ({ style }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="60"
-    height="60"
+    width="50"
+    height="50"
     viewBox="0 0 443.57 607.17"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     className={style}
@@ -1029,8 +1029,8 @@ const ErrorIllustration: React.FC<Props> = ({ style }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     data-name="Layer 1"
-    width="60"
-    height="60"
+    width="50"
+    height="50"
     viewBox="0 0 742.41705 712.57302"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     className={style}
