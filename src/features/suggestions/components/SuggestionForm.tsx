@@ -88,7 +88,7 @@ Color: ${piece.color}`,
                   Ask general question about your outfit or question
                 </h3>
                 <p className="mb-sm leading-[1.3]  max-xs:text-sm">
-                  You can ask general fashion question <br className="xs:hidden" /> by typing in the text area below.{' '}
+                  You can ask a general fashion question <br className="xs:hidden" /> by typing in the text area below.{' '}
                   <br />
                   *If you ask a non fashion related question, <br className="xs:hidden" />
                   AI will not andwer properly.

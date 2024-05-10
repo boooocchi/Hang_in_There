@@ -366,7 +366,7 @@ export const resolvers = {
         const { url, fields } = await createPresignedPost(s3, {
           Bucket: bucketName,
           Key: key,
-          Fields: { 'Content-Type': 'image/png' },
+          Fields: { 'Content-Type': 'image/' },
           Conditions: [['content-length-range', 0, 10485760]],
           Expires: 60,
         });

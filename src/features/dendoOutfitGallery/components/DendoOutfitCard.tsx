@@ -10,7 +10,7 @@ import PullDownMenu from './elements/PullDownMenu';
 
 type DendoOutfitCardProps = {
   dendoOutfit: dendoOutfitType;
-  setArgs: React.Dispatch<React.SetStateAction<{id:string, imageUrl:string}>>;
+  setArgs: React.Dispatch<React.SetStateAction<{ id: string; imageUrl: string }>>;
   toggleModal: () => void;
 };
 
@@ -22,12 +22,12 @@ const DendoOutfitCard: React.FC<DendoOutfitCardProps> = ({ dendoOutfit, setArgs,
         <PullDownMenu
           deleteHandler={() => {
             toggleModal();
-            setArgs({id:dendoOutfit.id, imageUrl:dendoOutfit.imageUrl});
+            setArgs({ id: dendoOutfit.id, imageUrl: dendoOutfit.imageUrl });
           }}
         ></PullDownMenu>
       </div>
 
-      <div className="aspect-[3/4] w-full overflow-hidden relative rounded-md group">
+      <div className="aspect-[3/4] w-full overflow-hidden relative rounded-md group shadow-md">
         <Link href={`/dendoOutfit/${dendoOutfit.id}`}>
           {dendoOutfit.imageUrl ? (
             <ImageWithLoading

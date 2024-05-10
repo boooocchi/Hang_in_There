@@ -33,7 +33,12 @@ const DropZone: React.FC<DropZoneProps> = ({ className, handleFileSelect, delete
     [handleFileSelect],
   );
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'image/jpeg': ['.jpeg', '.png'],
+    },
+  });
 
   React.useEffect(() => {
     return () => {
@@ -116,7 +121,11 @@ const DropZone: React.FC<DropZoneProps> = ({ className, handleFileSelect, delete
                 'Drop the image here ...'
               ) : (
                 <>
-                  Drag and drop a image here, <br /> or click to select a file
+                  Drag and drop a image here, <br /> or click to select a file <br />
+                  <br />
+                  *Please upload
+                  <span className="font-boldest"> portrait</span> image <br />
+                  with aspect ratio <span className="font-boldest">3:4</span> for the best result. <br />
                 </>
               )}
             </p>

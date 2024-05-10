@@ -39,7 +39,9 @@ const Index = () => {
     imageUrl: '',
   });
 
-  const [deleteOutfit] = useMutation(DELETE_DENTO_OUTFIT);
+  const [deleteOutfit] = useMutation(DELETE_DENTO_OUTFIT, {
+    refetchQueries: [{ query: DENDOOUTFIT_QUERY, variables: { userId } }],
+  });
   const [deleteS3Image] = useMutation(DELETE_S3IMAGE_MUTATION);
 
   const deleteHandler = async (id: string, imageUrl: string) => {

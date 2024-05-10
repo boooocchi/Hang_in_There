@@ -47,9 +47,9 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                 {!registerPage &&
                   categoryData?.map((piece) => {
                     return (
-                      <div className="flex flex-col gap-1 overflow-hidden w-[200px] shrink-0" key={piece.id}>
-                        <Link href={`/wardrobe/${userId}/${piece.id}`} className="group overflow-hidden rounded-md">
-                          <div className="flex flex-col gap-1 relative w-[200px] aspect-[3/4] ">
+                      <div className="flex flex-col gap-1 w-[200px] shrink-0" key={piece.id}>
+                        <Link href={`/wardrobe/${userId}/${piece.id}`} className="group  rounded-md shadow-md">
+                          <div className="flex flex-col gap-1 relative overflow-hidden shadow-md rounded-md w-[200px] aspect-[3/4]">
                             <ImageWithLoading
                               url={piece.imageUrl}
                               alt={piece.itemName}
