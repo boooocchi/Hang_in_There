@@ -72,7 +72,7 @@ Color: ${piece.color}`,
       <div className="flex flex-col h-full w-full">
         <div className="h-[85%] w-full  flex flex-col gap-3 overflow-y-scroll">
           {!sentMessage && (
-            <div className="h-full w-full flex flex-col xs:-mt-md">
+            <div className="h-full w-full flex flex-col xs:-mt-md max-xs:justify-center">
               <div className="w-full flex justify-center">
                 <AiChatIcon style="xs:h-[250px] xs:w-[250px] h-[150px] w-[150px] xs:mr-md" />
               </div>
