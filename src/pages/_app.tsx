@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <ToastProvider>
           <PortalToasty></PortalToasty>
           <div
-            className="bg-darkGray flex 2xl:justify-center xs:h-screen max-xs:h-svh;
+            className="bg-darkGray flex 2xl:justify-center xs:h-screen max-xs:h-svh
           "
           >
             <div
