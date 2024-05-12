@@ -13,7 +13,7 @@ const PageLayout: React.FC<Children> = ({ children }) => {
   const router = useRouter();
   const pathname = router.pathname;
   const overFlow =
-    pathname === '/' ? 'xs:overflow-visible max-xs:overflow-y-scroll max-xs:overflow-x-visible' : 'overflow-hidden';
+    pathname === '/' ? 'xs:overflow-visible max-xs:overflow-y-scroll max-xs:overflow-x-hidden' : 'overflow-hidden';
 
   if (status === 'loading') {
     return (
