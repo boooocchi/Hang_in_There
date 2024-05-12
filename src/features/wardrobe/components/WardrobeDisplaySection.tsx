@@ -61,7 +61,8 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
                       </div>
                     );
                   })}
-                {registerPage &&
+                {sortedWardrobeData &&
+                  registerPage &&
                   register &&
                   watch &&
                   categoryData?.map((piece) => {

@@ -10,6 +10,8 @@ import Button from '@/components/elements/button/Button';
 import Input from '@/components/elements/form/Input';
 import { GoogleIcon } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
+import { useToast } from '@/contexts/ToastContext';
+import { getErrorMessage } from '@/utils/errorHandler';
 
 import { signupValidationSchema } from '../validation/signupValidationSchema';
 
@@ -48,6 +50,7 @@ const SIGNUP_MUTATION = gql`
 const SignupForm = () => {
   const router = useRouter();
   const [signup, { loading, error }] = useMutation(SIGNUP_MUTATION);
+  const { addToastMessage } = useToast();
 
   const form = useForm<SignupFormValues>({
     defaultValues: {
@@ -73,12 +76,14 @@ const SignupForm = () => {
         },
       });
       router.push('/auth/signin');
+      addToastMessage('Sign up successfully');
     } catch (error: unknown) {
       if (typeof error === 'object' && error !== null && 'graphQLErrors' in error) {
         const graphQLError = error as GraphQLException;
         if (graphQLError.graphQLErrors.length > 0) {
           const message = graphQLError.graphQLErrors[0].message;
           console.error(message);
+          addToastMessage(message, true);
         }
       } else if (error instanceof Error) {
         console.error('An unexpected error occurred:', error.message);
@@ -89,8 +94,10 @@ const SignupForm = () => {
   const handleGoogleSignup = async () => {
     try {
       await signIn('google', { callbackUrl: '/' });
+      addToastMessage('Sign up with Google successfully');
     } catch (err) {
       console.error(err);
+      addToastMessage(getErrorMessage(err), true);
     }
   };
 

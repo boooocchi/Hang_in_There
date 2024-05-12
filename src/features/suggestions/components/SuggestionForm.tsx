@@ -74,24 +74,24 @@ Color: ${piece.color}`,
           {!sentMessage && (
             <div className="h-full w-full flex flex-col xs:-mt-md max-xs:justify-center">
               <div className="w-full flex justify-center">
-                <AiChatIcon style="xs:h-[250px] xs:w-[250px] h-[150px] w-[150px] xs:mr-md" />
+                <AiChatIcon style="xs:h-[220px] xs:w-[220px] h-[150px] w-[150px] xs:mr-md" />
               </div>
               <div className="w-full text-center">
-                <h2 className="xs:text-xl text-lg font-extraBold tracking-tighter xs:mb-md mb-sm">HOW TO USE</h2>
-                <h3 className="xs:text-lg font-extraBold tracking-tight mb-xs">Ask for Matching pieces</h3>
+                <h2 className="xs:text-xl text-lg font-extraBold tracking-tighter xs:mb-md mb-sm">2 Way to Use</h2>
+                <h3 className="xs:text-lg font-extraBold tracking-tight mb-xs">1: Ask for Matching pieces</h3>
                 <p className="mb-sm leading-[1.3] max-xs:text-sm">
-                  You can ask for good matching pieces for an item in your wardrome <br /> by clicking the button below
+                  You can ask for matching pieces for selected item <br /> by clicking the button below
                   <span className="font-bold"> &quot;wanna ask about your piece? &quot;</span>. <br /> AI will give you
                   3 suggestions for the item you have selected.
                 </p>
                 <h3 className="xs:text-lg font-extraBold tracking-tight mb-xs">
-                  Ask general question about your outfit or question
+                  2: Ask general question about your outfit or question
                 </h3>
                 <p className="mb-sm leading-[1.3]  max-xs:text-sm">
                   You can ask a general fashion question <br className="xs:hidden" /> by typing in the text area below.{' '}
                   <br />
                   *If you ask a non fashion related question, <br className="xs:hidden" />
-                  AI will not andwer properly.
+                  AI will not answer properly.
                 </p>
                 <h3 className="xs:text-base tracking-tight mb-xs text-accentOrange text-sm">
                   *Note: This AI chat feature can be used up to 5 times per day.

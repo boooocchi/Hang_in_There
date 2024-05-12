@@ -45,8 +45,8 @@ const DashboardWIshList = () => {
   const isAnyUncheckedItems = wishListData?.wishList.some((item: ListItemType) => !item.checked);
 
   return (
-    <div className="xs:w-1/2 w-full xs:h-full max-xs:h-[300px] rounded-lg flex gap-md py-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-md relative">
-      <div className="w-full h-full flex  flex-col gap-sm">
+    <div className="xs:w-1/2 w-full xs:h-full max-xs:h-[300px] rounded-lg flex gap-md py-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-md relative overdflow-hidden">
+      <div className="w-full h-full flex  flex-col gap-sm overflow-hidden">
         <h2 className=" text-base text-center  items-center flex justify-cente gap-sm font-extraBold  ">
           <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
             <ListIcon style="fill-none stroke-gray" />
@@ -60,8 +60,8 @@ const DashboardWIshList = () => {
           </div>
         )}
         {wishListData?.wishList.length > 0 && isAnyUncheckedItems && (
-          <div className="overflow-y-scroll w-full xs:px-2xl px-sm h-[220px]">
-            <ul className="w-full  h-[90%]">
+          <div className="overflow-y-scroll w-full xs:px-2xl px-sm xs:max-h-[210px]">
+            <ul className="w-full h-full">
               {wishListData?.wishList.map((item: { itemName: string; id: string; checked: boolean }) => {
                 if (item.checked) return null;
                 return (

@@ -101,7 +101,7 @@ const Index = () => {
           </>
         )
       )}
-      <RegisterOutfitBtn />
+      <RegisterOutfitBtn isInstruction={data?.dendoOutfits.length === 0} />
     </MainLayout>
   );
 };

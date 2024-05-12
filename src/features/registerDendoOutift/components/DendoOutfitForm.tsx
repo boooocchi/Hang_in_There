@@ -22,6 +22,7 @@ import { UPLOAD_S3_IMAGE } from '../../registerPiece/graphql/mutation';
 import { REGISTER_OUTFIT } from '../graphql/mutation';
 import { RegisterOutfitValues } from '../types/types';
 import { registerDendoOutfitValidationSchema } from '../validation/registerDendoOutfitValidationSchema';
+import { EmptyIllustration } from '@/components/elements/icons/icons';
 
 interface CustomError extends FieldErrors<RegisterOutfitValues> {
   ''?: { message: string; type: string; ref?: React.RefObject<HTMLInputElement> };
@@ -125,6 +126,13 @@ const DendoOutfitForm = () => {
   if (loading) {
     return <Loading size="large"></Loading>;
   }
+  if (data.all_pieces.length === 0)
+    return (
+      <div className="w-full h-full flex flex-col justify-center items-center text-center">
+        You have not registered any clothes yet! <br /> Please at least register 2 pieces to create an outfit.
+        <EmptyIllustration />
+      </div>
+    );
 
   return (
     <form className="relative h-full" onSubmit={handleSubmit(onSubmit)}>

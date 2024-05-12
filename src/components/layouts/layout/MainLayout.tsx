@@ -13,7 +13,7 @@ const MainLayout: React.FC<Props> = ({ children, title, editButtons }) => {
   const pathname = router.pathname;
   const dashboardStyle = pathname === '/' ? 'xs:overflow-visible max-xs:overflow-y-scroll' : 'overflow-y-scroll';
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col relative">
       <div
         className={`flex items-center xs:gap-[30px] max-xs:justify-between mb-sm tracking-wide xs:mb-md ${pathname === '/' && 'ml-xs'} xs:ml-0 w-full`}
       >

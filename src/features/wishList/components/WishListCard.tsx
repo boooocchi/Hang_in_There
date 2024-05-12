@@ -95,7 +95,7 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
                     focus:ring-0 outline-none rounded-sm form-checkbox"
                       onChange={() => handleItemStatus(item.id, item.checked)}
                     />
-                    <p className="truncate">{item.itemName}</p>
+                    <p className="overflow-x-scroll w-full whitespace-nowrap	no-scrollbar">{item.itemName}</p>
                   </div>
                   <div className="flex gap-2">
                     <button
