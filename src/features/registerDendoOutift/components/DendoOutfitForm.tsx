@@ -7,6 +7,7 @@ import { FieldErrors, useForm } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
 import Input from '@/components/elements/form/Input';
+import { EmptyIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import { useToast } from '@/contexts/ToastContext';
 import DropZone from '@/features/registerPiece/components/DropZone';
@@ -22,7 +23,6 @@ import { UPLOAD_S3_IMAGE } from '../../registerPiece/graphql/mutation';
 import { REGISTER_OUTFIT } from '../graphql/mutation';
 import { RegisterOutfitValues } from '../types/types';
 import { registerDendoOutfitValidationSchema } from '../validation/registerDendoOutfitValidationSchema';
-import { EmptyIllustration } from '@/components/elements/icons/icons';
 
 interface CustomError extends FieldErrors<RegisterOutfitValues> {
   ''?: { message: string; type: string; ref?: React.RefObject<HTMLInputElement> };
