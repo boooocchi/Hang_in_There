@@ -54,7 +54,7 @@ export default function Home({ weatherData }: WeatherData) {
         <div className="h-[25%] max-xs:h-[150px] flex xs:gap-md gap-sm w-full font-bold">
           <div className="h-full py-md px-md xs:w-[70%] w-1/2 relative  bg-gray rounded-lg shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
             <div className="xs:text-2xl text-xl font-boldest leading-[1.1] tracking-tight">
-              <span className={`${titleFont.className} max-xs:text-lg`}>Hello,</span> <br className="xs:hidden" />{' '}
+              <span className={`${titleFont.className} max-xs:text-lg`}>Hello,</span> <br className="xs:hidden" />
               {userName}.
             </div>
             <DashboardHeroIcon style="absolute xs:right-5 right-1 bottom-0 xs:h-[200px] xs:w-[200px] h-[80px] w-[80px]" />
@@ -79,7 +79,7 @@ export default function Home({ weatherData }: WeatherData) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const res = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=vancouver,BC,CA&limit=1&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`,
@@ -101,7 +101,10 @@ export async function getServerSideProps() {
       const feelsLike = Math.round(weatherData.current.feels_like * 10) / 10;
 
       return {
-        props: { weatherData: { weatherDescription, maxTemp, minTemp, currentTemp, feelsLike, weatherData } },
+        props: {
+          weatherData: { weatherDescription, maxTemp, minTemp, currentTemp, feelsLike, weatherData },
+          revalidate: 3600,
+        },
       };
     }
   } catch (err) {

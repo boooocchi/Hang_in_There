@@ -53,7 +53,11 @@ const DashboardWIshList = () => {
           </span>
           <span className="whitespace-nowrap">Wish List</span>
         </h2>
-        {loading && <Loading size="large"></Loading>}
+        {loading && (
+          <div className="h-3/5 mb-md">
+            <Loading size="large"></Loading>
+          </div>
+        )}
         {!isAnyUncheckedItems && !loading && (
           <div className="flex w-full h-full justify-center items-center">
             <span className="mb-5">You have no item on your wish list</span>

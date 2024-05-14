@@ -53,10 +53,10 @@ const sunny = (
 const cloudy = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    strokeWidth="2"
+    strokeWidth="3"
     viewBox="8 10 115 110"
     id="cloud"
-    className="xs:w-[50px] w-[37px]"
+    className="xs:w-[45px] w-[37px]"
   >
     <path
       className="fill-accentOrange stroke-accentOrange "
