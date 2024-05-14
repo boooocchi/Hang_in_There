@@ -9,7 +9,6 @@ export const useAuth = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (status === 'loading') return;
     if (status !== 'authenticated') router.push('/auth/signin');
   }, [session, status, router]);
 
