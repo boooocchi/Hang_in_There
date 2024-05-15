@@ -19,6 +19,7 @@ const config: Config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    'next/font/google': '<rootDir>/__mocks__/nextFontMock.js',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };

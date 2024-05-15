@@ -42,7 +42,7 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
           if (categoryData?.length === 0) return null;
           return (
             <div key={category} className="flex flex-col gap-2">
-              <h2 className={`text-xl font-extraBold ${mainFont.className}`}>{upperCamelCase(category)}</h2>
+              <h2 className={`text-xl font-bolder ${mainFont.className}`}>{upperCamelCase(category)}</h2>
               <div className="flex overflow-x-scroll hide-scrollbar xs:gap-5 gap-3">
                 {!registerPage &&
                   categoryData?.map((piece) => {

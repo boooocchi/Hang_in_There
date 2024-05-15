@@ -93,7 +93,7 @@ const SideMenu = ({
                       },
                     )}
                   >
-                    <div className="flex items-center font-extraBold tracking-tighter">
+                    <div className="flex items-center font-bolder tracking-tighter">
                       <div
                         className={`h-[21px] w-[21px] flex items-center mr-5 fill-gray stroke-gray
                    group-hover:fill-lighterOrange group-hover:stroke-lighterOrange`}
@@ -115,7 +115,7 @@ const SideMenu = ({
             className={`mt-auto  text-gray w-full py-sm px-md flex items-center rounded-md group ${settingClassName}`}
           >
             <SettingIcon />
-            <span className="font-extraBold tracking-tighter text-base group-hover:text-lighterOrange">Settings</span>
+            <span className="font-bolder tracking-tighter text-base group-hover:text-lighterOrange">Settings</span>
           </Link>
         </div>
       </nav>

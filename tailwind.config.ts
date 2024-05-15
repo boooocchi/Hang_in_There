@@ -22,7 +22,7 @@ const config: Config = {
     fontWeight: {
       normal: '300',
       bold: '500',
-      extraBold: '600',
+      bolder: '600',
       boldest: '700',
     },
 

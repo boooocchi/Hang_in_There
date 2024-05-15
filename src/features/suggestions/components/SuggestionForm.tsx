@@ -77,14 +77,14 @@ Color: ${piece.color}`,
                 <AiChatIcon style="xs:h-[220px] xs:w-[220px] h-[150px] w-[150px] xs:mr-md" />
               </div>
               <div className="w-full text-center">
-                <h2 className="xs:text-xl text-lg font-extraBold tracking-tighter xs:mb-md mb-sm">2 Way to Use</h2>
-                <h3 className="xs:text-lg font-extraBold tracking-tight mb-xs">1: Ask for Matching pieces</h3>
+                <h2 className="xs:text-xl text-lg font-bolder tracking-tighter xs:mb-md mb-sm">2 Way to Use</h2>
+                <h3 className="xs:text-lg font-bolder tracking-tight mb-xs">1: Ask for Matching pieces</h3>
                 <p className="mb-sm leading-[1.3] max-xs:text-sm">
                   You can ask for matching pieces for selected item <br /> by clicking the button below
                   <span className="font-bold"> &quot;wanna ask about your piece? &quot;</span>. <br /> AI will give you
                   3 suggestions for the item you have selected.
                 </p>
-                <h3 className="xs:text-lg font-extraBold tracking-tight mb-xs">
+                <h3 className="xs:text-lg font-bolder tracking-tight mb-xs">
                   2: Ask general question about your outfit or question
                 </h3>
                 <p className="mb-sm leading-[1.3]  max-xs:text-sm">

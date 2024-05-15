@@ -15,7 +15,7 @@ const DashboardCard: React.FC<Props> = ({ children, title, link }) => {
     >
       <div className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md shrink-0">{children}</div>
       <h2 className="text-base relative  w-full">
-        <p className="font-extraBold tracking-tighter">{title}</p>
+        <p className="font-bolder tracking-tighter">{title}</p>
       </h2>
     </Link>
   );

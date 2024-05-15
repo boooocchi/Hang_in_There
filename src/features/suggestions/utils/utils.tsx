@@ -17,7 +17,7 @@ export const convertAiMessage = (message: string) => {
       <ul className="flex flex-col gap-3">
         {formattedOptions.map((option, index) => (
           <li key={index}>
-            <p className="font-extraBold">
+            <p className="font-bolder">
               Option{index + 1}: {option.itemName}
             </p>
             <p className="">Reason: {option.reason}</p>
@@ -35,7 +35,7 @@ const SearchLink: React.FC<{ link: string }> = ({ link }) => {
       <span className="">Google Image Search Result: </span>
       <Link
         href={`https://www.google.com/search?q=${link}`}
-        className="flex gap-2 items-baseline font-extraBold"
+        className="flex gap-2 items-baseline font-bolder"
         target="_blank"
       >
         <svg
