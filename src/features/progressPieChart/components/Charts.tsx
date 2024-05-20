@@ -91,7 +91,7 @@ const Charts = () => {
                     value={percentage}
                     strokeWidth={15}
                     circleRatio={0.5}
-                    className="xs:h-[100px] xs:w-[180px] h-[77px] w-[100px]"
+                    className="xs:h-[90px] xs:w-[180px] h-[77px] w-[100px]"
                     counterClockwise={true}
                     styles={buildStyles({
                       rotation: 0.25,

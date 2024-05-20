@@ -5,10 +5,22 @@ import { useSession } from 'next-auth/react';
 import { useAuth } from '@/hooks/useAuth';
 
 jest.mock('next-auth/react');
+jest.mock('next/router');
 
 describe('useAuth', () => {
+  //useSession and useRouter are mocked
   const mockUseSession = useSession as jest.Mock;
-  const mockUseRouter = useRouter as jest.Mock; // Use the mock from __mocks__
+  const mockUseRouter = useRouter as jest.Mock;
+  // Mock the push function from useRouter
+  const pushMock = jest.fn();
+  mockUseRouter.mockReturnValue({
+    push: pushMock,
+  });
+
+  afterEach(() => {
+    //mockUseSession returns different values in each test, so it should be reset after each test
+    mockUseSession.mockReset();
+  });
 
   it('when status is not loading or unauthenticated, it should return session, status and userId', () => {
     mockUseSession.mockReturnValue({
@@ -27,11 +39,6 @@ describe('useAuth', () => {
     expect(userId).toBe('dummyId');
   });
   it('when status is unauthenticated, router.push is called', () => {
-    const pushMock = jest.fn();
-    mockUseRouter.mockReturnValue({
-      push: pushMock,
-    });
-
     mockUseSession.mockReturnValue({
       data: null,
       status: 'unauthenticated',
