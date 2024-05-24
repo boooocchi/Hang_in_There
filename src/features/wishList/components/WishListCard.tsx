@@ -92,7 +92,7 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
                     <input
                       type="checkbox"
                       className="w-4 h-4 text-accentOrange border-accentOrange
-                    focus:ring-0 outline-none rounded-sm form-checkbox"
+                    focus:ring-0 rounded-sm form-checkbox focus:shadow-none cursor-pointer"
                       onChange={() => handleItemStatus(item.id, item.checked)}
                     />
                     <p className="overflow-x-scroll w-full whitespace-nowrap	no-scrollbar">{item.itemName}</p>

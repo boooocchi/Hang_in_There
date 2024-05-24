@@ -34,36 +34,6 @@ select:focus {
   color: #e96440 !important;
 }
 
-.form-checkbox:focus {
-  box-shadow: none !important;
-}
-
-.toastMessage-enter {
-  transform: translateX(100%);
-  opacity: 0;
-}
-.toastMessage-enter-active {
-  will-change: transform, opacity;
-  transform: translateX(0);
-  opacity: 1;
-  transition:
-    opacity 1000ms,
-    transform 1000ms;
-}
-
-.wishListCard::after {
-  content: '';
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0px; /* Adjust values according to your shadow size */
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  box-shadow: 100px 10px 10px -5px rgba(0, 0, 0, 0.3);
-  border-radius: inherit; /* To match the card container's border-radius */
-}
-
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

@@ -88,7 +88,7 @@ const WishListForm: React.FC<FormProps> = ({
         <input
           id="wishListInput"
           type="text"
-          className="border-b border-lightGreen bg-lightGreen rounded-md mt-1 text-lg w-full py-xs px-sm"
+          className="border-1 border-middleGreen bg-gray rounded-md mt-1 text-lg w-full py-sm px-md"
           {...register('itemName')}
         />
         {errors.itemName && (

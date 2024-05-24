@@ -10,7 +10,6 @@ const config: Config = {
   ],
   theme: {
     fontSize: {
-      '4xl': '40px',
       '3xl': '32px',
       '2xl': '24px',
       xl: '20px',
@@ -25,22 +24,16 @@ const config: Config = {
       bolder: '600',
       boldest: '700',
     },
-
     extend: {
       screens: {
         xs: '431px',
-      },
-      backgroundImage: {
-        signinPage: 'url("/image/signinPage.jpg")',
       },
       colors: {
         deepGreen: '#00423A',
         middleGreen: '#10645B',
         lighterGreen: '#13756B',
-        lightGreen: '#E7F3F3',
         accentOrange: '#E96C49',
         lighterOrange: '#FC8463',
-        lightOrange: '#ffc4aa',
         errorRed: '#FF3300',
         darkGray: '#F3F3F3',
         gray: '#FDFDFD',
