@@ -9,7 +9,7 @@ const Loading = ({ size }: { size?: string }) => {
         viewBox="0 0 24 24"
         strokeWidth="2"
         stroke="currentColor"
-        className={`inline text-lighterOrange  animate-spin  rounded-md${size === 'large' ? 'h-[40px] w-[40px]' : 'w-[24px] h-[24px]'}`}
+        className={`inline text-lighterOrange  animate-spin  rounded-md${size === 'large' ? 'h-[40px] w-[40px]' : 'w-[22px] h-[22px]'}`}
       >
         <path
           strokeLinecap="round"
