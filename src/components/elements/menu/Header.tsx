@@ -3,7 +3,7 @@ import React from 'react';
 
 import { MenuIcon } from '@/components/elements/icons/icons';
 import { titleFont } from '@/constants/FontFamily';
-import { useSearch } from '@/hooks/useSearchModal';
+import { useSearchModal } from '@/hooks/useSearchModal';
 
 import HeaderDropdownMenu from './HeaderDropdownMenu';
 import SideMenu from './SideMenu';
@@ -14,7 +14,7 @@ const Header = () => {
 
   const [isSideMenuOpen, setIsSideMenuOpen] = React.useState<boolean>(false);
 
-  const { setIsModalOpen, Modal } = useSearch();
+  const { setIsModalOpen, Modal } = useSearchModal();
   return (
     <header className="w-full">
       <nav className="flex justify-between h-full items-center">
@@ -62,7 +62,7 @@ const Header = () => {
           <MenuIcon style={`${isSideMenuOpen ? 'stroke-gray' : 'stroke-middleGreen'} h-6 w-6`} />
         </button>
       </nav>
-      {Modal}
+      <Modal />
       <div
         className={`w-full fixed z-10 xs:hidden max-xs:duration-300  max-xs:right-0  ${isSideMenuOpen ? 'max-xs:top-0 max-xs:opacity-100' : 'max-xs:top-10 pointer-events-none max-xs:opacity-0'}`}
       >
