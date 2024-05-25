@@ -13,7 +13,7 @@ const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx|js|jsx)$': 'ts-jest',
   },
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleNameMapper: {
