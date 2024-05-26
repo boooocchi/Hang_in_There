@@ -16,7 +16,7 @@ import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]';
 import { useAuth } from './useAuth';
 
 type SearchHook = () => {
-  Modal: React.FC;
+  Modal: React.ReactNode;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -55,7 +55,7 @@ export const useSearchModal: SearchHook = () => {
     setSearchText('');
   };
 
-  const Modal = () => (
+  const Modal = (
     <SearchResultModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
       <div className="xs:h-[600px] xs:w-[850px] w-[350px] h-[500px] bg-darkGray rounded-md top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] xs:p-lg xs:px-2xl p-md flex flex-col gap-3 items-center  fixed z-[999]">
         <div className="relative flex w-full justify-center items-center">

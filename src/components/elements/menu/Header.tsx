@@ -62,7 +62,7 @@ const Header = () => {
           <MenuIcon style={`${isSideMenuOpen ? 'stroke-gray' : 'stroke-middleGreen'} h-6 w-6`} />
         </button>
       </nav>
-      <Modal />
+      {Modal}
       <div
         className={`w-full fixed z-10 xs:hidden max-xs:duration-300  max-xs:right-0  ${isSideMenuOpen ? 'max-xs:top-0 max-xs:opacity-100' : 'max-xs:top-10 pointer-events-none max-xs:opacity-0'}`}
       >
