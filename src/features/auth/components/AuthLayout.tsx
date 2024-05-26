@@ -1,26 +1,11 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import { SigninIllustration } from '@/components/elements/icons/icons';
-import Loading from '@/components/elements/message/Loading';
 import { titleFont } from '@/constants/FontFamily';
 import { Children } from '@/types/types';
 
 const AuthLayout: React.FC<Children> = ({ children }) => {
-  const router = useRouter();
-  const { status } = useSession();
-  if (status === 'loading')
-    return (
-      <div className="xs:h-screen h-svh w-screen">
-        <Loading size="large" />
-      </div>
-    );
-  if (status === 'authenticated') {
-    router.push('/');
-  }
-
   return (
     <div className="w-full bg-middleGreen bg-cover h-screen xs:flex items-center justify-center hidden">
       <div className="w-1/2 flex justify-center">

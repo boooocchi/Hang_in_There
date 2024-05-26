@@ -15,6 +15,12 @@ const PageLayout: React.FC<Children> = ({ children }) => {
   const overFlow =
     pathname === '/' ? 'xs:overflow-visible max-xs:overflow-y-scroll max-xs:overflow-x-hidden' : 'overflow-hidden';
 
+  React.useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/auth/signin');
+    }
+  }, [status, router]);
+
   if (status === 'loading') {
     return (
       <div className="xs:h-screen h-svh w-full">
@@ -22,24 +28,25 @@ const PageLayout: React.FC<Children> = ({ children }) => {
       </div>
     );
   }
+
   if (status !== 'authenticated') {
-    router.push('/auth/signin');
+    return (
+      <div className="xs:h-screen h-svh w-full">
+        <Loading size="large" />
+      </div>
+    );
   }
 
   return (
-    <>
-      {status === 'authenticated' && (
-        <div className="w-full h-full flex items-center">
-          <div className="max-xs:hidden max-h-[800px]">
-            <SideMenu />
-          </div>
-          <div className="flex flex-col h-full  px-[15px] pt-md pb-xl xs:px-4xl xs:py-2xl w-full bg-darkGray xs:gap-[30px] gap-[20px] xs:min-h-[750px] xs:max-h-[800px] xs:overflow-hidden max-xs:min-h-svh">
-            <Header />
-            <div className={`flex-grow ${overFlow}`}>{children}</div>
-          </div>
-        </div>
-      )}
-    </>
+    <div className="w-full h-full flex items-center">
+      <div className="max-xs:hidden max-h-[800px]">
+        <SideMenu />
+      </div>
+      <div className="flex flex-col h-full  px-[15px] pt-md pb-xl xs:px-4xl xs:py-2xl w-full bg-darkGray xs:gap-[30px] gap-[20px] xs:min-h-[750px] xs:max-h-[800px] xs:overflow-hidden max-xs:min-h-svh">
+        <Header />
+        <div className={`flex-grow ${overFlow}`}>{children}</div>
+      </div>
+    </div>
   );
 };
 
