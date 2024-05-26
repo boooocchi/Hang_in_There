@@ -128,7 +128,10 @@ export const useSearchModal: SearchHook = () => {
                         {outfit.imageUrl ? (
                           <ImageWithLoading alt="outfit image" url={outfit.imageUrl} />
                         ) : (
-                          <div className="w-full h-full flex bg-gray justify-center items-center rounded-md">
+                          <div
+                            aria-label="Default dendooutfit image"
+                            className="w-full h-full flex bg-gray justify-center items-center rounded-md"
+                          >
                             <DendoOutfitIllustration />
                           </div>
                         )}
@@ -142,6 +145,7 @@ export const useSearchModal: SearchHook = () => {
           </div>
         </div>
         <button
+          aria-label="close modal"
           className="rounded-full h-7 w-7 flex justify-center items-center opacity-70 hover:opacity-90 bg-accentOrange leading-[10px] text-gray absolute xs:-top-5 xs:-right-8 -right-3 -top-3 text-sm shadow-sm"
           onClick={() => handleModalClose()}
         >
