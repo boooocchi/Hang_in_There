@@ -68,7 +68,7 @@ const Piece = () => {
       {loading ? (
         <Loading size="large" />
       ) : (
-        <MainLayout title={data.piece.itemName} editButtons={editButtons}>
+        <MainLayout title={data?.piece.itemName} editButtons={editButtons}>
           <PieceForm pieceData={data} editMode={editMode} setEditMode={setEditMode}></PieceForm>
         </MainLayout>
       )}
