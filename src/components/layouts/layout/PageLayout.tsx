@@ -5,8 +5,8 @@ import Loading from '@/components/elements/message/Loading';
 import { useAuth } from '@/hooks/useAuth';
 import { Children } from '@/types/types';
 
-import Header from '../../elements/menu/Header';
-import SideMenu from '../../elements/menu/SideMenu';
+import Header from '../../menu/Header';
+import SideMenu from '../../menu/SideMenu';
 
 const PageLayout: React.FC<Children> = ({ children }) => {
   const { status } = useAuth();

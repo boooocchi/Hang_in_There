@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 
-import ImageWithLoading from '@/components/elements/ImageWithLoading';
+import ImageWithLoading from '@/components/elements/image/ImageWithLoading';
 import { mainFont } from '@/constants/FontFamily';
 import { RegisterOutfitValues } from '@/features/registerDendoOutift/types/types';
 import { useAuth } from '@/hooks/useAuth';

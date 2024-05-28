@@ -2,10 +2,10 @@ import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { useModal } from '@/hooks/useModal';
+import { useAlertModal } from '@/hooks/useAlertModal';
 
 const TestModalComponent: React.FC = () => {
-  const { Modal, toggleModal, closeModal, openModal } = useModal();
+  const { Modal, toggleModal, closeModal, openModal } = useAlertModal();
 
   return (
     <div>

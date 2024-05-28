@@ -5,8 +5,8 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
 import 'react-circular-progressbar/dist/styles.css';
 
-import { ChartIcon, ChartIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
+import { ChartIcon, ChartIllustration } from '@/constants/icons/icons';
 
 import { limitDataItem } from '../types/pirChartTypes';
 import { percentageCalculator, countByCategory } from '../utils/chartUtils';

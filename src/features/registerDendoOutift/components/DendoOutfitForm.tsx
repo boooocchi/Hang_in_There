@@ -7,8 +7,8 @@ import { FieldErrors, useForm } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
 import Input from '@/components/elements/form/Input';
-import { EmptyIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
+import { EmptyIllustration } from '@/constants/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 import DropZone from '@/features/registerPiece/components/DropZone';
 import { uploadPhoto } from '@/features/registerPiece/utils/uploadImage';

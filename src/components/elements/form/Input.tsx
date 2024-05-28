@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <>
-      <div className="flex flex-col  group relative w-full">
+      <div className="flex flex-col group relative w-full">
         {label && (
           <label htmlFor={name} className={` text-base mb-1`}>
             {label}
@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = ({
         <input
           type={name.includes('password') ? 'password' : 'text'}
           id={name}
-          className="rounded-md border-1 bg-darkGray border-middleGreen  py-sm px-md relative "
+          className="rounded-md border-1 bg-darkGray border-middleGreen  py-sm px-md relative"
           placeholder={placeholder ?? name}
           {...register}
           onFocus={() => handleFocus && handleFocus(name)}

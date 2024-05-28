@@ -1,9 +1,11 @@
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
-import { MenuIcon } from '@/components/elements/icons/icons';
 import { titleFont } from '@/constants/FontFamily';
-import { useSearchModal } from '@/hooks/useSearchModal';
+import { MenuIcon } from '@/constants/icons/icons';
+import { useModal } from '@/hooks/useModal';
+
+import { SearchModalContent } from '../modal/searchModalContent';
 
 import HeaderDropdownMenu from './HeaderDropdownMenu';
 import SideMenu from './SideMenu';
@@ -14,7 +16,7 @@ const Header = () => {
 
   const [isSideMenuOpen, setIsSideMenuOpen] = React.useState<boolean>(false);
 
-  const { setIsModalOpen, Modal } = useSearchModal();
+  const { openModal, closeModal, Modal } = useModal();
   return (
     <header className="w-full">
       <nav className="flex justify-between h-full items-center">
@@ -24,7 +26,7 @@ const Header = () => {
           </div>
           <button
             className="xs:flex gap-2 items-center text-sm py-xs px-sm rounded-md border-1  max-xs:border-none xs:border-middleGreen xs:w-[180px]"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => openModal()}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +64,9 @@ const Header = () => {
           <MenuIcon style={`${isSideMenuOpen ? 'stroke-gray' : 'stroke-middleGreen'} h-6 w-6`} />
         </button>
       </nav>
-      {Modal}
+      <Modal>
+        <SearchModalContent closeModal={closeModal} />
+      </Modal>
       <div
         className={`w-full fixed z-10 xs:hidden max-xs:duration-300  max-xs:right-0  ${isSideMenuOpen ? 'max-xs:top-0 max-xs:opacity-100' : 'max-xs:top-10 pointer-events-none max-xs:opacity-0'}`}
       >

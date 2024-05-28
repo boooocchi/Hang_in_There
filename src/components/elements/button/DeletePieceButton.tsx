@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { useToast } from '@/contexts/ToastContext';
-import { useModal } from '@/hooks/useModal';
+import { useAlertModal } from '@/hooks/useAlertModal';
 import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
 import { getErrorMessage } from '@/utils/errorHandler';
 
-import { AlertIcon, TrashbinIcon } from '../icons/icons';
+import { AlertIcon, TrashbinIcon } from '../../../constants/icons/icons';
 import Loading from '../message/Loading';
 
 const DELETE_PIECE_MUTATION = gql`
@@ -39,7 +39,7 @@ const DeletePieceButton: React.FC<Props> = ({ pieceId, userId, fileKey }) => {
   const { addToastMessage } = useToast();
   const fileName = fileKey.split('https://do-i-have-it-storage.s3.amazonaws.com/')[1];
 
-  const { Modal, openModal } = useModal();
+  const { Modal, openModal } = useAlertModal();
 
   const handleDeletePiece = async () => {
     if (!pieceId) return;

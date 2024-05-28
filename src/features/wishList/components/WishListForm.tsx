@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import React from 'react';
 
 import Button from '@/components/elements/button/Button';
-import { CancelIcon } from '@/components/elements/icons/icons';
+import { CancelIcon } from '@/constants/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
 import { getErrorMessage } from '@/utils/errorHandler';

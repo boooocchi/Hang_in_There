@@ -1,10 +1,10 @@
 import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 
-import { EmptyIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import SmtWrongMessage from '@/components/elements/message/SmtWrongMessage';
 import MainLayout from '@/components/layouts/layout/MainLayout';
+import { EmptyIllustration } from '@/constants/icons/icons';
 import WardrobeDisplaySection from '@/features/wardrobe/components/WardrobeDisplaySection';
 import { useAuth } from '@/hooks/useAuth';
 

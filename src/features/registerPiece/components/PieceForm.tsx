@@ -5,9 +5,9 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
-import ImageWithLoading from '@/components/elements/ImageWithLoading';
 import Button from '@/components/elements/button/Button';
 import Input from '@/components/elements/form/Input';
+import ImageWithLoading from '@/components/elements/image/ImageWithLoading';
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
 import Loading from '@/components/elements/message/Loading';
 import { useToast } from '@/contexts/ToastContext';

@@ -1,8 +1,8 @@
 import { useQuery, useMutation } from '@apollo/client';
 import React from 'react';
 
-import { ListIcon, WishListIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
+import { ListIcon, WishListIllustration } from '@/constants/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 import { WISH_LIST_STATUS_UPDATE } from '@/features/wishList/graphql/mutation';
 import { WISH_LIST_QUERY } from '@/features/wishList/graphql/query';

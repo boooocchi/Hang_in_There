@@ -2,17 +2,17 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import React from 'react';
 
 import { DELETE_S3IMAGE_MUTATION } from '@/components/elements/button/DeletePieceButton';
-import { AlertIcon, EmptyIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import SmtWrongMessage from '@/components/elements/message/SmtWrongMessage';
 import MainLayout from '@/components/layouts/layout/MainLayout';
+import { AlertIcon, EmptyIllustration } from '@/constants/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 import DendoOutfitCard from '@/features/dendoOutfitGallery/components/DendoOutfitCard';
 import RegisterOutfitBtn from '@/features/dendoOutfitGallery/components/RegisterOutfitBtn';
 import { DELETE_DENTO_OUTFIT } from '@/features/dendoOutfitGallery/graphql/mutation';
 import { dendoOutfitType } from '@/features/dendoOutfitGallery/types/types';
+import { useAlertModal } from '@/hooks/useAlertModal';
 import { useAuth } from '@/hooks/useAuth';
-import { useModal } from '@/hooks/useModal';
 import { getErrorMessage } from '@/utils/errorHandler';
 
 export const DENDOOUTFIT_QUERY = gql`
@@ -64,7 +64,7 @@ const Index = () => {
     }
   };
 
-  const { Modal, toggleModal } = useModal();
+  const { Modal, toggleModal } = useAlertModal();
 
   if (error)
     return (

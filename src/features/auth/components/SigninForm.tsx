@@ -7,7 +7,7 @@ import { useForm, FieldErrors } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
 import Input from '@/components/elements/form/Input';
-import { GoogleIcon } from '@/components/elements/icons/icons';
+import { GoogleIcon } from '@/constants/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 import { getErrorMessage } from '@/utils/errorHandler';
 

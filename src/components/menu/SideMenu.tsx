@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { titleFont } from '@/constants/FontFamily';
 import {
   DashboardIcon,
   WardrobeIcon,
@@ -11,8 +12,7 @@ import {
   SuggestionIcon,
   SettingIcon,
   ListIcon,
-} from '@/components/elements/icons/icons';
-import { titleFont } from '@/constants/FontFamily';
+} from '@/constants/icons/icons';
 import { useAuth } from '@/hooks/useAuth';
 import { isItemBgColor } from '@/utils/utils';
 

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { ErrorIllustration, SuccessIllustration } from '@/components/elements/icons/icons';
 import { mainFont } from '@/constants/FontFamily';
+import { ErrorIllustration, SuccessIllustration } from '@/constants/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 
-import ClientPortal from '../Portal';
+import ClientPortal from '../../portal/Portal';
 
 const PortalToasty: React.FC = () => {
   const { textsState } = useToast();

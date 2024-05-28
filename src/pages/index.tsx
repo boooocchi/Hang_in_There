@@ -1,15 +1,15 @@
 import React from 'react';
 
 import DashboardCard from '@/components/elements/card/DashboardCard';
+import MainLayout from '@/components/layouts/layout/MainLayout';
+import { titleFont } from '@/constants/FontFamily';
 import {
   WardrobeIcon,
   RegisterIcon,
   DendoOutfitIcon,
   SuggestionIcon,
   DashboardHeroIcon,
-} from '@/components/elements/icons/icons';
-import MainLayout from '@/components/layouts/layout/MainLayout';
-import { titleFont } from '@/constants/FontFamily';
+} from '@/constants/icons/icons';
 import Charts from '@/features/progressPieChart/components/Charts';
 import WeatherBox from '@/features/weather/components/WeatherBox';
 import { WeatherData } from '@/features/weather/types/weatherType';

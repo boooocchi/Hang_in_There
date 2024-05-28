@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 
-import ImageWithLoading from '@/components/elements/ImageWithLoading';
-import { DendoOutfitIllustration } from '@/components/elements/icons/icons';
+import ImageWithLoading from '@/components/elements/image/ImageWithLoading';
+import { DendoOutfitIllustration } from '@/constants/icons/icons';
 import { dendoOutfitType } from '@/features/dendoOutfitGallery/types/types';
 import { dateFormatter } from '@/utils/utils';
 

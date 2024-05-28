@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
-import { SigninIllustration } from '@/components/elements/icons/icons';
 import Loading from '@/components/elements/message/Loading';
 import { titleFont } from '@/constants/FontFamily';
+import { SigninIllustration } from '@/constants/icons/icons';
 import AuthLayout from '@/features/auth/components/AuthLayout';
 import SigninForm from '@/features/auth/components/SigninForm';
 

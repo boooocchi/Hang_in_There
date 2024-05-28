@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { EditIcon, PlusIcon, TrashbinIcon } from '@/components/elements/icons/icons';
+import { EditIcon, PlusIcon, TrashbinIcon } from '@/constants/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
 import { getErrorMessage } from '@/utils/errorHandler';

@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
-import { useSearchModal } from '@/hooks/useSearchModal';
+import { useSearchModal } from '@/components/modal/searchModalContent';
 import { DENDOOUTFIT_QUERY } from '@/pages/dendoOutfitGallery/[id]';
 import { GET_All_PIECES_QUERY } from '@/pages/wardrobe/[id]/index';
 

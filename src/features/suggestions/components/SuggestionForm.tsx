@@ -2,12 +2,13 @@ import { Piece } from '@prisma/client';
 import React from 'react';
 
 import Button from '@/components/elements/button/Button';
-import { AiChatIcon, SendIcon } from '@/components/elements/icons/icons';
 import ErrorMessage from '@/components/elements/message/ErrorMessage';
+import { AiChatIcon, SendIcon } from '@/constants/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
+import { PieceSelectModalContent } from '@/features/suggestions/components/PieceSelectModalContent';
 import { generateAIAdvise } from '@/features/suggestions/utils/chatGPT';
 import { useAuth } from '@/hooks/useAuth';
-import { usePieceSelectModal } from '@/hooks/usePieceSelectModal';
+import { useModal } from '@/hooks/useModal';
 import { getErrorMessage } from '@/utils/errorHandler';
 
 import { convertAiMessage } from '../utils/utils';
@@ -65,7 +66,7 @@ Color: ${piece.color}`,
     }
   };
 
-  const { Modal, setIsModalOpen } = usePieceSelectModal({ createMessage });
+  const { Modal, closeModal, openModal } = useModal();
 
   return (
     <form onSubmit={(e) => onSubmit(e)} className="max-xs:max-h-[74svh] h-full relative">
@@ -123,7 +124,7 @@ Color: ${piece.color}`,
           <div className="w-full flex justify-end">
             <button
               onClick={() => {
-                setIsModalOpen(true);
+                openModal();
               }}
               type="button"
               className="underline mb-1"
@@ -151,7 +152,9 @@ Color: ${piece.color}`,
           </div>
         </div>
       </div>
-      {Modal}
+      <Modal>
+        <PieceSelectModalContent closeModal={closeModal} createMessage={createMessage} />
+      </Modal>
     </form>
   );
 };

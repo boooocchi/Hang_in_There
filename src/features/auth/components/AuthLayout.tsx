@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { SigninIllustration } from '@/components/elements/icons/icons';
 import { titleFont } from '@/constants/FontFamily';
+import { SigninIllustration } from '@/constants/icons/icons';
 import { Children } from '@/types/types';
 
 const AuthLayout: React.FC<Children> = ({ children }) => {
