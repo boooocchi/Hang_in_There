@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { SessionProvider } from 'next-auth/react';
 import React from 'react';
 
-import PortalToasty from '@/components/elements/message/PortalToasty';
+import ToastMessages from '@/components/elements/message/ToastMessages';
 import PageLayout from '@/components/layouts/layout/PageLayout';
 import { mainFont } from '@/constants/FontFamily';
 import { ToastProvider } from '@/contexts/ToastContext';
@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ApolloProvider client={apolloClient}>
       <SessionProvider session={pageProps.session}>
         <ToastProvider>
-          <PortalToasty></PortalToasty>
+          <ToastMessages />
           <div
             className="bg-darkGray flex 2xl:justify-center xs:h-screen max-xs:h-svh
           "

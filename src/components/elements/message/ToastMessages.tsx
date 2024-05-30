@@ -6,12 +6,12 @@ import { useToast } from '@/contexts/ToastContext';
 
 import ClientPortal from '../../portal/Portal';
 
-const PortalToasty: React.FC = () => {
+const ToastMessages: React.FC = () => {
   const { textsState } = useToast();
 
   return (
     <ClientPortal selector="#myportal">
-      <div className={` fixed -right-[400px] h-[500px] top-[50px] text z-[999]`}>
+      <div className="fixed -right-[400px] h-[500px] top-[50px] text z-[999]">
         {textsState.map((textState, index) => {
           return (
             <div
@@ -34,4 +34,4 @@ const PortalToasty: React.FC = () => {
   );
 };
 
-export default PortalToasty;
+export default ToastMessages;
