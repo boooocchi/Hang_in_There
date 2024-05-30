@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
 import React from 'react';
-import { useForm, FieldErrors } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
 import Input from '@/components/elements/form/Input';
@@ -17,10 +17,6 @@ type SigninFormValues = {
   email: string;
   password: string;
 };
-
-interface CustomError extends FieldErrors<SigninFormValues> {
-  samePassword?: { message: string; type: string; ref?: React.RefObject<HTMLInputElement> };
-}
 
 const SigninForm = () => {
   const router = useRouter();
@@ -45,18 +41,25 @@ const SigninForm = () => {
   });
 
   const { register, handleSubmit, formState } = form;
-  const errors: CustomError = formState.errors;
+  const errors = formState.errors;
 
   const onSubmit = async (data: SigninFormValues) => {
     setIsLoading(true);
 
     try {
-      await signIn('credentials', {
+      const result = await signIn('credentials', {
         email: data.email,
         password: data.password,
-        callbackUrl: '/',
+        redirect: false,
       });
+      if (result?.ok) {
+        addToastMessage('Logged in successfully!');
+      } else if (result?.error) {
+        console.error(result.error);
+        addToastMessage('Wrong email or password', true);
+      }
     } catch (err) {
+      console.error(err);
       addToastMessage(getErrorMessage(err), true);
     } finally {
       setIsLoading(false);
@@ -85,7 +88,6 @@ const SigninForm = () => {
           </div>
           <Button loading={isLoading}>Sign in</Button>
         </form>
-
         <p className="text-center">or</p>
         <div className="w-full">
           <button className="w-full" onClick={handleGoogleSignin}>

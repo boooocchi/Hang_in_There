@@ -87,14 +87,20 @@ const SignupForm = () => {
         }
       } else if (error instanceof Error) {
         console.error('An unexpected error occurred:', error.message);
+        addToastMessage(error.message, true);
       }
     }
   };
 
   const handleGoogleSignup = async () => {
     try {
-      await signIn('google', { callbackUrl: '/' });
-      addToastMessage('Sign up with Google successfully');
+      const result = await signIn('google');
+      if (result?.ok) {
+        addToastMessage('Logged in successfully!');
+      } else if (result?.error) {
+        console.error(result.error);
+        addToastMessage('Wrong email or password', true);
+      }
     } catch (err) {
       console.error(err);
       addToastMessage(getErrorMessage(err), true);
