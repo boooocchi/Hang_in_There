@@ -73,12 +73,12 @@ Color: ${piece.color}`,
       <div className="flex flex-col h-full w-full">
         <div className="h-[85%] w-full  flex flex-col gap-3 overflow-y-scroll">
           {!sentMessage && (
-            <div className="h-full w-full flex flex-col xs:-mt-md max-xs:justify-center">
-              <div className="w-full flex justify-center">
-                <AiChatIcon style="xs:h-[220px] xs:w-[220px] h-[150px] w-[150px] xs:mr-md" />
+            <div className="h-full w-full flex max-xs:flex-col xs:px-xl xs:items-center xs:-mt-md max-xs:justify-center">
+              <div className="w-full xs:w-1/2 flex justify-center">
+                <AiChatIcon style="xs:h-[250px] xs:w-[250px] h-[150px] w-[150px] xs:mr-md" />
               </div>
-              <div className="w-full text-center">
-                <h2 className="xs:text-xl text-lg font-bolder tracking-tighter xs:mb-md mb-sm">2 Way to Use</h2>
+              <div className="w-full xs:w-1/2 text-start xs:mr-md max-xs:px-sm mt-xs">
+                <h2 className="xs:text-xl text-lg font-bolder tracking-tighter xs:mb-md mb-sm">2 Ways to Use</h2>
                 <h3 className="xs:text-lg font-bolder tracking-tight mb-xs">1: Ask for Matching pieces</h3>
                 <p className="mb-sm leading-[1.3] max-xs:text-sm">
                   You can ask for matching pieces for selected item <br /> by clicking the button below
@@ -94,7 +94,7 @@ Color: ${piece.color}`,
                   *If you ask a non fashion related question, <br className="xs:hidden" />
                   AI will not answer properly.
                 </p>
-                <h3 className="xs:text-base tracking-tight mb-xs text-accentOrange text-sm">
+                <h3 className="xs:text-base tracking-tight mb-xs text-errorRed text-sm">
                   *Note: This AI chat feature can be used up to 5 times per day.
                 </h3>
               </div>

@@ -18,7 +18,7 @@ const AuthLayout: React.FC<Children> = ({ children }) => {
           >
             Hang <span className="text-3xl">&nbsp; in &nbsp;</span> There
           </h1>
-          <p className="text-center w-full leading-[1.7]">
+          <p className="text-start ml-sm leading-[1.7]">
             ・Save your favorite pieces of clothes in your own online wardrobe. <br />
             ・Create your outift by combining your favorite pieces. <br />
             ・Get matching suggestions for your items in your wardrobe. <br /> ・Limit the number of items in your
