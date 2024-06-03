@@ -37,30 +37,19 @@ const Page = () => {
     variables: { userId },
   });
 
-  if (error) {
-    return (
-      <MainLayout title="Wardrobe">
-        <SmtWrongMessage />
-      </MainLayout>
-    );
-  }
+  if (error) return <SmtWrongMessage />;
+  if (wardrobeLoading) return <Loading size="large"></Loading>;
 
   return (
-    <>
-      {wardrobeLoading ? (
-        <Loading size="large"></Loading>
-      ) : (
-        <MainLayout title="Wardrobe">
-          {wardrobeData.all_pieces.length === 0 && (
-            <div className="w-full h-full flex flex-col justify-center items-center">
-              You have not registered any clothes yet!
-              <EmptyIllustration />
-            </div>
-          )}
-          <WardrobeDisplaySection allPieces={wardrobeData?.all_pieces}></WardrobeDisplaySection>
-        </MainLayout>
+    <MainLayout title="Wardrobe">
+      {wardrobeData.all_pieces.length === 0 && (
+        <div className="w-full h-full flex flex-col justify-center items-center">
+          You have not registered any clothes yet!
+          <EmptyIllustration />
+        </div>
       )}
-    </>
+      <WardrobeDisplaySection allPieces={wardrobeData?.all_pieces}></WardrobeDisplaySection>
+    </MainLayout>
   );
 };
 

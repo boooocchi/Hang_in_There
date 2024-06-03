@@ -44,54 +44,52 @@ const WardrobeDisplaySection: React.FC<WardrobeDisplaySectionProps> = ({
             <div key={category} className="flex flex-col gap-2">
               <h2 className={`text-xl font-bolder ${mainFont.className}`}>{upperCamelCase(category)}</h2>
               <div className="flex overflow-x-scroll hide-scrollbar xs:gap-5 gap-3">
-                {!registerPage &&
-                  categoryData?.map((piece) => {
-                    return (
-                      <div className="flex flex-col gap-1 w-[200px] shrink-0" key={piece.id}>
-                        <Link href={`/wardrobe/${userId}/${piece.id}`} className="group  rounded-md shadow-md">
-                          <div className="flex flex-col gap-1 relative overflow-hidden shadow-md rounded-md w-[200px] aspect-[3/4]">
-                            <ImageWithLoading
-                              url={piece.imageUrl}
-                              alt={piece.itemName}
-                              style="group-hover:scale-110 transition-all duration-300 ease-in"
-                            />
-                          </div>
-                        </Link>
-                        <p className="truncate">{piece.itemName}</p>
-                      </div>
-                    );
-                  })}
-                {sortedWardrobeData &&
-                  registerPage &&
-                  register &&
-                  watch &&
-                  categoryData?.map((piece) => {
-                    const categoryValue = currentValue[piece.category];
-                    const isDisabled = Array.isArray(categoryValue)
-                      ? !!(categoryValue.length > 0 && !categoryValue.includes(piece.id))
-                      : !!(categoryValue && categoryValue !== piece.id);
+                {!registerPage
+                  ? categoryData?.map((piece) => {
+                      return (
+                        <div className="flex flex-col gap-1 w-[200px] shrink-0" key={piece.id}>
+                          <Link href={`/wardrobe/${userId}/${piece.id}`} className="group  rounded-md shadow-md">
+                            <div className="flex flex-col gap-1 relative overflow-hidden shadow-md rounded-md w-[200px] aspect-[3/4]">
+                              <ImageWithLoading
+                                url={piece.imageUrl}
+                                alt={piece.itemName}
+                                style="group-hover:scale-110 transition-all duration-300 ease-in"
+                              />
+                            </div>
+                          </Link>
+                          <p className="truncate">{piece.itemName}</p>
+                        </div>
+                      );
+                    })
+                  : register &&
+                    watch &&
+                    categoryData?.map((piece) => {
+                      const categoryValue = currentValue[piece.category];
+                      const isDisabled = Array.isArray(categoryValue)
+                        ? !!(categoryValue.length > 0 && !categoryValue.includes(piece.id))
+                        : !!(categoryValue && categoryValue !== piece.id);
 
-                    return (
-                      <div className="flex flex-col w-[150px] items-center shrink-0" key={piece.id}>
-                        <input
-                          type="checkbox"
-                          id={piece.id}
-                          value={piece.id}
-                          className=" form-checkbox  peer w-4 h-4 text-accentOrange bg-darkGray
+                      return (
+                        <div className="flex flex-col w-[150px] items-center shrink-0" key={piece.id}>
+                          <input
+                            type="checkbox"
+                            id={piece.id}
+                            value={piece.id}
+                            className=" form-checkbox  peer w-4 h-4 text-accentOrange bg-darkGray
                        focus:ring-0 ring-0 outline-none rounded-sm border-richGreen my-2"
-                          {...register(piece.category)}
-                          disabled={isDisabled}
-                        />
-                        <label
-                          htmlFor={piece.id}
-                          className="flex flex-col  relative  w-full aspect-[3/4] bg-darkGray  rounded-md cursor-pointer border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange mb-1"
-                        >
-                          <ImageWithLoading url={piece.imageUrl} alt={piece.itemName} />
-                        </label>
-                        <p className="w-full truncate text-sm">{piece.itemName}</p>
-                      </div>
-                    );
-                  })}
+                            {...register(piece.category)}
+                            disabled={isDisabled}
+                          />
+                          <label
+                            htmlFor={piece.id}
+                            className="flex flex-col  relative  w-full aspect-[3/4] bg-darkGray  rounded-md cursor-pointer border-none border-3 overflow-hidden peer-checked:border-accentOrange peer-hover:border-accentOrange mb-1"
+                          >
+                            <ImageWithLoading url={piece.imageUrl} alt={piece.itemName} />
+                          </label>
+                          <p className="w-full truncate text-sm">{piece.itemName}</p>
+                        </div>
+                      );
+                    })}
               </div>
             </div>
           );

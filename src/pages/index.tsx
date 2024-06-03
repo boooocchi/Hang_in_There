@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import DashboardCard from '@/components/elements/card/DashboardCard';
@@ -17,8 +18,6 @@ import DashboardWIshList from '@/features/wishList/components/DashboardWIshList'
 import { useAuth } from '@/hooks/useAuth';
 
 import '@radix-ui/themes/styles.css';
-// eslint-disable-next-line import/order
-import { useSession } from 'next-auth/react';
 
 export default function Home({ weatherData }: WeatherData) {
   const { data } = useSession();
@@ -102,7 +101,7 @@ export async function getStaticProps() {
 
       return {
         props: {
-          weatherData: { weatherDescription, maxTemp, minTemp, currentTemp, feelsLike, weatherData },
+          weatherData: { weatherDescription, maxTemp, minTemp, currentTemp, feelsLike },
           revalidate: 3600,
         },
       };

@@ -11,7 +11,7 @@ export const signupValidationSchema = yup
   .test('samePassword', 'Passwords do not match', function (value) {
     if (value.password !== value.passwordConfirmation) {
       return this.createError({
-        path: 'samePassword', // You can specify either 'email' or 'number' here
+        path: 'samePassword',
         message: 'Passwords do not match',
       });
     }

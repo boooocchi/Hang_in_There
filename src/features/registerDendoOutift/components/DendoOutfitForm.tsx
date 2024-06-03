@@ -126,7 +126,7 @@ const DendoOutfitForm = () => {
   if (loading) {
     return <Loading size="large"></Loading>;
   }
-  if (data.all_pieces.length === 0)
+  if (data.all_pieces.length < 3)
     return (
       <div className="w-full h-full flex flex-col justify-center items-center text-center">
         You have not registered any clothes yet! <br /> Please at least register 2 pieces to create an outfit.
@@ -169,12 +169,7 @@ const DendoOutfitForm = () => {
         {errors[''] && <p className="ml-5 text-sm text-errorRed">{errors[''].message}</p>}
       </div>
 
-      <WardrobeDisplaySection
-        registerPage
-        register={register}
-        watch={watch}
-        allPieces={data?.all_pieces}
-      ></WardrobeDisplaySection>
+      <WardrobeDisplaySection registerPage register={register} watch={watch} allPieces={data?.all_pieces} />
       {!isDropzone && (
         <div className="flex xs:gap-md gap-xs items-end mt-5">
           <div className="w-full flex-col flex gap-1">
