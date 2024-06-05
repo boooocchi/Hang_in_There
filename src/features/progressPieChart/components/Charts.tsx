@@ -29,9 +29,7 @@ const PIECES_QUERY = gql`
 `;
 
 type PercentagesType = {
-  [key in 'SHOES' | 'OUTERWEAR' | 'LIGHTTOPS' | 'HEAVYTOPS' | 'BOTTOMS' | 'ACCESSORIES']: {
-    percentage: number;
-  };
+  [key in 'SHOES' | 'OUTERWEAR' | 'LIGHTTOPS' | 'HEAVYTOPS' | 'BOTTOMS' | 'ACCESSORIES']: number;
 };
 
 const Charts = () => {
@@ -39,21 +37,20 @@ const Charts = () => {
   const userId = session?.user?.id;
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const { data: limitData } = useQuery(LIMITENTRIES_QUERY, {
+  const { data: limitData, loading: limitDataLoading } = useQuery(LIMITENTRIES_QUERY, {
     variables: { userId },
   });
-
-  const { data: piecesData } = useQuery(PIECES_QUERY, {
+  const { data: piecesData, loading: piecesDataLoading } = useQuery(PIECES_QUERY, {
     variables: { userId },
   });
 
   const [percentages, setPercentage] = React.useState<PercentagesType>({
-    OUTERWEAR: { percentage: 0 },
-    HEAVYTOPS: { percentage: 0 },
-    LIGHTTOPS: { percentage: 0 },
-    BOTTOMS: { percentage: 0 },
-    SHOES: { percentage: 0 },
-    ACCESSORIES: { percentage: 0 },
+    OUTERWEAR: 0,
+    HEAVYTOPS: 0,
+    LIGHTTOPS: 0,
+    BOTTOMS: 0,
+    SHOES: 0,
+    ACCESSORIES: 0,
   });
 
   React.useEffect(() => {
@@ -63,7 +60,7 @@ const Charts = () => {
         const numOfPieces = countByCategory(piecesData.pieces, item.category);
 
         const percentage = percentageCalculator(item.value, numOfPieces);
-        setPercentage((prev) => ({ ...prev, [item.category]: { percentage } }));
+        setPercentage((prev) => ({ ...prev, [item.category]: percentage }));
       });
     }
     setIsLoading(false);
@@ -78,13 +75,15 @@ const Charts = () => {
         Your Wardrobe Capacity
       </h2>
       <div className="flex-grow flex items-center justify-center ">
-        {isLoading ? (
-          <Loading size="large"></Loading>
+        {isLoading || limitDataLoading || piecesDataLoading ? (
+          <div className="h-3/5 mb-2xl">
+            <Loading size="large"></Loading>
+          </div>
         ) : (
           <div className="grid grid-cols-3 xs:gap-x-xs gap-x-xs overflow-hidden content-center text-gray  xs:px-lg xs:ml-8 ml-md h-full">
             {Object.keys(percentages).map((key, index) => {
               const categoryKey = key as keyof PercentagesType;
-              const percentage = percentages[categoryKey].percentage;
+              const percentage = percentages[categoryKey];
               return (
                 <div key={index} className="w-full flex justify-center px-xs relative overflow-hidden text-deepGreen">
                   <CircularProgressbar

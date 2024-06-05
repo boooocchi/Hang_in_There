@@ -36,21 +36,6 @@ const DendoOutfitForm = () => {
   const [uploadS3Image] = useMutation(UPLOAD_S3_IMAGE);
 
   const form = useForm<RegisterOutfitValues>({
-    defaultValues: {
-      title: '',
-      keywords: '',
-      description: '',
-      imageUrl: '',
-      LIGHTTOPS: false,
-      HEAVYTOPS: false,
-      OUTERWEAR: false,
-      BOTTOMS: false,
-      SHOES: false,
-      ACCESSORIES: false,
-    },
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     resolver: yupResolver(registerDendoOutfitValidationSchema),
   });
 
@@ -164,7 +149,11 @@ const DendoOutfitForm = () => {
       </div>
       <div className="mb-3 flex items-baseline">
         <p className="">
-          Click to select a piece... &nbsp; <span className="text-sm">*at least two from different category</span>
+          Click to select a piece... &nbsp;{' '}
+          <span className="text-sm text-errorRed">
+            * Select at least <b>2</b> items from different category. You can select up to 2 items from the same
+            category.
+          </span>
         </p>
         {errors[''] && <p className="ml-5 text-sm text-errorRed">{errors[''].message}</p>}
       </div>
