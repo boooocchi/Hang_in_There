@@ -49,7 +49,7 @@ export default function Home({ weatherData }: WeatherData) {
 
   return (
     <MainLayout title="DashBoard">
-      <section className="flex flex-col h-full xs:w-full w-[99%] gap-md max-xs:items-center">
+      <section className="flex flex-col h-full xs:w-full w-full gap-md max-xs:items-center">
         <div className="h-[25%] max-xs:h-[150px] flex xs:gap-md gap-sm w-full font-bold">
           <div className="h-full py-md px-md xs:w-[70%] w-1/2 relative  bg-gray rounded-lg shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
             <div className="xs:text-2xl text-xl font-boldest leading-[1.1] tracking-tight">
