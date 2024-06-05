@@ -6,49 +6,14 @@ export const registerDendoOutfitValidationSchema = yup
   .shape({
     title: yup.string().required('Title is required'),
     keyword: yup.string(),
-    imageUrl: yup.string().nullable(),
-    LIGHTTOPS: yup.lazy((value) =>
-      Array.isArray(value)
-        ? yup.array().of(yup.string().required())
-        : typeof value === 'string'
-          ? yup.string()
-          : yup.boolean(),
-    ),
-    HEAVYTOPS: yup.lazy((value) =>
-      Array.isArray(value)
-        ? yup.array().of(yup.string().required())
-        : typeof value === 'string'
-          ? yup.string()
-          : yup.boolean(),
-    ),
-    OUTERWEAR: yup.lazy((value) =>
-      Array.isArray(value)
-        ? yup.array().of(yup.string().required())
-        : typeof value === 'string'
-          ? yup.string()
-          : yup.boolean(),
-    ),
-    BOTTOMS: yup.lazy((value) =>
-      Array.isArray(value)
-        ? yup.array().of(yup.string().required())
-        : typeof value === 'string'
-          ? yup.string()
-          : yup.boolean(),
-    ),
-    SHOES: yup.lazy((value) =>
-      Array.isArray(value)
-        ? yup.array().of(yup.string().required())
-        : typeof value === 'string'
-          ? yup.string()
-          : yup.boolean(),
-    ),
-    ACCESSORIES: yup.lazy((value) =>
-      Array.isArray(value)
-        ? yup.array().of(yup.string().required())
-        : typeof value === 'string'
-          ? yup.string()
-          : yup.boolean(),
-    ),
+    description: yup.string(),
+    imageUrl: yup.string(),
+    LIGHTTOPS: yup.lazy((value) => (Array.isArray(value) ? yup.array().of(yup.string().required()) : yup.string())),
+    HEAVYTOPS: yup.lazy((value) => (Array.isArray(value) ? yup.array().of(yup.string().required()) : yup.string())),
+    OUTERWEAR: yup.lazy((value) => (Array.isArray(value) ? yup.array().of(yup.string().required()) : yup.string())),
+    BOTTOMS: yup.lazy((value) => (Array.isArray(value) ? yup.array().of(yup.string().required()) : yup.string())),
+    SHOES: yup.lazy((value) => (Array.isArray(value) ? yup.array().of(yup.string().required()) : yup.string())),
+    ACCESSORIES: yup.lazy((value) => (Array.isArray(value) ? yup.array().of(yup.string().required()) : yup.string())),
   })
   .test('atLeastTwoCategories', 'At least two categories are required', function (values) {
     const categoryKeys = Object.values(Categories);
