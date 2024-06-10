@@ -34,14 +34,19 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
     update: (cache, data) => cacheUpdateFunction(cache, data, 'DELETE', userId),
   });
 
-  const { register, handleSubmit, formState, setValue, reset } = useForm<addItemValues>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    reset,
+  } = useForm<addItemValues>({
     defaultValues: {
       itemName: '',
       category: categoryName,
     },
     resolver: yupResolver(wishListValidationSchema),
   });
-  const { errors } = formState;
 
   const handleDelete = async (id: string) => {
     try {
@@ -122,7 +127,7 @@ const WishListCard: React.FC<CardProps> = ({ categoryName }) => {
               register={register}
               handleSubmit={handleSubmit}
               errors={errors}
-            ></WishListForm>
+            />
           )}
         </ul>
         {!isWishListForm && (

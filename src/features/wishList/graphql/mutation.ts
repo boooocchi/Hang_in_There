@@ -4,6 +4,9 @@ export const WISH_LIST_ADD_MUTATION = gql`
   mutation Mutation($itemName: String!, $category: Categories!, $userId: String!) {
     add_wish_list(itemName: $itemName, category: $category, userId: $userId) {
       id
+      itemName
+      category
+      checked
     }
   }
 `;
