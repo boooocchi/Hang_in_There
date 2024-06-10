@@ -11,6 +11,16 @@ type ToastContextState = {
     type: 'success' | 'error';
     timeStamp: number;
   }[];
+  setTextsState: React.Dispatch<
+    React.SetStateAction<
+      {
+        text: string;
+        show: boolean;
+        type: 'success' | 'error';
+        timeStamp: number;
+      }[]
+    >
+  >;
 };
 const ToastContext = React.createContext<ToastContextState | undefined>(undefined);
 
@@ -25,7 +35,7 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
   >([
     {
       text: '',
-      show: false,
+      show: true,
       type: 'success',
       timeStamp: 0,
     },
@@ -102,7 +112,9 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  return <ToastContext.Provider value={{ addToastMessage, textsState }}>{children}</ToastContext.Provider>;
+  return (
+    <ToastContext.Provider value={{ addToastMessage, textsState, setTextsState }}>{children}</ToastContext.Provider>
+  );
 };
 
 export const useToast = () => {
