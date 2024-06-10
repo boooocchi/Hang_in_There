@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import { Categories } from '@prisma/client';
 import React from 'react';
 
 import Button from '@/components/elements/button/Button';
@@ -31,8 +32,7 @@ const WishListForm: React.FC<FormProps> = ({
     update: (cache, data) => cacheUpdateFunction(cache, data, 'UPDATE', userId),
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: { itemName: string; category: Categories }) => {
     if (editItemId) {
       try {
         await updateListItem({
