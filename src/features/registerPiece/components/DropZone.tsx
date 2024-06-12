@@ -50,7 +50,7 @@ const DropZone: React.FC<DropZoneProps> = ({ className, handleFileSelect, delete
 
   return (
     <div {...getRootProps({ className: className })}>
-      <div className="w-full h-full flex items-center justify-center">
+      <div className="w-full h-full flex items-center justify-center cursor-pointer">
         <input {...getInputProps()} />
         {file || pieceImgUrl ? (
           <div
