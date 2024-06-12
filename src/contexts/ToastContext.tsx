@@ -35,7 +35,7 @@ export const ToastProvider: React.FC<Children> = ({ children }) => {
   >([
     {
       text: '',
-      show: true,
+      show: false,
       type: 'success',
       timeStamp: 0,
     },

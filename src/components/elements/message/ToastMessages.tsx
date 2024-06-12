@@ -24,11 +24,11 @@ const ToastMessages: React.FC = () => {
                 {textState.type === 'error' ? <ErrorIllustration /> : <SuccessIllustration />}
               </div>
               <div
-                className={`bg-gray relative h-full w-full xs:p-lg p-lg  rounded-r-md text-md text-sm ${mainFont.className}`}
+                className={`bg-gray relative h-full w-full xs:p-lg p-lg pr-3xl rounded-r-md text-md text-sm ${mainFont.className}`}
               >
                 {textState.text !== '' ? textState.text : `Success!`}
                 <button
-                  className="rounded-full right-3 top-[50%] border-1 border-lighterGreen h-5 w-5 translate-y-[-50%] absolute flex items-center justify-center"
+                  className="rounded-full right-2 top-2 border-1 border-lighterGreen h-5 w-5 absolute flex items-center justify-center"
                   onClick={() =>
                     setTextsState((prev) => {
                       return prev.map(
