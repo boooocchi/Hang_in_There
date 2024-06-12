@@ -29,16 +29,10 @@ const Index = () => {
   });
 
   if (error) {
-    <MainLayout title="Settings">
-      <SmtWrongMessage />
-    </MainLayout>;
+    return <SmtWrongMessage />;
   }
   if (loading) {
-    return (
-      <MainLayout title="Settings">
-        <Loading size="large" />
-      </MainLayout>
-    );
+    return <Loading size="large" />;
   }
   return (
     <MainLayout title="Settings">

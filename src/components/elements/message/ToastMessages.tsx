@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { mainFont } from '@/constants/FontFamily';
 import { CancelIcon, ErrorIllustration, SuccessIllustration } from '@/constants/icons/icons';
 import { useToast } from '@/contexts/ToastContext';
 
@@ -23,12 +22,10 @@ const ToastMessages: React.FC = () => {
               <div className="flex items-center px-md justify-center">
                 {textState.type === 'error' ? <ErrorIllustration /> : <SuccessIllustration />}
               </div>
-              <div
-                className={`bg-gray relative h-full w-full xs:p-lg p-lg pr-3xl rounded-r-md text-md text-sm ${mainFont.className}`}
-              >
+              <div className="bg-gray relative h-full w-full xs:p-lg xs:pr-xl p-lg rounded-r-md text-md text-sm whitespace-wrap">
                 {textState.text !== '' ? textState.text : `Success!`}
                 <button
-                  className="rounded-full right-2 top-2 border-1 border-lighterGreen h-5 w-5 absolute flex items-center justify-center"
+                  className="rounded-full right-3 top-[50%] translate-y-[-50%] border-1 border-lighterGreen h-5 w-5 absolute flex items-center justify-center"
                   onClick={() =>
                     setTextsState((prev) => {
                       return prev.map(
