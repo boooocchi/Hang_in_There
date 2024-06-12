@@ -1,8 +1,7 @@
 import * as yup from 'yup';
 
 export const settingsValidationSchema = yup
-  .object()
-  .shape({
+  .object({
     userName: yup.string().required('Name is required').max(10, 'Name must be at most 10 characters'),
     email: yup.string().email('Invalid email form').required('Email is required'),
     password: yup.string().optional().min(8, 'Password must be at least 8 characters'),

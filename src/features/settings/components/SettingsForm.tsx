@@ -1,8 +1,8 @@
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Categories } from '@prisma/client';
 import React, { useEffect } from 'react';
-import { FieldErrors, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import Button from '@/components/elements/button/Button';
 import Input from '@/components/elements/form/Input';
@@ -10,58 +10,9 @@ import { useToast } from '@/contexts/ToastContext';
 import { useAuth } from '@/hooks/useAuth';
 import { getErrorMessage } from '@/utils/errorHandler';
 
+import { UPDATE_USER_INFO_MUTATION } from '../graphql/mutation';
+import { SettingsFormProps, SettingsFormValuesType, CustomError } from '../types/types';
 import { settingsValidationSchema } from '../validation/settingsValidation';
-
-const UPDATE_USER_INFO_MUTATION = gql`
-  mutation Mutation(
-    $userId: String!
-    $userName: String!
-    $email: String!
-    $password: String
-    $limitEntries: [LimitEntryInput]!
-  ) {
-    update_user_info(
-      userId: $userId
-      userName: $userName
-      email: $email
-      password: $password
-      limitEntries: $limitEntries
-    ) {
-      success
-    }
-  }
-`;
-
-type SettingsFormProps = {
-  userData?: {
-    userName: string;
-    password: string;
-    email: string;
-    limitEntries: {
-      id: string;
-      category: Categories;
-      value: number;
-      userId: string;
-    }[];
-    googleSignin: boolean;
-  };
-};
-
-type SettingsFormValuesType = {
-  userName: string;
-  email: string;
-  password?: string;
-  passwordConfirmation?: string;
-  LIGHTTOPS: number;
-  HEAVYTOPS: number;
-  OUTERWEAR: number;
-  BOTTOMS: number;
-  SHOES: number;
-  ACCESSORIES: number;
-};
-interface CustomError extends FieldErrors<SettingsFormValuesType> {
-  samePassword?: { message: string; type: string; ref?: React.RefObject<HTMLInputElement> };
-}
 
 const SettingsForm: React.FC<SettingsFormProps> = ({ userData }) => {
   const { userId } = useAuth();
