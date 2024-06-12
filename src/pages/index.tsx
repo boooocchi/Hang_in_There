@@ -27,7 +27,7 @@ export default function Home({ weatherData }: WeatherData) {
   const cards = [
     {
       title: 'Your Wardrobe',
-      icon: <WardrobeIcon style=" fill-gray  " />,
+      icon: <WardrobeIcon style=" fill-gray" />,
       link: `/wardrobe/${userId}`,
     },
     {
