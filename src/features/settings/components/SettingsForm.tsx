@@ -30,18 +30,9 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ userData }) => {
       setValue('userName', userData.userName);
       setValue('email', userData.email);
       setValue('password', userData.password);
-      const categoryToFieldMap: {
-        [key in Categories]: 'LIGHTTOPS' | 'HEAVYTOPS' | 'OUTERWEAR' | 'BOTTOMS' | 'SHOES' | 'ACCESSORIES';
-      } = {
-        LIGHTTOPS: 'LIGHTTOPS',
-        HEAVYTOPS: 'HEAVYTOPS',
-        OUTERWEAR: 'OUTERWEAR',
-        BOTTOMS: 'BOTTOMS',
-        SHOES: 'SHOES',
-        ACCESSORIES: 'ACCESSORIES',
-      };
+
       userData.limitEntries.forEach((entry) => {
-        const fieldName = categoryToFieldMap[entry.category];
+        const fieldName = Categories[entry.category];
         if (fieldName) {
           setValue(fieldName, entry.value);
         }
@@ -71,6 +62,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ userData }) => {
       });
       addToastMessage('User information updated successfully');
     } catch (error) {
+      console.error(error);
       addToastMessage(getErrorMessage(error), true);
     }
   };

@@ -45,9 +45,9 @@ const Charts = () => {
   });
 
   const [percentages, setPercentage] = React.useState<PercentagesType>({
-    OUTERWEAR: 0,
-    HEAVYTOPS: 0,
     LIGHTTOPS: 0,
+    HEAVYTOPS: 0,
+    OUTERWEAR: 0,
     BOTTOMS: 0,
     SHOES: 0,
     ACCESSORIES: 0,
@@ -94,11 +94,9 @@ const Charts = () => {
                     counterClockwise={true}
                     styles={buildStyles({
                       rotation: 0.25,
-                      strokeLinecap: 'round',
                       pathTransitionDuration: 0.5,
                       pathColor: `#11655b`,
                       trailColor: '#ddd',
-                      backgroundColor: '#11655b',
                     })}
                   />
                   <h2 className="text-xs font-bold absolute bottom-[20%]">{key}</h2>
