@@ -1,64 +1,47 @@
-import { useSession } from 'next-auth/react';
-import React from 'react';
+import React from 'react'
 
-import DashboardCard from '@/components/elements/card/DashboardCard';
-import MainLayout from '@/components/layouts/layout/MainLayout';
-import { titleFont } from '@/constants/FontFamily';
-import {
-  WardrobeIcon,
-  RegisterIcon,
-  DendoOutfitIcon,
-  SuggestionIcon,
-  DashboardHeroIcon,
-} from '@/constants/icons/icons';
-import Charts from '@/features/progressPieChart/components/Charts';
-import WeatherBox from '@/features/weather/components/WeatherBox';
-import { WeatherData } from '@/features/weather/types/weatherType';
-import DashboardWIshList from '@/features/wishList/components/DashboardWIshList';
-import { useAuth } from '@/hooks/useAuth';
+import DashboardCard from '@/components/elements/card/DashboardCard'
+import MainLayout from '@/components/layouts/layout/MainLayout'
+import { WardrobeIcon, RegisterIcon, DendoOutfitIcon, SuggestionIcon } from '@/constants/icons/icons'
+import Charts from '@/features/progressPieChart/components/Charts'
+import WeatherBox from '@/features/weather/components/WeatherBox'
+import { WeatherData } from '@/features/weather/types/weatherType'
+import DashboardWIshList from '@/features/wishList/components/DashboardWIshList'
+import { useAuth } from '@/hooks/useAuth'
 
-import '@radix-ui/themes/styles.css';
+import '@radix-ui/themes/styles.css'
 
 export default function Home({ weatherData }: WeatherData) {
-  const { data } = useSession();
-  const userName = data?.user?.userName;
-  const { userId } = useAuth();
+  const { userId } = useAuth()
 
   const cards = [
     {
       title: 'Your Wardrobe',
       icon: <WardrobeIcon style=" fill-gray" />,
-      link: `/wardrobe/${userId}`,
+      link: `/wardrobe/${userId}`
     },
     {
       title: 'Register Piece',
       icon: <RegisterIcon style="fill-gray" />,
-      link: '/registerPiece',
+      link: '/registerPiece'
     },
     {
       title: 'Dendo Outfit',
       icon: <DendoOutfitIcon style="fill-gray " />,
-      link: `/dendoOutfitGallery/${userId}`,
+      link: `/dendoOutfitGallery/${userId}`
     },
     {
       title: 'Suggestion',
       icon: <SuggestionIcon style="stroke-gray stroke-[1px]" />,
-      link: '/suggestion',
-    },
-  ];
+      link: '/suggestion'
+    }
+  ]
 
   return (
-    <MainLayout title="DashBoard">
+    <MainLayout>
       <section className="flex flex-col h-full xs:w-full w-full gap-md max-xs:items-center">
-        <div className="h-[25%] max-xs:h-[150px] flex xs:gap-md gap-sm w-full font-bold">
-          <div className="h-full py-md px-md xs:w-[70%] w-1/2 relative  bg-gray rounded-lg shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)]">
-            <div className="xs:text-2xl text-xl font-boldest leading-[1.1] tracking-tight">
-              <span className={`${titleFont.className} max-xs:text-lg`}>Hello,</span> <br className="xs:hidden" />
-              {userName}.
-            </div>
-            <DashboardHeroIcon style="absolute xs:right-5 right-1 bottom-0 xs:h-[200px] xs:w-[200px] h-[70px] w-[70px]" />
-          </div>
-          <div className="xs:h-full xs:w-[30%] w-1/2">
+        <div className="h-[35%] max-xs:min-h-[220px] flex xs:gap-md gap-sm w-full font-bold">
+          <div className="w-full relative">
             <WeatherBox weatherData={weatherData} />
           </div>
         </div>
@@ -75,40 +58,68 @@ export default function Home({ weatherData }: WeatherData) {
         </div>
       </section>
     </MainLayout>
-  );
+  )
 }
 
 export async function getStaticProps() {
   try {
     const res = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=vancouver,BC,CA&limit=1&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`,
-    );
+      `http://api.openweathermap.org/geo/1.0/direct?q=vancouver,BC,CA&limit=1&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`
+    )
 
-    const locations = await res.json();
-    const { lat, lon } = locations[0];
+    const locations = await res.json()
+    const { lat, lon } = locations[0]
 
     if (lat && lon) {
       const weatherResponse = await fetch(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`,
-      );
-      const weatherData = await weatherResponse.json();
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`
+      )
+      const weatherData = await weatherResponse.json()
 
-      const weatherDescription = weatherData.daily[0].weather[0].description;
-      const maxTemp = Math.round(weatherData.daily[0].temp.max * 10) / 10;
-      const minTemp = Math.round(weatherData.daily[0].temp.min * 10) / 10;
-      const currentTemp = Math.round(weatherData.current.temp * 10) / 10;
-      const feelsLike = Math.round(weatherData.current.feels_like * 10) / 10;
+      const weatherDescription = weatherData.daily[0].weather[0].description
+      const maxTemp = Math.round(weatherData.daily[0].temp.max * 10) / 10
+      const minTemp = Math.round(weatherData.daily[0].temp.min * 10) / 10
+      const temp = Math.round(weatherData.current.temp * 10) / 10
+      const feelsLike = Math.round(weatherData.current.feels_like * 10) / 10
+
+      const tmrwWeatherDescription = weatherData.daily[1].weather[0].description
+      const tmrwMaxTemp = Math.round(weatherData.daily[1].temp.max * 10) / 10
+      const tmrwMinTemp = Math.round(weatherData.daily[1].temp.min * 10) / 10
+      const tmrwTemp = Math.round(weatherData.daily[1].temp.day * 10) / 10
+      const tmrwFeelsLike = Math.round(weatherData.daily[1].feels_like.day * 10) / 10
+
+      const datmWeatherDescription = weatherData.daily[2].weather[0].description
+      const datmMaxTemp = Math.round(weatherData.daily[2].temp.max * 10) / 10
+      const datmMinTemp = Math.round(weatherData.daily[2].temp.min * 10) / 10
+      const datmTemp = Math.round(weatherData.daily[2].temp.day * 10) / 10
+      const datmFeelsLike = Math.round(weatherData.daily[2].feels_like.day * 10) / 10
 
       return {
         props: {
-          weatherData: { weatherDescription, maxTemp, minTemp, currentTemp, feelsLike },
-          revalidate: 3600,
-        },
-      };
+          weatherData: [
+            { weatherDescription, maxTemp, minTemp, temp, feelsLike },
+            {
+              weatherDescription: tmrwWeatherDescription,
+              maxTemp: tmrwMaxTemp,
+              minTemp: tmrwMinTemp,
+              temp: tmrwTemp,
+              feelsLike: tmrwFeelsLike
+            },
+            {
+              weatherDescription: datmWeatherDescription,
+              maxTemp: datmMaxTemp,
+              minTemp: datmMinTemp,
+              temp: datmTemp,
+              feelsLike: datmFeelsLike
+            }
+          ],
+          revalidate: 3600
+        }
+      }
     }
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 
-  return { props: { weatherData: null } };
+  return { props: { weatherData: null } }
 }
