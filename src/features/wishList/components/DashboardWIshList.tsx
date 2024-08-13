@@ -1,30 +1,30 @@
-import { useQuery, useMutation } from '@apollo/client';
-import React from 'react';
+import { useQuery, useMutation } from '@apollo/client'
+import React from 'react'
 
-import Loading from '@/components/elements/message/Loading';
-import { ListIcon, WishListIllustration } from '@/constants/icons/icons';
-import { useToast } from '@/contexts/ToastContext';
-import { WISH_LIST_STATUS_UPDATE } from '@/features/wishList/graphql/mutation';
-import { WISH_LIST_QUERY } from '@/features/wishList/graphql/query';
-import { cacheUpdateFunction } from '@/features/wishList/utils/utils';
-import { useAuth } from '@/hooks/useAuth';
-import { getErrorMessage } from '@/utils/errorHandler';
+import Loading from '@/components/elements/message/Loading'
+import { ListIcon, WishListIllustration } from '@/constants/icons/icons'
+import { useToast } from '@/contexts/ToastContext'
+import { WISH_LIST_STATUS_UPDATE } from '@/features/wishList/graphql/mutation'
+import { WISH_LIST_QUERY } from '@/features/wishList/graphql/query'
+import { cacheUpdateFunction } from '@/features/wishList/utils/utils'
+import { useAuth } from '@/hooks/useAuth'
+import { getErrorMessage } from '@/utils/errorHandler'
 
-import { ListItemType } from '../types/types';
+import { ListItemType } from '../types/types'
 
 const DashboardWIshList = () => {
-  const { userId } = useAuth();
+  const { userId } = useAuth()
   const { data: wishListData, loading } = useQuery(WISH_LIST_QUERY, {
     variables: {
-      userId,
-    },
-  });
+      userId
+    }
+  })
 
-  const { addToastMessage } = useToast();
+  const { addToastMessage } = useToast()
 
   const [updateItemStatus] = useMutation(WISH_LIST_STATUS_UPDATE, {
-    update: (cache, data) => cacheUpdateFunction(cache, data, 'STATUS_UPDATE', userId),
-  });
+    update: (cache, data) => cacheUpdateFunction(cache, data, 'STATUS_UPDATE', userId)
+  })
 
   const handleItemStatus = async (id: string, checked: boolean) => {
     if (!checked) {
@@ -32,20 +32,20 @@ const DashboardWIshList = () => {
         await updateItemStatus({
           variables: {
             id,
-            checked: true,
-          },
-        });
-        addToastMessage('item checked!');
+            checked: true
+          }
+        })
+        addToastMessage('item checked!')
       } catch (error) {
-        addToastMessage(getErrorMessage(error), true);
+        addToastMessage(getErrorMessage(error), true)
       }
     }
-  };
+  }
 
-  const isAnyUncheckedItems = wishListData?.wishList.some((item: ListItemType) => !item.checked);
+  const isAnyUncheckedItems = wishListData?.wishList.some((item: ListItemType) => !item.checked)
 
   return (
-    <div className="xs:w-1/2 w-full xs:h-full max-xs:h-[300px] rounded-lg flex gap-md py-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-md relative overdflow-hidden">
+    <div className="xs:w-1/2 w-full xs:h-full max-xs:h-[300px] rounded-lg flex gap-md p-sm xs:p-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] relative overdflow-hidden">
       <div className="w-full h-full flex  flex-col gap-sm overflow-hidden">
         <h2 className=" text-base text-center  items-center flex justify-cente gap-sm font-bolder  ">
           <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
@@ -67,7 +67,7 @@ const DashboardWIshList = () => {
           <div className="overflow-y-scroll w-full xs:px-2xl px-sm xs:max-h-[210px]">
             <ul className="w-full h-full">
               {wishListData?.wishList.map((item: { itemName: string; id: string; checked: boolean }) => {
-                if (item.checked) return null;
+                if (item.checked) return null
                 return (
                   <li
                     key={item.id}
@@ -82,7 +82,7 @@ const DashboardWIshList = () => {
 
                     <span className="w-full truncate">{item.itemName}</span>
                   </li>
-                );
+                )
               })}
             </ul>
           </div>
@@ -90,7 +90,7 @@ const DashboardWIshList = () => {
       </div>
       <WishListIllustration style="absolute xs:-bottom-[25px] -bottom-[18px] -right-2 max-xs:right-0 xs:h-[150px] xs:w-[150px] h-[100px] w-[100px]" />
     </div>
-  );
-};
+  )
+}
 
-export default DashboardWIshList;
+export default DashboardWIshList
