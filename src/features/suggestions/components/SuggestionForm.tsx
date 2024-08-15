@@ -1,84 +1,84 @@
-import { Piece } from '@prisma/client';
-import React from 'react';
+import { Piece } from '@prisma/client'
+import React from 'react'
 
-import Button from '@/components/elements/button/Button';
-import ErrorMessage from '@/components/elements/message/ErrorMessage';
-import { AiChatIcon, SendIcon } from '@/constants/icons/icons';
-import { useToast } from '@/contexts/ToastContext';
-import { PieceSelectModalContent } from '@/features/suggestions/components/PieceSelectModalContent';
-import { generateAIAdvise } from '@/features/suggestions/utils/chatGPT';
-import { useAuth } from '@/hooks/useAuth';
-import { useModal } from '@/hooks/useModal';
-import { getErrorMessage } from '@/utils/errorHandler';
+import Button from '@/components/elements/button/Button'
+import ErrorMessage from '@/components/elements/message/ErrorMessage'
+import { AiChatIcon, SendIcon } from '@/constants/icons/icons'
+import { useToast } from '@/contexts/ToastContext'
+import { PieceSelectModalContent } from '@/features/suggestions/components/PieceSelectModalContent'
+import { generateAIAdvise } from '@/features/suggestions/utils/chatGPT'
+import { useAuth } from '@/hooks/useAuth'
+import { useModal } from '@/hooks/useModal'
+import { getErrorMessage } from '@/utils/errorHandler'
 
-import { convertAiMessage } from '../utils/utils';
+import { convertAiMessage } from '../utils/utils'
 
 const SuggestionForm = () => {
-  const { userId } = useAuth();
-  const [message, setMessage] = React.useState('');
-  const [aiResponse, setAiResponse] = React.useState<React.ReactNode | null>();
-  const [sentMessage, setSentMessage] = React.useState<string>('');
-  const { addToastMessage } = useToast();
-  const [aiMessageLimitError, setAiMessageLimitError] = React.useState('');
+  const { userId } = useAuth()
+  const [message, setMessage] = React.useState('')
+  const [aiResponse, setAiResponse] = React.useState<React.ReactNode | null>()
+  const [sentMessage, setSentMessage] = React.useState<string>('')
+  const { addToastMessage } = useToast()
+  const [aiMessageLimitError, setAiMessageLimitError] = React.useState('')
 
-  const [isResponseLoading, setResponseLoading] = React.useState(false);
+  const [isResponseLoading, setResponseLoading] = React.useState(false)
 
   const createMessage = (piece: Piece) => {
     setMessage(
       `I would like to ask for good matching pieces for this item below
 Name: ${piece.itemName}
 Description: ${piece.description}
-Color: ${piece.color}`,
-    );
-  };
+Color: ${piece.color}`
+    )
+  }
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (message.length > 300) {
-      setAiMessageLimitError('Message should be less than 300 characters');
-      return;
+      setAiMessageLimitError('Message should be less than 300 characters')
+      return
     }
     if (!message || !userId) {
-      addToastMessage('Please type something in a form.');
-      return;
+      addToastMessage('Please type something in a form.')
+      return
     }
 
-    setAiResponse('');
-    setSentMessage(message);
-    setMessage('');
-    setResponseLoading(true);
+    setAiResponse('')
+    setSentMessage(message)
+    setMessage('')
+    setResponseLoading(true)
     try {
-      const response = await generateAIAdvise(message, userId);
+      const response = await generateAIAdvise(message, userId)
       if (response.status === 429) {
-        addToastMessage('You have exceeded the limit of use of AI suggestion');
-        return;
+        addToastMessage('You have exceeded the limit of use of AI suggestion')
+        return
       }
-      const { content } = response.message;
+      const { content } = response.message
       if (message.includes('I would like to ask for good matching pieces for this item below')) {
-        setAiResponse(convertAiMessage(content));
+        setAiResponse(convertAiMessage(content))
       } else {
-        setAiResponse(content);
+        setAiResponse(content)
       }
     } catch (error) {
-      addToastMessage(getErrorMessage(error));
+      addToastMessage(getErrorMessage(error))
     } finally {
-      setResponseLoading(false);
+      setResponseLoading(false)
     }
-  };
+  }
 
-  const { Modal, closeModal, openModal } = useModal();
+  const { Modal, closeModal, openModal } = useModal()
 
   return (
     <form onSubmit={(e) => onSubmit(e)} className="max-xs:max-h-[74svh] h-full relative">
       <div className="flex flex-col h-full w-full">
         <div className="h-[85%] w-full  flex flex-col gap-3 overflow-y-scroll">
           {!sentMessage && (
-            <div className="h-full w-full flex max-xs:flex-col xs:px-xl xs:items-center xs:-mt-md max-xs:justify-center">
+            <div className="h-full w-full flex max-xs:flex-col-reverse xs:px-xl xs:items-center xs:-mt-md max-xs:justify-end">
               <div className="w-full xs:w-1/2 flex justify-center">
-                <AiChatIcon style="xs:h-[250px] xs:w-[250px] h-[150px] w-[150px] xs:mr-md" />
+                <AiChatIcon style="xs:h-[200px] xs:w-[200px] h-[125px] w-[125px] xs:mr-md mt-md" />
               </div>
-              <div className="w-full xs:w-1/2 text-start xs:mr-md max-xs:px-sm mt-xs">
-                <h2 className="xs:text-xl text-lg font-bolder tracking-tighter xs:mb-md mb-sm">2 Ways to Use</h2>
+              <div className="w-full xs:w-1/2 text-start xs:mr-md mt-xs">
+                <h2 className="xs:text-xl text-lg font-bolder tracking-tighter xs:mb-md mb-sm">How to Use</h2>
                 <h3 className="xs:text-lg font-bolder tracking-tight mb-xs">1: Ask for Matching pieces</h3>
                 <p className="mb-sm leading-[1.3] max-xs:text-sm">
                   You can ask for matching pieces for selected item <br /> by clicking the button below
@@ -124,7 +124,7 @@ Color: ${piece.color}`,
           <div className="w-full flex justify-end">
             <button
               onClick={() => {
-                openModal();
+                openModal()
               }}
               type="button"
               className="underline mb-1"
@@ -156,7 +156,7 @@ Color: ${piece.color}`,
         <PieceSelectModalContent closeModal={closeModal} createMessage={createMessage} />
       </Modal>
     </form>
-  );
-};
+  )
+}
 
-export default SuggestionForm;
+export default SuggestionForm

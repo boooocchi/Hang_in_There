@@ -88,7 +88,7 @@ const DashboardWIshList = () => {
           </div>
         )}
       </div>
-      <WishListIllustration style="absolute xs:-bottom-[25px] -bottom-[18px] -right-2 max-xs:right-0 xs:h-[150px] xs:w-[150px] h-[100px] w-[100px]" />
+      <WishListIllustration style="absolute xs:-bottom-[25px] -bottom-[18px] -right-2 max-xs:right-0 xs:h-[135px] xs:w-[135px] h-[100px] w-[100px]" />
     </div>
   )
 }
