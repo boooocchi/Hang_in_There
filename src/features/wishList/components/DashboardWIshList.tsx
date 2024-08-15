@@ -45,7 +45,7 @@ const DashboardWIshList = () => {
   const isAnyUncheckedItems = wishListData?.wishList.some((item: ListItemType) => !item.checked)
 
   return (
-    <div className="xs:w-1/2 w-full xs:h-full max-xs:h-[300px] rounded-lg flex gap-md p-sm xs:p-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] relative overdflow-hidden">
+    <div className="xs:w-1/2 w-full xs:h-full max-xs:h-[300px] rounded-lg flex gap-md p-[15px] xs:p-md bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] relative overdflow-hidden">
       <div className="w-full h-full flex  flex-col gap-sm overflow-hidden">
         <h2 className=" text-base text-center  items-center flex justify-cente gap-sm font-bolder  ">
           <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
@@ -88,7 +88,7 @@ const DashboardWIshList = () => {
           </div>
         )}
       </div>
-      <WishListIllustration style="absolute xs:-bottom-[25px] -bottom-[18px] -right-2 max-xs:right-0 xs:h-[150px] xs:w-[150px] h-[100px] w-[100px]" />
+      <WishListIllustration style="absolute xs:-bottom-[25px] -bottom-[18px] -right-2 max-xs:right-0 xs:h-[135px] xs:w-[135px] h-[100px] w-[100px]" />
     </div>
   )
 }

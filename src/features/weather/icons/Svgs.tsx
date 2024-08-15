@@ -56,7 +56,7 @@ const cloudy = (
     strokeWidth="3"
     viewBox="8 10 115 110"
     id="cloud"
-    className="xs:w-[43px] w-[50px]"
+    className="xs:w-[43px] w-[45px]"
   >
     <path
       className="fill-accentOrange stroke-accentOrange "
