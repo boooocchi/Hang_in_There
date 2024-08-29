@@ -1,9 +1,9 @@
-import cn from 'classnames';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
+import cn from 'classnames'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import React from 'react'
 
-import { titleFont } from '@/constants/FontFamily';
+import { titleFont } from '@/constants/FontFamily'
 import {
   DashboardIcon,
   WardrobeIcon,
@@ -11,65 +11,65 @@ import {
   DendoOutfitIcon,
   SuggestionIcon,
   SettingIcon,
-  ListIcon,
-} from '@/constants/icons/icons';
-import { useAuth } from '@/hooks/useAuth';
-import { isItemBgColor } from '@/utils/utils';
+  ListIcon
+} from '@/constants/icons/icons'
+import { useAuth } from '@/hooks/useAuth'
+import { isItemBgColor } from '@/utils/utils'
 
 const SideMenu = ({
   isSideMenuOpen,
-  setIsSideMenuOpen,
+  setIsSideMenuOpen
 }: {
-  isSideMenuOpen?: boolean;
-  setIsSideMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  isSideMenuOpen?: boolean
+  setIsSideMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
-  const { pathname } = useRouter();
-  const { userId } = useAuth();
-  const settingClassName = pathname === '/settings' ? 'bg-lighterGreen' : '';
+  const { pathname } = useRouter()
+  const { userId } = useAuth()
+  const settingClassName = pathname === '/settings' ? 'bg-lighterGreen' : ''
 
   const navItems = [
     {
       icon: <DashboardIcon />,
       name: 'Dashboard',
       path: '/',
-      pathname: '/',
+      pathname: '/'
     },
     {
       icon: <WardrobeIcon />,
       name: 'Wardrobe',
       path: `/wardrobe/${userId}`,
-      pathname: 'wardrobe',
+      pathname: 'wardrobe'
     },
     {
       icon: <RegisterIcon />,
       name: 'Register Piece',
       path: '/registerPiece',
-      pathname: 'registerpiece',
+      pathname: 'registerpiece'
     },
     {
       icon: <DendoOutfitIcon />,
       name: 'Dendo Outfit',
       path: `/dendoOutfitGallery/${userId}`,
-      pathname: 'dendooutfit',
+      pathname: 'dendooutfit'
     },
     {
       icon: <SuggestionIcon />,
       name: 'Suggestion by AI',
       path: '/suggestion',
-      pathname: 'suggestion',
+      pathname: 'suggestion'
     },
     {
       icon: <ListIcon />,
       name: 'Wish List',
       path: '/wishList',
-      pathname: 'wishlist',
-    },
-  ];
+      pathname: 'wishlist'
+    }
+  ]
 
   return (
     <>
       <nav
-        className={`z-10 w-full flex flex-col flex-shrink-0  bg-middleGreen xs:w-[280px] xs:min-w-[280px]  xs:relative xs:py-2xl pt-2xl pb-xl px-xl shadow-[10px_15px_10px_-5px_rgba(0,0,0,0.3)] tracking-tight xs:h-screen xs:min-h-[750px] xs:max-h-[800px] h-[600px] overflow-hidden xs:rounded-r-[30px] 2xl:rounded-[30px] z-15  ${isSideMenuOpen ? 'max-xs:top-0 max-xs:opacity-100' : 'max-xs:top-10'}`}
+        className={`z-10 w-full flex flex-col flex-shrink-0  bg-middleGreen xs:w-[280px] xs:min-w-[280px]  xs:relative xs:py-2xl pt-2xl pb-xl px-xl shadow-[10px_15px_10px_-5px_rgba(0,0,0,0.3)] tracking-tight xs:h-screen xs:min-h-[750px] xs:max-h-[780px] h-[600px] overflow-hidden xs:rounded-[30px] z-15 xs:ml-sm  ${isSideMenuOpen ? 'max-xs:top-0 max-xs:opacity-100' : 'max-xs:top-10'}`}
       >
         <h1
           className={`flex items-baseline gap-2 text-gray font-mainTitle text-[35px] leading-[32px] whitespace-nowrap w-full justify-center ${titleFont.className}`}
@@ -81,7 +81,7 @@ const SideMenu = ({
         <div className="flex flex-col h-full justify-between">
           <ul className="h-full  xs:pt-[40px] pt-lg flex flex-col gap-md">
             {navItems.map((item, index) => {
-              const menuItemColor = isItemBgColor(item.pathname, pathname);
+              const menuItemColor = isItemBgColor(item.pathname, pathname)
               return (
                 <li key={index}>
                   <Link
@@ -89,8 +89,8 @@ const SideMenu = ({
                     className={cn(
                       'rounded-md py-sm px-md text-gray relative xs:w-full group group-hover:cursor-pointer w-full h-full  flex  xs:justify-start',
                       {
-                        'bg-lighterGreen': menuItemColor,
-                      },
+                        'bg-lighterGreen': menuItemColor
+                      }
                     )}
                   >
                     <div className="flex items-center font-bolder tracking-tighter">
@@ -107,7 +107,7 @@ const SideMenu = ({
                     <div className=" xs:block bg-lighterOrange rounded-xl absolute -top-1 -left-[65px] w-10 h-[50px]"></div>
                   )}
                 </li>
-              );
+              )
             })}
           </ul>
           <Link
@@ -122,11 +122,11 @@ const SideMenu = ({
       <button
         className="xs:hidden fixed h-svh w-screen bg-[rgba(1,1,1,0.3)] z-10"
         onClick={() => {
-          setIsSideMenuOpen && setIsSideMenuOpen(false);
-          document.body.style.overflow = 'auto';
+          setIsSideMenuOpen && setIsSideMenuOpen(false)
+          document.body.style.overflow = 'auto'
         }}
       ></button>
     </>
-  );
-};
-export default SideMenu;
+  )
+}
+export default SideMenu

@@ -80,7 +80,7 @@ const Charts = () => {
             <Loading size="large"></Loading>
           </div>
         ) : (
-          <div className="grid grid-cols-3 xs:gap-x-xs gap-x-xs overflow-hidden content-center text-gray xs:px-lg xs:ml-5 h-full">
+          <div className="grid grid-cols-3 xs:gap-x-sm gap-x-xs overflow-hidden content-center text-gray xs:px-lg xs:ml-5 h-full">
             {Object.keys(percentages).map((key, index) => {
               const categoryKey = key as keyof PercentagesType
               const percentage = percentages[categoryKey]
@@ -90,7 +90,7 @@ const Charts = () => {
                     value={percentage}
                     strokeWidth={15}
                     circleRatio={0.5}
-                    className="xs:h-[90px] h-[77px] w-[100px]"
+                    className="xs:h-[95px] h-[80px] w-[125px]"
                     counterClockwise={true}
                     styles={buildStyles({
                       rotation: 0.25,

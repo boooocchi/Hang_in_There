@@ -1,5 +1,6 @@
 export type WeatherDescription = {
   description: string
+  size?: number
 }
 
 export type WeatherData = {
