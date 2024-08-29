@@ -81,7 +81,7 @@ const SmallWeatherCard = ({
 
   return (
     <div className={`flex w-full xs:h-1/2 h-1/3 xs:justify-between gap-2 ${index === 1 && 'xs:hidden'}`}>
-      <div className="xs:text-md text-xs flex w-[30px] h-[30px] justify-center items-center text-md font-boldest uppercase">
+      <div className="max-xs:text-xs flex w-[30px] h-[30px] justify-center items-center text-md font-boldest uppercase">
         {formattedDate}
       </div>
       <div className="flex gap-2">
