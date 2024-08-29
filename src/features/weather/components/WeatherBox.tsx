@@ -21,19 +21,19 @@ const WeatherCard = ({
 
   return (
     <div
-      className={`flex flex-col items-center justify-between xs:items-start w-full xs:w-1/2 h-full ${index === 1 && 'max-xs:hidden'}`}
+      className={`flex flex-col items-center xs:px-lg justify-between xs:items-start w-full xs:w-1/2 h-full ${index === 1 && 'max-xs:hidden'}`}
       key={index}
     >
-      <h1 className="w-full h-[30px] max-xs:mb-1 flex items-center justify-center text-md font-boldest uppercase">
+      <h1 className="w-full h-[30px] max-xs:mb-1 flex items-center justify-start text-md font-boldest uppercase">
         {date}
       </h1>
-      <div className="w-full px-sm xs:px-lg flex-grow flex flex-col justify-center items-center">
+      <div className="w-full px-sm flex-grow flex flex-col justify-center items-center">
         <div className="flex max-xs:1/2 max-xs:flex-col xs:gap-xs xs:justify-center items-center text-xl w-full xs:w-full">
           <div className="w-full flex items-center justify-center xs:w-1/2">
             <WeatherIcon description={data.weatherDescription} />
           </div>
-          <div className="xs:text-xl text-lg w-full font-boldest  xs:w-1/2 flex items-center justify-center mb-xs">
-            {data.temp}
+          <div className="xs:text-xl text-lg w-full font-boldest  xs:w-1/2 flex items-center justify-center mb-sm">
+            {data.temp.toFixed(1)}
             <span className="xs:text-base text-sm">°C</span>
           </div>
         </div>
@@ -93,7 +93,7 @@ const SmallWeatherCard = ({
         </div>
       </div>
       <div className="xs:text-lg text-lg font-boldest flex items-center justify-center h-full">
-        {data.temp}
+        {data.temp.toFixed(1)}
         <span className="xs:text-base text-sm">°C</span>
       </div>
       <div className="flex h-full items-center text-sm max-xs:hidden">
@@ -109,7 +109,7 @@ const SmallWeatherCard = ({
 const WeatherBox = ({ weatherData }: WeatherData) => {
   return (
     <div className="w-full xs:h-full h-[250px] shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] rounded-lg flex flex-col  bg-gray p-[15px] xs:p-md">
-      <h2 className="text-base flex gap-sm font-bolder h-[30px] items-center max-xs:mb-xs">
+      <h2 className="text-base flex gap-sm font-bolder h-[30px] items-center mb-sm">
         <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
           <SunIcon style="fill-white w-7 h-7"></SunIcon>
         </span>

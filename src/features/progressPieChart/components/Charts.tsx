@@ -67,7 +67,7 @@ const Charts = () => {
   }, [limitData, piecesData])
 
   return (
-    <div className="xs:h-full xs:w-1/2 w-full bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-[15px] xs:p-md rounded-lg flex flex-col gap-md relative max-xs:h-[250px]">
+    <div className="xs:h-full xs:w-1/2 w-full bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-[15px] xs:p-md rounded-lg flex flex-col gap-sm relative max-xs:h-[250px]">
       <h2 className="text-base flex items-center gap-sm font-bolder">
         <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
           <ChartIcon />
