@@ -21,33 +21,64 @@ const WeatherCard = ({
 
   return (
     <div
-      className={`flex flex-col items-center xs:px-lg justify-between xs:items-start w-full xs:w-1/2 h-full ${index === 1 && 'max-xs:hidden'}`}
+      className={`flex flex-col items-center xs:px-lg xs:gap-2 gap-1 xs:items-start w-full xs:w-1/2 h-full ${index === 1 && 'max-xs:hidden'}`}
       key={index}
     >
-      <h1 className="w-full h-[30px] max-xs:mb-1 flex items-center justify-start text-md font-boldest uppercase">
+      <h1 className="w-full h-[25px] xs:h-[30px] flex items-center justify-center text-md font-boldest uppercase">
         {date}
       </h1>
-      <div className="w-full px-sm flex-grow flex flex-col justify-center items-center">
-        <div className="flex max-xs:1/2 max-xs:flex-col xs:gap-xs xs:justify-center items-center text-xl w-full xs:w-full">
-          <div className="w-full flex items-center justify-center xs:w-1/2">
-            <WeatherIcon description={data.weatherDescription} />
+      <div className="flex gap-1 w-full justify-center ml-2 max-xs:flex-col-reverse max-xs:items-center">
+        <div className="w-[100px] flex flex-col items-center gap-1 justify-between">
+          <div className="text-xl w-full font-boldest  xs:w-1/2 flex items-center justify-center">
+            {data.temp.toFixed(1)}
+            <span className="xs:text-base text-sm">°C</span>
           </div>
-          <div className="xs:text-xl text-lg w-full font-boldest  xs:w-1/2 flex items-center justify-center mb-sm">
+          <div className="flex items-center justify-center text-sm xs:flex bg-darkGray rounded-lg py-[2px] px-2">
+            feelslike {data.feelsLike}
+            <span className="text-xs">°C</span>
+          </div>
+          <div className="flex flex-col xs:flex-row items-center justify-center xs:gap-2 text-sm bg-darkGray rounded-lg py-[2px] px-2">
+            <div>
+              {data.minTemp}
+              <span className="text-xs">°C</span> / {data.maxTemp}
+              <span className="text-xs">°C</span>
+            </div>
+          </div>
+        </div>
+        <div className="w-[100px] flex flex-col items-center justify-center h-full text-center xs:gap-1">
+          <WeatherIcon description={data.weatherDescription} size />
+          <div className="text-xs whitespace-normal w-full flex justify-center leading-snug">
+            {data.weatherDescription}
+          </div>
+        </div>
+      </div>
+      {/* <div className="w-full flex-grow flex xs:gap-2 max-xs:flex-col xs:justify-center items-center">
+        <div className="flex max-xs:1/2 max-xs:flex-col gap-xs xs:gap-xs xs:justify-center items-center text-xl w-full xs:w-full">
+          <div className="w-full flex flex-col items-center justify-center xs:w-1/2">
+            <WeatherIcon description={data.weatherDescription} size />
+            <span className="text-sm whitespace-normal w-full text-center xs:hidden">{data.weatherDescription}</span>
+          </div>
+          <div className="xs:text-lg text-xl w-full font-boldest  xs:w-1/2 flex items-center justify-center">
             {data.temp.toFixed(1)}
             <span className="xs:text-base text-sm">°C</span>
           </div>
         </div>
-        <div className="w-full flex justify-center gap-xs items-center max-xs:h-1/2">
-          <div className="text-sm whitespace-normal w-1/2 text-center max-xs:hidden">{data.weatherDescription}</div>
-          <div className="flex w-1/2 flex-col items-center xs:w-1/2 xs:min-w-[80px]">
-            <div className="text-center text-sm xs:flex  max-xs:w-full">Feels: {data.feelsLike}</div>
-            <div className="flex flex-col xs:flex-row items-center justify-center xs:gap-2 text-sm max-xs:w-full">
-              <div>H: {data.maxTemp}</div>
-              <div>L: {data.minTemp}</div>
+        <div className="w-full flex justify-center gap-xs items-center">
+          <div className="flex w-full flex-col gap-1 items-center xs:w-1/2 xs:min-w-[80px]">
+            <div className="flex items-center justify-center text-sm xs:flex bg-darkGray rounded-lg py-[2px] px-2">
+              feelslike {data.feelsLike}
+              <span className="text-xs">°C</span>
+            </div>
+            <div className="flex flex-col xs:flex-row items-center justify-center xs:gap-2 text-sm bg-darkGray rounded-lg py-[2px] px-2">
+              <div>
+                {data.minTemp}
+                <span className="text-xs">°C</span> / {data.maxTemp}
+                <span className="text-xs">°C</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
@@ -80,16 +111,13 @@ const SmallWeatherCard = ({
   }
 
   return (
-    <div className={`flex w-full xs:h-1/2 h-1/3 xs:justify-between gap-2 ${index === 1 && 'xs:hidden'}`}>
+    <div className={`flex w-full xs:h-1/2 h-1/3 xs:gap-2 xs:justify-between gap-2 ${index === 1 && 'xs:hidden'}`}>
       <div className="max-xs:text-xs flex w-[30px] h-[30px] justify-center items-center text-md font-boldest uppercase">
         {formattedDate}
       </div>
       <div className="flex gap-2">
         <div className="flex items-center h-full">
-          <WeatherIcon description={data.weatherDescription} />
-        </div>
-        <div className="flex text-sm items-center justify-center h-full max-w-1/5 max-xs:hidden">
-          {data.weatherDescription}
+          <WeatherIcon description={data.weatherDescription} size={false} />
         </div>
       </div>
       <div className="xs:text-lg text-lg font-boldest flex items-center justify-center h-full">
@@ -98,8 +126,11 @@ const SmallWeatherCard = ({
       </div>
       <div className="flex h-full items-center text-sm max-xs:hidden">
         <div className="flex-col justify-center gap-2">
-          <div>H: {data.maxTemp}</div>
-          <div>L: {data.minTemp}</div>
+          <div className="rounded-lg bg-darkGray px-1 py-[2px]">
+            {data.minTemp}
+            <span className="text-xs">°C</span> / {data.maxTemp}
+            <span className="text-xs">°C</span>
+          </div>
         </div>
       </div>
     </div>
@@ -118,7 +149,7 @@ const WeatherBox = ({ weatherData }: WeatherData) => {
       <div className="w-full h-full flex">
         {weatherData.length > 2 ? (
           <>
-            <div className="xs:w-3/5 w-1/2 h-full flex  items-center justify-center">
+            <div className="xs:w-2/3 w-1/2 h-full flex  items-center justify-center">
               {weatherData.map((data, index) => {
                 if (index > 1) return
                 return (
@@ -126,14 +157,14 @@ const WeatherBox = ({ weatherData }: WeatherData) => {
                     <WeatherCard data={data} index={index} key={index} />
                     {index !== weatherData.length - 1 && (
                       <div
-                        className={`h-full w-[1px] bg-black opacity-70 ${index == weatherData.length - 2 && 'hidden xs:flex'} ${index === 1 && 'max-xs:hidden'}`}
+                        className={`h-full w-[1px] bg-black opacity-30 ${index == weatherData.length - 2 && 'hidden xs:flex'} ${index === 1 && 'max-xs:hidden'}`}
                       ></div>
                     )}
                   </>
                 )
               })}
             </div>
-            <div className="xs:w-2/5 w-1/2 flex-col h-full xs:pl-xl xs:pr-lg px-sm">
+            <div className="xs:w-1/3 w-1/2 flex-col h-full xs:pl-xl xs:pr-lg px-sm">
               {weatherData.map((data, index) => {
                 if (index < 1) return
                 return <SmallWeatherCard data={data} index={index} key={index} />
