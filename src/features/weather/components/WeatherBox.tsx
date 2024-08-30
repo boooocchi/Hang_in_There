@@ -24,7 +24,7 @@ const WeatherCard = ({
       className={`flex flex-col items-center xs:px-lg xs:gap-2 gap-1 xs:items-start w-full xs:w-1/2 h-full ${index === 1 && 'max-xs:hidden'}`}
       key={index}
     >
-      <h1 className="w-full h-[25px] xs:h-[30px] flex items-center justify-center text-md font-boldest uppercase">
+      <h1 className="w-full h-[25px] xs:h-[30px] flex items-start justify-center text-md font-boldest uppercase">
         {date}
       </h1>
       <div className="flex gap-1 w-full justify-center ml-2 max-xs:flex-col-reverse max-xs:items-center">
@@ -52,33 +52,6 @@ const WeatherCard = ({
           </div>
         </div>
       </div>
-      {/* <div className="w-full flex-grow flex xs:gap-2 max-xs:flex-col xs:justify-center items-center">
-        <div className="flex max-xs:1/2 max-xs:flex-col gap-xs xs:gap-xs xs:justify-center items-center text-xl w-full xs:w-full">
-          <div className="w-full flex flex-col items-center justify-center xs:w-1/2">
-            <WeatherIcon description={data.weatherDescription} size />
-            <span className="text-sm whitespace-normal w-full text-center xs:hidden">{data.weatherDescription}</span>
-          </div>
-          <div className="xs:text-lg text-xl w-full font-boldest  xs:w-1/2 flex items-center justify-center">
-            {data.temp.toFixed(1)}
-            <span className="xs:text-base text-sm">°C</span>
-          </div>
-        </div>
-        <div className="w-full flex justify-center gap-xs items-center">
-          <div className="flex w-full flex-col gap-1 items-center xs:w-1/2 xs:min-w-[80px]">
-            <div className="flex items-center justify-center text-sm xs:flex bg-darkGray rounded-lg py-[2px] px-2">
-              feelslike {data.feelsLike}
-              <span className="text-xs">°C</span>
-            </div>
-            <div className="flex flex-col xs:flex-row items-center justify-center xs:gap-2 text-sm bg-darkGray rounded-lg py-[2px] px-2">
-              <div>
-                {data.minTemp}
-                <span className="text-xs">°C</span> / {data.maxTemp}
-                <span className="text-xs">°C</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   )
 }
@@ -112,7 +85,7 @@ const SmallWeatherCard = ({
 
   return (
     <div className={`flex w-full xs:h-1/2 h-1/3 xs:gap-2 xs:justify-between gap-2 ${index === 1 && 'xs:hidden'}`}>
-      <div className="max-xs:text-xs flex w-[30px] h-[30px] justify-center items-center text-md font-boldest uppercase">
+      <div className="max-xs:text-xs flex w-[30px] h-[30px] justify-center items-start text-md font-boldest uppercase">
         {formattedDate}
       </div>
       <div className="flex gap-2">

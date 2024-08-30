@@ -41,7 +41,7 @@ export const WeatherIcon = ({ description, size }: WeatherDescription) => {
 const Sunny = ({ size }: { size?: boolean }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={`fill-accentOrange stroke-[0.5px] stroke-accentOrange w-[35px] ${size ? 'xs:w-[75px]' : 'xs:w-[50px]'}`}
+    className={`fill-accentOrange stroke-[0.5px] stroke-accentOrange ${size ? 'xs:w-[75px] w-[53px]' : 'xs:w-[50px] w-[35px]'}`}
     viewBox="0 12 100 80"
     strokeWidth="0.5"
     id="sun"
@@ -56,7 +56,7 @@ const Cloudy = ({ size }: { size?: boolean }) => (
     strokeWidth="2"
     viewBox="8 12 115 105"
     id="cloud"
-    className={`w-[40px] ${size ? 'xs:w-[60px]' : 'xs:w-[40px]'}`}
+    className={`${size ? 'xs:w-[60px] w-[45px]' : 'xs:w-[40px] w-[30px]'}`}
   >
     <path
       className="fill-accentOrange stroke-accentOrange "
@@ -69,7 +69,7 @@ const Rainy = ({ size }: { size?: boolean }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     strokeWidth="3"
-    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px]  w-[35px] ${size ? 'xs:w-[68px]' : 'xs:w-[48px]'}`}
+    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px] ${size ? 'xs:w-[68px] w-[48px]' : 'xs:w-[48px] w-[35px]'}`}
     viewBox="0 0 64 58"
     id="rain"
   >
@@ -82,7 +82,7 @@ const Snowy = ({ size }: { size?: boolean }) => (
     xmlns="http://www.w3.org/2000/svg"
     version="1.0"
     id="snow"
-    className={`w-[35px] ${size ? 'xs:w-[75px]' : 'xs:w-[50px]'}`}
+    className={`${size ? 'xs:w-[75px] w-[50px]' : 'xs:w-[50px] w-[35px]'}`}
     viewBox="3 5 18 14"
     strokeWidth="0.1px"
   >
@@ -113,7 +113,7 @@ const Misty = ({ size }: { size?: boolean }) => (
     viewBox="0 0 48 42"
     id="mist"
     strokeWidth="1"
-    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px]  w-[35px] ${size ? 'xs:w-[68px]' : 'xs:w-[43px]'}`}
+    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px]  w-[35px] ${size ? 'xs:w-[68px] w-[53px]' : 'xs:w-[43px] w-[35px]'}`}
   >
     <rect width="34" height="3" x="4" y="10"></rect>
     <rect width="29" height="3" x="4" y="26"></rect>
@@ -141,7 +141,7 @@ const ThunderStorm = ({ size }: { size?: boolean }) => (
     viewBox="0 2 64 55"
     id="thunderstorm"
     strokeWidth="2"
-    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px]  w-[35px] ${size ? 'xs:w-[68px]' : 'xs:w-[45px]'}`}
+    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px] ${size ? 'xs:w-[68px] w-[45px]' : 'xs:w-[45px] w-[30px]'}`}
   >
     <path d="M58.18 31.32a12.37 12.37 0 0 0 .93-4.59 12 12 0 0 0-12-12h-.64a9 9 0 0 0-8.6-6.64 8.7 8.7 0 0 0-6.93 3.3 16.4 16.4 0 0 0-3.49-.34c-.53 0-1.05 0-1.56.07a16.27 16.27 0 0 0-10.36 5l-.11.1c-.23.26-.46.52-.67.79a4.94 4.94 0 0 0-.36.44A6.42 6.42 0 0 0 14 18c-.19.27-.38.54-.55.82 0 .08-.1.16-.14.24a15.71 15.71 0 0 0-2.05 5.6v.08c0 .24-.08.47-.11.7a9.23 9.23 0 0 0 1 18.39h10.08a1 1 0 1 0 0-2H12.17a7.23 7.23 0 0 1-.09-14.45h.91l.06-.9a14.41 14.41 0 0 1 28.78 1 14.72 14.72 0 0 1-.66 4.32 1 1 0 0 0 .66 1.2 1 1 0 0 0 .29.05 1 1 0 0 0 1-.71 16.68 16.68 0 0 0 .75-4.91 17.15 17.15 0 0 0-.19-2.4 8.86 8.86 0 0 1 3 .81 8 8 0 0 1 3.67 10.63 1 1 0 0 0 .48 1.34 1.07 1.07 0 0 0 .43.09 1 1 0 0 0 .9-.57 10 10 0 0 0-4.63-13.29 10.28 10.28 0 0 0-4.3-1A16.45 16.45 0 0 0 33 12.05a6.77 6.77 0 0 1 4.83-2A7 7 0 0 1 44.69 16l.17 1.09 1.06-.27a4.88 4.88 0 0 1 1.18-.09 10 10 0 0 1 10 10 10.68 10.68 0 0 1-1.1 4.55l-.39.86.83.45a4.93 4.93 0 0 1-2.25 9.24H31.94a1 1 0 1 0 0 2h22.3a6.93 6.93 0 0 0 3.94-12.51zM42.6 46.4a1 1 0 0 0-1.29.57l-1.54 4a1 1 0 0 0 .57 1.29.92.92 0 0 0 .36.07 1 1 0 0 0 .94-.65l1.54-4a1 1 0 0 0-.58-1.28zm-8.06 0a1 1 0 0 0-1.29.58l-2.84 7.58a1 1 0 0 0 .59 1.29 1 1 0 0 0 1.29-.59l2.84-7.58a1 1 0 0 0-.59-1.28zm-17.18-.01a1 1 0 0 0-1.28.6l-2.72 7.58a1 1 0 0 0 .6 1.28 1 1 0 0 0 .34.06 1 1 0 0 0 .94-.66L18 47.67a1 1 0 0 0-.64-1.28zm32.69.01a1 1 0 0 0-1.29.58l-2.84 7.58a1 1 0 0 0 .59 1.29 1 1 0 0 0 .35.06 1 1 0 0 0 .93-.65l2.85-7.58a1 1 0 0 0-.59-1.28z"></path>
     <path d="M30.83 36.54a1.07 1.07 0 0 0-1-1.08h-7l4.64-10.32a.93.93 0 0 0-.59-1.27 1 1 0 0 0-1.38.49l-5.3 11.79a1.08 1.08 0 0 0 .59 1.38 1 1 0 0 0 .39.07h7.1L23.17 51a1 1 0 0 0 .59 1.27 1.07 1.07 0 0 0 1.37-.59l5.56-14.62a1.11 1.11 0 0 0 .14-.52Z"></path>
