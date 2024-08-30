@@ -89,10 +89,14 @@ export async function getStaticProps() {
       const tmrwFeelsLike = Math.round(weatherData.daily[1].feels_like.day * 10) / 10
 
       const datmWeatherDescription = weatherData.daily[2].weather[0].description
-      const datmMaxTemp = Math.round(weatherData.daily[2].temp.max * 10) / 10
-      const datmMinTemp = Math.round(weatherData.daily[2].temp.min * 10) / 10
       const datmTemp = Math.round(weatherData.daily[2].temp.day * 10) / 10
-      const datmFeelsLike = Math.round(weatherData.daily[2].feels_like.day * 10) / 10
+      const datmMaxTemp = Math.round(weatherData.daily[1].temp.max * 10) / 10
+      const datmMinTemp = Math.round(weatherData.daily[1].temp.min * 10) / 10
+
+      const in4daysWeatherDescription = weatherData.daily[3].weather[0].description
+      const in4daysTemp = Math.round(weatherData.daily[3].temp.day * 10) / 10
+      const in4daysMaxTemp = Math.round(weatherData.daily[1].temp.max * 10) / 10
+      const in4daysMinTemp = Math.round(weatherData.daily[1].temp.min * 10) / 10
 
       return {
         props: {
@@ -107,10 +111,15 @@ export async function getStaticProps() {
             },
             {
               weatherDescription: datmWeatherDescription,
-              maxTemp: datmMaxTemp,
-              minTemp: datmMinTemp,
               temp: datmTemp,
-              feelsLike: datmFeelsLike
+              maxTemp: datmMaxTemp,
+              minTemp: datmMinTemp
+            },
+            {
+              weatherDescription: in4daysWeatherDescription,
+              temp: in4daysTemp,
+              maxTemp: in4daysMaxTemp,
+              minTemp: in4daysMinTemp
             }
           ],
           revalidate: 3600

@@ -1,14 +1,14 @@
-import { gql, useQuery } from '@apollo/client';
-import { useRouter } from 'next/router';
-import React from 'react';
+import { gql, useQuery } from '@apollo/client'
+import { useRouter } from 'next/router'
+import React from 'react'
 
-import Button from '@/components/elements/button/Button';
-import DeletePieceButton from '@/components/elements/button/DeletePieceButton';
-import EditPieceButton from '@/components/elements/button/EditPieceButton';
-import Loading from '@/components/elements/message/Loading';
-import MainLayout from '@/components/layouts/layout/MainLayout';
-import PieceForm from '@/features/registerPiece/components/PieceForm';
-import { useAuth } from '@/hooks/useAuth';
+import Button from '@/components/elements/button/Button'
+import DeletePieceButton from '@/components/elements/button/DeletePieceButton'
+import EditPieceButton from '@/components/elements/button/EditPieceButton'
+import Loading from '@/components/elements/message/Loading'
+import MainLayout from '@/components/layouts/layout/MainLayout'
+import PieceForm from '@/features/registerPiece/components/PieceForm'
+import { useAuth } from '@/hooks/useAuth'
 
 export const GET_PIECE_QUERY = gql`
   query Piece($pieceId: String!) {
@@ -24,27 +24,27 @@ export const GET_PIECE_QUERY = gql`
       id
     }
   }
-`;
+`
 
 const Piece = () => {
-  const router = useRouter();
-  const pieceId = router.query.pieceId;
+  const router = useRouter()
+  const pieceId = router.query.pieceId
   const { data, loading } = useQuery(GET_PIECE_QUERY, {
-    variables: { pieceId },
-  });
+    variables: { pieceId }
+  })
 
-  const { session } = useAuth();
-  const userId = session?.user?.id;
+  const { session } = useAuth()
+  const userId = session?.user?.id
 
   const handleEdit = () => {
-    setEditMode(true);
-  };
+    setEditMode(true)
+  }
 
   const unsetEditMode = () => {
-    setEditMode(false);
-  };
+    setEditMode(false)
+  }
 
-  const [editMode, setEditMode] = React.useState<boolean>(false);
+  const [editMode, setEditMode] = React.useState<boolean>(false)
 
   const editButtons = (
     <>
@@ -55,13 +55,13 @@ const Piece = () => {
           </Button>
         </div>
       ) : (
-        <div className="flex gap-[10px] items-center h-full mt-1">
+        <div className="flex gap-1 items-center h-full mt-1">
           <EditPieceButton onClick={handleEdit} />
           <DeletePieceButton userId={userId} pieceId={data?.piece.id} fileKey={data?.piece.imageUrl} />
         </div>
       )}
     </>
-  );
+  )
 
   return (
     <>
@@ -73,7 +73,7 @@ const Piece = () => {
         </MainLayout>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Piece;
+export default Piece

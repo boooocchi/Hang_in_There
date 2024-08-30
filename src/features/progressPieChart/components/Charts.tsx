@@ -67,7 +67,7 @@ const Charts = () => {
   }, [limitData, piecesData])
 
   return (
-    <div className="xs:h-full xs:w-1/2 w-full bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-[15px] xs:p-md rounded-lg flex flex-col gap-md relative max-xs:h-[250px]">
+    <div className="xs:h-full xs:w-1/2 w-full bg-gray shadow-[5px_10px_10px_-5px_rgba(0,0,0,0.3)] p-[15px] xs:p-md rounded-lg flex flex-col gap-sm relative max-xs:h-[250px]">
       <h2 className="text-base flex items-center gap-sm font-bolder">
         <span className="h-8 w-8 bg-middleGreen flex items-center justify-center rounded-md">
           <ChartIcon />
@@ -80,7 +80,7 @@ const Charts = () => {
             <Loading size="large"></Loading>
           </div>
         ) : (
-          <div className="grid grid-cols-3 xs:gap-x-xs gap-x-xs overflow-hidden content-center text-gray xs:px-lg xs:ml-5 h-full">
+          <div className="grid grid-cols-3 xs:gap-x-sm gap-x-xs overflow-hidden content-center text-gray xs:px-lg xs:ml-5 h-full">
             {Object.keys(percentages).map((key, index) => {
               const categoryKey = key as keyof PercentagesType
               const percentage = percentages[categoryKey]
@@ -90,7 +90,7 @@ const Charts = () => {
                     value={percentage}
                     strokeWidth={15}
                     circleRatio={0.5}
-                    className="xs:h-[90px] h-[77px] w-[100px]"
+                    className="xs:h-[95px] h-[80px] w-[125px]"
                     counterClockwise={true}
                     styles={buildStyles({
                       rotation: 0.25,
