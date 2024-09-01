@@ -41,7 +41,7 @@ export const WeatherIcon = ({ description, size }: WeatherDescription) => {
 const Sunny = ({ size }: { size?: boolean }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={`fill-accentOrange stroke-[0.5px] stroke-accentOrange ${size ? 'xs:w-[75px] w-[53px]' : 'xs:w-[50px] w-[35px]'}`}
+    className={`fill-accentOrange stroke-[0.5px] stroke-accentOrange ${size ? 'xs:w-[70px] w-[53px]' : 'xs:w-[48px] w-[35px]'}`}
     viewBox="0 12 100 80"
     strokeWidth="0.5"
     id="sun"
@@ -57,7 +57,7 @@ const Cloudy = ({ size }: { size?: boolean }) => (
     strokeWidth="2"
     viewBox="8 12 115 105"
     id="cloud"
-    className={`${size ? 'xs:w-[60px] w-[45px]' : 'xs:w-[40px] w-[30px]'}`}
+    className={`${size ? 'xs:w-[53px] w-[45px]' : 'xs:w-[36px] w-[30px]'}`}
   >
     <path
       className="fill-accentOrange stroke-accentOrange "
@@ -70,7 +70,7 @@ const Rainy = ({ size }: { size?: boolean }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     strokeWidth="3"
-    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px] ${size ? 'xs:w-[68px] w-[48px]' : 'xs:w-[48px] w-[35px]'}`}
+    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px] ${size ? 'xs:w-[55px] w-[48px]' : 'xs:w-[40px] w-[35px]'}`}
     viewBox="0 0 64 58"
     id="rain"
   >
@@ -83,7 +83,7 @@ const Snowy = ({ size }: { size?: boolean }) => (
     xmlns="http://www.w3.org/2000/svg"
     version="1.0"
     id="snow"
-    className={`${size ? 'xs:w-[75px] w-[50px]' : 'xs:w-[50px] w-[35px]'}`}
+    className={`${size ? 'xs:w-[70px] w-[50px]' : 'xs:w-[50px] w-[35px]'}`}
     viewBox="3 5 18 14"
     strokeWidth="0.1px"
   >
@@ -114,7 +114,7 @@ const Misty = ({ size }: { size?: boolean }) => (
     viewBox="0 0 48 42"
     id="mist"
     strokeWidth="1"
-    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px]  w-[35px] ${size ? 'xs:w-[68px] w-[53px]' : 'xs:w-[43px] w-[35px]'}`}
+    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px]  w-[35px] ${size ? 'xs:w-[60px] w-[50px]' : 'xs:w-[40px] w-[30px]'}`}
   >
     <rect width="34" height="3" x="4" y="10"></rect>
     <rect width="29" height="3" x="4" y="26"></rect>
@@ -129,7 +129,7 @@ const FewClouds = ({ size }: { size?: boolean }) => (
     viewBox="0 10 80 60"
     id="cloud-sun"
     strokeWidth="5"
-    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px]  w-[35px] ${size ? 'xs:w-[75px]' : 'xs:w-[50px]'}`}
+    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px]  w-[35px] ${size ? 'xs:w-[70px]  w-[50px]' : 'xs:w-[50px] w-[35px]'}`}
   >
     <path d="M65.185 44.66c-.127 0-.254.002-.379.007.08-.506.12-1.016.12-1.525 0-4.202-2.658-7.784-6.377-9.181.078-.493.131-.988.131-1.482 0-5.155-4.194-9.35-9.35-9.35a9.304 9.304 0 0 0-8.562 5.618 12.222 12.222 0 0 0-3.287-.457c-6.201 0-11.349 4.6-12.207 10.568a13.492 13.492 0 0 0-6.681-1.754C11.098 37.104 5 43.202 5 50.697S11.098 64.29 18.593 64.29h46.592c5.412 0 9.815-4.403 9.815-9.815s-4.403-9.815-9.815-9.815zM49.33 25.13c4.053 0 7.35 3.297 7.35 7.35 0 .324-.023.65-.066.975a9.778 9.778 0 0 0-1.503-.128c-2.342 0-4.58.834-6.344 2.33a12.361 12.361 0 0 0-6.106-6.217 7.304 7.304 0 0 1 6.67-4.31zm15.855 37.16H18.593C12.2 62.29 7 57.09 7 50.697s5.2-11.593 11.593-11.593c2.524 0 4.93.802 6.956 2.32l1.599 1.197v-1.998c0-5.697 4.636-10.333 10.333-10.333 4.587 0 8.665 3.067 9.919 7.459l.515 1.806 1.21-1.436a7.821 7.821 0 0 1 5.986-2.792c4.31 0 7.815 3.506 7.815 7.815 0 .8-.125 1.601-.37 2.383l-.51 1.627 1.669-.35a7.215 7.215 0 0 1 1.47-.142c4.31 0 7.815 3.506 7.815 7.815 0 4.31-3.506 7.815-7.815 7.815zM48.333 16.71h2v4.638h-2z"></path>
     <path d="M60.696 31.594h4.638v2h-4.638zM37.313 22.103l1.414-1.414 3.28 3.28-1.414 1.414zM56.661 23.969l3.28-3.28 1.414 1.414-3.28 3.28z"></path>
@@ -142,7 +142,7 @@ const ThunderStorm = ({ size }: { size?: boolean }) => (
     viewBox="0 2 64 55"
     id="thunderstorm"
     strokeWidth="2"
-    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px] ${size ? 'xs:w-[68px] w-[45px]' : 'xs:w-[45px] w-[30px]'}`}
+    className={`fill-accentOrange stroke-accentOrange stroke-[0.5px] ${size ? 'xs:w-[60px] w-[45px]' : 'xs:w-[40px] w-[30px]'}`}
   >
     <path d="M58.18 31.32a12.37 12.37 0 0 0 .93-4.59 12 12 0 0 0-12-12h-.64a9 9 0 0 0-8.6-6.64 8.7 8.7 0 0 0-6.93 3.3 16.4 16.4 0 0 0-3.49-.34c-.53 0-1.05 0-1.56.07a16.27 16.27 0 0 0-10.36 5l-.11.1c-.23.26-.46.52-.67.79a4.94 4.94 0 0 0-.36.44A6.42 6.42 0 0 0 14 18c-.19.27-.38.54-.55.82 0 .08-.1.16-.14.24a15.71 15.71 0 0 0-2.05 5.6v.08c0 .24-.08.47-.11.7a9.23 9.23 0 0 0 1 18.39h10.08a1 1 0 1 0 0-2H12.17a7.23 7.23 0 0 1-.09-14.45h.91l.06-.9a14.41 14.41 0 0 1 28.78 1 14.72 14.72 0 0 1-.66 4.32 1 1 0 0 0 .66 1.2 1 1 0 0 0 .29.05 1 1 0 0 0 1-.71 16.68 16.68 0 0 0 .75-4.91 17.15 17.15 0 0 0-.19-2.4 8.86 8.86 0 0 1 3 .81 8 8 0 0 1 3.67 10.63 1 1 0 0 0 .48 1.34 1.07 1.07 0 0 0 .43.09 1 1 0 0 0 .9-.57 10 10 0 0 0-4.63-13.29 10.28 10.28 0 0 0-4.3-1A16.45 16.45 0 0 0 33 12.05a6.77 6.77 0 0 1 4.83-2A7 7 0 0 1 44.69 16l.17 1.09 1.06-.27a4.88 4.88 0 0 1 1.18-.09 10 10 0 0 1 10 10 10.68 10.68 0 0 1-1.1 4.55l-.39.86.83.45a4.93 4.93 0 0 1-2.25 9.24H31.94a1 1 0 1 0 0 2h22.3a6.93 6.93 0 0 0 3.94-12.51zM42.6 46.4a1 1 0 0 0-1.29.57l-1.54 4a1 1 0 0 0 .57 1.29.92.92 0 0 0 .36.07 1 1 0 0 0 .94-.65l1.54-4a1 1 0 0 0-.58-1.28zm-8.06 0a1 1 0 0 0-1.29.58l-2.84 7.58a1 1 0 0 0 .59 1.29 1 1 0 0 0 1.29-.59l2.84-7.58a1 1 0 0 0-.59-1.28zm-17.18-.01a1 1 0 0 0-1.28.6l-2.72 7.58a1 1 0 0 0 .6 1.28 1 1 0 0 0 .34.06 1 1 0 0 0 .94-.66L18 47.67a1 1 0 0 0-.64-1.28zm32.69.01a1 1 0 0 0-1.29.58l-2.84 7.58a1 1 0 0 0 .59 1.29 1 1 0 0 0 .35.06 1 1 0 0 0 .93-.65l2.85-7.58a1 1 0 0 0-.59-1.28z"></path>
     <path d="M30.83 36.54a1.07 1.07 0 0 0-1-1.08h-7l4.64-10.32a.93.93 0 0 0-.59-1.27 1 1 0 0 0-1.38.49l-5.3 11.79a1.08 1.08 0 0 0 .59 1.38 1 1 0 0 0 .39.07h7.1L23.17 51a1 1 0 0 0 .59 1.27 1.07 1.07 0 0 0 1.37-.59l5.56-14.62a1.11 1.11 0 0 0 .14-.52Z"></path>
