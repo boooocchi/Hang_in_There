@@ -11,7 +11,7 @@ type Props = {
 const MainLayout: React.FC<Props> = ({ children, title, editButtons }) => {
   const router = useRouter()
   const pathname = router.pathname
-  const dashboardStyle = pathname === '/' ? 'overflow-visible mr-lg' : 'overflow-y-scroll'
+  const dashboardStyle = pathname === '/' ? 'overflow-visible mr-lg' : 'overflow-y-scroll no-scrollbar'
   return (
     <div className="h-full flex flex-col relative">
       <div className="flex items-center xs:gap-[30px] max-xs:justify-between mb-sm tracking-wide xs:mb-md  xs:ml-0 w-full">

@@ -1,22 +1,22 @@
-import cn from 'classnames';
-import Image from 'next/image';
-import React from 'react';
+import cn from 'classnames'
+import Image from 'next/image'
+import React from 'react'
 
-import Loading from '@/components/elements/message/Loading';
+import Loading from '@/components/elements/message/Loading'
 
 type ImageProps = {
-  id?: string;
-  url: string;
-  alt: string;
-  style?: string;
-};
+  id?: string
+  url: string
+  alt: string
+  style?: string
+}
 
 const ImageWithLoading: React.FC<ImageProps> = ({ url, alt, style }) => {
-  const [imageLoaded, setImageLoaded] = React.useState<boolean>(false);
+  const [imageLoaded, setImageLoaded] = React.useState<boolean>(false)
 
   return (
     <>
-      {!imageLoaded && <Loading size="large" />}
+      {!imageLoaded && <Loading />}
       <Image
         src={url}
         alt={alt}
@@ -26,7 +26,7 @@ const ImageWithLoading: React.FC<ImageProps> = ({ url, alt, style }) => {
         onLoad={() => setImageLoaded(true)}
       />
     </>
-  );
-};
+  )
+}
 
-export default ImageWithLoading;
+export default ImageWithLoading

@@ -77,7 +77,7 @@ const Charts = () => {
       <div className="flex-grow flex items-center justify-center ">
         {isLoading || limitDataLoading || piecesDataLoading ? (
           <div className="h-3/5 mb-2xl">
-            <Loading size="large"></Loading>
+            <Loading />
           </div>
         ) : (
           <div className="grid grid-cols-3 xs:gap-x-sm gap-x-xs overflow-hidden content-center text-gray xs:px-lg xs:ml-5 h-full">
