@@ -41,7 +41,7 @@ export const WeatherIcon = ({ description, size }: WeatherDescription) => {
 const Sunny = ({ size }: { size?: boolean }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={`fill-accentOrange stroke-[0.5px] stroke-accentOrange ${size ? 'xs:w-[75px] w-[53px]' : 'xs:w-[50px] w-[35px]'}`}
+    className={`fill-accentOrange stroke-[0.5px] stroke-accentOrange ${size ? 'xs:w-[70px] w-[53px]' : 'xs:w-[48px] w-[35px]'}`}
     viewBox="0 12 100 80"
     strokeWidth="0.5"
     id="sun"
@@ -57,7 +57,7 @@ const Cloudy = ({ size }: { size?: boolean }) => (
     strokeWidth="2"
     viewBox="8 12 115 105"
     id="cloud"
-    className={`${size ? 'xs:w-[60px] w-[45px]' : 'xs:w-[40px] w-[30px]'}`}
+    className={`${size ? 'xs:w-[53px] w-[45px]' : 'xs:w-[36px] w-[30px]'}`}
   >
     <path
       className="fill-accentOrange stroke-accentOrange "
