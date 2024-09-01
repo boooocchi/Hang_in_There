@@ -55,7 +55,7 @@ const DashboardWIshList = () => {
         </h2>
         {loading && (
           <div className="h-3/5 mb-md">
-            <Loading size="large"></Loading>
+            <Loading></Loading>
           </div>
         )}
         {!isAnyUncheckedItems && !loading && (

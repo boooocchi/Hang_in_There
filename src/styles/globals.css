@@ -36,6 +36,7 @@ select:focus {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+  background-color: darkGray;
 }
 
 input:disabled,
