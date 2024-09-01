@@ -21,11 +21,11 @@ const WeatherCard = ({
 
   return (
     <div
-      className={`flex flex-col items-center xs:px-lg xs:gap-2 gap-1 xs:items-start w-full xs:w-1/2 h-full ${index === 1 && 'max-xs:hidden'}`}
+      className={`flex flex-col items-center xs:px-lg xs:gap-2 xs:items-start w-full xs:w-1/2 h-full ${index === 1 && 'max-xs:hidden'}`}
       key={index}
     >
-      <h1 className="w-full max-xs:h-[25px] flex items-start justify-center text-md font-boldest uppercase">{date}</h1>
-      <div className="flex flex-grow gap-1 w-full items-center justify-center ml-2 max-xs:flex-col-reverse">
+      <h1 className="w-full flex items-start justify-center text-md font-boldest uppercase">{date}</h1>
+      <div className="flex flex-grow gap-1 w-full items-center justify-center xs:ml-2 max-xs:flex-col-reverse">
         <div className="w-[100px] flex flex-col items-center gap-1 justify-center">
           <div className="text-xl w-full font-boldest  xs:w-1/2 flex items-center justify-center">
             {data.temp.toFixed(1)}
@@ -43,7 +43,7 @@ const WeatherCard = ({
             </div>
           </div>
         </div>
-        <div className="w-[100px] flex flex-col items-center justify-center h-full text-center xs:gap-1">
+        <div className="w-[100px] flex flex-col items-center justify-center xs:h-full text-center xs:gap-1">
           <WeatherIcon description={data.weatherDescription} size />
           <div className="text-xs whitespace-normal w-full flex justify-center leading-snug">
             {data.weatherDescription}
@@ -83,11 +83,11 @@ const SmallWeatherCard = ({
 
   return (
     <div className={`flex w-full xs:h-1/2 h-1/3 xs:gap-3 xs:justify-center max-xs:gap-2 ${index === 1 && 'xs:hidden'}`}>
-      <div className="max-xs:text-xs flex w-[30px] h-[30px] justify-center items-start text-md font-boldest uppercase">
+      <div className="max-xs:text-xs flex w-[25px] xs:w-[30px] h-[30px] justify-center items-start text-md font-boldest uppercase">
         {formattedDate}
       </div>
       <div className="flex gap-2">
-        <div className="flex items-center h-full w-[45px] justify-center">
+        <div className="flex items-center h-full w-[35px] xs:w-[45px] justify-center">
           <WeatherIcon description={data.weatherDescription} size={false} />
         </div>
       </div>
